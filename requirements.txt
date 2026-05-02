@@ -1,0 +1,24 @@
+# 期货交易系统依赖
+
+# 基础依赖
+pandas>=1.5.0
+numpy>=1.21.0
+python-dateutil>=2.8.0
+
+# 数据源
+akshare>=1.12.0
+
+# 可选数据源
+# tushare>=1.3.0
+
+# 飞书机器人（可选）
+requests>=2.28.0
+# flask>=2.2.0
+# fastapi>=0.95.0
+# uvicorn>=0.20.0
+
+# 消息总线（可选，分布式模式需要）
+redis>=4.5.0
+
+# 数据库
+# psycopg2-binary>=2.9.0  # PostgreSQL（可选）
