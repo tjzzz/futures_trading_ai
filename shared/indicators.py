@@ -34,7 +34,7 @@ def calculate_rsi(data: pd.Series, period: int = 14) -> float:
     """计算RSI"""
     delta = data.diff()
     gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
-    loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
+    loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean().clip(lower=1e-10)
     rs = gain / loss
     rsi = 100 - (100 / (1 + rs))
     return rsi.iloc[-1] if not pd.isna(rsi.iloc[-1]) else 50
@@ -67,7 +67,7 @@ def calculate_kdj(high: pd.Series, low: pd.Series, close: pd.Series, n: int = 9,
     计算KDJ指标
     返回: (k, d, j)
     """
-    rsv = (close - low.rolling(window=n).min()) / (high.rolling(window=n).max() - low.rolling(window=n).min()) * 100
+    rsv = (close - low.rolling(window=n).min()) / (high.rolling(window=n).max() - low.rolling(window=n).min()).clip(lower=1e-10) * 100
     k = rsv.ewm(com=m1-1, adjust=False).mean()
     d = k.ewm(com=m2-1, adjust=False).mean()
     j = 3 * k - 2 * d

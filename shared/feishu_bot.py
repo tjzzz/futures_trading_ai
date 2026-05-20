@@ -5,7 +5,6 @@
 import os
 import json
 import logging
-import asyncio
 from typing import Dict, Any, Optional, Callable, List
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
@@ -166,10 +165,10 @@ class FeishuBot(ABC):
         if message.chat_type == "p2p":
             return True
 
-        # 群聊检查@mentions
+        # 群聊检查@mentions（匹配 bot_id 而非 app_id，飞书提及中 bot_id 格式为 cli_xxx）
         mentions = message.raw_event.get("event", {}).get("message", {}).get("mentions", [])
         for mention in mentions:
-            if mention.get("id", {}).get("user_id") == self.app_id:
+            if mention.get("id", {}).get("bot_id") == self.app_id:
                 return True
 
         # 检查内容中是否有机器人名称
@@ -277,22 +276,49 @@ class FeishuWebhookServer:
 
     def __init__(self, port: int = 8080):
         self.port = port
-        self.bots: Dict[str, FeishuBot] = {}
+        self.bots: Dict[str, Any] = {}
         self.logger = logging.getLogger("FeishuWebhookServer")
 
-    def register_bot(self, path: str, bot: FeishuBot):
-        """注册机器人"""
+    def register_bot(self, path: str, bot):
+        """注册机器人（支持 FeishuBot 或 SkillAgent）"""
         self.bots[path] = bot
-        self.logger.info(f"注册机器人 {bot.get_bot_name()} 到路径: {path}")
+        bot_name = getattr(bot, 'get_bot_name', lambda: str(type(bot).__name__))()
+        self.logger.info(f"注册机器人 {bot_name} 到路径: {path}")
 
     async def handle_request(self, path: str, body: Dict) -> Optional[str]:
-        """处理请求"""
+        """处理请求（支持 FeishuBot.handle_event 和 SkillAgent.handle_feishu_message）"""
         bot = self.bots.get(path)
         if not bot:
             self.logger.warning(f"未找到路径 {path} 对应的机器人")
             return None
 
-        return await bot.handle_event(body)
+        # 检查是否为 FeishuBot 类型
+        if isinstance(bot, FeishuBot):
+            return await bot.handle_event(body)
+
+        # 否则尝试作为 SkillAgent 处理（简化模式：直接提取 text 字段）
+        text = ""
+        if isinstance(body, dict):
+            text = body.get("text", body.get("content", ""))
+            if not text and "event" in body:
+                msg = body.get("event", {}).get("message", {})
+                content = msg.get("content", "")
+                if isinstance(content, str):
+                    try:
+                        content_obj = json.loads(content)
+                        text = content_obj.get("text", "")
+                    except:
+                        text = content
+
+        if hasattr(bot, 'handle_feishu_message'):
+            return await bot.handle_feishu_message(
+                text,
+                user_id=body.get("user_id", ""),
+                chat_id=body.get("chat_id", "")
+            )
+
+        self.logger.warning(f"机器人 {path} 不支持 handle_event 或 handle_feishu_message")
+        return None
 
 
 # 简化的适配器工厂
@@ -320,46 +346,3 @@ def create_simple_adapter(skill_handler: Callable, bot_name: str, description: s
     return adapter
 
 
-if __name__ == "__main__":
-    # 测试基类
-    logging.basicConfig(level=logging.INFO)
-
-    class TestBot(FeishuBot):
-        def get_bot_name(self) -> str:
-            return "测试机器人"
-
-        def get_bot_description(self) -> str:
-            return "这是一个测试机器人"
-
-        def get_commands(self) -> List[Dict[str, str]]:
-            return [
-                {"name": "测试", "desc": "执行测试"},
-                {"name": "帮助", "desc": "显示帮助"}
-            ]
-
-        def get_command_examples(self) -> str:
-            return "  测试 参数"
-
-    bot = TestBot()
-
-    # 模拟事件
-    test_event = {
-        "header": {"token": ""},
-        "event": {
-            "message": {
-                "message_id": "test123",
-                "chat_id": "chat123",
-                "chat_type": "p2p",
-                "content": '{"text": "帮助"}',
-                "message_type": "text",
-                "create_time": 1234567890
-            },
-            "sender": {
-                "sender_id": {"user_id": "user123"}
-            }
-        }
-    }
-
-    response = asyncio.run(bot.handle_event(test_event))
-    print("\n响应:")
-    print(response)

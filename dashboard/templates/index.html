@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>期货 AI 交易体系 V2</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ============ CSS Variables (Dark Theme) ============ */
+:root {
+  --bg: #0f1117;
+  --bg2: #161b27;
+  --bg3: #1e2535;
+  --bg4: #252d3d;
+  --border: rgba(255,255,255,0.08);
+  --text: #e8eaf0;
+  --text2: #8b92a8;
+  --text3: #5a6278;
+  --blue: #4a9eff;
+  --teal: #2dd4a0;
+  --amber: #f5a623;
+  --coral: #ff6b6b;
+  --purple: #a78bfa;
+  --nav-width: 240px;
+  --header-height: 64px;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ============ Reset & Base ============ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  overflow: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ Scrollbar ============ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+
+/* ============ Sidebar ============ */
+.sidebar {
+  width: var(--nav-width);
+  min-width: var(--nav-width);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  z-index: 10;
+}
+.sidebar-brand {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-brand h1 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+.sidebar-brand .sub {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 10px;
+  overflow-y: auto;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text2);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s;
+  margin-bottom: 2px;
+  user-select: none;
+  position: relative;
+}
+.nav-item:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
+.nav-item.active {
+  background: rgba(74,158,255,0.12);
+  color: var(--blue);
+}
+.nav-item .icon {
+  width: 20px;
+  text-align: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.nav-item .badge {
+  margin-left: auto;
+  background: var(--coral);
+  color: #fff;
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.nav-subitem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 44px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text3);
+  font-size: 13px;
+  font-weight: 400;
+  transition: all 0.15s;
+  margin-bottom: 1px;
+  user-select: none;
+  position: relative;
+}
+.nav-subitem:hover {
+  background: var(--bg3);
+  color: var(--text2);
+}
+.nav-subitem.active {
+  background: rgba(74,158,255,0.08);
+  color: var(--blue);
+}
+.nav-subitem .icon {
+  width: 16px;
+  text-align: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.nav-subitem .badge {
+  margin-left: auto;
+  background: var(--coral);
+  color: #fff;
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.nav-section { margin-bottom: 4px; }
+.nav-section-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 8px 14px;
+}
+.sidebar-footer {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text2);
+}
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 6px rgba(45,212,160,0.4);
+  flex-shrink: 0;
+}
+.status-dot.warning { background: var(--amber); box-shadow: 0 0 6px rgba(245,166,35,0.4); }
+.status-dot.offline { background: var(--coral); box-shadow: 0 0 6px rgba(255,107,107,0.4); }
+.connection-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.connection-detail .label { color: var(--text3); font-size: 11px; }
+.connection-detail .value { color: var(--text2); font-size: 12px; }
+
+/* ============ Main Area ============ */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ============ Top Header ============ */
+.header {
+  height: var(--header-height);
+  min-height: var(--header-height);
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.header-left h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+.header-left .header-sub {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 1px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--bg3);
+  color: var(--text2);
+  border: 1px solid var(--border);
+}
+.tag.active-tag {
+  background: rgba(74,158,255,0.12);
+  border-color: rgba(74,158,255,0.3);
+  color: var(--blue);
+}
+.tag .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.last-update {
+  font-size: 12px;
+  color: var(--text3);
+}
+
+/* ============ Content ============ */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+}
+
+/* ============ Page: Overview (4 Quadrants 2x2) ============ */
+.page { display: none; }
+.page.active { display: block; }
+
+/* Scenario Banner */
+.scenario-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, var(--bg3), var(--bg4));
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.scenario-banner .scenario-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.scenario-banner .scenario-icon.bullish { background: rgba(45,212,160,0.15); }
+.scenario-banner .scenario-icon.bearish { background: rgba(255,107,107,0.15); }
+.scenario-banner .scenario-icon.neutral { background: rgba(245,166,35,0.15); }
+.scenario-banner .scenario-info { flex: 1; }
+.scenario-banner .scenario-info .label {
+  font-size: 11px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.scenario-banner .scenario-info .value {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.scenario-banner .scenario-info .value.bullish { color: var(--teal); }
+.scenario-banner .scenario-info .value.bearish { color: var(--coral); }
+.scenario-banner .scenario-info .value.neutral { color: var(--amber); }
+.scenario-banner .scenario-detail {
+  font-size: 12px;
+  color: var(--text2);
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* Quadrant Grid */
+.quadrant-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .quadrant-grid { grid-template-columns: 1fr; }
+}
+
+.quadrant-card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 20px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.quadrant-card:hover {
+  border-color: var(--bg4);
+  box-shadow: var(--shadow);
+}
+.quadrant-card .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.quadrant-card .card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.quadrant-card .card-title .emoji { font-size: 18px; }
+.quadrant-card .card-badge {
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.card-badge.bullish { background: rgba(45,212,160,0.12); color: var(--teal); }
+.card-badge.bearish { background: rgba(255,107,107,0.12); color: var(--coral); }
+.card-badge.neutral { background: rgba(245,166,35,0.12); color: var(--amber); }
+
+.quadrant-card .card-body { }
+.quadrant-card .card-metrics { display: flex; gap: 16px; flex-wrap: wrap; }
+.quadrant-card .metric {
+  flex: 1;
+  min-width: 80px;
+}
+.quadrant-card .metric .metric-label {
+  font-size: 11px;
+  color: var(--text3);
+  margin-bottom: 2px;
+}
+.quadrant-card .metric .metric-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+.quadrant-card .metric .metric-value.muted { color: var(--text2); font-size: 14px; font-weight: 400; }
+.quadrant-card .metric .metric-trend {
+  font-size: 11px;
+  margin-top: 1px;
+}
+.metric-trend.up { color: var(--teal); }
+.metric-trend.down { color: var(--coral); }
+.metric-trend.flat { color: var(--text3); }
+.quadrant-card .card-desc {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+.quadrant-card .card-chart-area {
+  margin-top: 12px;
+  height: 60px;
+  position: relative;
+}
+
+/* ============ Page: Macro ============ */
+.macro-page .quadrant-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.macro-card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.macro-card-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.macro-card-header .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.macro-card-body {
+  padding: 20px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.macro-card-body .metrics-list {
+  flex: 1;
+  min-width: 200px;
+}
+.macro-card-body .metrics-list .m-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.macro-card-body .metrics-list .m-item:last-child { border: none; }
+.macro-card-body .metrics-list .m-label { font-size: 13px; color: var(--text2); }
+.macro-card-body .metrics-list .m-value { font-size: 14px; font-weight: 600; }
+.macro-card-body .chart-area {
+  width: 280px;
+  height: 100px;
+}
+.macro-card-body .card-analysis {
+  width: 100%;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+/* ============ Page: Attribution ============ */
+.attr-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  background: var(--bg2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.attr-controls label { font-size: 13px; color: var(--text2); }
+.attr-controls select, .attr-controls input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+}
+.attr-controls select:focus, .attr-controls input:focus {
+  border-color: var(--blue);
+}
+.attr-btn {
+  padding: 6px 16px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.attr-btn:hover { opacity: 0.85; }
+.attr-result {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.attr-chart-box {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 20px;
+}
+.attr-chart-box h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.attr-report {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 20px;
+  grid-column: 1 / -1;
+}
+.attr-report h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.attr-report .report-text {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+/* ============ Page: Events ============ */
+.events-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.event-filter-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text2);
+  transition: all 0.15s;
+}
+.event-filter-btn.active {
+  background: rgba(74,158,255,0.12);
+  border-color: rgba(74,158,255,0.3);
+  color: var(--blue);
+}
+.event-filter-btn:hover { background: var(--bg3); }
+.event-list { display: flex; flex-direction: column; gap: 10px; }
+.event-item {
+  background: var(--bg2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.event-item .event-level {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.event-level.s {
+  background: rgba(255,107,107,0.15);
+  color: var(--coral);
+}
+.event-level.a {
+  background: rgba(245,166,35,0.15);
+  color: var(--amber);
+}
+.event-item .event-info { flex: 1; }
+.event-item .event-info .event-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+.event-item .event-info .event-desc {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.event-item .event-time {
+  font-size: 11px;
+  color: var(--text3);
+  white-space: nowrap;
+}
+
+/* ============ Page: Config ============ */
+.config-section {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.config-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.config-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.config-row:last-child { border: none; }
+.config-row .config-label { font-size: 13px; color: var(--text); }
+.config-row .config-desc { font-size: 12px; color: var(--text3); margin-top: 1px; }
+.toggle-switch {
+  position: relative;
+  width: 44px; height: 24px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.toggle-switch input { display: none; }
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--bg3);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.toggle-slider::after {
+  content: '';
+  position: absolute;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--text2);
+  top: 2px; left: 2px;
+  transition: all 0.2s;
+}
+.toggle-switch input:checked + .toggle-slider {
+  background: rgba(74,158,255,0.2);
+  border-color: var(--blue);
+}
+.toggle-switch input:checked + .toggle-slider::after {
+  left: 22px;
+  background: var(--blue);
+}
+.config-input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.config-input-row input {
+  width: 80px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: center;
+}
+.config-input-row input:focus {
+  border-color: var(--blue);
+  outline: none;
+}
+
+/* ============ Empty State ============ */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text3);
+}
+.empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
+.empty-state h3 { font-size: 16px; color: var(--text2); margin-bottom: 6px; }
+.empty-state p { font-size: 13px; }
+
+/* ============ Utility ============ */
+.text-teal { color: var(--teal); }
+.text-coral { color: var(--coral); }
+.text-amber { color: var(--amber); }
+.text-blue { color: var(--blue); }
+.text-muted { color: var(--text3); }
+
+/* Page title per page */
+.page-header {
+  margin-bottom: 20px;
+}
+.page-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.page-header .page-desc {
+  font-size: 13px;
+  color: var(--text3);
+  margin-top: 4px;
+}
+
+/* ============ Animations ============ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.page.active { animation: fadeIn 0.25s ease-out; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.loading-pulse { animation: pulse 1.5s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <h1>📈 期货 AI 交易体系</h1>
+    <div class="sub">Macro Futures Intelligence · V2</div>
+  </div>
+  <nav class="sidebar-nav">
+
+    <!-- Section: 贵金属 -->
+    <div class="nav-section">
+      <div class="nav-item active" data-page="overview">
+        <span class="icon">🥇</span> 贵金属-总览
+      </div>
+      <div class="nav-subitem" data-page="macro">
+        <span class="icon">🔍</span> 四象限宏观
+      </div>
+      <div class="nav-subitem" data-page="attribution">
+        <span class="icon">📋</span> 指标归因
+      </div>
+      <div class="nav-subitem" data-page="events">
+        <span class="icon">🔔</span> 事件中心
+        <span class="badge">3</span>
+      </div>
+      <div class="nav-subitem" data-page="config">
+        <span class="icon">⚙️</span> 配置
+      </div>
+    </div>
+
+    <div class="nav-section-divider"></div>
+
+    <!-- Section: 大宗商品 -->
+    <div class="nav-section">
+      <div class="nav-item" data-page="commodities">
+        <span class="icon">🛢️</span> 大宗商品
+      </div>
+    </div>
+
+    <div class="nav-section-divider"></div>
+
+    <!-- Section: 模拟交易 -->
+    <div class="nav-section">
+      <div class="nav-item" data-page="simtrade">
+        <span class="icon">🔄</span> 模拟交易
+      </div>
+    </div>
+
+    <div class="nav-section-divider"></div>
+
+    <!-- Section: 数据管理 -->
+    <div class="nav-section">
+      <div class="nav-item" data-page="data-mgmt">
+        <span class="icon">🗂️</span> 数据管理
+      </div>
+    </div>
+
+  </nav>
+  <div class="sidebar-footer">
+    <div class="connection-status">
+      <div class="status-dot"></div>
+      <div class="connection-detail">
+        <span class="label">系统连接</span>
+        <span class="value">数据采集活跃 · 5m前更新</span>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ==================== MAIN ==================== -->
+<div class="main">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <h2 id="pageTitle">贵金属-总览</h2>
+      <div class="header-sub" id="pageSubtitle">四象限宏观综合场景视图</div>
+    </div>
+    <div class="header-right">
+      <span class="tag active-tag">
+        <span class="dot" style="background:var(--teal)"></span>
+        规则模式
+      </span>
+      <span class="tag">
+        <span class="dot" style="background:var(--amber)"></span>
+        XAU/USD 综合
+      </span>
+      <span class="last-update">更新于 20:40:22</span>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- ===== PAGE: Overview ===== -->
+    <div class="page active" id="page-overview">
+      <div class="scenario-banner">
+        <div class="scenario-icon bullish">🟢</div>
+        <div class="scenario-info">
+          <div class="label">综合场景判断</div>
+          <div class="value bullish">谨慎看涨 — 宏观偏多</div>
+        </div>
+        <div class="scenario-detail">
+          置信度: 68%<br>
+          核心驱动: 10Y Treasury > 4.5% + VIX 回落
+        </div>
+      </div>
+
+      <div class="quadrant-grid">
+        <!-- Quadrant 1: Currency Anchor -->
+        <div class="quadrant-card">
+          <div class="card-header">
+            <div class="card-title"><span class="emoji">🟢</span> 货币锚</div>
+            <span class="card-badge bullish">利多</span>
+          </div>
+          <div class="card-body">
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-label">10Y Treasury</div>
+                <div class="metric-value">4.52%</div>
+                <div class="metric-trend up">↑ +0.08%</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">30Y Treasury</div>
+                <div class="metric-value">4.78%</div>
+                <div class="metric-trend up">↑ +0.05%</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">DXY</div>
+                <div class="metric-value">104.32</div>
+                <div class="metric-trend down">↓ -0.12</div>
+              </div>
+            </div>
+            <div class="card-desc">
+              国债收益率持续上移，实际利率走高对黄金形成名义压制，但美元走弱提供对冲。整体利多黄金，力度中等。
+            </div>
+          </div>
+        </div>
+
+        <!-- Quadrant 2: Macro Liquidity -->
+        <div class="quadrant-card">
+          <div class="card-header">
+            <div class="card-title"><span class="emoji">🔵</span> 宏观流动性</div>
+            <span class="card-badge neutral">中性偏多</span>
+          </div>
+          <div class="card-body">
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-label">2Y Treasury</div>
+                <div class="metric-value">4.12%</div>
+                <div class="metric-trend down">↓ -0.02%</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">2-10 Spread</div>
+                <div class="metric-value">+0.40%</div>
+                <div class="metric-trend up">↑ 走陡</div>
+              </div>
+            </div>
+            <div class="card-desc">
+              收益率曲线陡峭化，长端利率上行速度快于短端，市场对经济增速预期改善，流动性环境偏宽松。
+            </div>
+          </div>
+        </div>
+
+        <!-- Quadrant 3: Risk Appetite -->
+        <div class="quadrant-card">
+          <div class="card-header">
+            <div class="card-title"><span class="emoji">🟠</span> 风险偏好</div>
+            <span class="card-badge bullish">利多</span>
+          </div>
+          <div class="card-body">
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-label">VIX</div>
+                <div class="metric-value">18.5</div>
+                <div class="metric-trend down">↓ -1.2</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">S&P 500</div>
+                <div class="metric-value">5,378</div>
+                <div class="metric-trend up">↑ +0.6%</div>
+              </div>
+            </div>
+            <div class="card-desc">
+              VIX 回落至 20 以下，风险资产表现良好，避险需求温和，对黄金形成中性偏多支撑。
+            </div>
+          </div>
+        </div>
+
+        <!-- Quadrant 4: Supply-Demand -->
+        <div class="quadrant-card">
+          <div class="card-header">
+            <div class="card-title"><span class="emoji">🔴</span> 供需博弈</div>
+            <span class="card-badge neutral">中性</span>
+          </div>
+          <div class="card-body">
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-label">金银比</div>
+                <div class="metric-value">79.2</div>
+                <div class="metric-trend flat">→ 持平</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">XAU/USD</div>
+                <div class="metric-value">$2,358</div>
+                <div class="metric-trend up">↑ +$12</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">XAG/USD</div>
+                <div class="metric-value">$29.75</div>
+                <div class="metric-trend up">↑ +$0.18</div>
+              </div>
+            </div>
+            <div class="card-desc">
+              金银比略高于 75 阈值，白银相对黄金略低估，但偏离幅度有限，暂无强烈套利信号。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: Macro ===== -->
+    <div class="page" id="page-macro">
+      <div class="page-header">
+        <h3>四象限宏观详情</h3>
+        <div class="page-desc">逐象限深度分析，含历史趋势与归因</div>
+      </div>
+      <div class="quadrant-detail">
+        <div class="macro-card">
+          <div class="macro-card-header">
+            <div class="left"><span>🟢</span> 货币锚 — Currency Anchor</div>
+            <span class="card-badge bullish" style="font-size:12px">利多</span>
+          </div>
+          <div class="macro-card-body">
+            <div class="metrics-list">
+              <div class="m-item"><span class="m-label">10Y Treasury</span><span class="m-value">4.52% <span class="text-teal">↑0.08%</span></span></div>
+              <div class="m-item"><span class="m-label">30Y Treasury</span><span class="m-value">4.78% <span class="text-teal">↑0.05%</span></span></div>
+              <div class="m-item"><span class="m-label">TIPS 实际利率</span><span class="m-value">2.12% <span class="text-teal">↑0.03%</span></span></div>
+              <div class="m-item"><span class="m-label">DXY 美元指数</span><span class="m-value">104.32 <span class="text-coral">↓0.12</span></span></div>
+              <div class="m-item"><span class="m-label">规则评分</span><span class="m-value">75 / 100</span></div>
+            </div>
+            <div class="chart-area">
+              <canvas id="chartTenY"></canvas>
+            </div>
+            <div class="card-analysis">
+              <strong>分析：</strong>10Y 收益率连续 5 个交易日位于 4.5% 以上，结合 DXY 同步走弱，形成典型的实际利率走高 + 美元回落的矛盾组合。历史回测显示此组合下黄金 70% 概率周度收涨。
+            </div>
+          </div>
+        </div>
+
+        <div class="macro-card">
+          <div class="macro-card-header">
+            <div class="left"><span>🔵</span> 宏观流动性 — Macro Liquidity</div>
+            <span class="card-badge neutral" style="font-size:12px">中性偏多</span>
+          </div>
+          <div class="macro-card-body">
+            <div class="metrics-list">
+              <div class="m-item"><span class="m-label">2Y Treasury</span><span class="m-value">4.12% <span class="text-coral">↓0.02%</span></span></div>
+              <div class="m-item"><span class="m-label">2-10 Spread</span><span class="m-value">+0.40% <span class="text-teal">走陡</span></span></div>
+              <div class="m-item"><span class="m-label">美联储利率预期</span><span class="m-value">5.25-5.50%</span></div>
+              <div class="m-item"><span class="m-label">规则评分</span><span class="m-value">58 / 100</span></div>
+            </div>
+            <div class="chart-area">
+              <canvas id="chartSpread"></canvas>
+            </div>
+            <div class="card-analysis">
+              <strong>分析：</strong>曲线陡峭化确认，2-year vs 10-year 利差扩大至 40bp，为近 3 个月最高。通常预示着市场定价经济软着陆而非衰退，对贵金属构成温和支撑。
+            </div>
+          </div>
+        </div>
+
+        <div class="macro-card">
+          <div class="macro-card-header">
+            <div class="left"><span>🟠</span> 风险偏好 — Risk Appetite</div>
+            <span class="card-badge bullish" style="font-size:12px">利多</span>
+          </div>
+          <div class="macro-card-body">
+            <div class="metrics-list">
+              <div class="m-item"><span class="m-label">VIX</span><span class="m-value">18.5 <span class="text-teal">↓1.2</span></span></div>
+              <div class="m-item"><span class="m-label">S&P 500</span><span class="m-value">5,378 <span class="text-teal">↑0.6%</span></span></div>
+              <div class="m-item"><span class="m-label">地缘政治风险</span><span class="m-value">低</span></div>
+              <div class="m-item"><span class="m-label">规则评分</span><span class="m-value">62 / 100</span></div>
+            </div>
+            <div class="chart-area">
+              <canvas id="chartVix"></canvas>
+            </div>
+            <div class="card-analysis">
+              <strong>分析：</strong>VIX 维持在 20 以下舒适区，风险资产情绪向好。没有地缘政治危机驱动避险，黄金处于"温和上涨"而非"恐慌上冲"模式。
+            </div>
+          </div>
+        </div>
+
+        <div class="macro-card">
+          <div class="macro-card-header">
+            <div class="left"><span>🔴</span> 供需博弈 — Supply-Demand</div>
+            <span class="card-badge neutral" style="font-size:12px">中性</span>
+          </div>
+          <div class="macro-card-body">
+            <div class="metrics-list">
+              <div class="m-item"><span class="m-label">金银比</span><span class="m-value">79.2 <span class="text-amber">→ 0</span></span></div>
+              <div class="m-item"><span class="m-label">XAU/USD</span><span class="m-value">$2,358 <span class="text-teal">↑0.51%</span></span></div>
+              <div class="m-item"><span class="m-label">XAG/USD</span><span class="m-value">$29.75 <span class="text-teal">↑0.61%</span></span></div>
+              <div class="m-item"><span class="m-label">规则评分</span><span class="m-value">50 / 100</span></div>
+            </div>
+            <div class="chart-area">
+              <canvas id="chartRatio"></canvas>
+            </div>
+            <div class="card-analysis">
+              <strong>分析：</strong>金银比 79.2 略高于 75 的套利阈值，但未触及 85 的强烈低估线。白银相对黄金略便宜但不构成强信号，建议观望。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: Attribution ===== -->
+    <div class="page" id="page-attribution">
+      <div class="page-header">
+        <h3>指标归因</h3>
+        <div class="page-desc">选择指标与日期区间，查看走势归因分析</div>
+      </div>
+      <div class="attr-controls">
+        <label>指标：</label>
+        <select>
+          <option>10Y Treasury</option>
+          <option selected>金银比</option>
+          <option>VIX</option>
+          <option>DXY</option>
+          <option>XAU/USD</option>
+        </select>
+        <label>起：</label>
+        <input type="date" value="2026-04-01">
+        <label>止：</label>
+        <input type="date" value="2026-05-19">
+        <button class="attr-btn">查询归因</button>
+      </div>
+      <div class="attr-result">
+        <div class="attr-chart-box">
+          <h4>📈 价格走势</h4>
+          <canvas id="chartAttributionPrice" height="200"></canvas>
+        </div>
+        <div class="attr-chart-box">
+          <h4>📉 波动率分布</h4>
+          <canvas id="chartAttributionVol" height="200"></canvas>
+        </div>
+        <div class="attr-report">
+          <h4>📝 归因报告</h4>
+          <div class="report-text">
+            <p><strong>指标：金银比（Gold-Silver Ratio）</strong></p>
+            <p>区间：2026-04-01 至 2026-05-19（49 天）</p>
+            <br>
+            <p><strong>走势概述：</strong></p>
+            <p>金银比在 4 月初触及 82.4 的高点后持续回落，5 月中旬跌至 77.8 后小幅反弹至当前 79.2。整体呈震荡下行趋势，振幅约 5.6%。</p>
+            <br>
+            <p><strong>关键驱动因素：</strong></p>
+            <p>1. <strong>白银工业需求回升（4月中旬）：</strong> 中国制造业 PMI 超预期 + 太阳能光伏装机量同比增长 28%，白银表现优于黄金，比值从 82→79。<br>
+            2. <strong>美元走弱（4月下旬）：</strong> DXY 从 105.2 回落至 103.8，金银同涨但白银涨幅更大，比值下探至 78。<br>
+            3. <strong>避险情绪回升（5月初）：</strong> 中东局势反复，黄金避险买盘强于白银，比值短暂反弹至 80.5。</p>
+            <br>
+            <p><strong>结论：</strong> 当前 79.2 处于中性区间，无强烈套利信号。若金银比反弹至 82+ 可关注白银多配机会。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: Events ===== -->
+    <div class="page" id="page-events">
+      <div class="page-header">
+        <h3>事件中心</h3>
+        <div class="page-desc">监控阈值触发事件与推送历史</div>
+      </div>
+      <div class="events-controls">
+        <div class="event-filter-btn active">全部 (5)</div>
+        <div class="event-filter-btn">S 级 (2)</div>
+        <div class="event-filter-btn">A 级 (3)</div>
+      </div>
+      <div class="event-list">
+        <div class="event-item">
+          <div class="event-level s">S</div>
+          <div class="event-info">
+            <div class="event-title">10Y Treasury 触及 5.0% 危机阈值</div>
+            <div class="event-desc">10Y 收益率一度冲高至 5.02%，触发 crisis 级别警报。已推送飞书 @所有人。</div>
+          </div>
+          <span class="event-time">15:22 · 今天</span>
+        </div>
+        <div class="event-item">
+          <div class="event-level s">S</div>
+          <div class="event-info">
+            <div class="event-title">XAU 日内波动 > 5%</div>
+            <div class="event-desc">黄金价格日内波动率达 5.3%，触及 crisis 阈值，已推送紧急通知。</div>
+          </div>
+          <span class="event-time">09:45 · 今天</span>
+        </div>
+        <div class="event-item">
+          <div class="event-level a">A</div>
+          <div class="event-info">
+            <div class="event-title">金银比 > 75 警告阈值</div>
+            <div class="event-desc">金银比升至 78.5，超过 warn 阈值 75。推送至飞书私信。</div>
+          </div>
+          <span class="event-time">昨天</span>
+        </div>
+        <div class="event-item">
+          <div class="event-level a">A</div>
+          <div class="event-info">
+            <div class="event-title">VIX 突破 25 恐慌阈值</div>
+            <div class="event-desc">VIX 短时冲高至 26.3 后回落，触发 A 级警报。</div>
+          </div>
+          <span class="event-time">3天前</span>
+        </div>
+        <div class="event-item">
+          <div class="event-level a">A</div>
+          <div class="event-info">
+            <div class="event-title">10Y Treasury > 4.5% 警告</div>
+            <div class="event-desc">10Y 收益率首次突破 4.5% 警告线，推送已发送。</div>
+          </div>
+          <span class="event-time">5天前</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: Config ===== -->
+    <div class="page" id="page-config">
+      <div class="page-header">
+        <h3>系统配置</h3>
+        <div class="page-desc">分析模式切换与监控阈值自定义</div>
+      </div>
+
+      <div class="config-section">
+        <h4>🎯 分析引擎</h4>
+        <div class="config-row">
+          <div>
+            <div class="config-label">分析模式</div>
+            <div class="config-desc">规则模式 — 基于四象限规则引擎，快速响应数据变化</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">LLM 模式（待接入）</div>
+            <div class="config-desc">启用 LLM（DeepSeek）进行综合分析，质量更高但延迟增加</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" disabled>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <h4>📊 监控阈值</h4>
+        <div class="config-row">
+          <div>
+            <div class="config-label">10Y Treasury 警告线</div>
+            <div class="config-desc">当前 4.5%，超过则触发 A 级推送</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="4.5" step="0.1">%
+          </div>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">10Y Treasury 危机线</div>
+            <div class="config-desc">当前 5.0%，超过则触发 S 级 @所有人</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="5.0" step="0.1">%
+          </div>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">VIX 警告线</div>
+            <div class="config-desc">当前 25，超过则触发 A 级推送</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="25" step="1">
+          </div>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">VIX 危机线</div>
+            <div class="config-desc">当前 35，超过则触发 S 级 @所有人</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="35" step="1">
+          </div>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">金银比警告线</div>
+            <div class="config-desc">当前 75，超过则触发 A 级推送</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="75" step="1">
+          </div>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">XAU 日内波动警告</div>
+            <div class="config-desc">当前 3%，超过则触发监控</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="3" step="0.5">%
+          </div>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <h4>🔔 推送设置</h4>
+        <div class="config-row">
+          <div>
+            <div class="config-label">飞书推送</div>
+            <div class="config-desc">事件触发时自动通过飞书机器人推送</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">同指标同方向 24h 去重</div>
+            <div class="config-desc">避免同一事件反复推送（除非升级）</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: 大宗商品 ===== -->
+    <div class="page" id="page-commodities">
+      <div class="page-header">
+        <h3>大宗商品</h3>
+        <div class="page-desc">原油、铜、农产品等大宗商品行情与宏观分析</div>
+      </div>
+      <div class="empty-state">
+        <div class="icon">🛢️</div>
+        <h3>模块开发中</h3>
+        <p>大宗商品分析和数据采集将在后续版本接入</p>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: 模拟交易 ===== -->
+    <div class="page" id="page-simtrade">
+      <div class="page-header">
+        <h3>模拟交易</h3>
+        <div class="page-desc">基于四象限信号的模拟交易回测与执行</div>
+      </div>
+      <div class="empty-state">
+        <div class="icon">🔄</div>
+        <h3>模块开发中</h3>
+        <p>模拟交易引擎和策略回测将在后续版本接入</p>
+      </div>
+    </div>
+
+    <!-- ===== PAGE: 数据管理 ===== -->
+    <div class="page" id="page-data-mgmt">
+      <div class="page-header">
+        <h3>数据管理</h3>
+        <div class="page-desc">数据源配置、采集日志、历史数据清理</div>
+      </div>
+      <div class="empty-state">
+        <div class="icon">🗂️</div>
+        <h3>模块开发中</h3>
+        <p>数据管理页面将在后续版本细化实现</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ==================== API Client ====================
+const API = {
+  get: (url) => fetch(url).then(r => r.json()).catch(e => { console.error(`GET ${url} failed:`, e); return null; }),
+  post: (url, body) => fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json()).catch(e => { console.error(`POST ${url} failed:`, e); return null; }),
+};
+
+// ==================== Navigation ====================
+const navItems = document.querySelectorAll('.nav-item, .nav-subitem');
+const pages = document.querySelectorAll('.page');
+const pageTitle = document.getElementById('pageTitle');
+const pageSubtitle = document.getElementById('pageSubtitle');
+
+const pageMeta = {
+  overview: { title: '贵金属-总览', sub: '四象限宏观综合场景视图' },
+  macro: { title: '四象限宏观', sub: '逐象限深度分析，含历史趋势与归因' },
+  attribution: { title: '指标归因', sub: '选择指标与日期区间，查看走势归因分析' },
+  events: { title: '事件中心', sub: '监控阈值触发事件与推送历史' },
+  config: { title: '配置', sub: '分析模式切换与监控阈值自定义' },
+  commodities: { title: '大宗商品', sub: '原油、铜、农产品等大宗商品行情与宏观分析' },
+  simtrade: { title: '模拟交易', sub: '基于四象限信号的模拟交易回测与执行' },
+  'data-mgmt': { title: '数据管理', sub: '数据源配置、采集日志、历史数据清理' },
+};
+
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    navItems.forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+    const pageId = item.dataset.page;
+    pages.forEach(p => p.classList.remove('active'));
+    const target = document.getElementById(`page-${pageId}`);
+    if (target) target.classList.add('active');
+    const meta = pageMeta[pageId];
+    if (meta) { pageTitle.textContent = meta.title; pageSubtitle.textContent = meta.sub; }
+  });
+});
+
+// ==================== Utility Helpers ====================
+const SIGNAL_MAP = { bullish: 'bullish', bearish: 'bearish', neutral: 'neutral', mixed: 'neutral' };
+const SIGNAL_LABELS = { bullish: '利多', bearish: '利空', neutral: '中性', mixed: '偏中性' };
+const SIGNAL_ICONS = { bullish: '🟢', bearish: '🔴', neutral: '🟡', mixed: '🔄' };
+
+function el(id) { return document.getElementById(id); }
+
+function fmtNum(v, d) { return v != null ? Number(v).toFixed(d != null ? d : 2) : '--'; }
+
+function fmtPct(v) { return v != null ? (v >= 0 ? `↑ +${v}%` : `↓ ${v}%`) : '--'; }
+
+function trendClass(v) { return v > 0 ? 'up' : v < 0 ? 'down' : 'flat'; }
+
+function signalClass(s) { return SIGNAL_MAP[s] || 'neutral'; }
+
+function signalLabel(s) { return SIGNAL_LABELS[s] || s || '--'; }
+
+function signalBadgeHTML(s) {
+  const cls = signalClass(s);
+  const label = signalLabel(s);
+  return `<span class="card-badge ${cls}">${label}</span>`;
+}
+
+// ==================== Overview Page ====================
+function renderOverview(data, macro) {
+  const scenarioBanner = document.querySelector('.scenario-banner');
+  if (!scenarioBanner) return;
+
+  // Scenario signal
+  const signal = (macro && macro.overall_signal) || 'neutral';
+  const sCls = signalClass(signal);
+  const sLabel = macro && macro.scenario_label ? macro.scenario_label : (signalLabel(signal) + ' — 等待数据');
+  const confidence = macro && macro.overall_confidence != null ? macro.overall_confidence : '--';
+
+  scenarioBanner.querySelector('.scenario-icon').className = `scenario-icon ${sCls}`;
+  scenarioBanner.querySelector('.scenario-icon').textContent = SIGNAL_ICONS[signal] || '🟡';
+  const valEl = scenarioBanner.querySelector('.value');
+  valEl.textContent = sLabel;
+  valEl.className = `value ${sCls}`;
+  scenarioBanner.querySelector('.scenario-detail').innerHTML =
+    `置信度: ${confidence}${typeof confidence === 'number' ? '%' : ''}<br>` +
+    (macro && macro.summary ? `核心驱动: ${macro.summary.slice(0, 40)}...` : '数据加载中');
+
+  // Quadrant cards
+  const cards = document.querySelectorAll('.quadrant-card');
+  if (!cards.length) return;
+
+  const quadrantConfig = [
+    { emoji: '🟢', name: '货币锚' },
+    { emoji: '🔵', name: '宏观流动性' },
+    { emoji: '🟠', name: '风险偏好' },
+    { emoji: '🔴', name: '供需博弈' },
+  ];
+
+  const macroQuadrants = (macro && macro.quadrants) || [];
+  const gPrice = data && data.gold_price ? data.gold_price.value : null;
+  const sPrice = data && data.silver_price ? data.silver_price.value : null;
+  const ratio = data && data.gold_silver_ratio ? data.gold_silver_ratio.value : null;
+  const t10 = data && data.treasury ? data.treasury['10yr'] : null;
+  const t30 = data && data.treasury ? data.treasury['30yr'] : null;
+  const t2 = data && data.treasury ? data.treasury['2yr'] : null;
+  const dxy = data && data.dxy ? data.dxy.value : null;
+  const vixVal = data && data.vix ? data.vix.value : null;
+  const sp500Val = data && data.sp500 ? data.sp500.value : null;
+
+  cards.forEach((card, idx) => {
+    const cfg = quadrantConfig[idx] || {};
+    const mq = macroQuadrants[idx] || {};
+
+    // Card title
+    card.querySelector('.card-title').innerHTML = `<span class="emoji">${mq.emoji || cfg.emoji}</span> ${mq.name || cfg.name}`;
+    // Badge
+    const badge = card.querySelector('.card-badge');
+    if (badge) {
+      const sig = mq.signal || 'neutral';
+      badge.className = `card-badge ${signalClass(sig)}`;
+      badge.textContent = signalLabel(sig);
+    }
+    // Body metrics
+    const metricsDiv = card.querySelector('.card-metrics');
+    if (metricsDiv) {
+      const indicators = mq.indicators || {};
+      const indicatorPairs = Object.entries(indicators);
+      if (indicatorPairs.length > 0) {
+        metricsDiv.innerHTML = indicatorPairs.map(([k, v]) =>
+          `<div class="metric">
+            <div class="metric-label">${k}</div>
+            <div class="metric-value">${v}</div>
+          </div>`
+        ).join('');
+      } else {
+        // Fallback: show raw data based on quadrant
+        const fallbackMetrics = [];
+        if (idx === 0) { // 货币锚
+          if (t10) fallbackMetrics.push({ label: '10Y Treasury', value: fmtNum(t10, 2) + '%' });
+          if (t30) fallbackMetrics.push({ label: '30Y Treasury', value: fmtNum(t30, 2) + '%' });
+          if (dxy) fallbackMetrics.push({ label: 'DXY', value: fmtNum(dxy, 2) });
+        } else if (idx === 1) { // 宏观流动性
+          if (t2) fallbackMetrics.push({ label: '2Y Treasury', value: fmtNum(t2, 2) + '%' });
+          if (t10 && t2) fallbackMetrics.push({ label: '2-10 Spread', value: fmtNum((t10 - t2) * 100, 2) + 'bp' });
+        } else if (idx === 2) { // 风险偏好
+          if (vixVal) fallbackMetrics.push({ label: 'VIX', value: fmtNum(vixVal, 1) });
+          if (sp500Val) fallbackMetrics.push({ label: 'S&P 500', value: fmtNum(sp500Val, 0) });
+        } else if (idx === 3) { // 供需博弈
+          if (ratio) fallbackMetrics.push({ label: '金银比', value: fmtNum(ratio, 1) });
+          if (gPrice) fallbackMetrics.push({ label: 'XAU/USD', value: '$' + fmtNum(gPrice, 0) });
+          if (sPrice) fallbackMetrics.push({ label: 'XAG/USD', value: '$' + fmtNum(sPrice, 2) });
+        }
+        metricsDiv.innerHTML = fallbackMetrics.map(m =>
+          `<div class="metric">
+            <div class="metric-label">${m.label}</div>
+            <div class="metric-value">${m.value}</div>
+          </div>`
+        ).join('');
+      }
+    }
+    // Description
+    const desc = card.querySelector('.card-desc');
+    if (desc && mq.explanation) desc.textContent = mq.explanation;
+  });
+}
+
+// ==================== Macro Page ====================
+async function renderMacro(macro) {
+  const macroCards = document.querySelectorAll('.macro-card');
+  if (!macroCards.length) return;
+
+  const quadrants = (macro && macro.quadrants) || [];
+  macroCards.forEach((card, idx) => {
+    const q = quadrants[idx] || {};
+    // Header
+    const header = card.querySelector('.macro-card-header');
+    if (header) {
+      header.querySelector('.left').innerHTML = `<span>${q.emoji || '❓'}</span> ${q.name || '--'} — ${q.name_en || ''}`;
+      const badge = header.querySelector('.card-badge');
+      if (badge && q.signal) {
+        badge.className = `card-badge ${signalClass(q.signal)}`;
+        badge.textContent = signalLabel(q.signal);
+      }
+    }
+    // Body: metrics
+    const body = card.querySelector('.macro-card-body');
+    if (!body) return;
+    const metricsList = body.querySelector('.metrics-list');
+    if (metricsList && q.indicators) {
+      metricsList.innerHTML = Object.entries(q.indicators).map(([k, v]) =>
+        `<div class="m-item"><span class="m-label">${k}</span><span class="m-value">${v}</span></div>`
+      ).join('');
+    }
+    // Analysis text
+    const analysisDiv = body.querySelector('.card-analysis');
+    if (analysisDiv && q.explanation) {
+      analysisDiv.innerHTML = `<strong>分析：</strong>${q.explanation}`;
+    }
+  });
+
+  // Load mini chart history data
+  await Promise.all([
+    loadMiniChart('chartTenY', '#4a9eff', 'treasury', 60),
+    loadMiniChart('chartSpread', '#a78bfa', 'treasury', 60),
+    loadMiniChart('chartVix', '#2dd4a0', 'vix', 60),
+    loadMiniChart('chartRatio', '#f5a623', 'gold_silver_daily', 60),
+  ]);
+}
+
+async function loadMiniChart(canvasId, color, indicator, days) {
+  const data = await API.get(`/api/history?indicator=${indicator}&days=${days}`);
+  if (!data || !data.data || !data.data.length) {
+    createMiniChart(canvasId, color, { values: [] });
+    return;
+  }
+  const values = data.data.map(d => d.value).filter(v => v != null);
+  const labels = data.data.map(d => {
+    const parts = d.date ? d.date.split('-') : [];
+    return parts.length >= 3 ? `${parseInt(parts[1])}/${parseInt(parts[2])}` : '';
+  });
+  createMiniChart(canvasId, color, { values, labels });
+}
+
+function createMiniChart(id, color, data) {
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  const values = (data && data.values && data.values.length) ? data.values : [0];
+  const labels = (data && data.labels && data.labels.length) ? data.labels : values.map((_, i) => i + 1);
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels.slice(-30),
+      datasets: [{
+        data: values.slice(-30),
+        borderColor: color,
+        borderWidth: 1.5,
+        pointRadius: 0,
+        tension: 0.3,
+        fill: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { x: { display: false }, y: { display: false, beginAtZero: false } },
+      animation: { duration: 500 }
+    }
+  });
+}
+
+// ==================== Events Page ====================
+async function renderEvents() {
+  const evData = await API.get('/api/events');
+  const eventList = document.querySelector('.event-list');
+  const filterContainer = document.querySelector('.events-controls');
+  if (!eventList) return;
+
+  let events = [];
+  let totalS = 0, totalA = 0;
+
+  if (evData && (evData.active_s || evData.active_a)) {
+    const sEvents = (evData.active_s || []).map(e => ({ ...e, level: 'S' }));
+    const aEvents = (evData.active_a || []).map(e => ({ ...e, level: 'A' }));
+    events = [...sEvents, ...aEvents];
+    totalS = evData.total_s != null ? evData.total_s : sEvents.length;
+    totalA = evData.total_a != null ? evData.total_a : aEvents.length;
+  }
+
+  // Update filter buttons
+  if (filterContainer) {
+    const total = totalS + totalA;
+    filterContainer.innerHTML = `
+      <div class="event-filter-btn active" data-filter="all">全部 (${total})</div>
+      <div class="event-filter-btn" data-filter="S">S 级 (${totalS})</div>
+      <div class="event-filter-btn" data-filter="A">A 级 (${totalA})</div>
+    `;
+    // Filter logic
+    filterContainer.querySelectorAll('.event-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterContainer.querySelectorAll('.event-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        renderEventItems(eventList, events, filter);
+      });
+    });
+  }
+
+  renderEventItems(eventList, events, 'all');
+}
+
+function renderEventItems(container, events, filter) {
+  const filtered = filter === 'all' ? events : events.filter(e => e.level === filter);
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty-state"><h3>暂无事件</h3><p>当前无活跃告警事件</p></div>';
+    return;
+  }
+  container.innerHTML = filtered.map(e => `
+    <div class="event-item">
+      <div class="event-level ${e.level.toLowerCase()}">${e.level}</div>
+      <div class="event-info">
+        <div class="event-title">${e.title || '未知事件'}</div>
+        <div class="event-desc">${e.description || ''}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ==================== Config Page ====================
+async function renderConfig() {
+  const cfg = await API.get('/api/config');
+  if (!cfg) return;
+
+  // Analysis mode
+  const modeLabel = document.querySelector('.config-row:first-child .config-label');
+  const modeDesc = document.querySelector('.config-row:first-child .config-desc');
+  if (modeLabel) {
+    modeLabel.textContent = cfg.analysis_mode === 'llm' ? 'LLM 模式' : '规则模式';
+  }
+  if (modeDesc) {
+    modeDesc.textContent = cfg.analysis_mode === 'llm'
+      ? '启用 LLM（' + (cfg.llm_model || '--') + '）进行综合分析'
+      : '规则模式 — 基于四象限规则引擎，快速响应数据变化';
+  }
+
+  // Toggle switch: rules mode checkbox
+  const toggleCheckbox = document.querySelector('.config-section:first-child .toggle-switch input[type="checkbox"]');
+  if (toggleCheckbox) {
+    toggleCheckbox.checked = cfg.analysis_mode === 'llm';
+    toggleCheckbox.disabled = !cfg.llm_configured;
+    toggleCheckbox.addEventListener('change', async () => {
+      const newMode = toggleCheckbox.checked ? 'llm' : 'rules';
+      const result = await API.post('/api/config', { analysis_mode: newMode });
+      if (result && result.status === 'ok') {
+        // Reload macro analysis
+        const macro = await API.get('/api/macro');
+        renderOverview(null, macro);
+        await renderMacro(macro);
+      }
+    });
+  }
+
+  // LLM mode status
+  const llmRow = document.querySelectorAll('.config-row')[1];
+  if (llmRow && !cfg.llm_configured) {
+    const desc = llmRow.querySelector('.config-desc');
+    if (desc) desc.textContent = 'LLM 尚未配置 API Key 和 URL';
+  }
+
+  // Update tags in header
+  const modeTag = document.querySelector('.tag.active-tag');
+  if (modeTag) {
+    modeTag.innerHTML = `<span class="dot" style="background:var(--teal)"></span> ${cfg.analysis_mode === 'llm' ? 'LLM 模式' : '规则模式'}`;
+  }
+}
+
+// ==================== Attribution Page ====================
+function setupAttribution() {
+  const btn = document.querySelector('.attr-btn');
+  if (!btn) return;
+
+  btn.addEventListener('click', async () => {
+    const indicator = document.querySelector('.attr-controls select')?.value || '金银比';
+    const start = document.querySelector('.attr-controls input[type="date"]:first-of-type')?.value || '';
+    const end = document.querySelector('.attr-controls input[type="date"]:last-of-type')?.value || '';
+
+    if (!start || !end) return;
+
+    const result = await API.post('/api/attribution', { indicator, start, end });
+    if (!result) {
+      document.querySelector('.attr-report .report-text').innerHTML = '<p>查询失败，请重试</p>';
+      return;
+    }
+
+    // Update price chart
+    if (result.data && result.data.length) {
+      const values = result.data.map(d => d.value).filter(v => v != null);
+      const labels = result.data.map(d => d.date || '');
+      const canvas = document.getElementById('chartAttributionPrice');
+      if (canvas) {
+        destroyChart(canvas);
+        createAttrChart('chartAttributionPrice', 'line', '#4a9eff', indicator, { values, labels });
+      }
+    }
+
+    // Update report
+    const reportDiv = document.querySelector('.attr-report .report-text');
+    if (reportDiv) {
+      reportDiv.innerHTML = `
+        <p><strong>指标：${indicator}</strong></p>
+        <p>区间：${start} 至 ${end}</p>
+        <br>
+        ${result.analysis ? `<p>${result.analysis}</p>` : ''}
+        ${result.start_value != null ? `<p>起始值: ${result.start_value} → 结束值: ${result.end_value}</p>` : ''}
+        ${result.change != null ? `<p>变动: ${result.change > 0 ? '+' : ''}${fmtNum(result.change, 2)}</p>` : ''}
+      `;
+    }
+  });
+}
+
+function destroyChart(canvas) {
+  const charts = Chart.instances;
+  if (charts) {
+    Object.values(charts).forEach(c => { if (c.canvas === canvas) c.destroy(); });
+  }
+}
+
+function createAttrChart(id, type, color, label, data) {
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  const values = (data && data.values && data.values.length) ? data.values : [50, 50];
+  const labels = (data && data.labels && data.labels.length) ? data.labels : ['', ''];
+  new Chart(ctx, {
+    type: type,
+    data: {
+      labels: labels,
+      datasets: [{
+        label: label || '',
+        data: values,
+        borderColor: color,
+        backgroundColor: color + '20',
+        borderWidth: 2,
+        pointRadius: type === 'bar' ? 0 : 3,
+        tension: 0.3,
+        fill: type === 'line',
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a6278', font: { size: 10 } } },
+        y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5a6278', font: { size: 10 } }, beginAtZero: false }
+      },
+      animation: { duration: 600 }
+    }
+  });
+}
+
+// ==================== Header Update ====================
+function updateHeader(data) {
+  // Last update time
+  const lastUpd = document.querySelector('.last-update');
+  if (lastUpd && data && data.global_updated_at) {
+    lastUpd.textContent = `更新于 ${data.global_updated_at.slice(11, 19)}`;
+  }
+}
+
+// ==================== Main Init ====================
+async function initDashboard() {
+  try {
+    // Parallel fetch
+    const [data, macro] = await Promise.all([
+      API.get('/api/data'),
+      API.get('/api/macro')
+    ]);
+
+    // Render overview
+    renderOverview(data, macro);
+
+    // Render macro page
+    await renderMacro(macro);
+
+    // Render events
+    await renderEvents();
+
+    // Render config
+    await renderConfig();
+
+    // Update header
+    updateHeader(data);
+
+    // Setup attribution
+    setupAttribution();
+
+  } catch (err) {
+    console.error('Dashboard init error:', err);
+  }
+}
+
+// Start
+initDashboard();
+</script>
+</body>
+</html>

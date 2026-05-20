@@ -1,19 +1,14 @@
 """
-共享模块 - 数据、配置、工具
-整合自 skills 的 shared/
+共享模块 - 数据客户端
+
+注意: 配置管理统一使用根目录 config.py，shared/config.py 已废弃。
+      FeishuBot 相关保留 import 但不在 V2 活跃模块中使用。
 """
 from .data_client import DataClient, DataSource, AKShareDataSource, MockDataSource
-from .data_platform import DataStorage, DataCollector, DataService
+
+# 飞书机器人（V2 已废弃，保留引用避免潜在 import 错误）
 from .feishu_bot import FeishuBot, FeishuMessage, FeishuWebhookServer
-from .config import Config
 
 __all__ = [
-    # 数据客户端
     "DataClient", "DataSource", "AKShareDataSource", "MockDataSource",
-    # 数据中台
-    "DataStorage", "DataCollector", "DataService",
-    # 飞书机器人
-    "FeishuBot", "FeishuMessage", "FeishuWebhookServer",
-    # 配置
-    "Config"
 ]

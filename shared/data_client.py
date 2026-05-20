@@ -123,13 +123,17 @@ class TuShareDataSource(DataSource):
             self.pro = None
             self.logger.warning("未配置TUSHARE_TOKEN，将使用模拟数据")
     
+    def _fallback_mock(self, method: str, symbol: str) -> Any:
+        """降级到模拟数据时记录警告"""
+        self.logger.warning("TuShare 数据源不可用，降级到 Mock 数据 (%s: %s)", method, symbol)
+        return getattr(MockDataSource(), method)(symbol)
+
     def get_quote(self, symbol: str) -> Optional[Dict[str, Any]]:
         if not self.pro:
-            return MockDataSource().get_quote(symbol)
-        
+            return self._fallback_mock("get_quote", symbol)
+
         try:
             # 获取实时行情
-            # 注意：TuShare的期货接口需要特定权限
             df = self.pro.fut_daily(ts_code=f"{symbol}.SHF", limit=1)
             if df is not None and len(df) > 0:
                 row = df.iloc[0]
@@ -143,20 +147,20 @@ class TuShareDataSource(DataSource):
                 }
         except Exception as e:
             self.logger.error(f"获取行情失败: {e}")
-        
+
         return None
-    
+
     def get_bars(self, symbol: str, start: str, end: str, freq: str = "1d") -> Optional[List[Dict]]:
         if not self.pro:
-            return MockDataSource().get_bars(symbol, start, end, freq)
-        
+            return self._fallback_mock("get_bars", symbol)
+
         try:
             df = self.pro.fut_daily(
                 ts_code=f"{symbol}.SHF",
                 start_date=start.replace("-", ""),
                 end_date=end.replace("-", "")
             )
-            
+
             if df is not None and len(df) > 0:
                 return [
                     {
@@ -171,11 +175,11 @@ class TuShareDataSource(DataSource):
                 ]
         except Exception as e:
             self.logger.error(f"获取K线失败: {e}")
-        
+
         return None
-    
+
     def get_fundamental(self, symbol: str) -> Optional[Dict[str, Any]]:
-        # TuShare基本面数据需要特定接口
+        self.logger.warning("TuShare 基本面数据未实现，降级到 Mock 数据 (%s)", symbol)
         return MockDataSource().get_fundamental(symbol)
 
 
@@ -252,23 +256,28 @@ class AKShareDataSource(DataSource):
             self.logger.warning("AKShare未安装，将使用模拟数据")
             self.logger.warning("请安装: pip install akshare")
 
+    def _fallback_mock(self, method: str, symbol: str, reason: str = "") -> Any:
+        """降级到模拟数据时记录警告"""
+        self.logger.warning("AKShare 数据源不可用，降级到 Mock 数据 (%s: %s) %s", method, symbol, reason)
+        return getattr(MockDataSource(), method)(symbol)
+
     def get_quote(self, symbol: str) -> Optional[Dict[str, Any]]:
         """获取实时行情（延迟15分钟）"""
         if not self.ak:
-            return MockDataSource().get_quote(symbol)
+            return self._fallback_mock("get_quote", symbol, "(akshare not installed)")
 
         try:
             # 获取主力合约代码
             main_symbol = self.FUTURES_MAIN_MAP.get(symbol.upper())
             if not main_symbol:
                 self.logger.warning(f"不支持的品种: {symbol}")
-                return MockDataSource().get_quote(symbol)
+                return self._fallback_mock("get_quote", symbol, "(unknown symbol)")
 
             # 获取行情数据
             df = self.ak.futures_main_sina(symbol=main_symbol)
 
             if df is None or len(df) == 0:
-                return MockDataSource().get_quote(symbol)
+                return self._fallback_mock("get_quote", symbol, "(empty response)")
 
             # 获取最新一行数据
             latest = df.iloc[-1]
@@ -291,23 +300,23 @@ class AKShareDataSource(DataSource):
 
         except Exception as e:
             self.logger.error(f"获取行情失败: {e}")
-            return MockDataSource().get_quote(symbol)
+            return self._fallback_mock("get_quote", symbol, f"(exception: {e})")
 
     def get_bars(self, symbol: str, start: str, end: str, freq: str = "1d") -> Optional[List[Dict]]:
         """获取历史K线数据"""
         if not self.ak:
-            return MockDataSource().get_bars(symbol, start, end, freq)
+            return self._fallback_mock("get_bars", symbol, "(akshare not installed)")
 
         try:
             main_symbol = self.FUTURES_MAIN_MAP.get(symbol.upper())
             if not main_symbol:
-                return MockDataSource().get_bars(symbol, start, end, freq)
+                return self._fallback_mock("get_bars", symbol, "(unknown symbol)")
 
             # 获取历史数据
             df = self.ak.futures_main_sina(symbol=main_symbol)
 
             if df is None or len(df) == 0:
-                return MockDataSource().get_bars(symbol, start, end, freq)
+                return self._fallback_mock("get_bars", symbol, "(empty response)")
 
             # 转换列名
             df = df.rename(columns={
@@ -347,10 +356,11 @@ class AKShareDataSource(DataSource):
 
         except Exception as e:
             self.logger.error(f"获取K线失败: {e}")
-            return MockDataSource().get_bars(symbol, start, end, freq)
+            return self._fallback_mock("get_bars", symbol, f"(exception: {e})")
 
     def get_fundamental(self, symbol: str) -> Optional[Dict[str, Any]]:
         """获取基本面数据（AKShare暂不支持，返回模拟）"""
+        self.logger.warning("AKShare 基本面数据未实现，降级到 Mock 数据 (%s)", symbol)
         return MockDataSource().get_fundamental(symbol)
 
     def get_all_futures_list(self) -> List[Dict]:

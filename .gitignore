@@ -38,6 +38,7 @@ logs/
 *.log
 
 # Data files (keep structure, ignore large files)
+data/
 data/*.csv
 data/*.parquet
 !data/.gitkeep
@@ -55,3 +56,6 @@ config.local.json
 
 # Backup folders
 *_backup_*/
+
+# workbuddy
+.workbuddy/
