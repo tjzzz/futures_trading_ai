@@ -1,0 +1,113 @@
+    <!-- ===== PAGE: Config ===== -->
+    <div class="page" id="page-config">
+      <div class="page-header">
+        <h3>系统配置</h3>
+        <div class="page-desc">分析模式切换与监控阈值自定义</div>
+      </div>
+
+      <div class="config-section">
+        <h4>🎯 分析引擎</h4>
+        <div class="config-row">
+          <div>
+            <div class="config-label">分析模式</div>
+            <div class="config-desc">规则模式 — 基于四象限规则引擎，快速响应数据变化</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">LLM 模式（待接入）</div>
+            <div class="config-desc">启用 LLM（DeepSeek）进行综合分析，质量更高但延迟增加</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" disabled>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <h4>📊 监控阈值</h4>
+        <div class="config-row">
+          <div>
+            <div class="config-label">10Y Treasury 警告线</div>
+            <div class="config-desc">当前 4.5%，超过则触发 A 级推送</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="4.5" step="0.1">%
+          </div>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">10Y Treasury 危机线</div>
+            <div class="config-desc">当前 5.0%，超过则触发 S 级 @所有人</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="5.0" step="0.1">%
+          </div>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">VIX 警告线</div>
+            <div class="config-desc">当前 25，超过则触发 A 级推送</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="25" step="1">
+          </div>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">VIX 危机线</div>
+            <div class="config-desc">当前 35，超过则触发 S 级 @所有人</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="35" step="1">
+          </div>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">金银比警告线</div>
+            <div class="config-desc">当前 75，超过则触发 A 级推送</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="75" step="1">
+          </div>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">XAU 日内波动警告</div>
+            <div class="config-desc">当前 3%，超过则触发监控</div>
+          </div>
+          <div class="config-input-row">
+            <input type="number" value="3" step="0.5">%
+          </div>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <h4>🔔 推送设置</h4>
+        <div class="config-row">
+          <div>
+            <div class="config-label">飞书推送</div>
+            <div class="config-desc">事件触发时自动通过飞书机器人推送</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-label">同指标同方向 24h 去重</div>
+            <div class="config-desc">避免同一事件反复推送（除非升级）</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,149 @@
+    <!-- ===== PAGE: Overview ===== -->
+    <div class="page active" id="page-overview">
+      <div class="scenario-banner">
+        <div class="scenario-icon bullish">🟢</div>
+        <div class="scenario-info">
+          <div class="label">综合场景判断</div>
+          <div class="value bullish">谨慎看涨 — 宏观偏多</div>
+        </div>
+        <div class="scenario-detail">
+          置信度: 68%<br>
+          核心驱动: 10Y Treasury > 4.5% + VIX 回落
+        </div>
+      </div>
+
+      <!-- 趋势预判卡片 -->
+      <div class="prediction-card" id="prediction-card">
+        <div class="prediction-header">
+          <div class="prediction-title">
+            <span class="icon">🎯</span> 趋势预判
+            <span class="prediction-subtitle">仅供参考 · 每日更新</span>
+          </div>
+          <div class="prediction-summary" id="prediction-summary">
+            <span class="prediction-badge" id="prediction-badge">加载中...</span>
+            <span class="prediction-confidence" id="prediction-confidence"></span>
+          </div>
+        </div>
+        <div class="prediction-body">
+          <!-- 单行紧凑展示 -->
+          <div class="prediction-inline" id="prediction-inline">
+            <span class="prediction-loading">正在分析...</span>
+          </div>
+        </div>
+        <div class="prediction-footer">
+          <span class="prediction-hint">💡 <span id="prediction-advice">数据加载中...</span></span>
+        </div>
+      </div>
+
+      <div class="quadrant-grid">
+        <!-- Quadrant 1: Currency Anchor -->
+        <div class="quadrant-card">
+          <div class="card-header">
+            <div class="card-title"><span class="emoji">🟢</span> 货币锚</div>
+            <span class="card-badge bullish">利多</span>
+          </div>
+          <div class="card-body">
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-label">10Y Treasury</div>
+                <div class="metric-value">4.52%</div>
+                <div class="metric-trend up">↑ +0.08%</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">30Y Treasury</div>
+                <div class="metric-value">4.78%</div>
+                <div class="metric-trend up">↑ +0.05%</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">DXY</div>
+                <div class="metric-value">104.32</div>
+                <div class="metric-trend down">↓ -0.12</div>
+              </div>
+            </div>
+            <div class="card-desc">
+              国债收益率持续上移，实际利率走高对黄金形成名义压制，但美元走弱提供对冲。整体利多黄金，力度中等。
+            </div>
+          </div>
+        </div>
+
+        <!-- Quadrant 2: Macro Liquidity -->
+        <div class="quadrant-card">
+          <div class="card-header">
+            <div class="card-title"><span class="emoji">🔵</span> 宏观流动性</div>
+            <span class="card-badge neutral">中性偏多</span>
+          </div>
+          <div class="card-body">
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-label">2Y Treasury</div>
+                <div class="metric-value">4.12%</div>
+                <div class="metric-trend down">↓ -0.02%</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">2-10 Spread</div>
+                <div class="metric-value">+0.40%</div>
+                <div class="metric-trend up">↑ 走陡</div>
+              </div>
+            </div>
+            <div class="card-desc">
+              收益率曲线陡峭化，长端利率上行速度快于短端，市场对经济增速预期改善，流动性环境偏宽松。
+            </div>
+          </div>
+        </div>
+
+        <!-- Quadrant 3: Risk Appetite -->
+        <div class="quadrant-card">
+          <div class="card-header">
+            <div class="card-title"><span class="emoji">🟠</span> 风险偏好</div>
+            <span class="card-badge bullish">利多</span>
+          </div>
+          <div class="card-body">
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-label">VIX</div>
+                <div class="metric-value">18.5</div>
+                <div class="metric-trend down">↓ -1.2</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">S&P 500</div>
+                <div class="metric-value">5,378</div>
+                <div class="metric-trend up">↑ +0.6%</div>
+              </div>
+            </div>
+            <div class="card-desc">
+              VIX 回落至 20 以下，风险资产表现良好，避险需求温和，对黄金形成中性偏多支撑。
+            </div>
+          </div>
+        </div>
+
+        <!-- Quadrant 4: Supply-Demand -->
+        <div class="quadrant-card">
+          <div class="card-header">
+            <div class="card-title"><span class="emoji">🔴</span> 供需博弈</div>
+            <span class="card-badge neutral">中性</span>
+          </div>
+          <div class="card-body">
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-label">金银比</div>
+                <div class="metric-value">79.2</div>
+                <div class="metric-trend flat">→ 持平</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">XAU/USD</div>
+                <div class="metric-value">$2,358</div>
+                <div class="metric-trend up">↑ +$12</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">XAG/USD</div>
+                <div class="metric-value">$29.75</div>
+                <div class="metric-trend up">↑ +$0.18</div>
+              </div>
+            </div>
+            <div class="card-desc">
+              金银比略高于 75 阈值，白银相对黄金略低估，但偏离幅度有限，暂无强烈套利信号。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

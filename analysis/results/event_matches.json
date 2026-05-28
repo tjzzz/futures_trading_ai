@@ -1,0 +1,22 @@
+{
+  "target": "gold",
+  "period": {
+    "start": "2026-05-01",
+    "end": "2026-05-20"
+  },
+  "anomaly_detection": {
+    "total_days": 3,
+    "anomaly_days": 0,
+    "anomaly_threshold": 0,
+    "details": []
+  },
+  "matched_events": [],
+  "impact_analysis": {
+    "total_matched": 0,
+    "by_level": {},
+    "by_quadrant": {},
+    "avg_confidence": 0,
+    "total_price_impact": 0
+  },
+  "summary": "窗口内未检测到显著的事件驱动波动"
+}

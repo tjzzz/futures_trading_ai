@@ -1,0 +1,49 @@
+    <!-- ===== PAGE: Attribution ===== -->
+    <div class="page" id="page-attribution">
+      <div class="page-header">
+        <h3>指标归因</h3>
+        <div class="page-desc">选择指标与日期区间，查看走势归因分析</div>
+      </div>
+      <div class="attr-controls">
+        <label>指标：</label>
+        <select>
+          <option>10Y Treasury</option>
+          <option selected>金银比</option>
+          <option>VIX</option>
+          <option>DXY</option>
+          <option>XAU/USD</option>
+        </select>
+        <label>起：</label>
+        <input type="date" value="2026-04-01">
+        <label>止：</label>
+        <input type="date" value="2026-05-19">
+        <button class="attr-btn">查询归因</button>
+      </div>
+      <div class="attr-result">
+        <div class="attr-chart-box">
+          <h4>📈 价格走势</h4>
+          <canvas id="chartAttributionPrice" height="200"></canvas>
+        </div>
+        <div class="attr-chart-box">
+          <h4>📉 波动率分布</h4>
+          <canvas id="chartAttributionVol" height="200"></canvas>
+        </div>
+        <div class="attr-report">
+          <h4>📝 归因报告</h4>
+          <div class="report-text">
+            <p><strong>指标：金银比（Gold-Silver Ratio）</strong></p>
+            <p>区间：2026-04-01 至 2026-05-19（49 天）</p>
+            <br>
+            <p><strong>走势概述：</strong></p>
+            <p>金银比在 4 月初触及 82.4 的高点后持续回落，5 月中旬跌至 77.8 后小幅反弹至当前 79.2。整体呈震荡下行趋势，振幅约 5.6%。</p>
+            <br>
+            <p><strong>关键驱动因素：</strong></p>
+            <p>1. <strong>白银工业需求回升（4月中旬）：</strong> 中国制造业 PMI 超预期 + 太阳能光伏装机量同比增长 28%，白银表现优于黄金，比值从 82→79。<br>
+            2. <strong>美元走弱（4月下旬）：</strong> DXY 从 105.2 回落至 103.8，金银同涨但白银涨幅更大，比值下探至 78。<br>
+            3. <strong>避险情绪回升（5月初）：</strong> 中东局势反复，黄金避险买盘强于白银，比值短暂反弹至 80.5。</p>
+            <br>
+            <p><strong>结论：</strong> 当前 79.2 处于中性区间，无强烈套利信号。若金银比反弹至 82+ 可关注白银多配机会。</p>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -17,10 +17,7 @@ import json
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-try:
-    from config import PROJECT_ROOT
-except ImportError:
-    PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 from collectors.base_collector import acquire_exclusive_lock, release_exclusive_lock
 
@@ -30,7 +27,7 @@ TZ = timezone(timedelta(hours=8))
 EVENTS_FILE = PROJECT_ROOT / "data" / "events" / "event_tracker.json"
 FEED_FILE = PROJECT_ROOT / "data" / "events" / "latest_feed.json"
 DASHBOARD_FILE = PROJECT_ROOT / "data" / "current" / "dashboard_data.json"
-DASHBOARD_LOCK = DASHBOARD_FILE.with_suffix(".json.lock")
+DASHBOARD_LOCK = Path("/tmp/futures_trading_dashboard.json.lock")
 
 
 # ─── 文件锁（复用 base_collector 的排他锁，共享同一锁文件） ────

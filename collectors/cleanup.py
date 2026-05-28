@@ -13,10 +13,7 @@ import csv
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-try:
-    from config import PROJECT_ROOT
-except ImportError:
-    PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 CST = timezone(timedelta(hours=8))
 

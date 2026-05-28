@@ -1,0 +1,32 @@
+# {{ report_title }}
+生成时间: {{ generation_time }}
+分析引擎: {{ engine_name }}
+模式: {{ mode }}
+
+## 📊 概览
+{{ target_name }} {{ period.start }} ~ {{ period.end }} ({{ period.days }}天)
+价格: {{ price_change.from }} → {{ price_change.to }} ({{ price_change.pct|abs }}% {% if price_change.pct > 0 %}上涨{% else %}下跌{% endif %})
+
+## 🏆 驱动因子排名
+{% for driver in driver_ranking %}
+{{ loop.index }}. {{ driver.name }}
+  贡献度: {{ driver.contribution_pct }}%
+  相关性: r = {{ driver.r }} ({{ "正相关" if driver.r > 0 else "负相关" }})
+  变动幅度: Δ = {{ driver.delta }}
+  详情: {{ driver.detail }}
+{% endfor %}
+
+## 📰 事件匹配
+{% if matched_events %}
+{% for event in matched_events %}
+- {{ event.event_title }} ({{ event.event_level }}级)
+  日期: {{ event.anomaly_date }} | 时间差: {{ event.time_diff_hours }}小时
+  价格影响: {{ event.direction }} {{ event.price_impact.change|abs }}点
+  置信度: {{ event.match_confidence }} | 象限: {{ event.event_quadrant }}
+{% endfor %}
+{% else %}
+未检测到显著的事件驱动波动
+{% endif %}
+
+## 💡 综合结论
+{{ conclusion }}

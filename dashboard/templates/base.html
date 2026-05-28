@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}期货 AI 交易体系 V2{% endblock %}</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/lightweight-charts@5.2/dist/lightweight-charts.standalone.production.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
+<link rel="stylesheet" href="/static/css/style.css">
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+
+{% block sidebar %}
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <h1>📈 期货 AI 交易体系</h1>
+    <div class="sub">Macro Futures Intelligence · V2</div>
+  </div>
+<nav class="sidebar-nav">
+
+    <!-- Section: 实时探查 -->
+    <div class="nav-section">
+      <a href="/realtime" class="nav-item" data-page="realtime" style="text-decoration: none; color: inherit;">
+        <span class="icon">🔍</span> 实时探查
+      </a>
+    </div>
+
+    <div class="nav-section-divider"></div>
+
+    <!-- Section: 贵金属 -->
+    <div class="nav-section">
+      <a href="/" class="nav-item" data-page="overview" style="text-decoration: none; color: inherit;">
+        <span class="icon">🥇</span> 贵金属-总览
+      </a>
+      <a href="/macro" class="nav-subitem" data-page="macro" style="text-decoration: none; color: inherit;">
+        <span class="icon">🔍</span> 四象限宏观
+      </a>
+      <a href="/events" class="nav-subitem" data-page="events" style="text-decoration: none; color: inherit;">
+        <span class="icon">🔔</span> 事件中心
+        <span class="badge">3</span>
+      </a>
+      <a href="/config" class="nav-subitem" data-page="config" style="text-decoration: none; color: inherit;">
+        <span class="icon">⚙️</span> 配置
+      </a>
+    </div>
+
+    <div class="nav-section-divider"></div>
+
+    <!-- Section: 数据管理 -->
+    <div class="nav-section">
+      <a href="/data-management" class="nav-item" data-page="data-mgmt" style="text-decoration: none; color: inherit;">
+        <span class="icon">🗂️</span> 数据管理
+      </a>
+    </div>
+
+    <div class="nav-section-divider"></div>
+
+    <!-- Section: 大宗商品 -->
+    <div class="nav-section">
+      <div class="nav-item" data-page="commodities">
+        <span class="icon">🛢️</span> 大宗商品
+      </div>
+    </div>
+
+    <div class="nav-section-divider"></div>
+
+    <!-- Section: 模拟交易 -->
+    <div class="nav-section">
+      <div class="nav-item" data-page="simtrade">
+        <span class="icon">🔄</span> 模拟交易
+      </div>
+    </div>
+
+  </nav>
+  <div class="sidebar-footer">
+    <div class="connection-status">
+      <div class="status-dot"></div>
+      <div class="connection-detail">
+        <span class="label">系统连接</span>
+        <span class="value">数据采集活跃 · 5m前更新</span>
+      </div>
+    </div>
+  </div>
+</aside>
+{% endblock %}
+
+<!-- ==================== MAIN ==================== -->
+<div class="main">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <h2 id="pageTitle">{% block header_title %}期货 AI 交易体系{% endblock %}</h2>
+      <div class="header-sub" id="pageSubtitle">{% block header_subtitle %}Macro Futures Intelligence · V2{% endblock %}</div>
+    </div>
+    <div class="header-right">
+      <span class="tag active-tag">
+        <span class="dot" style="background:var(--teal)"></span>
+        规则模式
+      </span>
+      <span class="tag">
+        <span class="dot" style="background:var(--amber)"></span>
+        XAU/USD 综合
+      </span>
+      <span class="last-update">更新于 <span id="last-update-time">--:--:--</span></span>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+<script src="/static/js/app.js"></script>
+<script>
+// 更新时间显示
+function updateTime() {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('zh-CN', { hour12: false });
+  const el = document.getElementById('last-update-time');
+  if (el) el.textContent = timeStr;
+}
+updateTime();
+setInterval(updateTime, 1000);
+
+// 根据 URL 路径获取对应 pageId
+function pageIdFromPath() {
+  const map = { 
+    '/': 'overview', 
+    '/macro': 'macro', 
+    '/attribution': 'attribution', 
+    '/events': 'events', 
+    '/config': 'config', 
+    '/data-management': 'data-mgmt',
+    '/realtime': 'realtime'  // 新增实时探查路由
+  };
+  return map[window.location.pathname] || 'overview';
+}
+
+// 页面切换逻辑
+function switchPage(pageId) {
+  // 移除所有active类
+  document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+  document.querySelectorAll('.nav-subitem').forEach(item => item.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+
+  // 激活当前页面
+  const navItem = document.querySelector(`[data-page="${pageId}"]`);
+  if (navItem) navItem.classList.add('active');
+
+  const pageEl = document.getElementById(`page-${pageId}`);
+  if (pageEl) pageEl.classList.add('active');
+}
+
+// 初始激活页面（根据 URL）
+switchPage(pageIdFromPath());
+
+// 浏览器前进/后退
+window.addEventListener('popstate', () => {
+  const pid = pageIdFromPath();
+  switchPage(pid);
+  if (window.ensurePageLoaded) ensurePageLoaded(pid);
+});
+</script>
+
+{% block extra_js %}{% endblock %}
+</body>
+</html>

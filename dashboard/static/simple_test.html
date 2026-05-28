@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单测试</title>
+</head>
+<body>
+    <h1>简单JavaScript测试</h1>
+    <div id="test-output">等待JavaScript执行...</div>
+    
+    <script>
+        console.log('简单测试页面JavaScript开始执行');
+        document.getElementById('test-output').textContent = 'JavaScript执行成功！时间：' + new Date().toLocaleTimeString();
+        
+        // 测试能否访问实时探查API
+        fetch('/api/realtime/indicators')
+            .then(response => response.json())
+            .then(data => {
+                console.log('API测试成功:', data);
+                document.getElementById('test-output').textContent += ' | API测试成功，黄金价格：$' + (data.gold?.price || 'N/A');
+            })
+            .catch(error => {
+                console.error('API测试失败:', error);
+                document.getElementById('test-output').textContent += ' | API测试失败';
+            });
+    </script>
+</body>
+</html>

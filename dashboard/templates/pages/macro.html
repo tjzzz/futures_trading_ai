@@ -1,0 +1,93 @@
+    <!-- ===== PAGE: Macro ===== -->
+    <div class="page" id="page-macro">
+      <div class="page-header">
+        <h3>四象限宏观详情</h3>
+        <div class="page-desc">逐象限深度分析，含历史趋势与归因</div>
+      </div>
+      <div class="quadrant-detail">
+        <div class="macro-card">
+          <div class="macro-card-header">
+            <div class="left"><span>🟢</span> 货币锚 — Currency Anchor</div>
+            <span class="card-badge bullish" style="font-size:12px">利多</span>
+          </div>
+          <div class="macro-card-body">
+            <div class="metrics-list">
+              <div class="m-item"><span class="m-label">10Y Treasury</span><span class="m-value">4.52% <span class="text-teal">↑0.08%</span></span></div>
+              <div class="m-item"><span class="m-label">30Y Treasury</span><span class="m-value">4.78% <span class="text-teal">↑0.05%</span></span></div>
+              <div class="m-item"><span class="m-label">TIPS 实际利率</span><span class="m-value">2.12% <span class="text-teal">↑0.03%</span></span></div>
+              <div class="m-item"><span class="m-label">DXY 美元指数</span><span class="m-value">104.32 <span class="text-coral">↓0.12</span></span></div>
+              <div class="m-item"><span class="m-label">规则评分</span><span class="m-value">75 / 100</span></div>
+            </div>
+            <div class="chart-area">
+              <canvas id="chartTenY"></canvas>
+            </div>
+            <div class="card-analysis">
+              <strong>分析：</strong>10Y 收益率连续 5 个交易日位于 4.5% 以上，结合 DXY 同步走弱，形成典型的实际利率走高 + 美元回落的矛盾组合。历史回测显示此组合下黄金 70% 概率周度收涨。
+            </div>
+          </div>
+        </div>
+
+        <div class="macro-card">
+          <div class="macro-card-header">
+            <div class="left"><span>🔵</span> 宏观流动性 — Macro Liquidity</div>
+            <span class="card-badge neutral" style="font-size:12px">中性偏多</span>
+          </div>
+          <div class="macro-card-body">
+            <div class="metrics-list">
+              <div class="m-item"><span class="m-label">2Y Treasury</span><span class="m-value">4.12% <span class="text-coral">↓0.02%</span></span></div>
+              <div class="m-item"><span class="m-label">2-10 Spread</span><span class="m-value">+0.40% <span class="text-teal">走陡</span></span></div>
+              <div class="m-item"><span class="m-label">美联储利率预期</span><span class="m-value">5.25-5.50%</span></div>
+              <div class="m-item"><span class="m-label">规则评分</span><span class="m-value">58 / 100</span></div>
+            </div>
+            <div class="chart-area">
+              <canvas id="chartSpread"></canvas>
+            </div>
+            <div class="card-analysis">
+              <strong>分析：</strong>曲线陡峭化确认，2-year vs 10-year 利差扩大至 40bp，为近 3 个月最高。通常预示着市场定价经济软着陆而非衰退，对贵金属构成温和支撑。
+            </div>
+          </div>
+        </div>
+
+        <div class="macro-card">
+          <div class="macro-card-header">
+            <div class="left"><span>🟠</span> 风险偏好 — Risk Appetite</div>
+            <span class="card-badge bullish" style="font-size:12px">利多</span>
+          </div>
+          <div class="macro-card-body">
+            <div class="metrics-list">
+              <div class="m-item"><span class="m-label">VIX</span><span class="m-value">18.5 <span class="text-teal">↓1.2</span></span></div>
+              <div class="m-item"><span class="m-label">S&P 500</span><span class="m-value">5,378 <span class="text-teal">↑0.6%</span></span></div>
+              <div class="m-item"><span class="m-label">地缘政治风险</span><span class="m-value">低</span></div>
+              <div class="m-item"><span class="m-label">规则评分</span><span class="m-value">62 / 100</span></div>
+            </div>
+            <div class="chart-area">
+              <canvas id="chartVix"></canvas>
+            </div>
+            <div class="card-analysis">
+              <strong>分析：</strong>VIX 维持在 20 以下舒适区，风险资产情绪向好。没有地缘政治危机驱动避险，黄金处于"温和上涨"而非"恐慌上冲"模式。
+            </div>
+          </div>
+        </div>
+
+        <div class="macro-card">
+          <div class="macro-card-header">
+            <div class="left"><span>🔴</span> 供需博弈 — Supply-Demand</div>
+            <span class="card-badge neutral" style="font-size:12px">中性</span>
+          </div>
+          <div class="macro-card-body">
+            <div class="metrics-list">
+              <div class="m-item"><span class="m-label">金银比</span><span class="m-value">79.2 <span class="text-amber">→ 0</span></span></div>
+              <div class="m-item"><span class="m-label">XAU/USD</span><span class="m-value">$2,358 <span class="text-teal">↑0.51%</span></span></div>
+              <div class="m-item"><span class="m-label">XAG/USD</span><span class="m-value">$29.75 <span class="text-teal">↑0.61%</span></span></div>
+              <div class="m-item"><span class="m-label">规则评分</span><span class="m-value">50 / 100</span></div>
+            </div>
+            <div class="chart-area">
+              <canvas id="chartRatio"></canvas>
+            </div>
+            <div class="card-analysis">
+              <strong>分析：</strong>金银比 79.2 略高于 75 的套利阈值，但未触及 85 的强烈低估线。白银相对黄金略便宜但不构成强信号，建议观望。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

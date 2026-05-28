@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时探查测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .indicator {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <h1>实时探查页面测试</h1>
+    
+    <div class="test-result info">
+        <strong>测试说明：</strong>这个页面测试实时探查页面的JavaScript是否正确加载和执行
+    </div>
+    
+    <button onclick="runTests()">运行测试</button>
+    
+    <div id="test-results"></div>
+    
+    <div id="data-display" style="margin-top: 20px; display: none;">
+        <h3>实时数据展示</h3>
+        <div class="indicator" id="test-gold">黄金: 加载中...</div>
+        <div class="indicator" id="test-silver">白银: 加载中...</div>
+        <div class="indicator" id="test-ratio">金银比: 加载中...</div>
+        <div class="indicator" id="test-usd">美元指数: 加载中...</div>
+        <div class="indicator" id="test-bond">10Y美债: 加载中...</div>
+        <div class="indicator" id="test-vix">VIX: 加载中...</div>
+    </div>
+    
+    <script>
+        function runTests() {
+            const resultsDiv = document.getElementById('test-results');
+            resultsDiv.innerHTML = '';
+            
+            // 测试1: 检查API是否可访问
+            addTestResult('测试API可访问性', '正在检查 /api/realtime/indicators...');
+            
+            fetch('/api/realtime/indicators')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    addTestResult('API可访问性', '✅ 成功', 'success');
+                    
+                    // 测试2: 检查数据格式
+                    const hasGold = data.gold && data.gold.price;
+                    const hasSilver = data.silver && data.silver.price;
+                    const hasRatio = data.ratio && data.ratio.value;
+                    const hasUsd = data.usd_index && data.usd_index.value;
+                    const hasBond = data.bond_10y && data.bond_10y.value;
+                    const hasVix = data.vix && data.vix.value;
+                    
+                    addTestResult('数据格式检查', 
+                        `✅ 黄金: ${hasGold ? '有数据' : '无数据'}, 白银: ${hasSilver ? '有数据' : '无数据'}, 金银比: ${hasRatio ? '有数据' : '无数据'}, 美元指数: ${hasUsd ? '有数据' : '无数据'}, 10Y美债: ${hasBond ? '有数据' : '无数据'}, VIX: ${hasVix ? '有数据' : '无数据'}`, 
+                        'success');
+                    
+                    // 显示数据
+                    document.getElementById('data-display').style.display = 'block';
+                    if (hasGold) document.getElementById('test-gold').textContent = `黄金: $${data.gold.price.toFixed(2)}`;
+                    if (hasSilver) document.getElementById('test-silver').textContent = `白银: $${data.silver.price.toFixed(2)}`;
+                    if (hasRatio) document.getElementById('test-ratio').textContent = `金银比: ${data.ratio.value.toFixed(2)}`;
+                    if (hasUsd) document.getElementById('test-usd').textContent = `美元指数: ${data.usd_index.value.toFixed(3)}`;
+                    if (hasBond) document.getElementById('test-bond').textContent = `10Y美债: ${data.bond_10y.value.toFixed(3)}%`;
+                    if (hasVix) document.getElementById('test-vix').textContent = `VIX: ${data.vix.value.toFixed(2)}`;
+                    
+                    // 测试3: 检查loadRealtimeData函数
+                    if (typeof window.loadRealtimeData === 'function') {
+                        addTestResult('loadRealtimeData函数', '✅ 存在', 'success');
+                    } else {
+                        addTestResult('loadRealtimeData函数', '❌ 未找到', 'error');
+                    }
+                    
+                    // 测试4: 执行loadRealtimeData函数
+                    addTestResult('执行数据加载', '正在尝试调用loadRealtimeData...', 'info');
+                    try {
+                        if (typeof window.loadRealtimeData === 'function') {
+                            window.loadRealtimeData();
+                            setTimeout(() => {
+                                addTestResult('执行数据加载', '✅ 函数已执行', 'success');
+                            }, 100);
+                        } else {
+                            addTestResult('执行数据加载', '❌ 函数不存在，无法执行', 'error');
+                        }
+                    } catch (error) {
+                        addTestResult('执行数据加载', `❌ 执行出错: ${error.message}`, 'error');
+                    }
+                    
+                })
+                .catch(error => {
+                    addTestResult('API可访问性', `❌ 失败: ${error.message}`, 'error');
+                });
+        }
+        
+        function addTestResult(title, message, type = 'info') {
+            const resultsDiv = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = `<strong>${title}:</strong> ${message}`;
+            resultsDiv.appendChild(div);
+        }
+        
+        // 页面加载时自动运行测试
+        window.onload = function() {
+            setTimeout(runTests, 1000);
+        };
+    </script>
+</body>
+</html>

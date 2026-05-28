@@ -1,0 +1,48 @@
+    <!-- ===== PAGE: 数据管理 ===== -->
+    <div class="page" id="page-data-mgmt">
+      <div class="page-header">
+        <h3>数据管理</h3>
+        <div class="page-desc">数据源配置、采集日志、历史数据清理</div>
+      </div>
+      <!-- 实时/分钟数据 -->
+      <div class="data-mgmt-section">
+        <div class="dm-section-header">
+          <h4><span class="dm-section-icon">⚡</span> 分钟 / 实时数据</h4>
+          <span class="dm-section-count" id="dm-count-realtime">加载中...</span>
+        </div>
+        <table class="data-mgmt-table" id="dm-table-realtime">
+          <thead>
+            <tr>
+              <th style="width:28%">指标 / 数据源</th>
+              <th style="width:12%">采集频率</th>
+              <th style="width:16%">最新数据</th>
+              <th style="width:44%">数据覆盖</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="loading-row" colspan="4">加载中...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 日频数据 -->
+      <div class="data-mgmt-section">
+        <div class="dm-section-header">
+          <h4><span class="dm-section-icon">📅</span> 日频数据</h4>
+          <span class="dm-section-count" id="dm-count-daily">加载中...</span>
+        </div>
+        <table class="data-mgmt-table" id="dm-table-daily">
+          <thead>
+            <tr>
+              <th style="width:28%">指标 / 数据源</th>
+              <th style="width:12%">采集频率</th>
+              <th style="width:16%">最新数据</th>
+              <th style="width:44%">数据覆盖</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="loading-row" colspan="4">加载中...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

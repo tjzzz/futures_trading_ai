@@ -24,7 +24,8 @@ except ImportError:
     PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 SNAPSHOT_FILE = PROJECT_ROOT / "data/current/dashboard_data.json"
-SNAPSHOT_LOCK = SNAPSHOT_FILE.with_suffix(".json.lock")
+# 锁文件放到 /tmp 避免 iCloud Drive 干扰文件锁机制
+SNAPSHOT_LOCK = Path("/tmp/futures_trading_dashboard.json.lock")
 LOG_DIR = PROJECT_ROOT / "logs"
 CST = timezone(timedelta(hours=8))
 

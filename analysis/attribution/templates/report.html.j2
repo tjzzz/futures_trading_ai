@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ report_title }}</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header .meta {
+            margin-top: 15px;
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .price-change {
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .price-up { color: #27ae60; }
+        .price-down { color: #e74c3c; }
+        .driver-ranking {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .driver-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .driver-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .driver-card.top-3 {
+            border-left: 5px solid #3498db;
+        }
+        .contribution-bar {
+            height: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .contribution-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 5px;
+        }
+        .event-list {
+            list-style: none;
+            padding: 0;
+        }
+        .event-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .event-item.s-level { border-color: #e74c3c; }
+        .event-item.a-level { border-color: #f39c12; }
+        .event-item.b-level { border-color: #3498db; }
+        .event-item.c-level { border-color: #95a5a6; }
+        .conclusion {
+            background: #fffde7;
+            border-left: 5px solid #f1c40f;
+            padding: 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ report_title }}</h1>
+        <div class="meta">
+            生成时间: {{ generation_time }} | 分析引擎: {{ engine_name }} | 模式: {{ mode }}
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>📊 概览</h2>
+        <div class="price-change {% if price_change.pct > 0 %}price-up{% else %}price-down{% endif %}">
+            {{ target_name }}: {{ price_change.from }} → {{ price_change.to }} 
+            ({{ price_change.pct|abs }}% {% if price_change.pct > 0 %}上涨{% else %}下跌{% endif %})
+        </div>
+        <div class="stat-grid">
+            <div class="stat-item">
+                <div class="stat-value">{{ period.days }}天</div>
+                <div class="stat-label">分析周期</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">{{ driver_count }}个</div>
+                <div class="stat-label">分析因子</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">{{ event_count }}个</div>
+                <div class="stat-label">匹配事件</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">{{ dominant_contribution }}%</div>
+                <div class="stat-label">主导因子贡献</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>🏆 驱动因子排名</h2>
+        <div class="driver-ranking">
+            {% for driver in driver_ranking %}
+            <div class="driver-card {% if loop.index <= 3 %}top-3{% endif %}">
+                <h3>{{ loop.index }}. {{ driver.name }}</h3>
+                <div class="contribution-bar">
+                    <div class="contribution-fill" style="width: {{ driver.contribution_pct|abs }}%;"></div>
+                </div>
+                <p>贡献度: <strong>{{ driver.contribution_pct }}%</strong></p>
+                <p>相关性: r = {{ driver.r }} ({{ "正相关" if driver.r > 0 else "负相关" }})</p>
+                <p>变动幅度: Δ = {{ driver.delta }}</p>
+                <p class="detail">{{ driver.detail }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    {% if matched_events %}
+    <div class="section">
+        <h2>📰 事件匹配</h2>
+        <ul class="event-list">
+            {% for event in matched_events %}
+            <li class="event-item {{ event.event_level|lower }}-level">
+                <strong>{{ event.event_title }}</strong> ({{ event.event_level }}级)
+                <br>
+                <small>日期: {{ event.anomaly_date }} | 时间差: {{ event.time_diff_hours }}小时</small>
+                <br>
+                价格影响: {{ event.direction }} {{ event.price_impact.change|abs }}点
+                <br>
+                置信度: {{ event.match_confidence }} | 象限: {{ event.event_quadrant }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    <div class="section">
+        <h2>💡 综合结论</h2>
+        <div class="conclusion">
+            {{ conclusion }}
+        </div>
+    </div>
+    
+    <div class="footer">
+        期货AI交易系统 V2 - 归因分析报告 | 生成于 {{ generation_date }}
+    </div>
+</body>
+</html>

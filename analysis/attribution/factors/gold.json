@@ -1,0 +1,71 @@
+{
+  "target": "gold",
+  "name": "黄金 XAU/USD",
+  "timeframes": {
+    "short": {
+      "window": "1h~24h",
+      "data_grain": "minutely",
+      "label": "短线"
+    },
+    "medium": {
+      "window": "1d~30d",
+      "data_grain": "daily",
+      "label": "中线"
+    },
+    "long": {
+      "window": "1m~12m",
+      "data_grain": "daily",
+      "label": "长线"
+    }
+  },
+  "factors": [
+    {
+      "id": "dxy",
+      "name": "美元指数",
+      "direction": "negative",
+      "data_source": "dxy.csv",
+      "data_field": "value"
+    },
+    {
+      "id": "us10y",
+      "name": "10Y 美债收益率",
+      "direction": "negative",
+      "data_source": "treasury.csv",
+      "data_field": "10yr"
+    },
+    {
+      "id": "tips_10y",
+      "name": "TIPS 实际利率",
+      "direction": "negative",
+      "data_source": "tips.csv",
+      "data_field": "value"
+    },
+    {
+      "id": "vix",
+      "name": "VIX 恐慌指数",
+      "direction": "positive",
+      "data_source": "vix.csv",
+      "data_field": "value"
+    },
+    {
+      "id": "gold_futures",
+      "name": "黄金期货",
+      "direction": "positive",
+      "data_source": "gold_silver_daily.csv",
+      "data_field": "gold_close"
+    },
+    {
+      "id": "silver_futures",
+      "name": "白银期货",
+      "direction": "positive",
+      "data_source": "gold_silver_daily.csv",
+      "data_field": "silver_close"
+    },
+    {
+      "id": "event",
+      "name": "地缘/政策事件",
+      "direction": "positive",
+      "type": "discrete"
+    }
+  ]
+}

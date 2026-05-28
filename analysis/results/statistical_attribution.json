@@ -1,0 +1,79 @@
+{
+  "target": "gold",
+  "target_name": "黄金 XAU/USD",
+  "period": {
+    "start": "2026-05-01",
+    "end": "2026-05-20",
+    "grain": "daily"
+  },
+  "price_change": {
+    "from": 4549.2,
+    "to": 4490.2,
+    "absolute": -59.0,
+    "pct": -1.3
+  },
+  "driver_ranking": [
+    {
+      "factor": "us10y",
+      "name": "10Y 美债收益率",
+      "contribution_raw": 2.939,
+      "r": -1.0,
+      "delta": 2.939,
+      "direction": "negative",
+      "data_points": 2,
+      "factor_start": 4.39,
+      "factor_end": 4.67,
+      "factor_change": 0.28000000000000025,
+      "contribution_pct": 100.0,
+      "detail": "10Y 美债收益率 从 4.39 涨至 4.67 (+6.4%)，与价格负相关较强 (r=-1.00)"
+    },
+    {
+      "factor": "gold_futures",
+      "name": "黄金期货",
+      "contribution_raw": 1.801,
+      "r": 1.0,
+      "delta": -1.801,
+      "direction": "positive",
+      "data_points": 3,
+      "factor_start": 4549.2,
+      "factor_end": 4490.2,
+      "factor_change": -59.0,
+      "contribution_pct": 61.3,
+      "detail": "黄金期货 从 4549.20 跌至 4490.20 (-1.3%)，与价格正相关较强 (r=1.00)"
+    },
+    {
+      "factor": "silver_futures",
+      "name": "白银期货",
+      "contribution_raw": 0.662,
+      "r": 0.777,
+      "delta": -0.852,
+      "direction": "positive",
+      "data_points": 3,
+      "factor_start": 76.77,
+      "factor_end": 75.68,
+      "factor_change": -1.0899999999999892,
+      "contribution_pct": 22.5,
+      "detail": "白银期货 从 76.77 跌至 75.68 (-1.4%)，与价格正相关较强 (r=0.78)"
+    }
+  ],
+  "price_series": [
+    {
+      "date": "2026-05-18",
+      "value": 4549.2
+    },
+    {
+      "date": "2026-05-19",
+      "value": 4495.0
+    },
+    {
+      "date": "2026-05-20",
+      "value": 4490.2
+    }
+  ],
+  "statistics": {
+    "total_factors_analyzed": 3,
+    "effective_factors": 3,
+    "dominant_factor": "us10y",
+    "dominant_contribution": 100.0
+  }
+}
