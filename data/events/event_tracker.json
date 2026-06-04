@@ -1,0 +1,461 @@
+{
+  "active_events": [
+    {
+      "title": "Nvidia can deliver chips — but it can’t buy Big Tech out of its credit and power-grid crisis",
+      "summary": "Corporate profits can’t fix a chaotic trade war with China, climbing credit premiums and AI infrastructure limits.",
+      "level": "S",
+      "quadrant": [
+        "green",
+        "orange"
+      ],
+      "source": "marketwatch",
+      "link": "https://www.marketwatch.com/story/nvidia-can-deliver-chips-but-it-cant-buy-big-tech-out-of-its-credit-and-power-grid-crisis-9c114e62?mod=mw_rss_topstories",
+      "pubDate": "Thu, 21 May 2026 15:05:00 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Japan’s megabanks post record profits, but analysts warn growth may slow as risks mount",
+      "summary": "Japan's largest lenders may face some challenges to keep profit levels at record highs, amid higher credit costs and current geopolitical risks",
+      "level": "S",
+      "quadrant": [
+        "green",
+        "orange"
+      ],
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/05/21/japan-megabanks-profits-growth-risks-sumitomo-mitsui-mizuho-mitsubishi-ufj.html",
+      "pubDate": "Thu, 21 May 2026 06:35:46 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Fintech firm Mercury hits $5.2 billion valuation after funding round, up 49% in 14 months",
+      "summary": "Mercury has emerged as one of a select group of fintech firms, like Ramp and Stripe, that continued to thrive after the collapse of pandemic-era valuations.",
+      "level": "S",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/05/20/fintech-mercury-valuation-fundraise-bank-charter.html",
+      "pubDate": "Wed, 20 May 2026 15:57:55 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Why a small UK lender has major U.S. credit firms on edge",
+      "summary": "The continuing fallout from MFS' collapse has heightened fears that problems in complex credit markets pose a broader systemic risk. ",
+      "level": "S",
+      "quadrant": [
+        "green",
+        "orange"
+      ],
+      "source": "cnbc_economy",
+      "link": "https://www.cnbc.com/2026/05/18/mfs-private-credit-insolvency-banks-failure-collapse-barclays-mortgage.html",
+      "pubDate": "Mon, 18 May 2026 05:00:01 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Quantum stocks soar as the Trump administration looks to be buying in",
+      "summary": "The U.S. government is set to provide $2 billion in grants and take stakes in nine quantum-computing companies, the Wall Street Journal reports.",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "marketwatch",
+      "link": "https://www.marketwatch.com/story/quantum-stocks-soar-as-trump-administration-is-reportedly-buying-in-d6ed17b2?mod=mw_rss_topstories",
+      "pubDate": "Thu, 21 May 2026 13:47:00 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Congress is best chance to stop Trump 'lawfare' fund, attorneys say",
+      "summary": "The Department of Justice has set up a $1.8 billion fund that will purportedly compensate victims of prosecutorial overreach under the Biden administration.",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_politics",
+      "link": "https://www.cnbc.com/2026/05/20/trump-lawfare-fund-congress-courts-irs.html",
+      "pubDate": "Wed, 20 May 2026 23:08:30 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "DOJ charges ex-prosecutor with stealing Trump documents case report prepared by Jack Smith",
+      "summary": "Carmen Mercedes Lineberger allegedy emailed herself a copy of Volume II of special counsel Jack Smith's report on Trump's criminal case.",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_politics",
+      "link": "https://www.cnbc.com/2026/05/20/trump-documents-doj-charges-prosecutor-theft-jack-smith-report.html",
+      "pubDate": "Wed, 20 May 2026 19:23:20 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "EU clears major hurdle to finalize U.S. trade pact — and sidestep Trump tariff hikes",
+      "summary": "European Commission President Ursula von der Leyen on Wednesday welcomed a provisional agreement on legislation to remove import duties on U.S. goods.",
+      "level": "A",
+      "quadrant": [
+        "orange"
+      ],
+      "source": "cnbc_politics",
+      "link": "https://www.cnbc.com/2026/05/20/eu-us-trade-deal-trump-autos.html",
+      "pubDate": "Wed, 20 May 2026 07:19:59 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "ICE agent charged in Minnesota with assault in shooting of immigrant",
+      "summary": "Christian Castro is the second ICE agent to be charged for actions during Operation Metro Surge, the Trump administration's immigration-enforcement mission.",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_politics",
+      "link": "https://www.cnbc.com/2026/05/18/ice-minnesota-shooting-immigrant.html",
+      "pubDate": "Tue, 19 May 2026 00:38:51 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Trump ballroom money in question after Senate parliamentarian rules. Thune says GOP will persist",
+      "summary": "Senate Majority Leader John Thune, R-S.D., said the GOP will refine its approach to seeking money for President Donald Trump's White House ballroom.",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_politics",
+      "link": "https://www.cnbc.com/2026/05/18/trump-ballroom-provision-blocked-senate-parliamentarian.html",
+      "pubDate": "Mon, 18 May 2026 20:24:37 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Retail investors get direct access to SpaceX IPO through major brokerage platforms",
+      "summary": "SpaceX's blockbuster public offering is giving everyday traders access that has traditionally been reserved for Wall Street's biggest clients.",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/05/21/retail-investors-get-direct-access-to-spacex-ipo-through-major-brokerage-platforms.html",
+      "pubDate": "Thu, 21 May 2026 12:16:28 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Fed officials see rate hike ahead if inflation stays elevated, minutes show",
+      "summary": "A majority of officials anticipated that interest rate increases would be necessary if the Iran war continued to aggravate inflation.",
+      "level": "A",
+      "quadrant": [
+        "blue",
+        "orange",
+        "red"
+      ],
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/05/20/fed-officials-see-rate-hike-ahead-if-inflation-stays-elevated-minutes-show.html",
+      "pubDate": "Wed, 20 May 2026 19:04:09 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "China confirms order for 200 Boeing planes, calls aviation key area for U.S. cooperation",
+      "summary": "China has agreed to buy 200 Boeing jets, its first major order in nearly a decade, U.S. President Donald Trump said last week.",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/05/20/china-confirms-200-boeing-aircraft-order.html",
+      "pubDate": "Wed, 20 May 2026 05:22:20 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Fed to hike? When traders see a rate increase coming",
+      "summary": "Traders on prediction market platforms see increasing odds that an interest rate hike from the central bank comes by July 2027. ",
+      "level": "A",
+      "quadrant": [
+        "blue"
+      ],
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/05/19/fed-to-hike-when-traders-see-a-rate-increase-coming.html",
+      "pubDate": "Tue, 19 May 2026 21:51:22 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Investors are flooding out of cash to buy stocks. That 'bull capitulation' is a sell signal, Bank of America says",
+      "summary": "A contrarian signal just flashed, warning traders it could be time to get out of equities or limit exposure.",
+      "level": "A",
+      "quadrant": [
+        "orange"
+      ],
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/05/19/investors-are-leaving-cash-to-buy-stocks-thats-a-sell-signal-bank-of-america-says.html",
+      "pubDate": "Tue, 19 May 2026 15:58:40 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Standard Chartered to cut over 15% of corporate functions roles as it targets higher returns",
+      "summary": "Standard Chartered will trim corporate functions roles and target a more than 20% increase in income per employee by 2028 as it seeks stronger returns.",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/05/19/standard-chartered-job-cuts-corporate-roles-profit-targets.html",
+      "pubDate": "Tue, 19 May 2026 04:40:25 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "White House touts deals on soybeans and rare earths after Trump-Xi summit, while China talks up tariff cuts",
+      "summary": "The meeting between U.S. President Donald Trump and Chinese President Xi Jinping last week yielded new pacts, though the sides have provided differing details.",
+      "level": "A",
+      "quadrant": [
+        "green",
+        "orange"
+      ],
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/05/18/us-china-announce-deals-after-trump-xi-summit.html",
+      "pubDate": "Mon, 18 May 2026 04:58:00 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Kevin Warsh comes into the Fed facing a big 'family fight' over cutting interest rates",
+      "summary": "With inflation spiking and Treasury yields surging, Warsh is likely to confront a Federal Open Market Committee in no mood to ease.",
+      "level": "A",
+      "quadrant": [
+        "green",
+        "blue",
+        "orange",
+        "red"
+      ],
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/05/16/kevin-warsh-comes-into-the-fed-facing-a-big-family-fight-over-cutting-interest-rates.html",
+      "pubDate": "Sat, 16 May 2026 13:41:29 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Rising mortgage rates cause surge in demand for riskier loans",
+      "summary": "Mortgage rates continued to rise last week, causing more borrowers to head to adjustable-rate loans, which are cheaper but considered riskier. ",
+      "level": "A",
+      "quadrant": [
+        "orange"
+      ],
+      "source": "cnbc_economy",
+      "link": "https://www.cnbc.com/2026/05/20/rising-mortgage-rates-cause-surge-in-demand-for-riskier-loans.html",
+      "pubDate": "Wed, 20 May 2026 11:33:04 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Mortgage rates surge to highest level since July",
+      "summary": "Mortgage rates continued to move higher Tuesday on uncertainty over the war with Iran. They are at the highest level since last July.",
+      "level": "A",
+      "quadrant": [
+        "orange"
+      ],
+      "source": "cnbc_economy",
+      "link": "https://www.cnbc.com/2026/05/19/mortgage-rates-closing-in-on-7percent.html",
+      "pubDate": "Tue, 19 May 2026 20:06:10 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Homebuilder sentiment improves on late spring surge in demand",
+      "summary": "CNBC’s Diana Olick breaks down the newest housing data.",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_economy",
+      "link": "https://www.cnbc.com/video/2026/05/18/homebuilder-sentiment-improves-on-late-spring-surge-in-demand.html",
+      "pubDate": "Mon, 18 May 2026 14:12:54 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Homebuilder sentiment improves on late spring surge in demand",
+      "summary": "Builders are feeling slightly better about the housing market, as they see improved buyer traffic in a potential late spring surge. ",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_economy",
+      "link": "https://www.cnbc.com/2026/05/18/may-homebuilder-sentiment-improves.html",
+      "pubDate": "Mon, 18 May 2026 15:58:43 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "Mortgage rates jump to highest level since March on hotter inflation reports",
+      "summary": "Mortgage rates surged to the highest level since March in reaction to two hotter-than-expected inflation reports.",
+      "level": "A",
+      "quadrant": [
+        "red"
+      ],
+      "source": "cnbc_economy",
+      "link": "https://www.cnbc.com/2026/05/13/mortgage-rates-jump-to-highest-level-since-march.html",
+      "pubDate": "Wed, 13 May 2026 18:25:30 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    },
+    {
+      "title": "New York City Mayor Zohran Mamdani's pied-à-terre property tax is moving ahead. But will it work?",
+      "summary": "New York is moving ahead with a pied-à-terre property tax in its budget. Existing taxes from around the world's major cities show the limits of the policy.",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ],
+      "source": "cnbc_economy",
+      "link": "https://www.cnbc.com/2026/05/12/mayor-mamdani-new-york-pied-terre-property-tax-real-estate.html",
+      "pubDate": "Tue, 12 May 2026 20:20:27 GMT",
+      "detected_at": "2026-05-21 23:09 CST"
+    }
+  ],
+  "events_to_watch": [
+    {
+      "title": "Nvidia can deliver chips — but it can’t buy Big Tech out of its credit and power-grid crisis",
+      "level": "S",
+      "quadrant": [
+        "green",
+        "orange"
+      ]
+    },
+    {
+      "title": "Japan’s megabanks post record profits, but analysts warn growth may slow as risks mount",
+      "level": "S",
+      "quadrant": [
+        "green",
+        "orange"
+      ]
+    },
+    {
+      "title": "Fintech firm Mercury hits $5.2 billion valuation after funding round, up 49% in 14 months",
+      "level": "S",
+      "quadrant": [
+        "unclassified"
+      ]
+    },
+    {
+      "title": "Why a small UK lender has major U.S. credit firms on edge",
+      "level": "S",
+      "quadrant": [
+        "green",
+        "orange"
+      ]
+    },
+    {
+      "title": "Quantum stocks soar as the Trump administration looks to be buying in",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ]
+    },
+    {
+      "title": "Congress is best chance to stop Trump 'lawfare' fund, attorneys say",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ]
+    },
+    {
+      "title": "DOJ charges ex-prosecutor with stealing Trump documents case report prepared by Jack Smith",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ]
+    },
+    {
+      "title": "EU clears major hurdle to finalize U.S. trade pact — and sidestep Trump tariff hikes",
+      "level": "A",
+      "quadrant": [
+        "orange"
+      ]
+    },
+    {
+      "title": "ICE agent charged in Minnesota with assault in shooting of immigrant",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ]
+    },
+    {
+      "title": "Trump ballroom money in question after Senate parliamentarian rules. Thune says GOP will persist",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ]
+    },
+    {
+      "title": "Retail investors get direct access to SpaceX IPO through major brokerage platforms",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ]
+    },
+    {
+      "title": "Fed officials see rate hike ahead if inflation stays elevated, minutes show",
+      "level": "A",
+      "quadrant": [
+        "blue",
+        "orange",
+        "red"
+      ]
+    },
+    {
+      "title": "China confirms order for 200 Boeing planes, calls aviation key area for U.S. cooperation",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ]
+    },
+    {
+      "title": "Fed to hike? When traders see a rate increase coming",
+      "level": "A",
+      "quadrant": [
+        "blue"
+      ]
+    },
+    {
+      "title": "Investors are flooding out of cash to buy stocks. That 'bull capitulation' is a sell signal, Bank of America says",
+      "level": "A",
+      "quadrant": [
+        "orange"
+      ]
+    },
+    {
+      "title": "Standard Chartered to cut over 15% of corporate functions roles as it targets higher returns",
+      "level": "A",
+      "quadrant": [
+        "unclassified"
+      ]
+    },
+    {
+      "title": "White House touts deals on soybeans and rare earths after Trump-Xi summit, while China talks up tariff cuts",
+      "level": "A",
+      "quadrant": [
+        "green",
+        "orange"
+      ]
+    },
+    {
+      "title": "Kevin Warsh comes into the Fed facing a big 'family fight' over cutting interest rates",
+      "level": "A",
+      "quadrant": [
+        "green",
+        "blue",
+        "orange",
+        "red"
+      ]
+    },
+    {
+      "title": "Rising mortgage rates cause surge in demand for riskier loans",
+      "level": "A",
+      "quadrant": [
+        "orange"
+      ]
+    },
+    {
+      "title": "Mortgage rates surge to highest level since July",
+      "level": "A",
+      "quadrant": [
+        "orange"
+      ]
+    }
+  ],
+  "quadrant_summary": {
+    "green": 9,
+    "orange": 26,
+    "unclassified": 63,
+    "blue": 5,
+    "red": 13
+  },
+  "fetched_at": "2026-05-21 23:09 CST",
+  "total": 100
+}

@@ -1,0 +1,129 @@
+{
+  "gold_price": {
+    "value": 4495.0,
+    "unit": "USD/oz",
+    "updated_at": "2026-05-19 22:45:04"
+  },
+  "silver_price": {
+    "value": 74.22,
+    "unit": "USD/oz",
+    "updated_at": "2026-05-19 22:45:04"
+  },
+  "gold_silver_ratio": {
+    "value": 60.56,
+    "updated_at": "2026-05-19 22:45:04"
+  },
+  "treasury_10y": {
+    "value": 4.572,
+    "change": -0.095,
+    "change_pct": -2.04,
+    "prev_close": 4.667,
+    "source": "yahoo_finance",
+    "updated_at": "2026-05-21 16:17:42",
+    "freshness": "实时"
+  },
+  "treasury_30y": {},
+  "tips_10y": {
+    "value": 2.1,
+    "source": "fred",
+    "as_of_date": "2026-05-15",
+    "updated_at": "2026-05-19 20:30:59",
+    "freshness": "延迟2天"
+  },
+  "dxy": {
+    "value": 99.221,
+    "change": 0.129,
+    "change_pct": 0.13,
+    "prev_close": 99.092,
+    "source": "yahoo_finance",
+    "updated_at": "2026-05-21 16:17:42",
+    "freshness": "实时"
+  },
+  "vix": {
+    "value": 17.42,
+    "change": -0.02,
+    "change_pct": -0.11,
+    "prev_close": 17.44,
+    "source": "yahoo_finance",
+    "updated_at": "2026-05-21 16:17:42",
+    "freshness": "实时"
+  },
+  "sp500": {
+    "value": 7408.5,
+    "source": "fred",
+    "as_of_date": "2026-05-15",
+    "updated_at": "2026-05-19 20:31:02",
+    "freshness": "延迟1天"
+  },
+  "global_updated_at": "2026-05-21 16:17:42",
+  "global_freshness": "尚未采集",
+  "treasury": {
+    "10yr": 4.61,
+    "30yr": 5.14,
+    "2yr": 4.07,
+    "source": "ustreasury",
+    "as_of_date": "05/18/2026",
+    "updated_at": "2026-05-19 20:30:58",
+    "freshness": "昨日数据"
+  },
+  "events": {
+    "active_s": [
+      "小型英国私人信贷机构MFS破产引发系统性风险担忧",
+      "30Y美债收益率持续>5%，10Y>4.5%（持续追踪）"
+    ],
+    "active_a": [
+      "美伊战争僵局（持续近3个月）",
+      "油价大涨叠加伊战，冲击消费与经济",
+      "新任美联储主席Kevin Warsh面临内部 '家庭纷争'",
+      "Trump-Xi峰会后：大豆稀土协议 vs 汽车关税博弈",
+      "铝价看涨至$4000/吨（50年最大供应冲击）"
+    ],
+    "quadrant_events": {
+      "green": {
+        "active_events": 3,
+        "s_level": 2,
+        "a_level": 1,
+        "net_direction": "利多"
+      },
+      "blue": {
+        "active_events": 1,
+        "s_level": 0,
+        "a_level": 1,
+        "net_direction": "矛盾（降息预期vs长端飙升）"
+      },
+      "orange": {
+        "active_events": 5,
+        "s_level": 1,
+        "a_level": 4,
+        "net_direction": "利多（避险需求旺盛）"
+      },
+      "red": {
+        "active_events": 1,
+        "s_level": 0,
+        "a_level": 1,
+        "net_direction": "偏多（工业金属共振）"
+      }
+    },
+    "updated_at": "2026-05-19 22:30 CST"
+  },
+  "gold_futures": {
+    "value": 4527.5,
+    "change": -7.8,
+    "change_pct": -0.17,
+    "prev_close": 4535.3,
+    "source": "yahoo_finance",
+    "updated_at": "2026-05-21 16:17:42",
+    "freshness": "实时",
+    "volume": 32520
+  },
+  "silver_futures": {
+    "value": 75.36,
+    "change": -0.821,
+    "change_pct": -1.08,
+    "prev_close": 76.181,
+    "source": "yahoo_finance",
+    "updated_at": "2026-05-21 16:17:42",
+    "freshness": "实时",
+    "volume": 9082
+  }
+}
