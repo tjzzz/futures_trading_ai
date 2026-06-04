@@ -38,10 +38,7 @@ logs/
 *.log
 
 # Data files (keep structure, ignore large files)
-data/
-data/*.csv
-data/*.parquet
-!data/.gitkeep
+
 
 # Database (optional - remove if you want to track small DB files)
 # data/*.db
@@ -59,3 +56,5 @@ config.local.json
 
 # workbuddy
 .workbuddy/
+.claude
+.obsidian

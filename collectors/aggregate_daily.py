@@ -76,7 +76,7 @@ def write_daily(daily: dict[str, dict]):
         "gold_open", "gold_high", "gold_low",
         "silver_open", "silver_high", "silver_low",
     ]
-
+    
     with open(DAILY_PATH, "w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
