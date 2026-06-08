@@ -155,7 +155,7 @@ def _handle_event_command(text: str) -> str:
         事件 S      → 仅 S 级事件
         事件 A      → 仅 A 级事件
     """
-    from collectors.rss_news import load_events
+    from collectors.news_rss import load_events
     import json
 
     events_data = load_events()

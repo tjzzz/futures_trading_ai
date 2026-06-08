@@ -1,6 +1,43 @@
 {
   "version": "1",
-  "last_check": "2026-05-20T01:56:25.077584+08:00",
+  "last_check": "2026-06-07 00:00:00",
+  "collectors": {
+    "macro": {
+      "last_run": "2026-05-21 16:17:42",
+      "status": "ok",
+      "notes": "Yahoo Finance + FRED + Treasury + CBOE VIX"
+    },
+    "bullion": {
+      "last_run": "2026-05-19 22:45:04",
+      "status": "ok",
+      "notes": "gold-api.com 金银现货"
+    },
+    "china_futures": {
+      "last_run": "2026-06-05 21:10:05",
+      "status": "ok",
+      "notes": "AKShare 沪金/沪银"
+    },
+    "news_rss": {
+      "last_run": "2026-06-05 21:09:00",
+      "status": "ok",
+      "notes": "CNBC + MarketWatch RSS"
+    },
+    "fedwatch": {
+      "last_run": null,
+      "status": "implemented",
+      "notes": "CME FedWatch 利率概率 (Web Fetch / API)"
+    },
+    "oil": {
+      "last_run": null,
+      "status": "implemented",
+      "notes": "WTI 原油价格 (yfinance CL=F)"
+    },
+    "gld_slv": {
+      "last_run": null,
+      "status": "implemented",
+      "notes": "GLD/SLV ETF 持仓 (yfinance)"
+    }
+  },
   "fired_events": {
     "301093bcb4653f03": {
       "first_fired": "2026-05-20T01:56:03.764468+08:00",

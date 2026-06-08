@@ -51,7 +51,7 @@ from config import (
     V2_COMMANDS, COLLECTOR_INTERVALS,
 )
 from analysis import Analysis
-from collectors.rss_news import load_events
+from collectors.news_rss import load_events
 
 # ── 日志 ────────────────────────────────────────────────
 logging.basicConfig(

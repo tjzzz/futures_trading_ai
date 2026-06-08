@@ -55,7 +55,7 @@
     "updated_at": "2026-05-19 20:31:02",
     "freshness": "延迟1天"
   },
-  "global_updated_at": "2026-05-21 16:17:42",
+  "global_updated_at": "2026-06-05 21:10:05",
   "global_freshness": "尚未采集",
   "treasury": {
     "10yr": 4.61,
@@ -125,5 +125,31 @@
     "updated_at": "2026-05-21 16:17:42",
     "freshness": "实时",
     "volume": 9082
+  },
+  "shfe_gold": {
+    "open": 985.18,
+    "high": 987.96,
+    "low": 968.88,
+    "close": 974.02,
+    "volume": 196978,
+    "open_interest": 191132,
+    "settlement": 0.0,
+    "change_pct": 0.0,
+    "date": "2026-06-05",
+    "source": "akshare",
+    "updated_at": "2026-06-05 21:10:04"
+  },
+  "shfe_silver": {
+    "open": 18038.0,
+    "high": 18230.0,
+    "low": 17170.0,
+    "close": 17528.0,
+    "volume": 705714,
+    "open_interest": 289320,
+    "settlement": 0.0,
+    "change_pct": 0.0,
+    "date": "2026-06-05",
+    "source": "akshare",
+    "updated_at": "2026-06-05 21:10:05"
   }
 }

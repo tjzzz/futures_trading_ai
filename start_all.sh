@@ -50,8 +50,8 @@ echo "仪表盘服务器启动成功，PID: $DASHBOARD_PID"
 
 # 首次数据采集（确保仪表盘启动后有实时数据）
 echo "执行首次数据采集..."
-python3 -m collectors.gold_silver 2>/dev/null || true
-python3 -m collectors.yahoo_finance 2>/dev/null || true
+python3 -m collectors.bullion 2>/dev/null || true
+python3 -m collectors.macro market 2>/dev/null || true
 echo "首次数据采集完成"
 
 # 等待服务启动
@@ -107,9 +107,9 @@ echo "  停止所有服务: pkill -f \"python3.*(start.py|dashboard.app)\""
 echo "  查看进程: ps aux | grep python"
 echo ""
 echo "📊 运行采集器更新数据:"
-echo "  python3 -m collectors.gold_silver     # 金银现货 (5min)"
-echo "  python3 -m collectors.yahoo_finance   # DXY/US10Y/VIX/期货 (5min)"
-echo "  python3 -m collectors.daily           # 每日数据"
-echo "  python3 -m collectors.rss_news        # RSS新闻 (30min)"
+echo "  python3 -m collectors.bullion         # 金银现货 (5min)"
+echo "  python3 -m collectors.macro market    # 宏观市场 DXY/US10Y/VIX/期货 (5min)"
+echo "  python3 -m collectors.macro daily     # 日频宏观数据"
+echo "  python3 -m collectors.news_rss        # RSS新闻 (30min)"
 echo "  python3 -m event_monitor.monitor      # 事件监控"
 echo "=========================================="

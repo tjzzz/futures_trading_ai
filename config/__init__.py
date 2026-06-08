@@ -41,6 +41,9 @@ FEISHU_WEBHOOK_PORT = int(os.getenv("FEISHU_WEBHOOK_PORT", "8080"))
 # ─── V2 命令前缀 ──────────────────────────────────────────
 V2_COMMANDS = ["归因", "趋势", "宏观", "事件", "监控", "预测"]
 
+# ─── 指标注册表 ──────────────────────────────────────────
+from config.indicator_loader import loader, IndicatorLoader, get_loader
+
 
 def validate_config() -> list:
     """

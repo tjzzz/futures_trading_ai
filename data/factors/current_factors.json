@@ -1,0 +1,230 @@
+{
+  "updated_at": "2026-06-08 10:42:26",
+  "data_source": "V0 采集 + compute_factors.py",
+  "factors": {
+    "opportunity_cost": {
+      "label": "机会成本",
+      "signal": null,
+      "data": {
+        "tips_10y": {
+          "value": 2.1,
+          "source": "fred",
+          "updated": "2026-05-15"
+        },
+        "tips_10y_change_d": 0.0,
+        "tips_10y_trend_20d": "up",
+        "nominal_10y": {
+          "value": 4.572,
+          "change": -0.095,
+          "source": "yahoo_finance"
+        },
+        "nominal_10y_change_d": -10.0,
+        "fedwatch_prob": null
+      }
+    },
+    "currency": {
+      "label": "货币",
+      "signal": null,
+      "data": {
+        "dxy": {
+          "value": 99.221,
+          "change": 0.129,
+          "source": "yahoo_finance",
+          "updated_at": "2026-05-21 16:17:42"
+        },
+        "dxy_change_d": 0.0,
+        "dxy_vs_200ma": "below",
+        "dxy_trend_60d": "flat"
+      }
+    },
+    "safe_haven": {
+      "label": "避险需求",
+      "signal": null,
+      "data": {
+        "vix": {
+          "value": 17.42,
+          "change": -0.02,
+          "source": "yahoo_finance",
+          "updated_at": "2026-05-21 16:17:42"
+        },
+        "vix_change_d": -2.04,
+        "vix_ma20": 17.629,
+        "vix_regime": "moderate",
+        "sp500": {
+          "value": 7408.5,
+          "source": "fred",
+          "updated_at": "2026-05-19 20:31:02"
+        },
+        "sp500_change_d": 0.0
+      }
+    },
+    "inflation": {
+      "label": "通胀预期",
+      "signal": null,
+      "data": {
+        "breakeven_10y": {
+          "value": 2.47,
+          "source": "calc (nominal_10y - tips_10y)",
+          "updated_at": "2026-06-08 10:42:26"
+        },
+        "breakeven_change_d": 0.01
+      }
+    },
+    "positioning": {
+      "label": "持仓动量",
+      "signal": null,
+      "data": {
+        "gold_oi": {
+          "value": 32520,
+          "source": "yahoo_finance",
+          "updated_at": "2026-05-21 16:17:42"
+        },
+        "silver_oi": {
+          "value": 9082,
+          "source": "yahoo_finance",
+          "updated_at": "2026-05-21 16:17:42"
+        },
+        "shfe_gold_oi": {
+          "value": 191132,
+          "source": "akshare",
+          "updated_at": "2026-06-05 21:10:04"
+        },
+        "shfe_silver_oi": {
+          "value": 289320,
+          "source": "akshare",
+          "updated_at": "2026-06-05 21:10:05"
+        }
+      }
+    },
+    "structural_demand": {
+      "label": "结构性需求",
+      "signal": null,
+      "data": {}
+    },
+    "silver_specific": {
+      "label": "银价专用",
+      "signal": null,
+      "data": {
+        "gold_silver_ratio": {
+          "value": 60.56,
+          "source": "calc (gold/silver)",
+          "updated_at": "2026-06-08 10:42:26"
+        },
+        "gs_ratio_percentile": 53.6
+      }
+    }
+  },
+  "events": [
+    {
+      "id": "Sen. Lisa Blunt Rochester: We have a hou...",
+      "title": "Sen. Lisa Blunt Rochester: We have a housing crisis in this country",
+      "summary": "Sen. Lisa Blunt Rochester (D-Del.) joins 'Squawk Box' to discuss her thoughts on Fed Chair Kevin Warsh, addressing the U.S. housing crisis, President Trump's decision to name Bill Pulte as acting DNI,",
+      "source": "cnbc_economy",
+      "detected_at": "2026-06-05 21:09 CST",
+      "factor_tags": [
+        "opportunity_cost",
+        "positioning",
+        "safe_haven"
+      ],
+      "impact": null,
+      "expiry": null
+    },
+    {
+      "id": "‘This would be a one-time event’: How ca...",
+      "title": "‘This would be a one-time event’: How can I take extra money from my 401(k) without triggering higher Medicare premiums?",
+      "summary": "“I generally withdraw money from my traditional 401(k) for projects, larger expenses and sometimes just to stay ahead on upcoming bills.”",
+      "source": "marketwatch",
+      "detected_at": "2026-06-05 21:09 CST",
+      "factor_tags": [],
+      "impact": null,
+      "expiry": null
+    },
+    {
+      "id": "The IPO of this power generator for data...",
+      "title": "The IPO of this power generator for data centers quietly outshines Quantinuum",
+      "summary": "Innio’s stock soared in its debut, to outshine the shares of the more high-profile quantum-computing company, and Trump administration investment, Quantinuum.",
+      "source": "marketwatch",
+      "detected_at": "2026-06-05 21:09 CST",
+      "factor_tags": [],
+      "impact": null,
+      "expiry": null
+    },
+    {
+      "id": "Bitcoin set to slump to new lows for 202...",
+      "title": "Bitcoin set to slump to new lows for 2026 after recent sell-off, traders forecast",
+      "summary": "The cryptocurrency is likely to break below its lows hit in early February, traders on prediction market Kalshi believe.",
+      "source": "cnbc_markets",
+      "detected_at": "2026-06-05 21:09 CST",
+      "factor_tags": [],
+      "impact": null,
+      "expiry": null
+    },
+    {
+      "id": "Morgan Stanley will soon open its trilli...",
+      "title": "Morgan Stanley will soon open its trillion-dollar wealth management funnel to AI agents",
+      "summary": "Morgan Stanley's move is one of the earliest instances of a major Wall Street bank opening its platforms to external AI tools.",
+      "source": "cnbc_markets",
+      "detected_at": "2026-06-05 21:09 CST",
+      "factor_tags": [],
+      "impact": null,
+      "expiry": null
+    },
+    {
+      "id": "Goldman Sachs cuts Hong Kong stocks in f...",
+      "title": "Goldman Sachs cuts Hong Kong stocks in favor of mainland China AI hardware plays",
+      "summary": "The investment bank on Wednesday cut its rating on H shares to market-weight from overweight, while staying overweight mainland China's A shares.",
+      "source": "cnbc_markets",
+      "detected_at": "2026-06-05 21:09 CST",
+      "factor_tags": [
+        "safe_haven"
+      ],
+      "impact": null,
+      "expiry": null
+    },
+    {
+      "id": "Berkshire Hathaway buys Taylor Morrison ...",
+      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
+      "summary": "The acquisition marks one of the first major strategic deals under Warren Buffett's successor Greg Abel, who took over as CEO in the beginning of 2026.",
+      "source": "cnbc_markets",
+      "detected_at": "2026-06-05 21:09 CST",
+      "factor_tags": [
+        "safe_haven"
+      ],
+      "impact": null,
+      "expiry": null
+    },
+    {
+      "id": "Pulte appointment as spy chief would giv...",
+      "title": "Pulte appointment as spy chief would give a Trump attack dog access to a trove of intelligence",
+      "summary": "In his role atop the housing finance agency, Bill Pulte has used his access to mortgage records to refer some top Trump opponents for prosecution.",
+      "source": "cnbc_economy",
+      "detected_at": "2026-06-05 21:09 CST",
+      "factor_tags": [],
+      "impact": null,
+      "expiry": null
+    },
+    {
+      "id": "Homeowners insurance premiums have soare...",
+      "title": "Homeowners insurance premiums have soared in recent years. How to reduce your costs",
+      "summary": "Insurance premiums have soared for many homeowners in recent years, but there are steps policyholders can take to reduce them, experts said.",
+      "source": "cnbc_economy",
+      "detected_at": "2026-06-05 21:09 CST",
+      "factor_tags": [],
+      "impact": null,
+      "expiry": null
+    },
+    {
+      "id": "Berkshire Hathaway buys Taylor Morrison ...",
+      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
+      "summary": "The acquisition marks one of the first major strategic deals under Warren Buffett's successor Greg Abel, who took over as CEO in the beginning of 2026.",
+      "source": "cnbc_economy",
+      "detected_at": "2026-06-05 21:09 CST",
+      "factor_tags": [
+        "safe_haven"
+      ],
+      "impact": null,
+      "expiry": null
+    }
+  ],
+  "summary": {}
+}

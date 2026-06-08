@@ -30,11 +30,11 @@ fi
 
 # 停止后台采集进程
 echo "检查后台采集进程..."
-if pkill -f "python3.*collectors.gold_silver"; then
-    echo "✅ gold_silver 采集器已停止"
+if pkill -f "python3.*collectors.bullion"; then
+    echo "✅ bullion 采集器已停止"
 fi
-if pkill -f "python3.*collectors.yahoo_finance"; then
-    echo "✅ yahoo_finance 采集器已停止"
+if pkill -f "python3.*collectors.macro"; then
+    echo "✅ macro 采集器已停止"
 fi
 
 # 检查端口是否释放

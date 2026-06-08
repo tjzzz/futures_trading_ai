@@ -16,6 +16,9 @@ YAHOO_SYMBOLS = {
     "vix": "^VIX",
     "gold": "GC=F",
     "silver": "SI=F",
+    "wti_crude": "CL=F",  # WTI 原油
+    "gld_etf": "GLD",     # SPDR Gold Trust
+    "slv_etf": "SLV",     # iShares Silver Trust
 }
 
 # 数据采集间隔（秒）
@@ -24,6 +27,9 @@ COLLECTOR_INTERVALS = {
     "yahoo_finance": 5 * 60,    # 5 分钟
     "daily": 86400,             # 每日
     "rss_news": 30 * 60,        # 30 分钟
+    "fedwatch": 86400,          # 每日 (CME FedWatch)
+    "oil": 5 * 60,              # 5 分钟 (WTI 原油)
+    "gld_slv": 86400,           # 每日 (GLD/SLV ETF)
 }
 
 # ============ 文件路径配置 ============
@@ -34,7 +40,10 @@ DATA_PATHS = {
     "history_daily": "data/history/daily",
     "history_minutely": "data/history/minutely",
     "events": "data/events",
-    "sources": "data/sources/source_registry.json",
+    "sources": "config/indicator_source.json",
+    "factors": "data/factors/current_factors.json",         # 因子对齐数据
+    "oil_history": "data/history/minutely/oil_minutely.csv", # WTI 原油历史
+    "gld_slv_history": "data/history/daily/gld_slv_holdings.csv",  # GLD/SLV 历史
 }
 
 # 日志目录

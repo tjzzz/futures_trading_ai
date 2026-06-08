@@ -2,6 +2,7 @@
 
 # 数据采集
 requests>=2.28.0
+yfinance>=0.2.28
 
 # 仪表盘（Flask）
 flask>=2.2.0

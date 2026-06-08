@@ -1,0 +1,447 @@
+{
+  "version": "2.0",
+  "updated_at": "2026-06-05",
+
+  "description": "指标定义统一注册表 —— 所有模块从此处读取指标映射、数据源、存储路径和展示配置",
+
+  "indicators": {
+    "gold": {
+      "name": "黄金",
+      "name_en": "Gold",
+      "category": "precious_metal",
+      "quadrant": ["red"],
+      "yahoo_symbol": null,
+      "collectors": ["collectors.bullion"],
+      "files": {
+        "snapshot_key": "gold_price",
+        "minutely": { "file": "gold_silver_minutely.csv", "field": "gold_usd" },
+        "daily": { "file": "gold_silver_daily.csv", "field": "gold_close" }
+      },
+      "display": {
+        "icon": "G",
+        "color": "#f59e0b",
+        "group": 1,
+        "unit": "USD/oz",
+        "precision": 2
+      },
+      "thresholds": null
+    },
+
+    "silver": {
+      "name": "白银",
+      "name_en": "Silver",
+      "category": "precious_metal",
+      "quadrant": ["red"],
+      "yahoo_symbol": null,
+      "collectors": ["collectors.bullion"],
+      "files": {
+        "snapshot_key": "silver_price",
+        "minutely": { "file": "gold_silver_minutely.csv", "field": "silver_usd" },
+        "daily": { "file": "gold_silver_daily.csv", "field": "silver_close" }
+      },
+      "display": {
+        "icon": "S",
+        "color": "#14b8a6",
+        "group": 1,
+        "unit": "USD/oz",
+        "precision": 2
+      },
+      "thresholds": null
+    },
+
+    "ratio": {
+      "name": "金银比",
+      "name_en": "Gold/Silver Ratio",
+      "category": "derived",
+      "quadrant": ["red"],
+      "yahoo_symbol": null,
+      "collectors": ["collectors.bullion"],
+      "files": {
+        "snapshot_key": "gold_silver_ratio",
+        "minutely": { "file": "gold_silver_minutely.csv", "field": "ratio" },
+        "daily": { "file": "gold_silver_daily.csv", "field": "ratio_close" }
+      },
+      "display": {
+        "icon": "R",
+        "color": "#a855f7",
+        "group": 2,
+        "unit": "",
+        "precision": 2
+      },
+      "thresholds": {
+        "warning": 80,
+        "critical": 85
+      }
+    },
+
+    "gold_futures": {
+      "name": "黄金期货",
+      "name_en": "Gold Futures",
+      "category": "precious_metal",
+      "quadrant": ["red"],
+      "yahoo_symbol": "GC=F",
+      "collectors": ["collectors.macro"],
+      "files": {
+        "snapshot_key": "gold_futures",
+        "minutely": { "file": "yahoo_finance_minutely.csv", "field": "gold_futures" }
+      },
+      "display": {
+        "icon": "GF",
+        "color": "#f59e0b",
+        "group": 1,
+        "unit": "USD/oz",
+        "precision": 2
+      },
+      "thresholds": null
+    },
+
+    "silver_futures": {
+      "name": "白银期货",
+      "name_en": "Silver Futures",
+      "category": "precious_metal",
+      "quadrant": ["red"],
+      "yahoo_symbol": "SI=F",
+      "collectors": ["collectors.macro"],
+      "files": {
+        "snapshot_key": "silver_futures",
+        "minutely": { "file": "yahoo_finance_minutely.csv", "field": "silver_futures" }
+      },
+      "display": {
+        "icon": "SF",
+        "color": "#14b8a6",
+        "group": 1,
+        "unit": "USD/oz",
+        "precision": 2
+      },
+      "thresholds": null
+    },
+
+    "dxy": {
+      "name": "美元指数",
+      "name_en": "USD Index",
+      "category": "macro",
+      "quadrant": ["green"],
+      "yahoo_symbol": "DX-Y.NYB",
+      "collectors": ["collectors.macro"],
+      "files": {
+        "snapshot_key": "dxy",
+        "daily": { "file": "dxy.csv", "field": "value" },
+        "minutely": { "file": "yahoo_finance_minutely.csv", "field": "dxy" }
+      },
+      "display": {
+        "icon": "$",
+        "color": "#3b82f6",
+        "group": 3,
+        "unit": "",
+        "precision": 3
+      },
+      "thresholds": null
+    },
+
+    "treasury_10y": {
+      "name": "10Y美债收益率",
+      "name_en": "US 10Y Treasury Yield",
+      "category": "macro",
+      "quadrant": ["green"],
+      "yahoo_symbol": "^TNX",
+      "collectors": ["collectors.macro"],
+      "files": {
+        "snapshot_key": "treasury_10y",
+        "daily": { "file": "treasury.csv", "field": "10yr" },
+        "minutely": { "file": "yahoo_finance_minutely.csv", "field": "us10y" }
+      },
+      "display": {
+        "icon": "B",
+        "color": "#ef4444",
+        "group": 3,
+        "unit": "%",
+        "precision": 3
+      },
+      "thresholds": {
+        "warning": 4.5,
+        "critical": 5.0
+      }
+    },
+
+    "treasury_2y": {
+      "name": "2Y美债收益率",
+      "name_en": "US 2Y Treasury Yield",
+      "category": "macro",
+      "quadrant": ["blue"],
+      "yahoo_symbol": null,
+      "collectors": ["collectors.macro"],
+      "files": {
+        "daily": { "file": "treasury.csv", "field": "2yr" }
+      },
+      "display": {
+        "icon": "2Y",
+        "color": "#f97316",
+        "group": 3,
+        "unit": "%",
+        "precision": 3
+      },
+      "thresholds": null
+    },
+
+    "treasury_30y": {
+      "name": "30Y美债收益率",
+      "name_en": "US 30Y Treasury Yield",
+      "category": "macro",
+      "quadrant": ["green"],
+      "yahoo_symbol": null,
+      "collectors": ["collectors.macro"],
+      "files": {
+        "daily": { "file": "treasury.csv", "field": "30yr" }
+      },
+      "display": {
+        "icon": "30Y",
+        "color": "#dc2626",
+        "group": 3,
+        "unit": "%",
+        "precision": 3
+      },
+      "thresholds": null
+    },
+
+    "tips_10y": {
+      "name": "10Y实际利率(TIPS)",
+      "name_en": "10Y TIPS Yield",
+      "category": "macro",
+      "quadrant": ["blue"],
+      "yahoo_symbol": null,
+      "collectors": ["collectors.macro"],
+      "files": {
+        "snapshot_key": "tips_10y",
+        "daily": { "file": "tips.csv", "field": "value" }
+      },
+      "display": {
+        "icon": "TI",
+        "color": "#6366f1",
+        "group": 3,
+        "unit": "%",
+        "precision": 2
+      },
+      "thresholds": null
+    },
+
+    "sp500": {
+      "name": "标普500",
+      "name_en": "S&P 500",
+      "category": "sentiment",
+      "quadrant": ["orange"],
+      "yahoo_symbol": null,
+      "collectors": ["collectors.macro"],
+      "files": {
+        "snapshot_key": "sp500",
+        "daily": { "file": "sp500.csv", "field": "value" }
+      },
+      "display": {
+        "icon": "SP",
+        "color": "#22c55e",
+        "group": 4,
+        "unit": "",
+        "precision": 1
+      },
+      "thresholds": null
+    },
+
+    "vix": {
+      "name": "VIX恐慌指数",
+      "name_en": "CBOE Volatility Index",
+      "category": "sentiment",
+      "quadrant": ["orange"],
+      "yahoo_symbol": "^VIX",
+      "collectors": ["collectors.macro"],
+      "files": {
+        "snapshot_key": "vix",
+        "daily": { "file": "vix.csv", "field": "close" },
+        "minutely": { "file": "yahoo_finance_minutely.csv", "field": "vix" }
+      },
+      "display": {
+        "icon": "V",
+        "color": "#ef4444",
+        "group": 4,
+        "unit": "",
+        "precision": 2
+      },
+      "thresholds": {
+        "warning": 20,
+        "critical": 25
+      }
+    },
+
+    "shfe_gold": {
+      "name": "沪金",
+      "name_en": "SHFE Gold Futures",
+      "category": "precious_metal",
+      "quadrant": ["red"],
+      "yahoo_symbol": null,
+      "collectors": ["collectors.china_futures"],
+      "files": {
+        "snapshot_key": "shfe_gold",
+        "daily": { "file": "china_futures.csv", "field": "au_close" }
+      },
+      "display": {
+        "icon": "AU",
+        "color": "#f59e0b",
+        "group": 1,
+        "unit": "CNY/g",
+        "precision": 2
+      },
+      "thresholds": null
+    },
+
+    "shfe_silver": {
+      "name": "沪银",
+      "name_en": "SHFE Silver Futures",
+      "category": "precious_metal",
+      "quadrant": ["red"],
+      "yahoo_symbol": null,
+      "collectors": ["collectors.china_futures"],
+      "files": {
+        "snapshot_key": "shfe_silver",
+        "daily": { "file": "china_futures.csv", "field": "ag_close" }
+      },
+      "display": {
+        "icon": "AG",
+        "color": "#14b8a6",
+        "group": 1,
+        "unit": "CNY/kg",
+        "precision": 2
+      },
+      "thresholds": null
+    }
+  },
+
+  "collectors": {
+    "collectors.bullion": {
+      "name": "金银现货采集器",
+      "module": "collectors.bullion",
+      "frequency_minutes": 5,
+      "data_source": "gold-api",
+      "indicators": ["gold", "silver", "ratio"],
+      "url": "https://api.gold-api.com/price/{symbol}",
+      "output": {
+        "snapshot_keys": ["gold_price", "silver_price", "gold_silver_ratio"],
+        "minutely_file": "gold_silver_minutely.csv",
+        "minutely_fields": ["gold_usd", "silver_usd", "ratio"]
+      }
+    },
+    "collectors.china_futures": {
+      "name": "国内期货主力合约 (AKShare/新浪)",
+      "module": "collectors.china_futures",
+      "frequency_minutes": 1440,
+      "data_source": "akshare-sina",
+      "indicators": ["shfe_gold", "shfe_silver"],
+      "notes": "免费，无需 API Key，日频 OHLC + 持仓量"
+    },
+    "collectors.macro": {
+      "name": "宏观指标采集器（市场 + 日频基本面）",
+      "module": "collectors.macro",
+      "frequency_minutes": 5,
+      "data_source": "yahoo-finance|ustreasury|fred|cboe-vix",
+      "indicators": ["dxy", "treasury_10y", "treasury_2y", "treasury_30y", "tips_10y", "sp500", "vix", "gold_futures", "silver_futures"],
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}",
+      "output": {
+        "snapshot_keys": ["dxy", "treasury_10y", "vix", "gold_futures", "silver_futures"],
+        "minutely_file": "yahoo_finance_minutely.csv",
+        "extended_file": "yahoo_finance_extended_minutely.csv",
+        "unified_file": "unified_gold_silver_volume.csv",
+        "daily_files": {
+          "treasury":  { "file": "treasury.csv",  "fields": ["10yr", "2yr", "30yr"] },
+          "tips_10y":  { "file": "tips.csv",      "field": "value" },
+          "dxy":       { "file": "dxy.csv",       "field": "value" },
+          "sp500":     { "file": "sp500.csv",     "field": "value" },
+          "vix":       { "file": "vix.csv",       "field": "close" }
+        },
+        "fred_series": {
+          "tips":  { "id": "DFII10",    "name": "10-Year TIPS", "indicator": "tips_10y" },
+          "dxy":   { "id": "DTWEXBGS",  "name": "Trade Weighted USD Index", "indicator": "dxy" },
+          "sp500": { "id": "SP500",     "name": "S&P 500", "indicator": "sp500" }
+        }
+      }
+    },
+    "collectors.news_rss": {
+      "name": "RSS 新闻采集器",
+      "module": "collectors.news_rss",
+      "frequency_minutes": 30,
+      "data_source": "cnbc|marketwatch",
+      "indicators": [],
+      "urls": [
+        "https://feeds.content.dowjones.io/public/rss/mw_topstories",
+        "https://www.cnbc.com/id/10000113/device/rss/rss.html",
+        "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",
+        "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000115"
+      ],
+      "output": {
+        "feed_file": "latest_feed.json",
+        "events_file": "event_tracker.json"
+      }
+    }
+  },
+
+  "sources": [
+    {
+      "id": "gold-api",
+      "name": "Gold API",
+      "type": "api",
+      "url": "https://api.gold-api.com/price/{symbol}",
+      "status": "active",
+      "since": "2026-01-02",
+      "notes": "免费层，无需 API Key，金银现货实时价格"
+    },
+    {
+      "id": "yahoo-finance",
+      "name": "Yahoo Finance",
+      "type": "api",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}",
+      "status": "active",
+      "since": "2026-05-21",
+      "notes": "免费，无需 Key，延迟约15分钟"
+    },
+    {
+      "id": "ustreasury",
+      "name": "U.S. Treasury Yield Curve",
+      "type": "csv",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all",
+      "status": "active",
+      "since": "2026-01-02",
+      "notes": "T+1，包含2Y/10Y/30Y 收益率"
+    },
+    {
+      "id": "fred",
+      "name": "FRED (Federal Reserve Economic Data)",
+      "type": "csv",
+      "url": "https://fred.stlouisfed.org/",
+      "status": "active",
+      "since": "2026-01-02",
+      "notes": "免费，无需 API Key。使用 series: DFII10 / DTWEXBGS / SP500"
+    },
+    {
+      "id": "cboe-vix",
+      "name": "CBOE VIX",
+      "type": "csv",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv",
+      "status": "active",
+      "since": "2026-05-18",
+      "notes": "VIX 日频历史，含 Date/Open/High/Low/Close"
+    },
+    {
+      "id": "cnbc-rss",
+      "name": "CNBC + MarketWatch RSS",
+      "type": "rss",
+      "status": "active",
+      "since": "2026-05-18",
+      "notes": "四象限新闻归因，30分钟轮询"
+    },
+    {
+      "id": "alltick",
+      "name": "AllTick 实时期货行情",
+      "type": "api",
+      "url": "https://alltick.co",
+      "status": "pending",
+      "since": null,
+      "notes": "有免费额度，需注册 API Key，WebSocket 接入。待开发"
+    }
+  ]
+}
