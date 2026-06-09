@@ -1,13 +1,22 @@
-#!/usr/bin/env python3
 """
-飞书集成模块 - V2 架构
-提供飞书 Webhook 消息解析、V2 命令路由功能
+feishu — 飞书集成模块
+
+推送：push_morning_brief / push_anomaly_alert / push_event_reminder / push_text
+消息：send_message（底层）
 """
-from .handlers import extract_user_message, is_v2_command, handle_v2_command, V2_COMMANDS
+
+from .push import (
+    send_message,
+    push_morning_brief,
+    push_anomaly_alert,
+    push_event_reminder,
+    push_text,
+)
 
 __all__ = [
-    "extract_user_message",
-    "is_v2_command",
-    "handle_v2_command",
-    "V2_COMMANDS",
+    "send_message",
+    "push_morning_brief",
+    "push_anomaly_alert",
+    "push_event_reminder",
+    "push_text",
 ]

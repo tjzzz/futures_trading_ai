@@ -1,248 +1,118 @@
-# 期货 AI 交易系统 V2
+# 期货 AI 交易系统 V1
 
-以黄金（XAU）为核心的宏观基本面分析系统。数据驱动的四象限分析引擎 + 事件监控 + Web 仪表盘 + 飞书机器人。
+基于金银七因子归因模型的宏观分析系统。数据采集 → 因子对齐 → AI Agent 分析 + 记忆闭环。
 
 ---
 
-## 架构
+## 系统架构
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    消费层 (Consumer Layer)                        │
-│                                                                  │
-│  ┌──────────────────┐    ┌──────────────────────────────┐       │
-│  │  Dashboard Web    │    │  飞书机器人                     │       │
-│  │  (Flask :8082)   │    │  (start.py :8080)              │       │
-│  └──────────────────┘    └──────────────────────────────┘       │
-└──────────────────────────┬──────────────────────────────────────┘
-                           │ REST API
-┌──────────────────────────▼──────────────────────────────────────┐
-│                     分析层 (Analysis Layer)                       │
-│                                                                  │
-│  ┌──────────────────────────────────────────────────────────┐    │
-│  │  analysis/engine.py      ← 统一入口                       │    │
-│  │                          dispatch(ANALYSIS_MODE)          │    │
-│  └────────┬─────────┬──────────────────┬────────────────────┘    │
-│           │         │                  │                          │
-│  ┌────────▼──┐ ┌───▼────────┐ ┌───────▼──────────┐              │
-│  │ 宏观分析   │ │ 归因模块    │ │ 事件监控          │              │
-│  │ rules/    │ │ L1 统计     │ │ thresholds.py    │              │
-│  │   macro.py│ │ L2 事件匹配 │ │ monitor.py       │              │
-│  │ llm/      │ │ L3 报告生成 │ │ 阈值检测+防重复   │              │
-│  │   macro.py│ │            │ │                   │              │
-│  └───────────┘ └────────────┘ └───────────────────┘              │
-│                                                                  │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
-│  │ 预测模块     │  │ 预警模块     │  │ 大宗商品知识库 │            │
-│  │ 短/中/长期   │  │ 定制化追踪   │  │ 全品种分析    │            │
-│  │ 价格预测    │  │ 多级阈值预警 │  │ 因果关系网络 │            │
-│  │             │  │             │  │ 潜力标的挖掘 │            │
-│  └─────────────┘  └─────────────┘  └─────────────┘              │
-└──────────────────────────┬──────────────────────────────────────┘
-                           │ 读取
-┌──────────────────────────▼──────────────────────────────────────┐
-│                     数据指标层 (Data/Indicator Layer)             │
-│                                                                  │
-│  ┌───────────────┐  ┌──────────────────┐  ┌──────────────────┐   │
-│  │ 快照层         │  │ 历史层 (History)  │  │ 事件层 (Events)   │   │
-│  │ dashboard_    │  │ minutely/ (7天)  │  │ event_tracker   │   │
-│  │ data.json     │  │ daily/ (永久)     │  │ latest_feed     │   │
-│  └───────────────┘  └──────────────────┘  └──────────────────┘   │
-│                                                                  │
-│  ┌──────────────────────────────────────────────────────────┐    │
-│  │ 注册表: data/sources/source_registry.json                 │    │
-│  └──────────────────────────────────────────────────────────┘    │
-└──────────────────────────┬──────────────────────────────────────┘
-                           │ 写入
-┌──────────────────────────▼──────────────────────────────────────┐
-│                     采集层 (Collector Layer)                      │
-│                                                                  │
-│  gold_silver.py (5min)   │  gold-api.com (现货)                  │
-│  yahoo_finance.py (5min) │  Yahoo Finance (DXY/US10Y/VIX/期货)  │
-│  daily.py (7:30)         │  Treasury CSV + FRED + CBOE          │
-│  rss_news.py (30min)     │  CNBC/MarketWatch RSS                │
-│  backfill_2026.py        │  历史回填 (一次性)                     │
-│                                                                  │
-│  所有采集器继承 BaseCollector: fetch() → parse() → 写入           │
-└──────────────────────────────────────────────────────────────────┘
+                    ┌──────────────────────┐
+                    │        用户            │
+                    └──────────┬───────────┘
+                               │
+               ┌───────────────┼───────────────┐
+               │               │               │
+       ┌───────▼──────┐ ┌─────▼──────┐       │
+       │  飞书机器人    │ │  Web 应用   │       │
+       │ (即时/推送)   │ │ (深度分析)  │       │
+       └───────┬──────┘ └─────┬──────┘       │
+               │               │              │
+               └───────┬───────┘              │
+                       │                      │
+              ┌────────▼────────┐   ┌─────────┴──────────┐
+              │  后端 AI 引擎    │   │    交易档案          │
+              │ (trade-macro)   │   │ (trading_archive/)   │
+              │                 │   │ user_profile         │
+              │  工具链:         │   │ positions            │
+              │  data_query     │   │ trade_history        │
+              │  compute_factors│   │ macro_memo           │
+              │  analyze_macro  │   │ decisions            │
+              └────────┬────────┘   └─────────────────────┘
+                       │
+              ┌────────▼────────┐
+              │   数据基础层      │
+              │  (采集器→因子)   │
+              └─────────────────┘
 ```
 
-**设计原则**：
-- **数据中台唯一** — 所有模块只从 `data/` 读文件，模块间不解耦、不传消息
-- **采集器独立** — 只做 `fetch → parse → 写文件`，不参与分析
-- **分析可切换** — 规则引擎 / LLM 双模式，默认规则模式
-- **飞书与 Dashboard 并列** — 均为消费端，不承载调度
-- **全文件解耦** — 无消息总线、无 Agent 通信框架
-
 ---
 
-## 模块文档
+## 数据采集（按数据源组织）
 
-| 编号 | 模块 | 说明 | 文档 |
-|:----:|:----|:-----|:----:|
-| 00 | **新手引导** | 新人入职必读，开发规范与流程 | [docs/00_新手引导.md](docs/00_新手引导.md) |
-| 01 | **架构方案** | 整体架构、分层设计、数据流全景 | [docs/01_架构方案.md](docs/01_架构方案.md) |
-| 02 | **数据中台** | 数据源、因子映射、字段说明、采集分组 | [docs/02_数据中台.md](docs/02_数据中台.md) |
-| 03 | **采集器开发** | 采集器架构、新增步骤、CSV 规范 | [docs/03_采集器开发.md](docs/03_采集器开发.md) |
-| 04 | **Dashboard 开发** | SPA 架构、新增页面步骤、样式系统 | [docs/04_Dashboard开发.md](docs/04_Dashboard开发.md) |
-| 05 | **归因模块** | 3 层归因设计（统计→事件→LLM） | [docs/05_归因模块.md](docs/05_归因模块.md) |
-| 06 | **实时探查** | 实时指标看板、异常检测、因果网络 | [docs/06_实时探查.md](功能_01_实时探查.md) |
-| 07 | **预测模块** | 短/中/长期价格预测、技术面信号 | [docs/07_预测模块.md](docs/07_预测模块.md) |
-| 08 | **预警模块** | 定制化指标追踪、多级阈值预警 | [docs/08_预警模块.md](docs/08_预警模块.md) |
-| 09 | **大宗商品知识库** | 全品种分析、因果关系网络、潜力标的挖掘 | [docs/09_大宗商品知识库.md](docs/09_大宗商品知识库.md) |
-| 10 | **模拟交易平台** | 仓位管理、买卖操作、自动化预警 | [docs/10_模拟交易平台.md](docs/10_模拟交易平台.md) |
-
----
-
-## 开发进展
-
-### 采集层 (Collectors)
-
-| 功能 | 状态 | 方案文档 |
-|:-----|:----:|:---------|
-| gold_silver 金银现货采集 (5min) | ✅ 已完成 | [03_采集器开发.md](docs/03_采集器开发.md) |
-| yahoo_finance 高频指标采集 (5min) | ✅ 已完成 | [03_采集器开发.md](docs/03_采集器开发.md) |
-| daily 日频数据采集 (7:30) | ✅ 已完成 | [03_采集器开发.md](docs/03_采集器开发.md) |
-| rss_news RSS 新闻采集 (30min) | ✅ 已完成 | [03_采集器开发.md](docs/03_采集器开发.md) |
-| aggregate_daily 分钟→日聚合 | ✅ 已完成 | — |
-| backfill_2026 历史数据回填 | ✅ 已完成 | — |
-| cleanup 数据清理 | ✅ 已完成 | — |
-| gold_silver_daily 金银日频 | ⚠️ 模拟数据 | [03_采集器开发.md](docs/03_采集器开发.md) |
-| **AllTick COMEX 接入** | 📋 待开发 | — |
-| **CME FedWatch 利率概率** | 📋 待开发 | — |
-| **经济日历自动匹配** | 📋 待开发 | — |
-
-### 分析层 (Analysis)
-
-| 功能 | 状态 | 方案文档 |
-|:-----|:----:|:---------|
-| analysis/engine.py 统一入口 | ✅ 已完成 | [01_架构方案.md](docs/01_架构方案.md) |
-| 宏观分析 rules 模式 | ✅ 已完成 | [01_架构方案.md](docs/01_架构方案.md) |
-| 宏观分析 LLM 模式 | ✅ 已完成 | [01_架构方案.md](docs/01_架构方案.md) |
-| 事件监控 (Event Monitor) | ✅ 已完成 | [01_架构方案.md](docs/01_架构方案.md) |
-| **归因模块 L1 统计归因** | 🔧 待开发 | [05_归因模块.md](docs/05_归因模块.md) |
-| **归因模块 L2 事件匹配** | 📋 待开发 | [05_归因模块.md](docs/05_归因模块.md) |
-| **归因模块 L3 报告生成** | 📋 待开发 | [05_归因模块.md](docs/05_归因模块.md) |
-| **预测模块 (短/中/长期)** | ✅ 已完成 | [07_预测模块.md](docs/07_预测模块.md) |
-| **预警模块 (定制化追踪)** | 📋 待开发 | [08_预警模块.md](docs/08_预警模块.md) |
-| **大宗商品知识库** | 📋 待开发 | [09_大宗商品知识库.md](docs/09_大宗商品知识库.md) |
-| **AKShare 国内宏观数据** | 📋 待开发 | — |
-
-### 展示层 (Dashboard + Feishu + 模拟交易)
-
-| 功能 | 状态 | 方案文档 |
-|:-----|:----:|:---------|
-| 总览页 | ✅ 已完成 | [04_Dashboard开发.md](docs/04_Dashboard开发.md) |
-| 宏观页 | ✅ 已完成 | [04_Dashboard开发.md](docs/04_Dashboard开发.md) |
-| 归因页 (框架) | ✅ 已完成 | [05_归因模块.md](docs/05_归因模块.md) |
-| 事件页 | ✅ 已完成 | [04_Dashboard开发.md](docs/04_Dashboard开发.md) |
-| 配置页 | ✅ 已完成 | — |
-| 数据管理页 | ✅ 已完成 | — |
-| 实时探查页 | ✅ 已完成 | [06_实时探查.md](功能_01_实时探查.md) |
-| 因果指向图 (D3.js) | ✅ 已完成 | [06_实时探查.md](功能_01_实时探查.md) |
-| 总览页趋势预判卡片 | ✅ 已完成 | [04_Dashboard开发.md](docs/04_Dashboard开发.md) |
-| **研究报告页** | 📋 设计中 | — |
-| **归因页数据接入** | 🔧 待开发 | [05_归因模块.md](docs/05_归因模块.md) |
-| **交易量数据集成** | 📋 待开发 | — |
-| **带时滞相关分析** | 📋 待开发 | [06_实时探查.md](功能_01_实时探查.md) |
-| **实时数据推送 (WebSocket)** | 📋 待开发 | — |
-| **数据新鲜度标记** | 📋 待开发 | — |
-| **飞书事件推送** | 📋 待开发 | — |
-| **大宗商品知识库页面** | 📋 待开发 | [09_大宗商品知识库.md](docs/09_大宗商品知识库.md) |
-| **模拟交易平台页面** | 📋 待开发 | [10_模拟交易平台.md](docs/10_模拟交易平台.md) |
-
-### 基建层 (Infrastructure)
-
-| 功能 | 状态 |
-|:-----|:----:|
-| 一键启动/停止 (start/stop_all.sh) | ✅ 已完成 |
-| 一键运行采集器 (run_all_collectors.sh) | ✅ 已完成 |
-| 飞书 Webhook 服务器 (server.py) | ✅ 已完成 |
-| 数据中台 (data/ 目录结构) | ✅ 已完成 |
-| 飞书 V2 命令 | ✅ 已完成 |
-| docs/ 文档体系 | ✅ 已完成 |
-
----
-
-## TODO / 待解决问题
-
-> **⚠️ gold_silver_daily 使用模拟数据**
->
-> 当前 `gold_silver_daily` 采集器使用基于随机波动的模拟数据生成 2026-01-01 至今的金银日线数据。
-> 这是为了让预测模块能够运行和测试算法逻辑，但**不适合真实交易**。
->
-> **待接入真实数据源：**
-> - FRED: `GOLDAMGBD228NLBM`（伦敦金下午定盘价）、`SLVPRUSD`（伦敦银价格）
-> - Metals-API / Gold Price API（免费层）
-> - CME Group COMEX 期货历史数据
-> - AllTick（已注册，提供 tick 级实时数据）
-
-> **🔧 实时探查-指标一致性待优化**
->
-> **问题**：归因分析模块与因果指向图模块使用的指标不一致，缺乏统一的指标抽象层
->
-> **现状对比**：
-> 1. **归因分析**（4个因素）：
->    - 美元指数变动（外部驱动因素）
->    - 美债收益率波动（外部驱动因素）
->    - 市场情绪变化（外部驱动因素）
->    - 技术面调整（技术因素）
->
-> 2. **因果指向图**（6个指标）：
->    - 黄金、白银、金银比（贵金属核心指标）
->    - 美元指数、10Y美债、VIX（外部驱动指标）
->
-> **根本原因**：
-> - 归因分析：侧重于**外部驱动因素分析**
-> - 因果指向图：侧重于**指标间相互关系分析**
-> - 两者视角不同，但共享数据源应统一
->
-> **优化方案**：
-> 1. **创建指标抽象层**：在 `shared/indicators.py` 中定义统一指标枚举和映射关系
-> 2. **指标分类统一**：
->    - 核心指标：黄金、白银、金银比
->    - 驱动指标：美元指数、10Y美债、VIX、交易量（待添加）
->    - 衍生指标：技术面信号、趋势指标
-> 3. **数据映射统一**：
->    - 归因分析：映射驱动指标对核心指标的影响权重
->    - 因果指向图：展示所有指标间相互关系
-> 4. **API统一**：
->    - 两个模块使用相同的指标ID命名规范
->    - 后端数据接口返回一致的指标数据结构
-
----
-
-## 快速启动
+| 采集器 | 数据源 | 指标 | 频率 |
+|--------|--------|------|:----:|
+| `gold_api.py` | gold-api.com | 金银现货 | 5min |
+| `yfinance_batch.py` | Yahoo Finance | DXY/US10Y/VIX/金银期货/原油/GLD/SLV/Fed Funds | 5min |
+| `treasuries.py` | U.S. Treasury | 美债收益率 2Y/10Y/30Y | 每日 |
+| `fred.py` | FRED | TIPS / CPI / Core PCE / HY Credit Spread | 每日 |
+| `cboe_vix.py` | CBOE | VIX 日频历史 | 每日 |
+| `fallback.py` | FRED + ExchangeRate-API | WTI原油/布伦特原油/铜/USD/CNY | 每日 |
+| `china_futures.py` | AKShare/新浪 | 沪金/沪银 OHLC + 持仓量 | 每日 |
+| `news_rss.py` | CNBC + MarketWatch | 新闻（七因子归类） | 30min |
 
 ```bash
-# 1. 安装依赖
-pip install -r requirements.txt
+# 一键运行所有采集器
+python -m collectors.run
 
-# 2. 一键启动所有服务
-bash start_all.sh
+# 仅实时数据
+python -m collectors.run realtime
 
-# 3. 或手动启动
-python -m dashboard.app --port 8082    # Web 仪表盘
-python start.py                        # 飞书 Webhook (可选)
-
-# 4. 运行采集器
-bash run_all_collectors.sh --realtime  # 实时数据
-bash run_all_collectors.sh --historical # 历史回填
+# 仅日频数据
+python -m collectors.run daily
 ```
 
-## 配置
+---
 
-编辑 `config.py`（或环境变量覆盖）：
+## 因子对齐数据
 
-| 配置项 | 默认值 | 说明 |
-|--------|:------:|------|
-| `ANALYSIS_MODE` | `"rules"` | 分析模式: rules / llm |
-| `LLM_API_KEY` | `""` | LLM API Key (可选) |
-| `LLM_API_URL` | OpenAI 端点 | LLM API 地址 |
-| `LLM_MODEL` | `"gpt-4o"` | LLM 模型 |
-| `FEISHU_APP_ID` | `""` | 飞书应用 ID (可选) |
-| `FEISHU_APP_SECRET` | `""` | 飞书应用 Secret |
-| `FEISHU_WEBHOOK_PORT` | `8080` | 飞书 Webhook 端口 |
+数据通过 `compute_factors.py` 按七因子模型组织为结构化 JSON：
+
+| 因子 | 指示指标 |
+|------|---------|
+| 机会成本 | TIPS / 名义利率 / FedWatch概率 |
+| 货币 | DXY / USD/CNY |
+| 避险需求 | VIX / 信用利差 / S&P 500 |
+| 通胀预期 | 盈亏平衡通胀率 / CPI / PCE / 原油 / 铜 |
+| 持仓动量 | COMEX OI / 沪金银 OI / GLD |
+| 结构性需求 | 央行购金（手动） |
+| 银价专用 | 金银比 / 白银库存 |
+
+```bash
+python tools/compute_factors.py          # 全量计算
+python tools/compute_factors.py --pretty # 格式化输出到 stdout
+python tools/data_query.py factors       # 通过查询 CLI 查看
+```
+
+---
+
+## 分析工具
+
+```bash
+# 宏观信号合成（加权投票制）
+python tools/analyze_macro.py
+python tools/analyze_macro.py --json
+
+# 品种归因
+python tools/analyze_position.py --symbol all
+```
+
+---
+
+## AI Agent 分析框架
+
+| 文档 | 用途 |
+|------|------|
+| `docs/1_金银价格驱动因子体系.md` | 分析框架（七因子归因模型） |
+| `docs/v1-Agent分析SOP.md` | 分析标准操作流程 |
+| `docs/v1-数据中台设计.md` | 数据架构规范 |
+
+交易档案位于 `wiki_trade/trading_archive/`（Obsidian vault 内），包含：
+- `user_profile.md` — 用户画像
+- `positions.md` — 当前持仓
+- `macro_memo.md` — 宏观备忘录（每次分析更新）
+- `trade_history.md` — 交易历史
+- `decisions.md` — 决策复盘记录
 
 ---
 
@@ -250,32 +120,121 @@ bash run_all_collectors.sh --historical # 历史回填
 
 ```
 futures_trading_ai/
-├── collectors/        # 采集器 (BaseCollector 基类 + 7 个采集器)
-├── analysis/          # 分析引擎 (rules + llm 双模式)
-├── event_monitor/     # 事件监控 (阈值检测 + 防重复)
-├── dashboard/         # Web 仪表盘 (Flask + Jinja2 SPA)
-├── feishu/            # 飞书命令路由
-├── shared/            # 共享模块 (旧组件，保留兼容)
-├── data/              # 数据中台 (快照 + 历史 + 事件 + 注册表)
-├── docs/              # 文档 (00~07 编号模块)
-├── config.py          # 全局配置
-├── server.py          # 飞书 Webhook 服务器
-├── start.py           # 飞书启动入口
-├── start_all.sh       # 一键启动
-├── stop_all.sh        # 一键停止
-├── run_all_collectors.sh  # 一键采集
-└── requirements.txt
+├── collectors/              # V1 采集器（按数据源命名）
+│   ├── base.py
+│   ├── gold_api.py / yfinance_batch.py / treasuries.py
+│   ├── fred.py / cboe_vix.py / fallback.py
+│   ├── china_futures.py / news_rss.py
+│   └── run.py               # 统一采集总管
+├── tools/                   # 分析工具
+│   ├── data_query.py         # 统一数据查询 CLI
+│   ├── compute_factors.py    # 因子对齐计算
+│   ├── analyze_macro.py      # 宏观信号合成
+│   └── analyze_position.py   # 品种归因
+├── config/
+│   ├── constants.py           # 项目常量
+│   └── indicator_source.json # 指标注册表
+├── data/                     # 数据中台
+│   ├── current/              # dashboard 快照
+│   ├── history/daily/        # 日频 CSV
+│   ├── history/minutely/     # 分钟级 CSV
+│   ├── events/               # 新闻/事件
+│   └── factors/              # 因子对齐 JSON
+└── docs/
+    ├── v0/                   # V0 历史文档（归档）
+    ├── 【MOC】FuturesTradingAI方案.md
+    ├── v1-数据中台设计.md
+    ├── v1-后端引擎设计.md
+    ├── v1-Agent分析SOP.md
+    └── 1_金银价格驱动因子体系.md
 ```
 
 ---
 
-## 变更说明 (V1 → V2)
+## 开发状态
 
-1. **架构重构**：去掉 Agent 通信框架，改为纯数据流驱动
-2. **模块简化**：`core/`、`skills/` 等废弃
-3. **配置统一**：`config.py` 唯一配置入口
-4. **飞书精简**：V2 命令直接路由到 analysis 引擎
-5. **数据中台**：`data/` 作为唯一数据源
-6. **双模式分析**：规则引擎 + LLM 运行时切换
-7. **高频采集**：yahoo_finance 5 分钟级 DXY/US10Y/VIX
-8. **实时探查**：实时指标看板 + D3.js 因果网络 + 异常检测
+### ✅ 已完成（V1）
+
+- V1 采集器 8 个（按数据源命名），统一 `python -m collectors.run` 运行
+- V2 AKShare 主源重构：akshare_futures（COMEX 金银实时）、akshare_global（全球指数）、akshare_bond（美债收益率）、akshare_news（金十新闻+宏观日历）
+- run.py 后端感知频控（13 个后端独立 min_interval，按后端自动等待）
+- 因子对齐数据管道（7 因子 → `current_factors.json`，含三周期信号计算）
+- 统一直询 CLI `data_query.py`（snapshot/macro/factors/technical/history/events/news）
+- 宏观信号合成 `analyze_macro.py`
+- AI Agent 分析 SOP（含输出模板、数据新鲜度规则、推理标注规则、异动归因流程）
+- SOP 标准分析流程首次端到端测试通过（2026-06-08）
+- 交易档案系统（`wiki_trade/trading_archive/`）
+- 数据采集全链路跑通（15/15 采集器通过，20/25 dashboard 字段实时）
+
+### ⏳ 待完善
+
+#### 🔴 数据源问题
+
+- [ ] 东方财富代理屏蔽 — `push2.eastmoney.com` 被系统代理（Clash X/Surge TUN模式）拦截，所有 akshare_global（DXY/SP500/VIX）和 akshare_bond（美债）请求失败。需在代理客户端将 `eastmoney.com` 加入直连/白名单
+- [ ] yfinance 429 限流 — 12-ticker 批量请求频繁触发 Yahoo 限流，仅 1-2/12 成功。DXY、SP500、VIX 数据停滞 18 天。方案：降低 yfinance 调用频率至 30s+，或减少 batch ticker 数量
+- [ ] investing.com API 变更 — `futures_foreign_hist` 已废弃，无法获取 COMEX 金银日频历史。替代方案：新浪期货日频或 FRED
+- [ ] CBOE VIX SSL 偶发错误 — 日频采集偶发 SSL 连接失败，重试一般可恢复
+- [ ] 华尔街见闻频控限制 — 单日调用次数有限，`macro_info_ws()` 频繁调用可能封 IP。建议每日固定在 8:30 和 20:30 调用
+
+#### 📡 数据覆盖缺口
+
+- [ ] GLD/SLV ETF、FedWatch 概率 — 依赖 yfinance，当前不可用。AKShare 是否有替代 source 待调研
+- [ ] SGE 黄金现货 — `spot_hist_sge("Au99.99")` AKShare 可用但未接入 dashboard
+- [ ] COT 持仓数据 — `macro_usa_cftc_c_holding` AKShare 可用但未集成到 factor 模型
+- [ ] COMEX 金银实时 OI — akshare_futures 返回的 OI 为 0，需排查数据字段映射
+- [ ] compute_factors.py 结构性需求因子 — `structural_demand` 数据块为空，央行购金数据需手动录入或接入新闻自动归类
+- [ ] 白银历史数据不连续 — 3/27 ~ 5/18 数据缺失，需回填
+- [ ] data_query.py news 为空 — `news` 和 `news_by_factor` 返回空结果，latest_feed.json 格式可能不匹配查询解析逻辑
+- [ ] data_query.py technical spot_silver — 数据截至 5/20，不反映当前价格，需排查数据源更新
+
+#### 🔧 工程缺失
+
+- [ ] generate_brief.py — 晨报/复盘自动生成工具尚未创建
+- [ ] 分钟级历史记录 — COMEX 实时数据（akshare_futures）未写入 minutely CSV 历史
+- [ ] monitor_state.json 采集状态监控 — run.py 当前不写入各采集器运行状态和最后成功时间
+- [ ] compute_factors.py — fedwatch_prob 字段为 null，待数据源恢复后接入
+- [ ] analyze_macro.py — 宏观信号合成脚本未实际验证输出质量
+- [ ] data_query.py news_by_factor — 查询结果为空，大概率是管道格式不匹配
+
+#### 🤖 Agent 分析闭环
+
+- [ ] macro_memo.md 自动更新 — SOP 分析完成后未写入记忆系统，需在 `step_memory` 阶段调用写入
+- [ ] decisions.md 复盘写入 — 判断错误检测后未自动记录到决策档案
+- [ ] WebSearch 信息入库 — 搜索发现的新概念/知识未沉淀到 wiki 知识库
+- [ ] 无持仓时的建议优化 — 当前持仓评估无数据时，建议应基于资金管理原则给出参考
+
+#### 🚀 第三波计划
+
+- [ ] 飞书推送 — 异动预警推送到飞书 webhook
+- [ ] Web 因子看板 — 七因子仪表盘实时展示
+- [ ] 定时晨报 — 每日开盘前自动生成并推送
+
+---
+
+## 快速启动
+
+```bash
+# 安装依赖
+pip install -r requirements.txt
+
+# 运行全部采集器
+python -m collectors.run
+
+# 计算因子数据
+python tools/compute_factors.py
+```
+
+---
+
+## 数据源
+
+| 数据源 | 使用范围 | 费用 |
+|--------|---------|:----:|
+| gold-api.com | 金银现货 | 免费 |
+| Yahoo Finance | DXY/US10Y/VIX/金银期货/原油/ETF | 免费（需注意限流） |
+| U.S. Treasury | 美债收益率曲线 | 免费 |
+| FRED | TIPS / CPI / PCE / 信用利差 / 原油 | 免费 |
+| CBOE | VIX 日频历史 | 免费 |
+| ExchangeRate-API | USD/CNY | 免费（无需 key） |
+| AKShare/新浪 | 沪金/沪银 OHLC + 持仓量 | 免费 |
+| CNBC + MarketWatch | RSS 新闻 | 免费 |

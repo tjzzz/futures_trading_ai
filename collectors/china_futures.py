@@ -19,7 +19,7 @@ import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-from collectors.base_collector import BaseCollector
+from collectors.base import BaseCollector
 from config import loader
 
 logger = logging.getLogger("china_futures")
@@ -140,7 +140,7 @@ class ChinaFuturesCollector(BaseCollector):
         }
 
     def run(self):
-        self.logger.info(f"=== {self.source_id} start ===")
+        self.logger.info(f"=== {self.name} start ===")
         try:
             raw = self.fetch()
             if not raw:
@@ -185,8 +185,40 @@ class ChinaFuturesCollector(BaseCollector):
                 w.writerows(result["history_rows"])
             self.logger.info(f"写入 {csv_file.name}: {len(result['history_rows'])} 行")
 
-        self.logger.info(f"✅ {self.source_id} completed")
+        self.logger.info(f"✅ {self.name} completed")
         return True
+
+    # ── V1 接口 ──
+
+    def v1_collect(self) -> dict | None:
+        """V1 采集接口（被 collectors.run.py 调用）"""
+        self.logger.info(f"=== {self.name} v1 start ===")
+        try:
+            raw = self.fetch()
+            if not raw:
+                return None
+            result = self.parse(raw)
+        except Exception as e:
+            self.logger.error(f"采集失败: {e}")
+            return None
+
+        snapshot = {}
+        for sk, sv in result.get("snapshot_updates", {}).items():
+            snapshot[sk] = sv
+
+        # 仅写最新行（避免重复追加全量历史）
+        latest_rows = {}
+        for r in result.get("history_rows", []):
+            sym = r.get("symbol", "")
+            if sym not in latest_rows:
+                latest_rows[sym] = r
+            else:
+                if r["date"] > latest_rows[sym]["date"]:
+                    latest_rows[sym] = r
+        history = [{"file": "data/history/daily/china_futures.csv",
+                     "row": r, "grain": "daily"} for r in latest_rows.values()]
+
+        return {"snapshot": snapshot, "history": history}
 
 
 def main():

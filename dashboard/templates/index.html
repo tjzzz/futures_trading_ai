@@ -1,22 +1,79 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FuturesAI — 七因子看板</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.min.js"></script>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app">
+  <nav class="sidebar">
+    <div class="brand">⬡ FuturesAI</div>
+    <div class="nav-items">
+      <button class="nav-item active" data-tab="overview"><span class="nav-icon">📊</span><span class="nav-label">行情概览</span></button>
+      <button class="nav-item" data-tab="factors"><span class="nav-icon">◉</span><span class="nav-label">七因子</span></button>
+      <button class="nav-item" data-tab="monitor"><span class="nav-icon">📡</span><span class="nav-label">数据监控</span></button>
+    </div>
+    <div class="sidebar-footer" id="clock">--:--</div>
+  </nav>
+  <main class="content">
 
-{% block title %}期货 AI 交易体系 V2 - 总览{% endblock %}
+    <section id="tab-overview" class="tab-content active">
+      <div class="page-header"><h2>行情概览</h2><span class="update-time" id="overview-time"></span></div>
+      <div class="price-row">
+        <div class="price-card gold" id="gold-card">
+          <div class="price-label">黄金 COMEX</div>
+          <div class="price-value">--</div>
+          <div class="price-change">--</div>
+          <div class="price-sub">实时</div>
+        </div>
+        <div class="price-card silver" id="silver-card">
+          <div class="price-label">白银 COMEX</div>
+          <div class="price-value">--</div>
+          <div class="price-change">--</div>
+          <div class="price-sub">实时</div>
+        </div>
+        <div class="price-card ratio" id="ratio-card">
+          <div class="price-label">金银比</div>
+          <div class="price-value">--</div>
+          <div class="price-change">--</div>
+          <div class="price-sub">最新数据</div>
+        </div>
+      </div>
+      <div class="card"><div class="card-title">金银价格趋势</div><div id="chart-trend"></div></div>
+      <div class="row-2col">
+        <div class="card"><div class="card-title">七因子雷达</div><div class="radar-container"><canvas id="chart-radar"></canvas></div></div>
+        <div class="card"><div class="card-title">综合判断</div>
+          <div id="judgment-area">
+            <div class="judgment-row"><span class="label">方向</span><span class="value" id="j-direction">--</span></div>
+            <div class="judgment-row"><span class="label">置信度</span><span class="value" id="j-confidence">--</span></div>
+            <div class="judgment-row"><span class="label">主导因子</span><span class="value" id="j-dominant">--</span></div>
+            <div class="judgment-row"><span class="label">短期</span><span class="value" id="j-short">--</span></div>
+            <div class="judgment-row"><span class="label">中期</span><span class="value" id="j-mid">--</span></div>
+            <div class="judgment-row"><span class="label">长期</span><span class="value" id="j-long">--</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card"><div class="card-title">核心指标</div><div class="indicator-row" id="indicator-row"></div></div>
+      <div class="card"><div class="card-title">活跃事件</div><div id="events-list"></div></div>
+    </section>
 
-{% block active_page %}overview{% endblock %}
+    <section id="tab-factors" class="tab-content">
+      <div class="page-header"><h2>七因子分析</h2><span class="update-time" id="factors-time"></span></div>
+      <div id="factor-cards"></div>
+    </section>
 
-{% block header_title %}贵金属总览{% endblock %}
-{% block header_subtitle %}黄金、白银实时行情与宏观分析{% endblock %}
+    <section id="tab-monitor" class="tab-content">
+      <div class="page-header"><h2>数据监控</h2><span class="update-time" id="monitor-time"></span></div>
+      <div class="card"><div class="card-title">采集器状态</div><div id="monitor-grid"></div></div>
+      <div class="card"><div class="card-title">Dashboard 字段覆盖</div><div id="coverage-bar"></div></div>
+    </section>
 
-{% block content %}
-  {% include 'pages/overview.html' %}
-  {% include 'pages/macro.html' %}
-  {% include 'pages/attribution.html' %}
-  {% include 'pages/events.html' %}
-  {% include 'pages/config.html' %}
-  {% include 'pages/commodities.html' %}
-  {% include 'pages/simtrade.html' %}
-  {% include 'pages/data_mgmt.html' %}
-  {% include 'pages/realtime.html' %}
-{% endblock %}
-
-<script src="/static/js/app.js"></script>
+  </main>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

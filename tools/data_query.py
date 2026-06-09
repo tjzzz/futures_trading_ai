@@ -13,6 +13,8 @@ V3 Data Query Tool — 封装 V2 数据层供 AI Agent 调用
     python data_query.py monitor           — 阈值监控状态
     python data_query.py factors           — 全部因子数据
     python data_query.py factors <factor>  — 单因子
+    python data_query.py technical         — 全部技术指标
+    python data_query.py technical <品种>   — 单品种技术指标 (shfe_gold/shfe_silver/spot_gold/spot_silver)
     python data_query.py news_by_factor <factor>      — 按因子查新闻
     python data_query.py events_by_factor <factor>    — 按因子查事件
 
@@ -338,6 +340,67 @@ def cmd_events_by_factor(factor_id: str, limit: int = 10) -> dict:
     }
 
 
+def cmd_technical(symbol: str = "") -> dict:
+    """查询技术指标
+
+    从 current_factors.json 读取 compute_factors.py 计算的指标数据。
+
+    指标: MA20/60/200, RSI(14), MACD(12,26,9), ATR(14), ADX(14)
+
+    品种: shfe_gold, shfe_silver, spot_gold, spot_silver
+
+    Args:
+        symbol: 可选，指定品种
+
+    用法:
+        python data_query.py technical              # 所有品种
+        python data_query.py technical shfe_gold    # 沪金
+    """
+    data = read_json(FACTORS_FILE)
+    if "error" in data:
+        return data
+
+    technicals = data.get("technicals", {})
+    if not technicals:
+        return {"error": "无技术指标数据，请先运行 compute_factors.py"}
+
+    valid_symbols = list(technicals.keys())
+
+    if symbol:
+        if symbol not in technicals:
+            return {
+                "error": f"未知品种: {symbol}",
+                "available": valid_symbols,
+            }
+        return {
+            "updated_at": data.get("updated_at"),
+            "symbol": symbol,
+            "technicals": technicals[symbol],
+        }
+
+    # 返回精简版
+    summary = {}
+    for sym, tech in technicals.items():
+        if isinstance(tech, dict) and "error" not in tech:
+            summary[sym] = {
+                "price": tech.get("price"),
+                "ma20": tech.get("ma20"),
+                "ma60": tech.get("ma60"),
+                "rsi_14": tech.get("rsi_14"),
+                "macd_histogram": tech.get("macd", {}).get("histogram") if isinstance(tech.get("macd"), dict) else None,
+                "atr_14": tech.get("atr_14"),
+                "adx_14": tech.get("adx_14"),
+            }
+        else:
+            summary[sym] = {"error": tech.get("error", "未知错误")}
+
+    return {
+        "updated_at": data.get("updated_at"),
+        "symbol_count": len(technicals),
+        "technicals": summary,
+    }
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -354,6 +417,7 @@ def main():
         "monitor": lambda: cmd_monitor(),
         "analysis": lambda: cmd_analysis(),
         "factors": lambda: cmd_factors(sys.argv[2] if len(sys.argv) > 2 else ""),
+        "technical": lambda: cmd_technical(sys.argv[2] if len(sys.argv) > 2 else ""),
         "news_by_factor": lambda: cmd_news_by_factor(sys.argv[2]) if len(sys.argv) > 2 else {"error": "请指定因子 ID，如: safe_haven"},
         "events_by_factor": lambda: cmd_events_by_factor(sys.argv[2]) if len(sys.argv) > 2 else {"error": "请指定因子 ID，如: positioning"},
     }

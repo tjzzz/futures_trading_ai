@@ -146,6 +146,22 @@ def _compute_trend(records: List[Dict[str, Any]], window: int = 20) -> Optional[
     - 斜率% > 0.1% / 天 → "up"
     - 斜率% < -0.1% / 天 → "down"
     """
+    slope = _compute_slope(records, window)
+    if slope is None:
+        return None
+    slope_pct = slope["slope_pct"]
+    if abs(slope_pct) < 0.1:
+        return "flat"
+    return "up" if slope_pct > 0 else "down"
+
+
+def _compute_slope(records: List[Dict[str, Any]], window: int = 20) -> Optional[dict]:
+    """
+    计算滑动窗口内的线性回归斜率，返回斜率和归一化值。
+
+    Returns:
+        {"slope": 绝对斜率, "slope_pct": 百分比斜率, "n": 样本数}
+    """
     if len(records) < 3:
         return None
     recent = records[-window:] if len(records) >= window else records
@@ -156,7 +172,6 @@ def _compute_trend(records: List[Dict[str, Any]], window: int = 20) -> Optional[
     mean_val = sum(values) / n
     if mean_val == 0:
         return None
-    # 简单线性回归：x = 0, 1, 2, ..., n-1
     x_mean = (n - 1) / 2
     y_mean = sum(values) / n
     numerator = sum((i - x_mean) * (v - y_mean) for i, v in enumerate(values))
@@ -165,9 +180,81 @@ def _compute_trend(records: List[Dict[str, Any]], window: int = 20) -> Optional[
         return None
     slope = numerator / denominator
     slope_pct = (slope / mean_val) * 100
-    if abs(slope_pct) < 0.1:
-        return "flat"
-    return "up" if slope_pct > 0 else "down"
+    return {"slope": slope, "slope_pct": slope_pct, "n": n}
+
+
+def _compute_multi_scale_signals(records: List[Dict[str, Any]]) -> dict:
+    """
+    计算三周期信号（短期/中期/长期）。
+
+    对任意数值序列，用三个时间窗口的线性回归斜率
+    归一化后得到方向+强度。
+
+    Args:
+        records: [{"date": "...", "value": float}, ...]，日期升序
+
+    Returns:
+        {
+            "short": {"direction": "bullish"/"bearish"/"neutral", "strength": 0.8, "window_days": 5},
+            "mid": {"direction": "...", "strength": 0.3, ...},
+            "long": {"direction": "...", "strength": 0.2, ...}
+        }
+        数据不足时对应维度返回 None
+    """
+    # 三个时间窗口（交易日数）
+    WINDOWS = {"short": 5, "mid": 20, "long": 60}
+    # 中性阈值（归一化斜率% < 此值视为中性）
+    NEUTRAL_THRESHOLD = 0.05
+
+    result = {}
+    for period, window in WINDOWS.items():
+        if len(records) < 3:
+            result[period] = None
+            continue
+        recent = records[-window:] if len(records) >= window else records
+        n = len(recent)
+        if n < 3:
+            result[period] = None
+            continue
+
+        values = [r["value"] for r in recent]
+        mean_val = sum(values) / n
+        if mean_val == 0:
+            result[period] = None
+            continue
+
+        # 线性回归斜率
+        x_mean = (n - 1) / 2
+        y_mean = sum(values) / n
+        try:
+            numerator = sum((i - x_mean) * (v - y_mean) for i, v in enumerate(values))
+            denominator = sum((i - x_mean) ** 2 for i in range(n))
+        except (TypeError, ZeroDivisionError):
+            result[period] = None
+            continue
+        if denominator == 0:
+            result[period] = None
+            continue
+        slope = numerator / denominator
+        slope_pct = (slope / mean_val) * 100
+
+        # 方向判断
+        if abs(slope_pct) < NEUTRAL_THRESHOLD:
+            direction = "neutral"
+            strength = round(abs(slope_pct) / NEUTRAL_THRESHOLD, 2)
+        else:
+            direction = "bullish" if slope_pct < 0 else "bearish"
+            # 强度归一化：斜率% × 10，上限1.0
+            strength = min(round(abs(slope_pct) * 10, 2), 1.0)
+
+        result[period] = {
+            "direction": direction,
+            "strength": strength,
+            "window_days": min(window, n),
+            "evidence": f"{'上升' if slope_pct > 0 else '下降'} {abs(slope_pct):.2f}%/天 ({n}天)",
+        }
+
+    return result
 
 
 def _compute_ma(records: List[Dict[str, Any]], window: int = 20) -> Optional[float]:
@@ -302,6 +389,10 @@ def compute_opportunity_cost(dashboard: dict) -> Dict[str, Any]:
     if fedwatch_dots:
         data["fedwatch_dots"] = fedwatch_dots
 
+    # ── 三周期信号 ──
+    # TIPS 是机会成本核心指标，用它计算三周期信号
+    data["signals"] = _compute_multi_scale_signals(tips_records)
+
     return data
 
 
@@ -344,6 +435,9 @@ def compute_currency(dashboard: dict) -> Dict[str, Any]:
     dxy_trend = _compute_trend(dxy_records, window=60)
     if dxy_trend is not None:
         data["dxy_trend_60d"] = dxy_trend
+
+    # ── 三周期信号 ──
+    data["signals"] = _compute_multi_scale_signals(dxy_records)
 
     return data
 
@@ -415,7 +509,7 @@ def compute_safe_haven(dashboard: dict) -> Dict[str, Any]:
     if sp500_change is not None:
         data["sp500_change_d"] = round(sp500_change, 1)
 
-    # ── 信用利差 / TED 利差（待新增采集） ──
+    # ── 信用利差 / TED 利差（FRED BAMLH0A0HYM2） ──
     credit_spread_data = dashboard.get("credit_spread")
     if credit_spread_data:
         data["credit_spread"] = credit_spread_data
@@ -423,6 +517,15 @@ def compute_safe_haven(dashboard: dict) -> Dict[str, Any]:
     ted_spread_data = dashboard.get("ted_spread")
     if ted_spread_data:
         data["ted_spread"] = ted_spread_data
+
+    # ── 三周期信号（VIX，nota: VIX上升=避险利多，反转方向）──
+    vix_signals = _compute_multi_scale_signals(vix_records)
+    if vix_signals:
+        for p, sig in vix_signals.items():
+            if sig and sig["direction"] != "neutral":
+                # VIX 上升 = 恐慌 = 利多金银 → 反转方向
+                sig["direction"] = "bullish" if sig["direction"] == "bearish" else "bearish"
+    data["signals"] = vix_signals
 
     return data
 
@@ -471,13 +574,41 @@ def compute_inflation(dashboard: dict) -> Dict[str, Any]:
                 be_change = round(breakeven - prev_be, 2)
                 data["breakeven_change_d"] = be_change
 
-    # ── 手动/月度指标（当前无自动采集，保留 null） ──
-    # cpi_mom, cpi_yoy, pce_core — 待手动录入或新增采集
+    # ── 手动/月度指标 ──
+    cpi = dashboard.get("cpi_yoy")
+    if cpi:
+        data["cpi_yoy"] = cpi
 
-    # ── 原油 WTI ──
+    pce = dashboard.get("pce_core")
+    if pce:
+        data["pce_core"] = pce
+
+    # ── 原油 WTI + 布伦特 ──
     oil_wti = dashboard.get("oil_wti")
     if oil_wti:
         data["oil_wti"] = oil_wti
+
+    oil_brent = dashboard.get("oil_brent")
+    if oil_brent:
+        data["oil_brent"] = oil_brent
+
+    copper = dashboard.get("copper")
+    if copper:
+        data["copper"] = copper
+
+    # ── 三周期信号（盈亏平衡通胀率） ──
+    if tips_records and treasury_records:
+        # 计算盈亏平衡序列
+        min_len = min(len(tips_records), len(treasury_records))
+        if min_len >= 5:
+            be_records = []
+            for i in range(min_len):
+                t = tips_records[i]["value"]
+                n = treasury_records[i]["value"]
+                if t is not None and n is not None:
+                    be_records.append({"date": tips_records[i]["date"], "value": n - t})
+            if len(be_records) >= 5:
+                data["signals"] = _compute_multi_scale_signals(be_records)
 
     return data
 
@@ -547,6 +678,28 @@ def compute_positioning(dashboard: dict) -> Dict[str, Any]:
             "source": "akshare",
             "updated_at": shfe_silver.get("updated_at", now),
         }
+
+    # ── 三周期信号（沪银 OI 或 COMEX 持仓量） ──
+    # 沪银持仓量序列从 china_futures.csv 读
+    positioning_path = DATA_HISTORY_DAILY / "china_futures.csv"
+    if positioning_path.exists():
+        import csv
+        try:
+            with open(positioning_path, "r", encoding="utf-8") as f:
+                pos_rows = [r for r in csv.DictReader(f) if r.get("symbol") == "AG"]
+            if len(pos_rows) >= 5:
+                oi_records = []
+                for r in pos_rows:
+                    oi = r.get("open_interest")
+                    if oi:
+                        try:
+                            oi_records.append({"date": r.get("date"), "value": float(oi)})
+                        except (ValueError, TypeError):
+                            continue
+                if len(oi_records) >= 5:
+                    data["signals"] = _compute_multi_scale_signals(oi_records)
+        except Exception:
+            pass
 
     return data
 
@@ -634,6 +787,10 @@ def compute_silver_specific(dashboard: dict) -> Dict[str, Any]:
     if solar_growth:
         data["solar_pv_growth"] = solar_growth
 
+    # ── 三周期信号（金银比） ──
+    if len(gs_records) >= 5:
+        data["signals"] = _compute_multi_scale_signals(gs_records)
+
     return data
 
 
@@ -644,33 +801,16 @@ def compute_silver_specific(dashboard: dict) -> Dict[str, Any]:
 
 def load_events_for_factors() -> List[Dict[str, Any]]:
     """
-    从 event_tracker.json 加载事件数据，按因子标签归类。
+    从 event_tracker.json 加载事件数据，按 factor_tags 归类。
 
-    四象限 → 七因子映射：
-    - green → currency + inflation
-    - blue → opportunity_cost + positioning
-    - orange → safe_haven
-    - red → structural_demand + silver_specific
+    V1 版本：news_rss 已直接标注 factor_tags 字段（七因子），不再需要四象限映射。
     """
     events_data: List[Dict[str, Any]] = []
     tracker = _read_json(EVENT_FILE)
     active_events = tracker.get("active_events", [])
 
-    quadrant_to_factors = {
-        "green": ["currency", "inflation"],
-        "blue": ["opportunity_cost", "positioning"],
-        "orange": ["safe_haven"],
-        "red": ["structural_demand", "silver_specific"],
-    }
-
     for evt in active_events[:20]:  # 最多20条
-        quadrants = evt.get("quadrant", [])
-        factor_tags: List[str] = []
-        for q in quadrants:
-            factor_tags.extend(quadrant_to_factors.get(q, []))
-        # 去重
-        factor_tags = list(dict.fromkeys(factor_tags))
-
+        factor_tags = evt.get("factor_tags", [])
         events_data.append({
             "id": evt.get("title", "")[:40] + "...",
             "title": evt.get("title", ""),
@@ -686,8 +826,283 @@ def load_events_for_factors() -> List[Dict[str, Any]]:
 
 
 # ====================================================================
-#  主函数
+#  技术指标计算
 # ====================================================================
+
+def _read_records_sorted(path: Path, date_col: str = "date",
+                          sort_asc: bool = True) -> List[Dict[str, Any]]:
+    """
+    读取 CSV 并统一排序返回。
+    自动处理 YYYY-MM-DD 和 MM/DD/YYYY 两种日期格式。
+    """
+    if not path.exists():
+        return []
+    rows: List[Dict[str, Any]] = []
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                rows.append(dict(row))
+    except (OSError, csv.Error):
+        return []
+    # 统一日期格式
+    for r in rows:
+        raw = (r.get(date_col) or "").strip()
+        if "/" in raw:
+            parts = raw.split("/")
+            if len(parts) == 3:
+                r["_date"] = f"{parts[2]}-{parts[0].zfill(2)}-{parts[1].zfill(2)}"
+        else:
+            r["_date"] = raw
+    rows.sort(key=lambda r: r.get("_date", ""), reverse=not sort_asc)
+    return rows
+
+
+def _safe_float(v: Any, default: float = 0.0) -> float:
+    if v is None:
+        return default
+    if isinstance(v, (int, float)):
+        return float(v)
+    if isinstance(v, str):
+        try:
+            return float(v)
+        except (ValueError, TypeError):
+            return default
+    return default
+
+
+def _ema(values: List[float], window: int) -> List[Optional[float]]:
+    """计算指数移动平均，返回与输入等长的列表"""
+    result: List[Optional[float]] = [None] * len(values)
+    if len(values) < window:
+        return result
+    # 初始 SMA
+    sma = sum(values[:window]) / window
+    result[window - 1] = sma
+    multiplier = 2 / (window + 1)
+    for i in range(window, len(values)):
+        result[i] = (values[i] - result[i - 1]) * multiplier + result[i - 1]
+    return result
+
+
+def _compute_rsi(closes: List[float], window: int = 14) -> Optional[float]:
+    """计算 RSI(14)，返回最新值"""
+    if len(closes) < window + 1:
+        return None
+    gains, losses = [], []
+    for i in range(1, len(closes)):
+        diff = closes[i] - closes[i - 1]
+        gains.append(max(diff, 0))
+        losses.append(max(-diff, 0))
+    # 初始 SMA
+    avg_gain = sum(gains[:window]) / window
+    avg_loss = sum(losses[:window]) / window
+    if avg_loss == 0:
+        return 100.0
+    # 平滑计算
+    for i in range(window, len(gains)):
+        avg_gain = (avg_gain * (window - 1) + gains[i]) / window
+        avg_loss = (avg_loss * (window - 1) + losses[i]) / window
+    if avg_loss == 0:
+        return 100.0
+    rs = avg_gain / avg_loss
+    return round(100 - (100 / (1 + rs)), 1)
+
+
+def _compute_macd(closes: List[float], fast: int = 12, slow: int = 26,
+                   signal: int = 9) -> Optional[Dict[str, float]]:
+    """计算 MACD(12,26,9)，返回最新值"""
+    if len(closes) < slow + signal:
+        return None
+    ema_fast = _ema(closes, fast)
+    ema_slow = _ema(closes, slow)
+    macd_line: List[Optional[float]] = []
+    for i in range(len(closes)):
+        if ema_fast[i] is not None and ema_slow[i] is not None:
+            macd_line.append(ema_fast[i] - ema_slow[i])
+        else:
+            macd_line.append(None)
+    valid_macd = [v for v in macd_line if v is not None]
+    if len(valid_macd) < signal:
+        return None
+    signal_line_values = _ema(valid_macd, signal)
+    macd_val = valid_macd[-1]
+    sig_val = signal_line_values[-1]
+    if macd_val is None or sig_val is None:
+        return None
+    return {
+        "macd": round(macd_val, 2),
+        "signal": round(sig_val, 2),
+        "histogram": round(macd_val - sig_val, 2),
+    }
+
+
+def _compute_atr(highs: List[float], lows: List[float],
+                 closes: List[float], window: int = 14) -> Optional[float]:
+    """计算 ATR(14)，返回最新值"""
+    if len(highs) < window + 1 or len(lows) < window + 1 or len(closes) < window + 1:
+        return None
+    tr_values = []
+    for i in range(1, len(closes)):
+        hl = highs[i] - lows[i]
+        hc = abs(highs[i] - closes[i - 1])
+        lc = abs(lows[i] - closes[i - 1])
+        tr_values.append(max(hl, hc, lc))
+    if len(tr_values) < window:
+        return None
+    # 初始 SMA
+    atr = sum(tr_values[:window]) / window
+    # 平滑
+    for i in range(window, len(tr_values)):
+        atr = (atr * (window - 1) + tr_values[i]) / window
+    return round(atr, 2)
+
+
+def _compute_adx(highs: List[float], lows: List[float],
+                 closes: List[float], window: int = 14) -> Optional[float]:
+    """计算 ADX(14)，返回最新值"""
+    if len(highs) < window * 2 + 1:
+        return None
+    # +DM, -DM, TR
+    plus_dm, minus_dm, tr = [], [], []
+    for i in range(1, len(closes)):
+        up_move = highs[i] - highs[i - 1]
+        down_move = lows[i - 1] - lows[i]
+        if up_move > down_move and up_move > 0:
+            plus_dm.append(up_move)
+        else:
+            plus_dm.append(0)
+        if down_move > up_move and down_move > 0:
+            minus_dm.append(down_move)
+        else:
+            minus_dm.append(0)
+        hl = highs[i] - lows[i]
+        hc = abs(highs[i] - closes[i - 1])
+        lc = abs(lows[i] - closes[i - 1])
+        tr.append(max(hl, hc, lc))
+
+    if len(tr) < window:
+        return None
+
+    # 平滑
+    def _smooth(values, w):
+        result = [0.0] * len(values)
+        result[w - 1] = sum(values[:w]) / w
+        for i in range(w, len(values)):
+            result[i] = (result[i - 1] * (w - 1) + values[i]) / w
+        return result
+
+    smooth_tr = _smooth(tr, window)
+    smooth_pdm = _smooth(plus_dm, window)
+    smooth_mdm = _smooth(minus_dm, window)
+
+    # +DI, -DI
+    di_plus, di_minus = [], []
+    for i in range(window, len(smooth_tr)):
+        tr_v = smooth_tr[i]
+        di_plus.append(100 * smooth_pdm[i] / tr_v if tr_v != 0 else 0)
+        di_minus.append(100 * smooth_mdm[i] / tr_v if tr_v != 0 else 0)
+
+    if len(di_plus) < window:
+        return None
+
+    # DX
+    dx_values = []
+    for i in range(len(di_plus)):
+        sum_di = di_plus[i] + di_minus[i]
+        if sum_di != 0:
+            dx_values.append(100 * abs(di_plus[i] - di_minus[i]) / sum_di)
+        else:
+            dx_values.append(0)
+
+    # ADX = EMA of DX
+    adx_values = _smooth(dx_values, window)
+    adx = [v for v in adx_values if v > 0]
+    return round(adx[-1], 1) if adx else None
+
+
+def _compute_ma_from(values: List[float], window: int) -> Optional[float]:
+    """计算简单移动平均最新值"""
+    if len(values) < window:
+        return None
+    recent = values[-window:]
+    return round(sum(recent) / window, 2)
+
+
+def compute_technicals(dashboard: dict) -> Dict[str, Any]:
+    """
+    计算金银技术指标。
+
+    数据来源：
+    - china_futures.csv — SHFE 金银 (AU/AG)，有完整 OHLC + 成交量数据
+    - gold_silver_daily.csv — 现货金银 (USD)，日线数据
+
+    指标：MA20/60/200, RSI(14), MACD(12,26,9), ATR(14), ADX(14)
+    """
+    result: Dict[str, Any] = {}
+
+    # ── SHFE 数据（china_futures.csv）──
+    cf_path = DATA_HISTORY_DAILY / "china_futures.csv"
+    cf_rows = _read_records_sorted(cf_path) if cf_path.exists() else []
+
+    for symbol, key in [("AU", "shfe_gold"), ("AG", "shfe_silver")]:
+        sym_rows = [r for r in cf_rows if r.get("symbol") == symbol]
+        if len(sym_rows) < 20:
+            result[key] = {"error": f"数据不足 (共{len(sym_rows)}行)"}
+            continue
+
+        closes = [_safe_float(r.get("close")) for r in sym_rows if r.get("close")]
+        highs = [_safe_float(r.get("high")) for r in sym_rows if r.get("high")]
+        lows = [_safe_float(r.get("low")) for r in sym_rows if r.get("low")]
+        volumes = [_safe_float(r.get("volume")) for r in sym_rows if r.get("volume")]
+        oi = [_safe_float(r.get("open_interest")) for r in sym_rows if r.get("open_interest")]
+
+        tech: Dict[str, Any] = {
+            "price": closes[-1] if closes else None,
+            "volume": volumes[-1] if volumes else None,
+            "open_interest": oi[-1] if oi else None,
+            "ma20": _compute_ma_from(closes, 20),
+            "ma60": _compute_ma_from(closes, 60),
+            "ma200": _compute_ma_from(closes, 200),
+            "rsi_14": _compute_rsi(closes, 14),
+            "macd": _compute_macd(closes, 12, 26, 9),
+            "atr_14": _compute_atr(highs, lows, closes, 14),
+            "adx_14": _compute_adx(highs, lows, closes, 14),
+            "data_range": f"{sym_rows[0].get('_date', '')} ~ {sym_rows[-1].get('_date', '')}",
+            "data_rows": len(sym_rows),
+        }
+        result[key] = tech
+
+    # ── 现货数据（gold_silver_daily.csv）──
+    gs_path = DATA_HISTORY_DAILY / "gold_silver_daily.csv"
+    gs_rows = _read_records_sorted(gs_path) if gs_path.exists() else []
+
+    for prefix, close_col, high_col, low_col in [
+        ("gold", "gold_close", "gold_high", "gold_low"),
+        ("silver", "silver_close", "silver_high", "silver_low"),
+    ]:
+        closes = [_safe_float(r.get(close_col)) for r in gs_rows if r.get(close_col)]
+        highs = [_safe_float(r.get(high_col)) for r in gs_rows if r.get(high_col)]
+        lows = [_safe_float(r.get(low_col)) for r in gs_rows if r.get(low_col)]
+        if len(closes) < 14:
+            result[f"spot_{prefix}"] = {"error": f"数据不足 (共{len(closes)}行)"}
+            continue
+
+        tech: Dict[str, Any] = {
+            "price": closes[-1] if closes else None,
+            "ma20": _compute_ma_from(closes, 20),
+            "ma60": _compute_ma_from(closes, 60),
+            "ma200": _compute_ma_from(closes, 200),
+            "rsi_14": _compute_rsi(closes, 14),
+            "macd": _compute_macd(closes, 12, 26, 9),
+            "atr_14": _compute_atr(highs, lows, closes, 14),
+            "adx_14": _compute_adx(highs, lows, closes, 14),
+            "data_range": f"{gs_rows[0].get('_date', '')} ~ {gs_rows[-1].get('_date', '')}",
+            "data_rows": len(gs_rows),
+        }
+        result[f"spot_{prefix}"] = tech
+
+    return result
 
 
 def compute_all() -> dict:
@@ -727,12 +1142,16 @@ def compute_all() -> dict:
     # 加载事件
     events = load_events_for_factors()
 
+    # 计算技术指标
+    technicals = compute_technicals(dashboard)
+
     # 组装顶层结构
     result: dict = {
         "updated_at": _now_cst(),
-        "data_source": "V0 采集 + compute_factors.py",
+        "data_source": "V1 采集 + compute_factors.py",
         "factors": factors,
         "events": events,
+        "technicals": technicals,
         "summary": {},
     }
 
@@ -770,7 +1189,7 @@ def compute_single_factor(factor_id: str) -> Optional[dict]:
 
     result: dict = {
         "updated_at": _now_cst(),
-        "data_source": "V0 采集 + compute_factors.py",
+        "data_source": "V1 采集 + compute_factors.py",
         "factors": {
             factor_id: {
                 "label": label,

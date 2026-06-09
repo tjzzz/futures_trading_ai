@@ -1,0 +1,22 @@
+{
+  "predictions": [],
+  "factor_weights": {
+    "opportunity_cost": 1.0,
+    "currency": 0.6,
+    "safe_haven": 0.8,
+    "inflation": 0.6,
+    "positioning": 0.5,
+    "structural_demand": 0.4,
+    "silver_specific": 0.3
+  },
+  "weight_adjustment_log": [],
+  "accuracy_stats": {
+    "total_verified": 0,
+    "direction_correct": 0,
+    "direction_accuracy": null,
+    "range_correct": 0,
+    "range_accuracy": null,
+    "by_factor": {}
+  },
+  "last_updated": "2026-06-09"
+}

@@ -1,278 +1,262 @@
 {
   "active_events": [
     {
+      "title": "Hot jobs report puts Fed cuts further out of reach as Chair Warsh faces policy tests",
+      "summary": "Another big jobs report in May has swept aside the possibility of interest rate cuts anytime soon.",
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/06/05/hot-jobs-report-puts-fed-cuts-further-out-of-reach-as-chair-warsh-faces-policy-tests.html",
+      "pubDate": "Fri, 05 Jun 2026 19:09:09 GMT",
+      "factor_tags": [
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.85,
+        "safe_haven": 0.3
+      },
+      "impact": null,
+      "expiry": null,
+      "event_id": "evt_4c90eb0c",
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "headline": "Hot jobs report puts Fed cuts further out of reach as Chair Warsh faces policy tests",
+          "detail": "Another big jobs report in May has swept aside the possibility of interest rate cuts anytime soon.",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Goldman Sachs cuts Hong Kong stocks in favor of mainland China AI hardware plays",
+          "detail": "The investment bank on Wednesday cut its rating on H shares to market-weight from overweight, while staying overweight mainland China's A shares.",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Fed Chair Warsh makes first hires at central bank, including 'Project 2025' author",
+          "detail": "The new Fed chair has made his first hires. One wrote the Fed chapter in the conservative policy blueprint \"Project 2025.\"",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "China's property sector hasn't hit bottom, but the slump is slowing: Strategist",
+          "detail": "Peter Churchouse, Managing Director at Portwood Capital, says China’s property downturn may be stabilizing as policy support slows the pace of price declines. However, he warns the market has likely n",
+          "source": "cnbc_economy",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Sen. Lisa Blunt Rochester: We have a housing crisis in this country",
+          "detail": "Sen. Lisa Blunt Rochester (D-Del.) joins 'Squawk Box' to discuss her thoughts on Fed Chair Kevin Warsh, addressing the U.S. housing crisis, President Trump's decision to name Bill Pulte as acting DNI,",
+          "source": "cnbc_economy",
+          "impact": null
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "title": "Fed Chair Warsh makes first hires at central bank, including 'Project 2025' author",
+      "summary": "The new Fed chair has made his first hires. One wrote the Fed chapter in the conservative policy blueprint \"Project 2025.\"",
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/06/02/fed-chair-warsh-makes-first-hires-at-central-bank-including-project-2025-author.html",
+      "pubDate": "Wed, 03 Jun 2026 14:38:04 GMT",
+      "factor_tags": [
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.6,
+        "safe_haven": 0.3
+      },
+      "impact": null,
+      "expiry": null,
+      "event_id": "evt_eff4d351",
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "headline": "Greg Abel just made his first big deal as Berkshire CEO. Why Warren Buffett is happy",
+          "detail": "Berkshire's purchase of homebuilder Taylor Morrison gives the conglomerate a larger foothold in housing and appears to have been struck at a bargain valuation.",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
+          "detail": "The acquisition marks one of the first major strategic deals under Warren Buffett's successor Greg Abel, who took over as CEO in the beginning of 2026.",
+          "source": "cnbc_economy",
+          "impact": null
+        }
+      ],
+      "status": "active"
+    },
+    {
       "title": "Sen. Lisa Blunt Rochester: We have a housing crisis in this country",
       "summary": "Sen. Lisa Blunt Rochester (D-Del.) joins 'Squawk Box' to discuss her thoughts on Fed Chair Kevin Warsh, addressing the U.S. housing crisis, President Trump's decision to name Bill Pulte as acting DNI,",
-      "level": "S",
-      "quadrant": [
-        "blue",
-        "orange"
-      ],
       "source": "cnbc_economy",
       "link": "https://www.cnbc.com/video/2026/06/03/sen-lisa-blunt-rochester-we-have-a-housing-crisis-in-this-country.html",
       "pubDate": "Wed, 03 Jun 2026 11:27:56 GMT",
-      "detected_at": "2026-06-05 21:09 CST"
+      "factor_tags": [
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.6,
+        "safe_haven": 0.6
+      },
+      "impact": null,
+      "expiry": null,
+      "event_id": "evt_3e59da28",
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "headline": "Rubio odds for GOP 2028 nominee close to overtaking Vance on Kalshi",
+          "detail": "Vice President Vance has seen his odds slip since the start of the year, as the secretary of State's chances have been buoyed by international conflicts.",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Cassidy: Pulte not 'competent' for intelligence director role",
+          "detail": "Intelligence community veterans have warned that Pulte is ill-prepared for the job and could target Trump's foes in the role.",
+          "source": "cnbc_economy",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Trump names housing chief Bill Pulte acting intelligence director, replacing Tulsi Gabbard",
+          "detail": "Pulte has alleged wrongdoing related to mortgages against Trump's foes, Federal Reserve Governor Lisa Cook and New York Attorney General Letitia James.",
+          "source": "cnbc_economy",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "42% of homeowners say insurance costs have gone up 'a lot,' survey finds. Here's why",
+          "detail": "Inflation, climate change and other factors have combined to push up premiums for homeowners insurance — with broad implications for consumers and the economy. ",
+          "source": "cnbc_economy",
+          "impact": null
+        }
+      ],
+      "status": "active"
     },
     {
-      "title": "‘This would be a one-time event’: How can I take extra money from my 401(k) without triggering higher Medicare premiums?",
-      "summary": "“I generally withdraw money from my traditional 401(k) for projects, larger expenses and sometimes just to stay ahead on upcoming bills.”",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
+      "event_id": "fed_policy_path",
+      "title": "Fed 政策路径跟踪",
+      "type": "permanent",
+      "status": "active",
+      "severity": "medium",
+      "factor_tags": [
+        "opportunity_cost",
+        "currency"
       ],
-      "source": "marketwatch",
-      "link": "https://www.marketwatch.com/story/this-would-be-a-one-time-event-how-can-i-take-extra-money-from-my-401-k-without-triggering-higher-medicare-premiums-fef1586d?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 13:00:00 GMT",
-      "detected_at": "2026-06-05 21:09 CST"
+      "started_at": "2026-06-09",
+      "expected_expiry": null,
+      "sources": [
+        "system"
+      ],
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "headline": "Bitcoin set to slump to new lows for 2026 after recent sell-off, traders forecast",
+          "detail": "The cryptocurrency is likely to break below its lows hit in early February, traders on prediction market Kalshi believe.",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Higher mortgage rates don't just keep buyers on the sidelines. Application denials rise too",
+          "detail": "The denial rate in loan applications was 15.1% in 2024, up from 12.2% in 2021, a rise that occurred alongside surging mortgage rates, the St. Louis Fed found.",
+          "source": "cnbc_economy",
+          "impact": null
+        }
+      ],
+      "key_levels": {},
+      "next_focus": null,
+      "narrative_change": null
     },
     {
-      "title": "The IPO of this power generator for data centers quietly outshines Quantinuum",
-      "summary": "Innio’s stock soared in its debut, to outshine the shares of the more high-profile quantum-computing company, and Trump administration investment, Quantinuum.",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
+      "event_id": "economic_calendar",
+      "title": "经济数据日历",
+      "type": "permanent",
+      "status": "active",
+      "severity": "medium",
+      "factor_tags": [
+        "inflation",
+        "opportunity_cost",
+        "safe_haven"
       ],
-      "source": "marketwatch",
-      "link": "https://www.marketwatch.com/story/the-ipo-of-this-power-generator-for-data-centers-quietly-outshines-quantinuum-d5d3124c?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 11:12:00 GMT",
-      "detected_at": "2026-06-05 21:09 CST"
+      "started_at": "2026-06-09",
+      "expected_expiry": null,
+      "sources": [
+        "system"
+      ],
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "headline": "Sellers are pulling homes off the market at the fastest pace since 2020",
+          "detail": "Frustrated sellers are pulling their homes off the market at an increasingly high pace, as demand weakens and bidding wars wane.",
+          "source": "cnbc_economy",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Dubai's premium real estate segments are recovering despite Iran uncertainty: DAMAC Group",
+          "detail": "Ali Sajwani, Managing Director of Dubai real estate developer DAMAC Group, says there's been a pick-up in sales in the UAE real estate market despite the ongoing Middle East war. He attributes Dubai's",
+          "source": "cnbc_economy",
+          "impact": null
+        }
+      ],
+      "key_levels": {},
+      "next_focus": null,
+      "narrative_change": null
     },
     {
-      "title": "Bitcoin set to slump to new lows for 2026 after recent sell-off, traders forecast",
-      "summary": "The cryptocurrency is likely to break below its lows hit in early February, traders on prediction market Kalshi believe.",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
+      "event_id": "iran_middle_east",
+      "title": "中东/伊朗局势",
+      "type": "geo_political",
+      "status": "active",
+      "severity": "high",
+      "factor_tags": [
+        "safe_haven"
       ],
-      "source": "cnbc_markets",
-      "link": "https://www.cnbc.com/2026/06/03/bitcoin-to-slump-to-new-lows-after-recent-sell-off-traders-predict.html",
-      "pubDate": "Wed, 03 Jun 2026 20:06:54 GMT",
-      "detected_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "title": "Morgan Stanley will soon open its trillion-dollar wealth management funnel to AI agents",
-      "summary": "Morgan Stanley's move is one of the earliest instances of a major Wall Street bank opening its platforms to external AI tools.",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
+      "started_at": "2026-06-01",
+      "expected_expiry": null,
+      "sources": [
+        "manual"
       ],
-      "source": "cnbc_markets",
-      "link": "https://www.cnbc.com/2026/06/03/ai-agents-morgan-stanley-wealth-management-funnel.html",
-      "pubDate": "Wed, 03 Jun 2026 15:32:54 GMT",
-      "detected_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "title": "Goldman Sachs cuts Hong Kong stocks in favor of mainland China AI hardware plays",
-      "summary": "The investment bank on Wednesday cut its rating on H shares to market-weight from overweight, while staying overweight mainland China's A shares.",
-      "level": "A",
-      "quadrant": [
-        "orange"
-      ],
-      "source": "cnbc_markets",
-      "link": "https://www.cnbc.com/2026/06/03/goldman-sachs-cuts-hong-kong-stocks-to-ne.html",
-      "pubDate": "Wed, 03 Jun 2026 01:49:10 GMT",
-      "detected_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
-      "summary": "The acquisition marks one of the first major strategic deals under Warren Buffett's successor Greg Abel, who took over as CEO in the beginning of 2026.",
-      "level": "A",
-      "quadrant": [
-        "orange"
-      ],
-      "source": "cnbc_markets",
-      "link": "https://www.cnbc.com/2026/06/01/berkshire-hathaway-taylor-morrison-home-acquisition-housing-market.html",
-      "pubDate": "Mon, 01 Jun 2026 20:18:46 GMT",
-      "detected_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "title": "Pulte appointment as spy chief would give a Trump attack dog access to a trove of intelligence",
-      "summary": "In his role atop the housing finance agency, Bill Pulte has used his access to mortgage records to refer some top Trump opponents for prosecution.",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
-      ],
-      "source": "cnbc_economy",
-      "link": "https://www.cnbc.com/2026/06/02/bill-pulte-dni-tulsi-gabbard.html",
-      "pubDate": "Wed, 03 Jun 2026 10:57:06 GMT",
-      "detected_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "title": "Homeowners insurance premiums have soared in recent years. How to reduce your costs",
-      "summary": "Insurance premiums have soared for many homeowners in recent years, but there are steps policyholders can take to reduce them, experts said.",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
-      ],
-      "source": "cnbc_economy",
-      "link": "https://www.cnbc.com/2026/06/02/homeowners-insurance-premiums-costs-how-to-reduce.html",
-      "pubDate": "Tue, 02 Jun 2026 17:18:07 GMT",
-      "detected_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
-      "summary": "The acquisition marks one of the first major strategic deals under Warren Buffett's successor Greg Abel, who took over as CEO in the beginning of 2026.",
-      "level": "A",
-      "quadrant": [
-        "orange"
-      ],
-      "source": "cnbc_economy",
-      "link": "https://www.cnbc.com/2026/06/01/berkshire-hathaway-taylor-morrison-home-acquisition-housing-market.html",
-      "pubDate": "Mon, 01 Jun 2026 20:18:46 GMT",
-      "detected_at": "2026-06-05 21:09 CST"
+      "timeline": [],
+      "key_levels": {},
+      "next_focus": null,
+      "narrative_change": null
     }
   ],
-  "events_to_watch": [
-    {
-      "title": "Sen. Lisa Blunt Rochester: We have a housing crisis in this country",
-      "level": "S",
-      "quadrant": [
-        "blue",
-        "orange"
-      ]
-    },
-    {
-      "title": "‘This would be a one-time event’: How can I take extra money from my 401(k) without triggering higher Medicare premiums?",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "The IPO of this power generator for data centers quietly outshines Quantinuum",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "Bitcoin set to slump to new lows for 2026 after recent sell-off, traders forecast",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "Morgan Stanley will soon open its trillion-dollar wealth management funnel to AI agents",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "Goldman Sachs cuts Hong Kong stocks in favor of mainland China AI hardware plays",
-      "level": "A",
-      "quadrant": [
-        "orange"
-      ]
-    },
-    {
-      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
-      "level": "A",
-      "quadrant": [
-        "orange"
-      ]
-    },
-    {
-      "title": "Pulte appointment as spy chief would give a Trump attack dog access to a trove of intelligence",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "Homeowners insurance premiums have soared in recent years. How to reduce your costs",
-      "level": "A",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
-      "level": "A",
-      "quadrant": [
-        "orange"
-      ]
-    },
-    {
-      "title": "‘This is a tricky subject’: We’re in our 70s and our only child is 40. Do we leave her everything?",
-      "level": "C",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "Bulls declare victory in AI debate, but two classic signs of a market top are looming",
-      "level": "C",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "A new blood test can help detect colon cancer, but it’s not as good as the test you hate to take",
-      "level": "C",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "Here’s the downside to record-setting stock markets across the globe that are generating a wealth boom",
-      "level": "C",
-      "quadrant": [
-        "orange",
-        "red"
-      ]
-    },
-    {
-      "title": "Walmart’s stock was once a market darling. Now its tech-fueled valuation faces a reality check.",
-      "level": "C",
-      "quadrant": [
-        "orange"
-      ]
-    },
-    {
-      "title": "We thought we found the perfect luxury retirement community, but it’s millions of dollars in debt. Are we trapped?",
-      "level": "C",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "I own a house with my sister, but the mortgage is in her name. Could this come back to bite me?",
-      "level": "C",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "What SpaceX is really worth, according to the professor known as the dean of valuation",
-      "level": "C",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "Where investors may find the next 'big wave' for AI trade ",
-      "level": "C",
-      "quadrant": [
-        "unclassified"
-      ]
-    },
-    {
-      "title": "Stocks making the biggest moves premarket: Lululemon, Micron, ServiceTitan, Strategy & more",
-      "level": "C",
-      "quadrant": [
-        "unclassified"
-      ]
-    }
-  ],
-  "quadrant_summary": {
-    "blue": 5,
-    "orange": 14,
-    "unclassified": 51,
-    "red": 2,
-    "green": 1
+  "factor_summary": {
+    "unclassified": 44,
+    "opportunity_cost": 5,
+    "safe_haven": 12,
+    "currency": 1,
+    "inflation": 1
   },
-  "fetched_at": "2026-06-05 21:09 CST",
-  "total": 70
+  "fetched_at": "2026-06-09 17:22:38",
+  "total": 60,
+  "calendar": [
+    {
+      "date": "2026-06-09 01:00",
+      "event": "苹果WWDC开发者大会，升级版Siri或发布",
+      "region": "美国",
+      "importance": 4,
+      "actual": "nan",
+      "expected": "nan",
+      "previous": "nan",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "unclassified"
+      ]
+    }
+  ]
 }

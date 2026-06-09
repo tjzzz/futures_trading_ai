@@ -1,224 +1,92 @@
 {
-  "fetched_at": "2026-06-05 21:09 CST",
-  "total": 70,
+  "fetched_at": "2026-06-09 17:22 CST",
+  "total": 60,
   "events": [
     {
-      "source": "cnbc_economy",
-      "title": "Sen. Lisa Blunt Rochester: We have a housing crisis in this country",
-      "description": "Sen. Lisa Blunt Rochester (D-Del.) joins 'Squawk Box' to discuss her thoughts on Fed Chair Kevin Warsh, addressing the U.S. housing crisis, President Trump's decision to name Bill Pulte as acting DNI, and more.",
-      "link": "https://www.cnbc.com/video/2026/06/03/sen-lisa-blunt-rochester-we-have-a-housing-crisis-in-this-country.html",
-      "pubDate": "Wed, 03 Jun 2026 11:27:56 GMT",
-      "quadrant": [
-        "blue",
-        "orange"
-      ],
-      "level": "S",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "‘This would be a one-time event’: How can I take extra money from my 401(k) without triggering higher Medicare premiums?",
-      "description": "“I generally withdraw money from my traditional 401(k) for projects, larger expenses and sometimes just to stay ahead on upcoming bills.”",
-      "link": "https://www.marketwatch.com/story/this-would-be-a-one-time-event-how-can-i-take-extra-money-from-my-401-k-without-triggering-higher-medicare-premiums-fef1586d?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 13:00:00 GMT",
-      "quadrant": [
+      "source": "cnbc_markets",
+      "title": "Electric vehicle giant BYD predicts 80% of China car sales will soon be electric",
+      "description": "BYD expects China's competitive electric vehicle market to continue growing, even as manufacturers and analysts anticipate domestic demand to taper further.",
+      "link": "https://www.cnbc.com/2026/06/09/electric-vehicle-giant-byd-predicts-80percent-of-china-car-sales-will-soon-be-electric.html",
+      "pubDate": "Tue, 09 Jun 2026 06:52:53 GMT",
+      "factors": [
         "unclassified"
       ],
-      "level": "A",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "The IPO of this power generator for data centers quietly outshines Quantinuum",
-      "description": "Innio’s stock soared in its debut, to outshine the shares of the more high-profile quantum-computing company, and Trump administration investment, Quantinuum.",
-      "link": "https://www.marketwatch.com/story/the-ipo-of-this-power-generator-for-data-centers-quietly-outshines-quantinuum-d5d3124c?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 11:12:00 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "A",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
-      "title": "Bitcoin set to slump to new lows for 2026 after recent sell-off, traders forecast",
-      "description": "The cryptocurrency is likely to break below its lows hit in early February, traders on prediction market Kalshi believe.",
-      "link": "https://www.cnbc.com/2026/06/03/bitcoin-to-slump-to-new-lows-after-recent-sell-off-traders-predict.html",
-      "pubDate": "Wed, 03 Jun 2026 20:06:54 GMT",
-      "quadrant": [
+      "title": "This startup wants to reduce payment friction on prediction markets",
+      "description": "EDGE Markets is announcing two new products to solve payment issues in prediction markets, the company shared exclusively with CNBC.",
+      "link": "https://www.cnbc.com/2026/06/08/this-startup-wants-to-reduce-payment-friction-on-prediction-markets.html",
+      "pubDate": "Mon, 08 Jun 2026 12:31:46 GMT",
+      "factors": [
         "unclassified"
       ],
-      "level": "A",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
-      "title": "Morgan Stanley will soon open its trillion-dollar wealth management funnel to AI agents",
-      "description": "Morgan Stanley's move is one of the earliest instances of a major Wall Street bank opening its platforms to external AI tools.",
-      "link": "https://www.cnbc.com/2026/06/03/ai-agents-morgan-stanley-wealth-management-funnel.html",
-      "pubDate": "Wed, 03 Jun 2026 15:32:54 GMT",
-      "quadrant": [
+      "title": "Stocks making the biggest moves premarket: Nvidia, Marvell, Flex and more",
+      "description": "These are the stocks posting the largest moves in early trading.",
+      "link": "https://www.cnbc.com/2026/06/08/stocks-making-the-biggest-moves-premarket-nvidia-marvell-flex-and-more.html",
+      "pubDate": "Mon, 08 Jun 2026 12:00:05 GMT",
+      "factors": [
         "unclassified"
       ],
-      "level": "A",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
-      "title": "Goldman Sachs cuts Hong Kong stocks in favor of mainland China AI hardware plays",
-      "description": "The investment bank on Wednesday cut its rating on H shares to market-weight from overweight, while staying overweight mainland China's A shares.",
-      "link": "https://www.cnbc.com/2026/06/03/goldman-sachs-cuts-hong-kong-stocks-to-ne.html",
-      "pubDate": "Wed, 03 Jun 2026 01:49:10 GMT",
-      "quadrant": [
-        "orange"
+      "title": "Hong Kong's IPO boom is developing a performance problem",
+      "description": "As Hong Kong vies with Wall Street to be the top IPO market, a growing number of pre-debut runups turn sour after their listing.",
+      "link": "https://www.cnbc.com/2026/06/08/hong-kongs-ipo-boom-is-developing-a-performance-problem.html",
+      "pubDate": "Mon, 08 Jun 2026 00:44:55 GMT",
+      "factors": [
+        "unclassified"
       ],
-      "level": "A",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
-      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
-      "description": "The acquisition marks one of the first major strategic deals under Warren Buffett's successor Greg Abel, who took over as CEO in the beginning of 2026.",
-      "link": "https://www.cnbc.com/2026/06/01/berkshire-hathaway-taylor-morrison-home-acquisition-housing-market.html",
-      "pubDate": "Mon, 01 Jun 2026 20:18:46 GMT",
-      "quadrant": [
-        "orange"
-      ],
-      "level": "A",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "cnbc_economy",
-      "title": "Pulte appointment as spy chief would give a Trump attack dog access to a trove of intelligence",
-      "description": "In his role atop the housing finance agency, Bill Pulte has used his access to mortgage records to refer some top Trump opponents for prosecution.",
-      "link": "https://www.cnbc.com/2026/06/02/bill-pulte-dni-tulsi-gabbard.html",
-      "pubDate": "Wed, 03 Jun 2026 10:57:06 GMT",
-      "quadrant": [
+      "title": "Bitcoin is cratering, but a new Wall Street crypto hype is on the rise",
+      "description": "As bitcoin dropped to its lowest price since 2024, investors flock to a new type of crypto investment linked to the hyperliquid platforms, HYPE ETFs.",
+      "link": "https://www.cnbc.com/2026/06/06/bitcoin-price-crash-crypto-hype-hyperliquid-etfs.html",
+      "pubDate": "Mon, 08 Jun 2026 15:11:48 GMT",
+      "factors": [
         "unclassified"
       ],
-      "level": "A",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
-      "source": "cnbc_economy",
-      "title": "Homeowners insurance premiums have soared in recent years. How to reduce your costs",
-      "description": "Insurance premiums have soared for many homeowners in recent years, but there are steps policyholders can take to reduce them, experts said.",
-      "link": "https://www.cnbc.com/2026/06/02/homeowners-insurance-premiums-costs-how-to-reduce.html",
-      "pubDate": "Tue, 02 Jun 2026 17:18:07 GMT",
-      "quadrant": [
-        "unclassified"
+      "source": "cnbc_markets",
+      "title": "Hot jobs report puts Fed cuts further out of reach as Chair Warsh faces policy tests",
+      "description": "Another big jobs report in May has swept aside the possibility of interest rate cuts anytime soon.",
+      "link": "https://www.cnbc.com/2026/06/05/hot-jobs-report-puts-fed-cuts-further-out-of-reach-as-chair-warsh-faces-policy-tests.html",
+      "pubDate": "Fri, 05 Jun 2026 19:09:09 GMT",
+      "factors": [
+        "opportunity_cost",
+        "safe_haven"
       ],
-      "level": "A",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "cnbc_economy",
-      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
-      "description": "The acquisition marks one of the first major strategic deals under Warren Buffett's successor Greg Abel, who took over as CEO in the beginning of 2026.",
-      "link": "https://www.cnbc.com/2026/06/01/berkshire-hathaway-taylor-morrison-home-acquisition-housing-market.html",
-      "pubDate": "Mon, 01 Jun 2026 20:18:46 GMT",
-      "quadrant": [
-        "orange"
-      ],
-      "level": "A",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "‘This is a tricky subject’: We’re in our 70s and our only child is 40. Do we leave her everything?",
-      "description": "“It makes us feel uncomfortable.”",
-      "link": "https://www.marketwatch.com/story/it-makes-us-feel-uncomfortable-were-in-our-70s-and-our-only-child-is-40-do-we-tell-her-were-leaving-her-everything-28421776?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 13:00:00 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "Bulls declare victory in AI debate, but two classic signs of a market top are looming",
-      "description": "The trend of ‘capex recycling’ is considered a problem by a TS Lombard analyst",
-      "link": "https://www.marketwatch.com/story/bulls-declare-victory-on-ai-but-two-classic-signs-of-a-market-top-are-looming-5e4d0222?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 12:35:00 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "A new blood test can help detect colon cancer, but it’s not as good as the test you hate to take",
-      "description": "About 50 million Americans aren’t getting screened for colon cancer at a time when colon-cancer rates are rising.",
-      "link": "https://www.marketwatch.com/story/a-new-blood-test-can-help-detect-colon-cancer-but-its-not-as-good-as-the-test-you-hate-to-take-1c5716d0?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 11:51:00 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "Here’s the downside to record-setting stock markets across the globe that are generating a wealth boom",
-      "description": "While some Americans are enjoying the fruits of the stock market bonanza, their consumption is stirring inflation and lower-income consumers are missing out altogether, says Bank of America.",
-      "link": "https://www.marketwatch.com/story/heres-the-downside-to-record-setting-stock-markets-across-the-globe-that-are-generating-a-wealth-boom-cb5c0ffc?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 11:49:00 GMT",
-      "quadrant": [
-        "orange",
-        "red"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "Walmart’s stock was once a market darling. Now its tech-fueled valuation faces a reality check.",
-      "description": "Walmart shares have lagged peers and the S&P 500 this year, with some analysts noting that business is still dominated by low-margin grocery sales.",
-      "link": "https://www.marketwatch.com/story/walmarts-stock-was-once-a-market-darling-now-its-tech-fueled-valuation-faces-a-reality-check-6bccfbcd?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 10:44:00 GMT",
-      "quadrant": [
-        "orange"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "We thought we found the perfect luxury retirement community, but it’s millions of dollars in debt. Are we trapped?",
-      "description": "“If we were to leave, we would lose a portion of our buy-in — about $80,000.”",
-      "link": "https://www.marketwatch.com/story/we-thought-we-found-the-perfect-luxury-retirement-community-but-its-millions-of-dollars-in-debt-are-we-trapped-cde2e8f5?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 10:15:00 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "I own a house with my sister, but the mortgage is in her name. Could this come back to bite me?",
-      "description": "“My son, daughter-in-law and granddaughter live there and take care of utilities, yardwork and maintenance.”",
-      "link": "https://www.marketwatch.com/story/my-older-sister-and-i-co-own-a-home-where-my-son-lives-what-happens-if-she-dies-2913b928?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 09:55:00 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "What SpaceX is really worth, according to the professor known as the dean of valuation",
-      "description": "Aswath Damodaran, the New York University finance professor e nickname the “dean of valuation,” had estimated, before getting a look at the prospectus, that SpaceX was worth $1.2 trillion. What he says now.",
-      "link": "https://www.marketwatch.com/story/what-spacex-is-really-worth-according-to-the-professor-called-the-dean-of-valuation-bab6cdd2?mod=mw_rss_topstories",
-      "pubDate": "Fri, 05 Jun 2026 09:44:00 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "opportunity_cost": 0.85,
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -226,11 +94,13 @@
       "description": "Tim Urbanowicz, chief investment strategist at Innovator from Goldman Sachs Asset Management, tackles the AI boom.",
       "link": "https://www.cnbc.com/2026/06/05/where-investors-may-find-the-next-big-wave-for-ai-trade.html",
       "pubDate": "Fri, 05 Jun 2026 12:17:43 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -238,11 +108,13 @@
       "description": "These are the stocks posting the largest moves premarket.",
       "link": "https://www.cnbc.com/2026/06/05/stocks-making-the-biggest-moves-premarket-lulu-mu-ttan.html",
       "pubDate": "Fri, 05 Jun 2026 11:25:10 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -250,11 +122,13 @@
       "description": "Tencent Chief AI Scientist Yao Shunyu, who joined the company from OpenAI, said Friday he aims to pursue artificial general intelligence.",
       "link": "https://www.cnbc.com/2026/06/05/china-may-move-toward-us-path-on-ai-as-firms-poach-employees.html",
       "pubDate": "Fri, 05 Jun 2026 07:50:47 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -262,11 +136,13 @@
       "description": "See which stocks are posting big moves after the bell.",
       "link": "https://www.cnbc.com/2026/06/04/stocks-making-the-biggest-moves-after-hours-lulu-agx-ttan.html",
       "pubDate": "Thu, 04 Jun 2026 22:54:31 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -274,11 +150,13 @@
       "description": "Brett Winton said SpaceX's Starlink satellite broadband network is the primary driver of ARK's valuation thesis.",
       "link": "https://www.cnbc.com/2026/06/04/ark-invest-owns-spacex-in-its-venture-etf-it-says-starlink-alone-supports-2-trillion-value-at-ipo.html",
       "pubDate": "Thu, 04 Jun 2026 14:18:15 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -286,11 +164,13 @@
       "description": "The prediction market platform is developing the platform to create a singular platform for its highly engaged traders.",
       "link": "https://www.cnbc.com/2026/06/04/kalshi-is-building-a-bloomberg-terminal-for-prediction-markets.html",
       "pubDate": "Thu, 04 Jun 2026 12:47:27 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -298,11 +178,13 @@
       "description": "These are the stocks posting the largest moves in the premarket.",
       "link": "https://www.cnbc.com/2026/06/04/stocks-making-the-biggest-moves-premarket-.html",
       "pubDate": "Thu, 04 Jun 2026 16:33:01 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -310,11 +192,41 @@
       "description": "See which stocks are posting big moves after the bell.",
       "link": "https://www.cnbc.com/2026/06/03/stocks-making-the-biggest-moves-after-hours-avgo-crwd-pvh.html",
       "pubDate": "Wed, 03 Jun 2026 22:51:53 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Bitcoin set to slump to new lows for 2026 after recent sell-off, traders forecast",
+      "description": "The cryptocurrency is likely to break below its lows hit in early February, traders on prediction market Kalshi believe.",
+      "link": "https://www.cnbc.com/2026/06/03/bitcoin-to-slump-to-new-lows-after-recent-sell-off-traders-predict.html",
+      "pubDate": "Wed, 03 Jun 2026 20:06:54 GMT",
+      "factors": [
+        "currency"
+      ],
+      "relevance": {
+        "currency": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Morgan Stanley will soon open its trillion-dollar wealth management funnel to AI agents",
+      "description": "Morgan Stanley's move is one of the earliest instances of a major Wall Street bank opening its platforms to external AI tools.",
+      "link": "https://www.cnbc.com/2026/06/03/ai-agents-morgan-stanley-wealth-management-funnel.html",
+      "pubDate": "Wed, 03 Jun 2026 15:32:54 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -322,11 +234,27 @@
       "description": "These are the stocks posting the largest moves premarket.",
       "link": "https://www.cnbc.com/2026/06/03/stocks-making-the-biggest-moves-premarket-bx-mrvl-panw.html",
       "pubDate": "Wed, 03 Jun 2026 11:36:50 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Goldman Sachs cuts Hong Kong stocks in favor of mainland China AI hardware plays",
+      "description": "The investment bank on Wednesday cut its rating on H shares to market-weight from overweight, while staying overweight mainland China's A shares.",
+      "link": "https://www.cnbc.com/2026/06/03/goldman-sachs-cuts-hong-kong-stocks-to-ne.html",
+      "pubDate": "Wed, 03 Jun 2026 01:49:10 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -334,24 +262,15 @@
       "description": "The new Fed chair has made his first hires. One wrote the Fed chapter in the conservative policy blueprint \"Project 2025.\"",
       "link": "https://www.cnbc.com/2026/06/02/fed-chair-warsh-makes-first-hires-at-central-bank-including-project-2025-author.html",
       "pubDate": "Wed, 03 Jun 2026 14:38:04 GMT",
-      "quadrant": [
-        "blue",
-        "orange"
+      "factors": [
+        "opportunity_cost",
+        "safe_haven"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "cnbc_markets",
-      "title": "Traders say Karen Bass and Spencer Pratt will advance to runoff in high-profile LA mayoral race",
-      "description": "Los Angeles voters go to the polls Tuesday. If no candidate receives more than 50%, the top-two vote getters will advance to a November runoff.",
-      "link": "https://www.cnbc.com/2026/06/02/bass-and-pratt-will-advance-in-la-mayoral-race-traders-say.html",
-      "pubDate": "Wed, 03 Jun 2026 14:09:15 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "opportunity_cost": 0.6,
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -359,11 +278,13 @@
       "description": "Goldman Sachs CEO David Solomon's comments come as investors prepare for what will be one of the busiest periods for equity issuance in years.",
       "link": "https://www.cnbc.com/2026/06/02/goldman-ceo-david-solomon-greed-mode-ai-firms-ipos.html",
       "pubDate": "Tue, 02 Jun 2026 19:06:48 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -371,11 +292,13 @@
       "description": "The back-to-back deals offer one of the clearest signals yet that Abel is prepared to put Berkshire's enormous balance sheet to work.",
       "link": "https://www.cnbc.com/2026/06/02/greg-abel-channels-buffetts-dealmaking-style-in-17-billion-deal-spree.html",
       "pubDate": "Tue, 02 Jun 2026 17:57:40 GMT",
-      "quadrant": [
-        "blue"
+      "factors": [
+        "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -383,11 +306,13 @@
       "description": "Prediction market platforms have increasingly looked to institutional traders, not individual ones, as the next venue for growth.",
       "link": "https://www.cnbc.com/2026/06/02/polymarket-closes-first-block-trade-in-push-for-institutional-adoption.html",
       "pubDate": "Tue, 02 Jun 2026 12:25:12 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -395,11 +320,13 @@
       "description": "These are the stocks posting the largest moves in early trading.",
       "link": "https://www.cnbc.com/2026/06/02/stocks-making-the-biggest-moves-premarket-mrvl-hpe-vsxy.html",
       "pubDate": "Tue, 02 Jun 2026 12:16:23 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -407,11 +334,13 @@
       "description": "Berkshire's purchase of homebuilder Taylor Morrison gives the conglomerate a larger foothold in housing and appears to have been struck at a bargain valuation.",
       "link": "https://www.cnbc.com/2026/06/01/greg-abel-just-made-his-first-big-deal-as-berkshire-ceo-why-warren-buffett-is-happy.html",
       "pubDate": "Mon, 01 Jun 2026 17:46:28 GMT",
-      "quadrant": [
-        "orange"
+      "factors": [
+        "safe_haven"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -419,11 +348,13 @@
       "description": "These are the stocks posting the largest moves midday.",
       "link": "https://www.cnbc.com/2026/06/01/stocks-making-the-biggest-moves-midday-mgm-zm-nvda-vsat-ibm.html",
       "pubDate": "Mon, 01 Jun 2026 18:31:42 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -431,11 +362,13 @@
       "description": "In a series of moves in 2026, the prediction market platform in the U.S. is working to make its event contracts more attractive to institutional trading.",
       "link": "https://www.cnbc.com/2026/06/01/individual-traders-drove-kalshis-rise-now-its-going-for-wall-street.html",
       "pubDate": "Mon, 01 Jun 2026 15:22:09 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -443,11 +376,13 @@
       "description": "Vice President Vance has seen his odds slip since the start of the year, as the secretary of State's chances have been buoyed by international conflicts.",
       "link": "https://www.cnbc.com/2026/06/01/rubio-odds-for-gop-2028-nominee-close-to-overtaking-vance-on-kalshi.html",
       "pubDate": "Mon, 01 Jun 2026 15:03:17 GMT",
-      "quadrant": [
-        "orange"
+      "factors": [
+        "safe_haven"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -455,11 +390,13 @@
       "description": "These are the stocks posting the largest moves premarket.",
       "link": "https://www.cnbc.com/2026/06/01/stocks-making-the-biggest-moves-premarket-nnvda-arm-qcom.html",
       "pubDate": "Mon, 01 Jun 2026 11:36:04 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_markets",
@@ -467,71 +404,27 @@
       "description": "The AI boom that has funneled more than $250 billion into OpenAI and Anthropic has left hundreds of startups built before ChatGPT's arrival in 2022 stranded.",
       "link": "https://www.cnbc.com/2026/06/01/ai-startup-valuations-pre-chatgpt.html",
       "pubDate": "Wed, 03 Jun 2026 20:48:40 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
-      "source": "cnbc_markets",
-      "title": "Nvidia, Meta and SLB rank among top companies in adopting AI, new study says",
-      "description": "The AI-Driven Enterprise Institute released new research that breaks down the degree to which S&P 500 companies are adopting AI compared with their peers.",
-      "link": "https://www.cnbc.com/2026/06/01/nvidia-meta-walmart-among-top-companies-adopting-ai.html",
-      "pubDate": "Mon, 01 Jun 2026 17:58:25 GMT",
-      "quadrant": [
-        "orange"
+      "source": "cnbc_economy",
+      "title": "China's property sector hasn't hit bottom, but the slump is slowing: Strategist",
+      "description": "Peter Churchouse, Managing Director at Portwood Capital, says China’s property downturn may be stabilizing as policy support slows the pace of price declines. However, he warns the market has likely not yet bottomed, and long-term structural pressures such as weaker demographics, slower urbanization",
+      "link": "https://www.cnbc.com/video/2026/06/08/china-property-slump-slowing-structural-downturn-remains-strategist.html",
+      "pubDate": "Mon, 08 Jun 2026 05:48:19 GMT",
+      "factors": [
+        "safe_haven"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "cnbc_markets",
-      "title": "Nvidia picks Unitree for humanoid robot platform as Chinese startup eyes IPO",
-      "description": "The U.S. chipmaker's first publicly available humanoid robotics system will use humanoids from Chinese startup Unitree.",
-      "link": "https://www.cnbc.com/2026/06/01/nvidia-unitree-humanoid-robotics-system-researchers.html",
-      "pubDate": "Mon, 01 Jun 2026 05:45:45 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "cnbc_markets",
-      "title": "China’s factory activity beats forecasts in May, private survey shows, despite softer official data",
-      "description": "China’s manufacturing activity expanded faster than expected in May, according to a private survey released Monday, although growth slowed from April.",
-      "link": "https://www.cnbc.com/2026/06/01/chinas-factory-activity-beats-forecasts-in-may-private-survey-shows-despite-softer-official-data.html",
-      "pubDate": "Mon, 01 Jun 2026 14:27:11 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "cnbc_markets",
-      "title": "Former Barclays CEO Jes Staley agrees to July 23 interview about Jeffrey Epstein by Oversight panel",
-      "description": "Microsoft co-founder Bill Gates is scheduled to be interviewed about his relationship to the sex offender Jeffrey Epstein in June.",
-      "link": "https://www.cnbc.com/2026/05/31/jes-staley-jeffrey-epstein-interview-house-jpmorgan-chase-barclays.html",
-      "pubDate": "Sun, 31 May 2026 15:53:27 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
-    },
-    {
-      "source": "cnbc_markets",
-      "title": "Two months, $2.6 billion: How NASA ETF turned SpaceX IPO access into a hot retail trade",
-      "description": "With Elon Musk's SpaceX IPO ahead, retail investors are rushing into space-themed ETFs including NASA which offers direct access to the rocket company.",
-      "link": "https://www.cnbc.com/2026/05/30/spacex-ipo-invest.html",
-      "pubDate": "Sat, 30 May 2026 15:33:42 GMT",
-      "quadrant": [
-        "unclassified"
-      ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -539,11 +432,13 @@
       "description": "CNBC's Diana Olick reports on news regarding the housing market.",
       "link": "https://www.cnbc.com/video/2026/06/04/home-sellers-pull-homes-off-market-at-fastest-pace-since-2020.html",
       "pubDate": "Thu, 04 Jun 2026 15:55:17 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -551,11 +446,13 @@
       "description": "The denial rate in loan applications was 15.1% in 2024, up from 12.2% in 2021, a rise that occurred alongside surging mortgage rates, the St. Louis Fed found.",
       "link": "https://www.cnbc.com/2026/06/04/higher-mortgage-rates-push-application-denial-rates-up.html",
       "pubDate": "Thu, 04 Jun 2026 12:15:01 GMT",
-      "quadrant": [
-        "blue"
+      "factors": [
+        "opportunity_cost"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "opportunity_cost": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -563,11 +460,13 @@
       "description": "Investment transaction volumes reached more than $15 billion during the first quarter, an increase of 5% compared with Q1 2025, according to JLL.",
       "link": "https://www.cnbc.com/2026/06/04/institutional-investors-retail-jll.html",
       "pubDate": "Thu, 04 Jun 2026 13:43:59 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -575,11 +474,13 @@
       "description": "Frustrated sellers are pulling their homes off the market at an increasingly high pace, as demand weakens and bidding wars wane.",
       "link": "https://www.cnbc.com/2026/06/03/sellers-delisting-homes-redfin.html",
       "pubDate": "Thu, 04 Jun 2026 18:50:29 GMT",
-      "quadrant": [
-        "orange"
+      "factors": [
+        "safe_haven"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -587,11 +488,29 @@
       "description": "Pulte is widely viewed as a Trump loyalist who has targeted the president's political foes during his tenure leading the housing regulatory agency.",
       "link": "https://www.cnbc.com/2026/06/03/tillis-trump-pulte-intelligence-dni-senate.html",
       "pubDate": "Wed, 03 Jun 2026 18:25:37 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Sen. Lisa Blunt Rochester: We have a housing crisis in this country",
+      "description": "Sen. Lisa Blunt Rochester (D-Del.) joins 'Squawk Box' to discuss her thoughts on Fed Chair Kevin Warsh, addressing the U.S. housing crisis, President Trump's decision to name Bill Pulte as acting DNI, and more.",
+      "link": "https://www.cnbc.com/video/2026/06/03/sen-lisa-blunt-rochester-we-have-a-housing-crisis-in-this-country.html",
+      "pubDate": "Wed, 03 Jun 2026 11:27:56 GMT",
+      "factors": [
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.6,
+        "safe_haven": 0.6
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -599,11 +518,13 @@
       "description": "Mortgage rates fell slightly last week, but neither current homeowners nor potential homebuyers were inspired. Demand for mortgages fell overall.",
       "link": "https://www.cnbc.com/2026/06/03/mortgage-rates-are-easing-slightly-but-homebuyers-are-retreating.html",
       "pubDate": "Wed, 03 Jun 2026 12:29:58 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -611,11 +532,13 @@
       "description": "Intelligence community veterans have warned that Pulte is ill-prepared for the job and could target Trump's foes in the role.",
       "link": "https://www.cnbc.com/2026/06/02/cassidy-pulte-intelligence-trump.html",
       "pubDate": "Tue, 02 Jun 2026 22:03:00 GMT",
-      "quadrant": [
-        "orange"
+      "factors": [
+        "safe_haven"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -623,11 +546,27 @@
       "description": "Jeff Olin, Vision Capital CEO and president, joins 'Fast Money' to talk investing opportunities in the real estate space.",
       "link": "https://www.cnbc.com/video/2026/06/02/vision-capital-ceo-says-ai-is-creating-investing-opportunities-in-commercial-reits.html",
       "pubDate": "Tue, 02 Jun 2026 21:59:13 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Pulte appointment as spy chief would give a Trump attack dog access to a trove of intelligence",
+      "description": "In his role atop the housing finance agency, Bill Pulte has used his access to mortgage records to refer some top Trump opponents for prosecution.",
+      "link": "https://www.cnbc.com/2026/06/02/bill-pulte-dni-tulsi-gabbard.html",
+      "pubDate": "Wed, 03 Jun 2026 10:57:06 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -635,11 +574,27 @@
       "description": "Pulte has alleged wrongdoing related to mortgages against Trump's foes, Federal Reserve Governor Lisa Cook and New York Attorney General Letitia James.",
       "link": "https://www.cnbc.com/2026/06/02/intelligence-trump-bill-pulte-tulsi-gabbard.html",
       "pubDate": "Wed, 03 Jun 2026 14:57:55 GMT",
-      "quadrant": [
-        "blue"
+      "factors": [
+        "opportunity_cost"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "opportunity_cost": 0.6
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Homeowners insurance premiums have soared in recent years. How to reduce your costs",
+      "description": "Insurance premiums have soared for many homeowners in recent years, but there are steps policyholders can take to reduce them, experts said.",
+      "link": "https://www.cnbc.com/2026/06/02/homeowners-insurance-premiums-costs-how-to-reduce.html",
+      "pubDate": "Tue, 02 Jun 2026 17:18:07 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -647,11 +602,13 @@
       "description": "Diana Olick sits down with a global real estate investment heavyweight, Sonny Kalsi, CEO of SLC Management.",
       "link": "https://www.cnbc.com/video/2026/06/02/property-play-sonny-kalsi-on-ai-apartments-and-the-data-center-debate.html",
       "pubDate": "Tue, 02 Jun 2026 11:58:01 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -659,11 +616,13 @@
       "description": "Logan Mohtashami, Housing Wire lead analyst, joins 'Closing Bell Overtime' to talk the state of the housing sector.",
       "link": "https://www.cnbc.com/video/2026/06/01/housing-wires-mohtashami-on-the-state-of-the-real-estate-sector.html",
       "pubDate": "Mon, 01 Jun 2026 21:48:11 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -671,11 +630,13 @@
       "description": "Berkshire's purchase of homebuilder Taylor Morrison gives the conglomerate a larger foothold in housing and appears to have been struck at a bargain valuation.",
       "link": "https://www.cnbc.com/2026/06/01/greg-abel-just-made-his-first-big-deal-as-berkshire-ceo-why-warren-buffett-is-happy.html",
       "pubDate": "Mon, 01 Jun 2026 17:46:28 GMT",
-      "quadrant": [
-        "orange"
+      "factors": [
+        "safe_haven"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -683,11 +644,13 @@
       "description": "Analysts say the deal between Berkshire Hathaway and Taylor Morrison signals that the housing market may have bottomed.",
       "link": "https://www.cnbc.com/2026/06/01/berkshire-taylor-morrison-bet-housing-market-bottom.html",
       "pubDate": "Mon, 01 Jun 2026 17:08:20 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -695,11 +658,13 @@
       "description": "Ross Perot Jr., Hillwood and The Perot Group chairman, joins ‘The Exchange’ to discuss the real estate market, keeping up with demand and much more.",
       "link": "https://www.cnbc.com/video/2026/06/01/watch-cnbcs-full-interview-with-the-perot-groups-ross-perot-jr.html",
       "pubDate": "Mon, 01 Jun 2026 15:17:25 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -707,11 +672,13 @@
       "description": "Taylor Morrison CEO Sheryl Palmer joins CNBC's 'Squawk on the Street' to discuss Taylor Morrison's agreement to be acquired by Berkshire Hathaway in a $6.8 billion deal.",
       "link": "https://www.cnbc.com/video/2026/06/01/taylor-morrison-ceo-says-berkshire-hathaway-deal-marks-aa-very-exciting-timea-for-the-company.html",
       "pubDate": "Mon, 01 Jun 2026 14:33:46 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -719,11 +686,27 @@
       "description": "CNBC's Becky Quick reports on the latest news.",
       "link": "https://www.cnbc.com/video/2026/06/01/berkshire-hathaway-buys-taylor-morrison-for-6-point-8-billion.html",
       "pubDate": "Mon, 01 Jun 2026 13:46:31 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
+      "description": "The acquisition marks one of the first major strategic deals under Warren Buffett's successor Greg Abel, who took over as CEO in the beginning of 2026.",
+      "link": "https://www.cnbc.com/2026/06/01/berkshire-hathaway-taylor-morrison-home-acquisition-housing-market.html",
+      "pubDate": "Mon, 01 Jun 2026 20:18:46 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -731,11 +714,13 @@
       "description": "Ross Perot Jr., Hillwood and The Perot Group chairman, joins 'The Exchange' to discuss the real estate market, keeping up with demand and much more.",
       "link": "https://www.cnbc.com/video/2026/05/29/perot-group-chairman-weare-building-1-million-square-foot-facilities-to-keep-up-with-demand.html",
       "pubDate": "Fri, 29 May 2026 17:41:54 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -743,11 +728,13 @@
       "description": "Noble Black, The Corcoran Group real estate broker, joins 'Squawk Box' to discuss New York City's pied-à-terre tax, impact on the real estate market, and more.",
       "link": "https://www.cnbc.com/video/2026/05/29/nyc-approves-pied-a-terre-tax-the-corcoran-groupas-noble-black-on-the-impact-on-wealthy-homeowners.html",
       "pubDate": "Fri, 29 May 2026 12:29:28 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -755,11 +742,13 @@
       "description": "CNBC's Diana Olick reports on latest housing data.",
       "link": "https://www.cnbc.com/video/2026/05/28/april-new-home-sales-miss-estimates-down-11-percent-year-over-year.html",
       "pubDate": "Thu, 28 May 2026 14:09:39 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -767,11 +756,13 @@
       "description": "Alan Ratner, managing director at Zelman, joins ‘Squawk on the Street’ to discuss the impact of higher mortgage rates on homebuilders, whether housing is also seeing a 'K-shaped economy,' and more.",
       "link": "https://www.cnbc.com/video/2026/05/27/we-are-seeing-a-k-shaped-economy-in-housing-says-zelmanas-alan-ratner.html",
       "pubDate": "Wed, 27 May 2026 15:03:29 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -779,11 +770,13 @@
       "description": "Inflation, climate change and other factors have combined to push up premiums for homeowners insurance — with broad implications for consumers and the economy. ",
       "link": "https://www.cnbc.com/2026/05/27/homeowners-insurance-premiums.html",
       "pubDate": "Wed, 27 May 2026 12:15:01 GMT",
-      "quadrant": [
-        "red"
+      "factors": [
+        "inflation"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "inflation": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -791,11 +784,13 @@
       "description": "Mortgage rates rose to the highest level in nine months, hitting refinance demand hardest. Homebuyers also pulled back but were still more active than last year.",
       "link": "https://www.cnbc.com/2026/05/27/mortgage-refinance-demand-drops.html",
       "pubDate": "Wed, 27 May 2026 11:23:39 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -803,11 +798,13 @@
       "description": "CNBC's Diana Olick joins 'Squawk Box' with the latest edition of CNBC's Property Play.",
       "link": "https://www.cnbc.com/video/2026/05/26/wells-fargo-to-offer-mortgage-incentives-on-3d-printed-homes-with-icon.html",
       "pubDate": "Tue, 26 May 2026 12:13:02 GMT",
-      "quadrant": [
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -815,11 +812,13 @@
       "description": "Wells Fargo will provide a 50 basis point lender credit to buyers of Icon homes using its mortgages.",
       "link": "https://www.cnbc.com/2026/05/26/wells-fargo-mortgage-incentives-3d-printed-homes-icon.html",
       "pubDate": "Tue, 26 May 2026 12:16:21 GMT",
-      "quadrant": [
-        "green"
+      "factors": [
+        "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
       "source": "cnbc_economy",
@@ -827,23 +826,27 @@
       "description": "Ali Sajwani, Managing Director of Dubai real estate developer DAMAC Group, says there's been a pick-up in sales in the UAE real estate market despite the ongoing Middle East war. He attributes Dubai's strength to the government's incentives and fee breaks for the hospitality industry which amount to",
       "link": "https://www.cnbc.com/video/2026/05/25/dubais-premium-real-estate-segments-recovering-despite-the-war-damac.html",
       "pubDate": "Mon, 25 May 2026 07:16:29 GMT",
-      "quadrant": [
-        "orange"
+      "factors": [
+        "safe_haven"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "safe_haven": 0.6
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     },
     {
-      "source": "cnbc_economy",
-      "title": "Why car wash real estate is cleaning up",
-      "description": "CNBC's Diana Olick reports on what has sparked private equity interest in car wash real estate.",
-      "link": "https://www.cnbc.com/video/2026/05/22/why-car-wash-real-estate-is-cleaning-up.html",
-      "pubDate": "Fri, 22 May 2026 17:58:44 GMT",
-      "quadrant": [
+      "source": "marketwatch",
+      "title": "Knicks ticket prices plunge more than 50% ahead of Game 3 at MSG — but not just because Trump’s going",
+      "description": "Ticketing-industry pros say there’s a bigger driver behind some ticket prices dropping several thousand dollars.",
+      "link": "https://www.marketwatch.com/story/knicks-ticket-prices-plunge-more-than-50-ahead-of-game-3-at-msg-but-not-just-because-trumps-going-b7944acf?mod=mw_rss_topstories",
+      "pubDate": "Mon, 08 Jun 2026 22:33:00 GMT",
+      "factors": [
         "unclassified"
       ],
-      "level": "C",
-      "fetched_at": "2026-06-05 21:09 CST"
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 17:22 CST"
     }
   ]
 }

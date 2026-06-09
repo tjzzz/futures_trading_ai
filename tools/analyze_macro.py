@@ -51,6 +51,7 @@ DATA_HISTORY = PROJECT_ROOT / "data" / "history" / "daily"
 
 DASHBOARD_FILE = DATA_CURRENT / "dashboard_data.json"
 FACTORS_FILE = DATA_FACTORS / "current_factors.json"
+PREDICTION_LOG_FILE = DATA_FACTORS / "prediction_log.json"
 COMPUTE_FACTORS_SCRIPT = TOOLS_DIR / "compute_factors.py"
 
 VAULT_ROOT = Path(
@@ -968,12 +969,45 @@ FACTOR_ANALYZERS: Dict[str, callable] = {
 
 
 # =============================================================================
+# 动态权重加载
+# =============================================================================
+
+
+def _load_dynamic_weights() -> Dict[str, float]:
+    """从 prediction_log.json 读取动态因子权重
+
+    如果文件不存在或读取失败，回退为默认权重。
+
+    Returns:
+        因子 ID → 权重 的字典
+    """
+    if not PREDICTION_LOG_FILE.exists():
+        return {fid: fdef["weight"] for fid, fdef in FACTOR_DEFINITIONS.items()}
+
+    try:
+        with open(PREDICTION_LOG_FILE, "r", encoding="utf-8") as f:
+            log_data = json.load(f)
+        weights = log_data.get("factor_weights", {})
+        if not weights:
+            return {fid: fdef["weight"] for fid, fdef in FACTOR_DEFINITIONS.items()}
+        return weights
+    except (json.JSONDecodeError, OSError) as e:
+        logger.warning("读取动态权重失败，使用默认权重: %s", e)
+        return {fid: fdef["weight"] for fid, fdef in FACTOR_DEFINITIONS.items()}
+
+
+# =============================================================================
 # 信号合成
 # =============================================================================
 
 
-def synthesize_signal(factor_results: List[dict]) -> dict:
+def synthesize_signal(factor_results: List[dict],
+                       weights: Optional[Dict[str, float]] = None) -> dict:
     """加权投票制合成综合方向
+
+    Args:
+        factor_results: 各因子分析结果列表
+        weights: 可选，动态因子权重字典。None 时使用 FACTOR_DEFINITIONS 中的默认权重
 
     规则：
       bullish_score = Σ(strength_i × weight_i) for signal == bullish
@@ -988,10 +1022,16 @@ def synthesize_signal(factor_results: List[dict]) -> dict:
 
     Args:
         factor_results: 各因子分析结果列表
+        weights: 可选，动态因子权重字典。None 时使用 FACTOR_DEFINITIONS 中的默认权重
 
     Returns:
         综合信号字典
     """
+    # 使用动态权重（如有），否则回退默认
+    active_weights = weights if weights else {
+        fid: fdef["weight"] for fid, fdef in FACTOR_DEFINITIONS.items()
+    }
+
     bullish_score = 0.0
     bearish_score = 0.0
     total_active_strength = 0.0
@@ -1002,7 +1042,7 @@ def synthesize_signal(factor_results: List[dict]) -> dict:
         fid = f["id"]
         signal = f["signal"]
         strength = f["strength"]
-        weight = FACTOR_DEFINITIONS.get(fid, {}).get("weight", 0.5)
+        weight = active_weights.get(fid, 0.5)
 
         if signal == "bullish":
             weighted = strength * weight
@@ -1384,8 +1424,18 @@ def run_analysis(input_path: Optional[Path] = None) -> dict:
             "key_metrics": km,
         })
 
-    # 3. 信号合成
-    overall = synthesize_signal(factor_results)
+    # 3. 加载动态因子权重（来自反馈闭环）
+    dynamic_weights = _load_dynamic_weights()
+    if dynamic_weights:
+        logger.info("使用动态因子权重（来自 prediction_log.json）")
+        for fid, w in dynamic_weights.items():
+            default_w = FACTOR_DEFINITIONS.get(fid, {}).get("weight", 0.5)
+            if abs(w - default_w) > 0.01:
+                logger.info("  %s: %.2f (默认 %.2f)",
+                            FACTOR_DEFINITIONS.get(fid, {}).get("label", fid), w, default_w)
+
+    # 4. 信号合成（传入动态权重）
+    overall = synthesize_signal(factor_results, weights=dynamic_weights)
 
     # 4. 关键点位
     key_levels = analyze_key_levels()

@@ -1,70 +1,73 @@
 {
   "gold_price": {
-    "value": 4495.0,
+    "value": 4330.7,
     "unit": "USD/oz",
-    "updated_at": "2026-05-19 22:45:04"
+    "updated_at": "2026-06-09 17:19:14"
   },
   "silver_price": {
-    "value": 74.22,
+    "value": 68.53,
     "unit": "USD/oz",
-    "updated_at": "2026-05-19 22:45:04"
+    "updated_at": "2026-06-09 17:19:14"
   },
   "gold_silver_ratio": {
-    "value": 60.56,
-    "updated_at": "2026-05-19 22:45:04"
+    "value": 63.19,
+    "updated_at": "2026-06-09 17:19:14"
   },
   "treasury_10y": {
-    "value": 4.572,
-    "change": -0.095,
-    "change_pct": -2.04,
-    "prev_close": 4.667,
-    "source": "yahoo_finance",
-    "updated_at": "2026-05-21 16:17:42",
-    "freshness": "实时"
+    "value": 4.56,
+    "change_bp": 1.0,
+    "source": "akshare_eastmoney",
+    "as_of_date": "2026-06-08",
+    "updated_at": "2026-06-09 17:20:41",
+    "freshness": "日频数据"
   },
-  "treasury_30y": {},
+  "treasury_30y": {
+    "value": 5.03,
+    "source": "akshare_eastmoney",
+    "as_of_date": "2026-06-08",
+    "updated_at": "2026-06-09 17:20:41",
+    "freshness": "日频数据"
+  },
   "tips_10y": {
-    "value": 2.1,
+    "value": 2.19,
     "source": "fred",
-    "as_of_date": "2026-05-15",
-    "updated_at": "2026-05-19 20:30:59",
-    "freshness": "延迟2天"
+    "as_of_date": "2026-06-05",
+    "updated_at": "2026-06-09 17:20:55",
+    "freshness": "延迟1~2天"
   },
   "dxy": {
-    "value": 99.221,
-    "change": 0.129,
-    "change_pct": 0.13,
-    "prev_close": 99.092,
+    "value": 99.83,
+    "change": -0.219,
+    "change_pct": -0.22,
+    "prev_close": 100.05,
     "source": "yahoo_finance",
-    "updated_at": "2026-05-21 16:17:42",
+    "updated_at": "2026-06-09 17:22:27",
     "freshness": "实时"
   },
   "vix": {
-    "value": 17.42,
-    "change": -0.02,
-    "change_pct": -0.11,
-    "prev_close": 17.44,
-    "source": "yahoo_finance",
-    "updated_at": "2026-05-21 16:17:42",
-    "freshness": "实时"
+    "value": 18.92,
+    "source": "cboe",
+    "as_of_date": "06/08/2026",
+    "updated_at": "2026-06-09 17:21:04",
+    "freshness": "前一交易日"
   },
   "sp500": {
-    "value": 7408.5,
+    "value": 7405.73,
     "source": "fred",
-    "as_of_date": "2026-05-15",
-    "updated_at": "2026-05-19 20:31:02",
+    "as_of_date": "2026-06-08",
+    "updated_at": "2026-06-09 17:21:08",
     "freshness": "延迟1天"
   },
-  "global_updated_at": "2026-06-05 21:10:05",
+  "global_updated_at": "2026-06-09 17:22:30",
   "global_freshness": "尚未采集",
   "treasury": {
-    "10yr": 4.61,
-    "30yr": 5.14,
-    "2yr": 4.07,
-    "source": "ustreasury",
-    "as_of_date": "05/18/2026",
-    "updated_at": "2026-05-19 20:30:58",
-    "freshness": "昨日数据"
+    "10yr": 4.56,
+    "2yr": 4.15,
+    "30yr": 5.03,
+    "source": "akshare_eastmoney",
+    "as_of_date": "2026-06-08",
+    "updated_at": "2026-06-09 17:20:41",
+    "freshness": "日频数据"
   },
   "events": {
     "active_s": [
@@ -107,49 +110,121 @@
     "updated_at": "2026-05-19 22:30 CST"
   },
   "gold_futures": {
-    "value": 4527.5,
-    "change": -7.8,
-    "change_pct": -0.17,
-    "prev_close": 4535.3,
-    "source": "yahoo_finance",
-    "updated_at": "2026-05-21 16:17:42",
-    "freshness": "实时",
-    "volume": 32520
+    "value": 4352.47,
+    "change_pct": -0.25,
+    "open": 4354.7,
+    "high": 4375.7,
+    "low": 4336.0,
+    "prev_close": 4363.4,
+    "open_interest": 0,
+    "bid": 4353.8,
+    "ask": 4354.2,
+    "source": "akshare_sina_foreign",
+    "quote_time": "17:19:10",
+    "updated_at": "2026-06-09 17:19:11",
+    "freshness": "实时"
   },
   "silver_futures": {
-    "value": 75.36,
-    "change": -0.821,
-    "change_pct": -1.08,
-    "prev_close": 76.181,
-    "source": "yahoo_finance",
-    "updated_at": "2026-05-21 16:17:42",
-    "freshness": "实时",
-    "volume": 9082
+    "value": 68.56,
+    "change_pct": -0.03,
+    "open": 68.32,
+    "high": 68.98,
+    "low": 67.53,
+    "prev_close": 68.58,
+    "open_interest": 0,
+    "bid": 68.5,
+    "ask": 68.52,
+    "source": "akshare_sina_foreign",
+    "quote_time": "17:18:20",
+    "updated_at": "2026-06-09 17:19:11",
+    "freshness": "实时"
   },
   "shfe_gold": {
-    "open": 985.18,
-    "high": 987.96,
-    "low": 968.88,
-    "close": 974.02,
-    "volume": 196978,
-    "open_interest": 191132,
+    "open": 947.48,
+    "high": 952.62,
+    "low": 945.62,
+    "close": 947.04,
+    "volume": 190012,
+    "open_interest": 181455,
     "settlement": 0.0,
     "change_pct": 0.0,
-    "date": "2026-06-05",
+    "date": "2026-06-09",
     "source": "akshare",
-    "updated_at": "2026-06-05 21:10:04"
+    "updated_at": "2026-06-09 17:22:30"
   },
   "shfe_silver": {
-    "open": 18038.0,
-    "high": 18230.0,
-    "low": 17170.0,
-    "close": 17528.0,
-    "volume": 705714,
-    "open_interest": 289320,
+    "open": 16580.0,
+    "high": 16615.0,
+    "low": 16223.0,
+    "close": 16458.0,
+    "volume": 602609,
+    "open_interest": 279277,
     "settlement": 0.0,
     "change_pct": 0.0,
-    "date": "2026-06-05",
+    "date": "2026-06-09",
     "source": "akshare",
-    "updated_at": "2026-06-05 21:10:05"
+    "updated_at": "2026-06-09 17:22:30"
+  },
+  "oil_wti": {
+    "value": 95.96,
+    "source": "fred",
+    "as_of_date": "2026-06-01",
+    "updated_at": "2026-06-09 17:21:16",
+    "freshness": "延迟1天"
+  },
+  "oil_brent": {
+    "value": 98.29,
+    "source": "fred",
+    "as_of_date": "2026-06-01",
+    "updated_at": "2026-06-09 17:21:19",
+    "freshness": "延迟1天"
+  },
+  "credit_spread": {
+    "value": 2.76,
+    "source": "fred",
+    "as_of_date": "2026-06-05",
+    "updated_at": "2026-06-09 17:20:58",
+    "freshness": "延迟1天"
+  },
+  "cpi_yoy": {
+    "value": 332.41,
+    "source": "fred",
+    "as_of_date": "2026-04-01",
+    "updated_at": "2026-06-09 17:20:59",
+    "freshness": "月度"
+  },
+  "pce_core": {
+    "value": 129.63,
+    "source": "fred",
+    "as_of_date": "2026-04-01",
+    "updated_at": "2026-06-09 17:21:01",
+    "freshness": "月度"
+  },
+  "vix_daily": {
+    "value": 21.51,
+    "source": "cboe",
+    "as_of_date": "06/05/2026",
+    "updated_at": "2026-06-08 16:41:24",
+    "freshness": "前一交易日"
+  },
+  "copper": {
+    "value": 13483.75,
+    "source": "fred",
+    "as_of_date": "2026-05-01",
+    "updated_at": "2026-06-09 17:21:21",
+    "freshness": "月度"
+  },
+  "usdcnh": {
+    "value": 6.7948,
+    "source": "exchangerate-api (open.er-api.com)",
+    "updated_at": "2026-06-09 17:21:22",
+    "freshness": "每日更新"
+  },
+  "treasury_2y": {
+    "value": 4.15,
+    "source": "akshare_eastmoney",
+    "as_of_date": "2026-06-08",
+    "updated_at": "2026-06-09 17:20:41",
+    "freshness": "日频数据"
   }
 }
