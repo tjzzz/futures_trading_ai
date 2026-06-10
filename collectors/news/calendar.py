@@ -134,50 +134,71 @@ def map_event_to_factors(event_name: str) -> list[str]:
     return list(tags) if tags else ["unclassified"]
 
 
-def collect() -> dict | None:
-    """采集经济日历并判断超预期"""
+def collect(days_ahead: int = 7) -> dict | None:
+    """采集经济日历并判断超预期
+
+    Args:
+        days_ahead: 预拉未来 N 天的日历（默认7天, 含今天）
+    """
     logger.info("=== calendar start ===")
     tracker = _load_tracker()
 
     try:
         import akshare as ak
 
-        # 华尔街见闻日历（含今值 vs 预期）
-        today_str = _today_cst()
-        df = ak.macro_info_ws(date=today_str)
-        if df is None or df.empty:
-            logger.warning("华尔街见闻日历无数据")
-            return None
+        today = datetime.now(CST)
+        all_calendar = []
+        fetched_dates = []
 
-        # 筛选美国重要性 3+ 的事件
-        us_important = df[df["地区"].str.contains("美国", na=False) & df["重要性"].astype(str).isin(["3", "4", "5"])]
+        for offset in range(days_ahead):
+            target_date = today + timedelta(days=offset)
+            date_str = target_date.strftime("%Y%m%d")
+            date_label = target_date.strftime("%Y-%m-%d")
 
-        calendar_entries = []
-        for _, row in us_important.iterrows():
-            event_name = str(row.get("事件", ""))
-            actual = str(row.get("今值", "")).strip()
-            expected = str(row.get("预期", "")).strip()
-            previous = str(row.get("前值", "")).strip()
-            importance = row.get("重要性")
+            try:
+                df = ak.macro_info_ws(date=date_str)
+            except Exception as e:
+                logger.warning(f"  {date_label}: 采集失败 - {e}")
+                continue
 
-            surprise = _judge_surprise(event_name, actual, expected)
-            factors = map_event_to_factors(event_name)
+            if df is None or df.empty:
+                logger.info(f"  {date_label}: 无数据")
+                continue
 
-            entry = {
-                "date": str(row.get("时间", ""))[:16],
-                "event": event_name,
-                "region": "美国",
-                "importance": int(float(importance)) if importance else 3,
-                "actual": actual,
-                "expected": expected,
-                "previous": previous,
-                "surprise": surprise,
-                "factor_tags": factors,
-            }
-            calendar_entries.append(entry)
+            fetched_dates.append(date_label)
 
-        # 记录超预期事件
-        surprises = [e for e in calendar_entries if e["surprise"]["direction"] in ("above", "below")]
+            # 筛选美国重要性 3+ 的事件
+            us_important = df[
+                df["地区"].str.contains("美国", na=False) &
+                df["重要性"].astype(str).isin(["3", "4", "5"])
+            ]
+
+            for _, row in us_important.iterrows():
+                event_name = str(row.get("事件", ""))
+                actual = str(row.get("今值", "")).strip()
+                expected = str(row.get("预期", "")).strip()
+                previous = str(row.get("前值", "")).strip()
+                importance = row.get("重要性")
+
+                surprise = _judge_surprise(event_name, actual, expected)
+                factors = map_event_to_factors(event_name)
+
+                entry = {
+                    "date": str(row.get("时间", ""))[:16],
+                    "event": event_name,
+                    "region": "美国",
+                    "importance": int(float(importance)) if importance else 3,
+                    "actual": actual,
+                    "expected": expected,
+                    "previous": previous,
+                    "surprise": surprise,
+                    "factor_tags": factors,
+                }
+                all_calendar.append(entry)
+
+        # 记录超预期事件（仅当天）
+        today_entries = [e for e in all_calendar if e["date"].startswith(today.strftime("%Y-%m-%d"))]
+        surprises = [e for e in today_entries if e["surprise"]["direction"] in ("above", "below")]
         if surprises:
             logger.info(f"  ⚡ 超预期事件: {len(surprises)} 条")
             for s in surprises:
@@ -185,12 +206,36 @@ def collect() -> dict | None:
         else:
             logger.info("  今日无美国重要超预期事件")
 
+        # 按时间排序，去重
+        seen = set()
+        deduped = []
+        for e in all_calendar:
+            key = (e["date"], e["event"])
+            if key not in seen:
+                seen.add(key)
+                deduped.append(e)
+            else:
+                logger.info(f"  去重: {e['date']} {e['event']}")
+        all_calendar = deduped
+        all_calendar.sort(key=lambda x: x["date"])
+
         # 更新 tracker
-        tracker["calendar"] = calendar_entries
+        tracker["calendar"] = all_calendar
+        tracker["calendar_date_range"] = f"{fetched_dates[0]} ~ {fetched_dates[-1]}" if fetched_dates else "无数据"
         tracker["fetched_at"] = _now_cst()
         _save_tracker(tracker)
 
-        logger.info(f"✅ calendar 完成: {len(calendar_entries)} 条")
+        # 更新 cache
+        cal_cache = {
+            "date": today.strftime("%Y-%m-%d"),
+            "date_range": tracker["calendar_date_range"],
+            "events": all_calendar,
+            "fetched_at": _now_cst(),
+        }
+        CALENDAR_CACHE.parent.mkdir(parents=True, exist_ok=True)
+        CALENDAR_CACHE.write_text(json.dumps(cal_cache, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        logger.info(f"✅ calendar 完成: {len(all_calendar)} 条 (范围: {tracker['calendar_date_range']})")
         return {"snapshot": {}, "history": []}
 
     except ImportError:

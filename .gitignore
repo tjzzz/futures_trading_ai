@@ -18,6 +18,7 @@ sdist/
 var/
 wheels/
 archive/
+trading/
 *.egg-info/
 .installed.cfg
 *.egg

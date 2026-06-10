@@ -6,11 +6,11 @@ Yahoo Finance 批量采集器 — V1
 覆盖: DXY / VIX / GLD / SLV / FedWatch 概率（5 ticker）
 
 其他指标 fallback:
-  - 美债收益率 → treasuries.py (U.S. Treasury)
-  - SP500 → fallback.py (FRED)
-  - WTI/布伦特/铜 → fallback.py (FRED)
-  - USD/CNY → fallback.py (ExchangeRate-API)
-  - 金银期货 → akshare_futures.py (新浪)
+  - 美债收益率 → treasury.py (U.S. Treasury)
+  - SP500 → macro_index.py (FRED)
+  - WTI/布伦特/铜 → macro_index.py (FRED)
+  - USD/CNY → macro_index.py (ExchangeRate-API)
+  - 金银期货 → futures_sina.py (新浪)
 
 频率: 5 分钟（5 ticker 几乎不触发 429）
 """
@@ -55,10 +55,10 @@ class YFinanceBatch(BaseCollector):
     """Yahoo Finance 批量采集器"""
 
     def __init__(self):
-        super().__init__("yfinance_batch")
+        super().__init__("yfinance")
 
     def collect(self) -> dict | None:
-        self.logger.info(f"=== yfinance_batch start ({len(TICKERS)} ticker) ===")
+        self.logger.info(f"=== {self.name} start ({len(TICKERS)} ticker) ===")
 
         # 尝试 1: 直接调 Yahoo v8 chart API
         result = self._collect_via_api()
@@ -79,7 +79,6 @@ class YFinanceBatch(BaseCollector):
     def _collect_via_api(self) -> dict | None:
         """通过 Yahoo v8 chart API 逐个获取"""
         snapshot = {}
-        history_rows = []
         errors = []
 
         for snap_key, symbol, hist_field in TICKERS:
@@ -91,10 +90,6 @@ class YFinanceBatch(BaseCollector):
 
                 entry = self._make_entry(price, prev_close, volume)
                 snapshot[snap_key] = entry
-                history_rows.append({
-                    "file": "data/history/minutely/yfinance_minutely.csv",
-                    "row": {"timestamp": now_cst(), hist_field: price},
-                })
             except Exception as e:
                 errors.append(f"{snap_key}({symbol}): {e}")
                 continue
@@ -114,12 +109,10 @@ class YFinanceBatch(BaseCollector):
             if fw:
                 snapshot["fedwatch_prob"] = fw
 
-        history = [{"file": h["file"], "row": h["row"], "grain": "minutely"} for h in history_rows]
-
         if errors:
             self.logger.warning(f"部分风险: {len(snapshot)}/{len(TICKERS)} — {', '.join(errors[:3])}")
         self.logger.info(f"v8 API 采集完成: {len(snapshot)}/{len(TICKERS)}")
-        return {"snapshot": snapshot, "history": history}
+        return {"snapshot": snapshot}
 
     def _fetch_one_via_api(self, symbol: str) -> tuple:
         """获取单个 ticker 实时价格，返回 (price, prev_close, volume)"""
@@ -165,7 +158,6 @@ class YFinanceBatch(BaseCollector):
 
         import pandas as pd
         snapshot = {}
-        history_rows = []
         errors = []
 
         for snap_key, symbol, hist_field in TICKERS:
@@ -187,8 +179,6 @@ class YFinanceBatch(BaseCollector):
                 prev = float(ticker_df["Close"].iloc[-2]) if len(ticker_df) >= 2 and "Close" in ticker_df else price
 
                 snapshot[snap_key] = self._make_entry(price, prev, vol)
-                history_rows.append({"file": "data/history/minutely/yfinance_minutely.csv",
-                                     "row": {"timestamp": now_cst(), hist_field: price}})
             except Exception as e:
                 errors.append(f"{snap_key}: {e}")
 
@@ -197,14 +187,12 @@ class YFinanceBatch(BaseCollector):
             if fw:
                 snapshot["fedwatch_prob"] = fw
 
-        history = [{"file": h["file"], "row": h["row"], "grain": "minutely"} for h in history_rows]
         self.logger.info(f"yfinance 回退完成: {len(snapshot)}/{len(TICKERS)}")
-        return {"snapshot": snapshot, "history": history} if snapshot else None
+        return {"snapshot": snapshot} if snapshot else None
 
     def _fallback_ticker(self) -> dict | None:
         """终极回退：逐个 Ticker() 带间隔"""
         snapshot = {}
-        history_rows = []
         errors = []
         for snap_key, symbol, hist_field in TICKERS:
             try:
@@ -216,8 +204,6 @@ class YFinanceBatch(BaseCollector):
                     vol = int(latest.get("Volume") or latest.get("volume", 0))
                     prev = float(df["Close"].iloc[-2]) if len(df) >= 2 and "Close" in df else price
                     snapshot[snap_key] = self._make_entry(price, prev, vol)
-                    history_rows.append({"file": "data/history/minutely/yfinance_minutely.csv",
-                                         "row": {"timestamp": now_cst(), hist_field: price}})
                 else:
                     errors.append(f"{snap_key}: 无数据")
             except Exception as e:
@@ -227,12 +213,11 @@ class YFinanceBatch(BaseCollector):
             fw = self._calc_fedwatch(snapshot["fedwatch_prob"].get("value", 0))
             if fw:
                 snapshot["fedwatch_prob"] = fw
-        history = [{"file": h["file"], "row": h["row"], "grain": "minutely"} for h in history_rows]
         if not snapshot:
             self.logger.error("终极回退全部失败")
             for e in errors:
                 self.logger.error(f"  {e}")
-        return {"snapshot": snapshot, "history": history} if snapshot else None
+        return {"snapshot": snapshot} if snapshot else None
 
     def _make_entry(self, price: float, prev_close: float, volume: int) -> dict:
         change = round(price - prev_close, 4) if prev_close else None

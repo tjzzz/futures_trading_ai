@@ -11,12 +11,15 @@
   },
   "weight_adjustment_log": [],
   "accuracy_stats": {
+    "window": 0,
     "total_verified": 0,
     "direction_correct": 0,
+    "direction_total": 0,
     "direction_accuracy": null,
     "range_correct": 0,
+    "range_total": 0,
     "range_accuracy": null,
     "by_factor": {}
   },
-  "last_updated": "2026-06-09"
+  "last_updated": "2026-06-09 19:16:18"
 }

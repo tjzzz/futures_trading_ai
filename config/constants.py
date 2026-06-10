@@ -38,12 +38,9 @@ COLLECTOR_INTERVALS = {
 DATA_PATHS = {
     "snapshot": "data/current/dashboard_data.json",
     "history_daily": "data/history/daily",
-    "history_minutely": "data/history/minutely",
     "events": "data/events",
     "sources": "config/indicator_source.json",
     "factors": "data/factors/current_factors.json",         # 因子对齐数据
-    "oil_history": "data/history/minutely/oil_minutely.csv", # WTI 原油历史
-    "gld_slv_history": "data/history/daily/gld_slv_holdings.csv",  # GLD/SLV 历史
 }
 
 # 日志目录

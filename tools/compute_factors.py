@@ -29,7 +29,6 @@ from typing import Any, Dict, List, Optional, Tuple
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_CURRENT = PROJECT_ROOT / "data" / "current"
 DATA_HISTORY_DAILY = PROJECT_ROOT / "data" / "history" / "daily"
-DATA_HISTORY_MINUTELY = PROJECT_ROOT / "data" / "history" / "minutely"
 DATA_EVENTS = PROJECT_ROOT / "data" / "events"
 DATA_FACTORS = PROJECT_ROOT / "data" / "factors"
 
@@ -388,6 +387,28 @@ def compute_opportunity_cost(dashboard: dict) -> Dict[str, Any]:
     fedwatch_dots = dashboard.get("fedwatch_dots")
     if fedwatch_dots:
         data["fedwatch_dots"] = fedwatch_dots
+
+    # ── 非农就业子指标 ──
+    nfp_surprise = dashboard.get("nfp_surprise_pct")
+    if nfp_surprise:
+        data["nfp_surprise_pct"] = nfp_surprise
+
+    nfp_change = dashboard.get("nfp_change")
+    if nfp_change:
+        data["nfp_change"] = nfp_change
+
+    # NFP 预期差三周期信号（读取历史 CSV 计算趋势）
+    nfp_records = _read_history_csv(
+        DATA_HISTORY_DAILY / "nfp_surprise.csv", value_col="surprise_pct"
+    )
+    if len(nfp_records) >= 2:
+        # 反转方向：positive surprise = strong economy = bearish for gold
+        nfp_signals = _compute_multi_scale_signals(nfp_records)
+        if nfp_signals:
+            for p, sig in nfp_signals.items():
+                if sig and sig["direction"] != "neutral":
+                    sig["direction"] = "bearish" if sig["direction"] == "bullish" else "bullish"
+            data["nfp_signals"] = nfp_signals
 
     # ── 三周期信号 ──
     # TIPS 是机会成本核心指标，用它计算三周期信号

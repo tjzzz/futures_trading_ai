@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-09 17:23:31",
+  "updated_at": "2026-06-10 18:04:58",
   "data_source": "V1 采集 + compute_factors.py",
   "factors": {
     "opportunity_cost": {
@@ -20,401 +20,36 @@
         },
         "nominal_10y_change_d": 1.0,
         "fedwatch_prob": null,
-        "signals": {
-          "short": {
-            "direction": "bearish",
-            "strength": 1.0,
-            "window_days": 5,
-            "evidence": "上升 0.75%/天 (5天)"
-          },
-          "mid": {
-            "direction": "bearish",
-            "strength": 1.0,
-            "window_days": 20,
-            "evidence": "上升 0.16%/天 (20天)"
-          },
-          "long": {
-            "direction": "neutral",
-            "strength": 0.08,
-            "window_days": 60,
-            "evidence": "上升 0.00%/天 (60天)"
-          }
-        }
-      }
-    },
-    "currency": {
-      "label": "货币",
-      "signal": null,
-      "data": {
-        "dxy": {
-          "value": 99.83,
-          "change": -0.219,
-          "source": "yahoo_finance",
-          "updated_at": "2026-06-09 17:22:27"
-        },
-        "dxy_change_d": 0.722,
-        "dxy_vs_200ma": "below",
-        "dxy_trend_60d": "flat",
-        "signals": {
-          "short": {
-            "direction": "bearish",
-            "strength": 1.0,
-            "window_days": 5,
-            "evidence": "上升 0.18%/天 (5天)"
-          },
-          "mid": {
-            "direction": "neutral",
-            "strength": 0.06,
-            "window_days": 20,
-            "evidence": "上升 0.00%/天 (20天)"
-          },
-          "long": {
-            "direction": "neutral",
-            "strength": 0.25,
-            "window_days": 60,
-            "evidence": "上升 0.01%/天 (60天)"
-          }
-        }
-      }
-    },
-    "safe_haven": {
-      "label": "避险需求",
-      "signal": null,
-      "data": {
-        "vix": {
-          "value": 18.92,
-          "change": null,
-          "source": "cboe",
-          "updated_at": "2026-06-09 17:21:04"
-        },
-        "vix_change_d": -2.59,
-        "vix_ma20": 17.874,
-        "vix_regime": "moderate",
-        "sp500": {
-          "value": 7405.7,
-          "source": "fred",
-          "updated_at": "2026-06-09 17:21:08"
-        },
-        "sp500_change_d": 22.0,
-        "credit_spread": {
-          "value": 2.76,
-          "source": "fred",
-          "as_of_date": "2026-06-05",
-          "updated_at": "2026-06-09 17:20:58",
-          "freshness": "延迟1天"
-        },
-        "signals": {
-          "short": {
-            "direction": "bearish",
-            "strength": 1.0,
-            "window_days": 5,
-            "evidence": "下降 2.47%/天 (5天)"
-          },
-          "mid": {
-            "direction": "bullish",
-            "strength": 1.0,
-            "window_days": 20,
-            "evidence": "上升 1.21%/天 (20天)"
-          },
-          "long": {
-            "direction": "bearish",
-            "strength": 1.0,
-            "window_days": 60,
-            "evidence": "下降 0.72%/天 (60天)"
-          }
-        }
-      }
-    },
-    "inflation": {
-      "label": "通胀预期",
-      "signal": null,
-      "data": {
-        "breakeven_10y": {
-          "value": 2.37,
-          "source": "calc (nominal_10y - tips_10y)",
-          "updated_at": "2026-06-09 17:23:31"
-        },
-        "breakeven_change_d": -0.07,
-        "cpi_yoy": {
-          "value": 332.41,
-          "source": "fred",
-          "as_of_date": "2026-04-01",
-          "updated_at": "2026-06-09 17:20:59",
-          "freshness": "月度"
-        },
-        "pce_core": {
-          "value": 129.63,
-          "source": "fred",
-          "as_of_date": "2026-04-01",
-          "updated_at": "2026-06-09 17:21:01",
-          "freshness": "月度"
-        },
-        "oil_wti": {
-          "value": 95.96,
-          "source": "fred",
-          "as_of_date": "2026-06-01",
-          "updated_at": "2026-06-09 17:21:16",
-          "freshness": "延迟1天"
-        },
-        "oil_brent": {
-          "value": 98.29,
-          "source": "fred",
-          "as_of_date": "2026-06-01",
-          "updated_at": "2026-06-09 17:21:19",
-          "freshness": "延迟1天"
-        },
-        "copper": {
-          "value": 13483.75,
-          "source": "fred",
+        "nfp_change": {
+          "value": 172,
+          "source": "fred(calc)",
           "as_of_date": "2026-05-01",
-          "updated_at": "2026-06-09 17:21:21",
-          "freshness": "月度"
+          "updated_at": "2026-06-10 18:04:48",
+          "description": "2026-05-01 vs 2026-04-01 月度变化"
         },
         "signals": {
           "short": {
-            "direction": "bullish",
+            "direction": "bearish",
             "strength": 1.0,
             "window_days": 5,
-            "evidence": "下降 0.26%/天 (5天)"
-          },
-          "mid": {
-            "direction": "bullish",
-            "strength": 1.0,
-            "window_days": 20,
-            "evidence": "下降 0.15%/天 (20天)"
-          },
-          "long": {
-            "direction": "neutral",
-            "strength": 0.41,
-            "window_days": 60,
-            "evidence": "下降 0.02%/天 (60天)"
-          }
-        }
-      }
-    },
-    "positioning": {
-      "label": "持仓动量",
-      "signal": null,
-      "data": {
-        "shfe_gold_oi": {
-          "value": 181455,
-          "source": "akshare",
-          "updated_at": "2026-06-09 17:22:30"
-        },
-        "shfe_silver_oi": {
-          "value": 279277,
-          "source": "akshare",
-          "updated_at": "2026-06-09 17:22:30"
-        },
-        "signals": {
-          "short": {
-            "direction": "bullish",
-            "strength": 0.88,
-            "window_days": 5,
-            "evidence": "下降 0.09%/天 (5天)"
+            "evidence": "上升 1.33%/天 (5天)"
           },
           "mid": {
             "direction": "bearish",
             "strength": 1.0,
             "window_days": 20,
-            "evidence": "上升 2.24%/天 (20天)"
+            "evidence": "上升 0.36%/天 (20天)"
           },
           "long": {
             "direction": "bearish",
             "strength": 1.0,
             "window_days": 60,
-            "evidence": "上升 0.24%/天 (60天)"
-          }
-        }
-      }
-    },
-    "structural_demand": {
-      "label": "结构性需求",
-      "signal": null,
-      "data": {}
-    },
-    "silver_specific": {
-      "label": "银价专用",
-      "signal": null,
-      "data": {
-        "gold_silver_ratio": {
-          "value": 63.19,
-          "source": "calc (gold/silver)",
-          "updated_at": "2026-06-09 17:23:31"
-        },
-        "gs_ratio_percentile": 2.3,
-        "signals": {
-          "short": {
-            "direction": "bullish",
-            "strength": 1.0,
-            "window_days": 5,
-            "evidence": "下降 5.47%/天 (5天)"
-          },
-          "mid": {
-            "direction": "bullish",
-            "strength": 1.0,
-            "window_days": 20,
-            "evidence": "下降 0.32%/天 (20天)"
-          },
-          "long": {
-            "direction": "bearish",
-            "strength": 1.0,
-            "window_days": 60,
-            "evidence": "上升 0.16%/天 (60天)"
+            "evidence": "上升 0.14%/天 (60天)"
           }
         }
       }
     }
   },
-  "events": [
-    {
-      "id": "Hot jobs report puts Fed cuts further ou...",
-      "title": "Hot jobs report puts Fed cuts further out of reach as Chair Warsh faces policy tests",
-      "summary": "Another big jobs report in May has swept aside the possibility of interest rate cuts anytime soon.",
-      "source": "cnbc_markets",
-      "detected_at": "",
-      "factor_tags": [
-        "opportunity_cost",
-        "safe_haven"
-      ],
-      "impact": null,
-      "expiry": null
-    },
-    {
-      "id": "Fed Chair Warsh makes first hires at cen...",
-      "title": "Fed Chair Warsh makes first hires at central bank, including 'Project 2025' author",
-      "summary": "The new Fed chair has made his first hires. One wrote the Fed chapter in the conservative policy blueprint \"Project 2025.\"",
-      "source": "cnbc_markets",
-      "detected_at": "",
-      "factor_tags": [
-        "opportunity_cost",
-        "safe_haven"
-      ],
-      "impact": null,
-      "expiry": null
-    },
-    {
-      "id": "Sen. Lisa Blunt Rochester: We have a hou...",
-      "title": "Sen. Lisa Blunt Rochester: We have a housing crisis in this country",
-      "summary": "Sen. Lisa Blunt Rochester (D-Del.) joins 'Squawk Box' to discuss her thoughts on Fed Chair Kevin Warsh, addressing the U.S. housing crisis, President Trump's decision to name Bill Pulte as acting DNI,",
-      "source": "cnbc_economy",
-      "detected_at": "",
-      "factor_tags": [
-        "opportunity_cost",
-        "safe_haven"
-      ],
-      "impact": null,
-      "expiry": null
-    },
-    {
-      "id": "Fed 政策路径跟踪...",
-      "title": "Fed 政策路径跟踪",
-      "summary": "",
-      "source": "news_rss",
-      "detected_at": "",
-      "factor_tags": [
-        "opportunity_cost",
-        "currency"
-      ],
-      "impact": null,
-      "expiry": null
-    },
-    {
-      "id": "经济数据日历...",
-      "title": "经济数据日历",
-      "summary": "",
-      "source": "news_rss",
-      "detected_at": "",
-      "factor_tags": [
-        "inflation",
-        "opportunity_cost",
-        "safe_haven"
-      ],
-      "impact": null,
-      "expiry": null
-    },
-    {
-      "id": "中东/伊朗局势...",
-      "title": "中东/伊朗局势",
-      "summary": "",
-      "source": "news_rss",
-      "detected_at": "",
-      "factor_tags": [
-        "safe_haven"
-      ],
-      "impact": null,
-      "expiry": null
-    }
-  ],
-  "technicals": {
-    "shfe_gold": {
-      "price": 947.04,
-      "volume": 190012.0,
-      "open_interest": 181455.0,
-      "ma20": 971.32,
-      "ma60": 978.13,
-      "ma200": 1005.11,
-      "rsi_14": 17.5,
-      "macd": {
-        "macd": -7.76,
-        "signal": -4.39,
-        "histogram": -3.37
-      },
-      "atr_14": 18.42,
-      "adx_14": 36.1,
-      "data_range": "2008-01-09 ~ 2026-06-09",
-      "data_rows": 31377
-    },
-    "shfe_silver": {
-      "price": 16458.0,
-      "volume": 602609.0,
-      "open_interest": 279277.0,
-      "ma20": 17575.0,
-      "ma60": 18007.18,
-      "ma200": 18808.41,
-      "rsi_14": 17.1,
-      "macd": {
-        "macd": -334.79,
-        "signal": -219.59,
-        "histogram": -115.2
-      },
-      "atr_14": 774.51,
-      "adx_14": 75.8,
-      "data_range": "2012-05-10 ~ 2026-06-09",
-      "data_rows": 23963
-    },
-    "spot_gold": {
-      "price": 4490.2,
-      "ma20": 4832.17,
-      "ma60": 4825.66,
-      "ma200": null,
-      "rsi_14": 31.7,
-      "macd": {
-        "macd": -45.57,
-        "signal": 3.25,
-        "histogram": -48.82
-      },
-      "atr_14": 112.04,
-      "adx_14": 15.5,
-      "data_range": "2026-01-01 ~ 2026-05-20",
-      "data_rows": 88
-    },
-    "spot_silver": {
-      "price": 75.68,
-      "ma20": 71.55,
-      "ma60": 72.61,
-      "ma200": null,
-      "rsi_14": 61.5,
-      "macd": {
-        "macd": 0.77,
-        "signal": 0.14,
-        "histogram": 0.62
-      },
-      "atr_14": 2.12,
-      "adx_14": 14.0,
-      "data_range": "2026-01-01 ~ 2026-05-20",
-      "data_rows": 88
-    }
-  },
+  "events": [],
   "summary": {}
 }

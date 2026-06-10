@@ -17,9 +17,9 @@ AKShare COMEX 金银期货采集器 — V1
   - gold_silver_ratio → 由 COMEX 金银价计算
 
 用法:
-    python -m collectors.akshare_futures                 # COMEX 金银
-    python -m collectors.akshare_futures gold            # 仅黄金
-    python -m collectors.akshare_futures subscribe       # 查看可订阅品种
+    python -m collectors.futures_sina                 # COMEX 金银
+    python -m collectors.futures_sina gold            # 仅黄金
+    python -m collectors.futures_sina subscribe       # 查看可订阅品种
 
 频率: 实时（建议 5-30 秒轮询）
 """
@@ -45,7 +45,7 @@ class AKShareFuturesCollector(BaseCollector):
     """COMEX 金银期货实时/日频采集器"""
 
     def __init__(self):
-        super().__init__("akshare_futures")
+        super().__init__("futures_sina")
 
     def collect(self) -> dict | None:
         """主采集入口 — 实时行情 + 日频历史"""
@@ -63,7 +63,7 @@ class AKShareFuturesCollector(BaseCollector):
             self.logger.error("COMEX 金银实时行情采集失败")
             return None
 
-        self.logger.info(f"✅ akshare_futures 完成")
+        self.logger.info(f"✅ futures_sina 完成")
         return {"snapshot": snapshot, "history": history or []}
 
     def collect_realtime(self) -> dict | None:

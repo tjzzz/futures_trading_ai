@@ -21,43 +21,61 @@ class CboeVix(BaseCollector):
     """CBOE VIX 日频"""
 
     def __init__(self):
-        super().__init__("cboe_vix")
+        super().__init__("vix")
 
     def collect(self) -> dict | None:
-        self.logger.info("=== cboe_vix start ===")
+        self.logger.info(f"=== {self.name} start ===")
+
+        # T-1 检查
+        hist_file = "data/history/daily/vix.csv"
+        if not self._needs_update(hist_file, max_stale_days=1):
+            self.logger.info("  vix: 数据已更新到 T-1，跳过")
+            return None
+
         try:
             r = requests.get(CBOE_VIX_URL, timeout=15)
             r.raise_for_status()
-            return self._parse(r.text)
+            return self._parse(r.text, hist_file)
         except requests.RequestException as e:
             self.logger.error(f"CBOE VIX 请求失败: {e}")
             return None
 
-    def _parse(self, raw: str) -> dict:
+    def _parse(self, raw: str, hist_file: str) -> dict:
         reader = csv.DictReader(io.StringIO(raw))
         rows = list(reader)
         if not rows:
             raise ValueError("VIX CSV 为空")
 
-        latest = rows[-1]
-        close = float(latest.get("CLOSE", 0))
-        date_str = latest.get("DATE", "").strip()
+        # 组装所有行为 dict 列表
+        all_rows = []
+        for r in rows:
+            d = r.get("DATE", "").strip()
+            if not d:
+                continue
+            try:
+                all_rows.append({"date": d, "close": float(r.get("CLOSE", 0))})
+            except (ValueError, TypeError):
+                continue
+
+        if not all_rows:
+            raise ValueError("VIX 无有效行")
+
+        latest = all_rows[-1]
+        self.logger.info(f"  vix: 全量 {len(all_rows)} 行，覆盖写入")
 
         return {
             "snapshot": {
                 "vix": {
-                    "value": close,
+                    "value": float(latest["close"]),
                     "source": "cboe",
-                    "as_of_date": date_str,
+                    "as_of_date": latest["date"],
                     "updated_at": self._now(),
                     "freshness": "前一交易日",
                 },
             },
             "history": [{
-                "file": "data/history/daily/vix.csv",
-                "row": {"date": date_str, "close": close},
-                "grain": "daily",
-            }],
+                "file": hist_file, "row": r, "grain": "daily", "mode": "overwrite",
+            } for r in all_rows],
         }
 
 

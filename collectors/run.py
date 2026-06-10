@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
-统一采集总管 — V2 (AKShare 主源重构)
+统一采集总管
 
-按依赖顺序执行所有采集器，统一合并 snapshot 和 history 写入。
+按依赖顺序执行所有采集器，统一合并 snapshot 写入。
 
 数据源状态（2026-06-09）:
-  【主源】AKShare 系列 → 新浪/华尔街见闻（东方财富和 Yahoo 均被封禁）
-  【兜底】FRED（SP500/DXY/原油/铜/TIPS）、U.S. Treasury（美债）、CBOE（VIX）、gold-api（金银）
-  【可选】yfinance（常 429/403，各指标已独立 fallback 覆盖）
-  【放弃】东方财富（push2his.eastmoney.com 封杀非浏览器请求）
+  【实时】新浪外盘期货（COMEX 金银）、gold-api（现货）、yfinance（兜底）
+  【日频】FRED（SP500/DXY/原油/铜/TIPS）、U.S. Treasury（美债）、CBOE（VIX）、Yahoo（金银日频）、新浪国内期货（沪金沪银）
+  【新闻】CNBC/MarketWatch RSS + 本地日历
+  【已放弃】AKShare 系列（东方财富被封禁，investing.com API 废弃）
 
 用法:
     python -m collectors.run                   # 全部运行（默认）
-    python -m collectors.run realtime          # 仅实时（akshare_futures + gold_api）
+    python -m collectors.run realtime          # 仅实时（futures_sina + spot_gold）
     python -m collectors.run daily             # 仅日频
     python -m collectors.run backfill          # 历史回填
 """
@@ -24,22 +24,23 @@ from collections import defaultdict
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-# ── 兜底采集器 ──
-import collectors.gold_api as gold_spot
-import collectors.yfinance_batch as yf_batch
-import collectors.treasuries as treas
-import collectors.fred as fred_collector
-import collectors.cboe_vix as cboe_vix
-import collectors.fallback as fallback
-import collectors.china_futures as china_fut
+import collectors.spot_gold as spot_gold
+import collectors.spot_daily as spot_daily
+import collectors.yfinance as yfinance
+import collectors.treasury as treasury
+import collectors.macro_tips as macro_tips
+import collectors.vix as vix_collector
+import collectors.macro_index as macro_index
+import collectors.macro_nfp as macro_nfp
+import collectors.futures_shfe as shfe_fut
 
 # ── 新闻管道（news/ 包）──
 import collectors.news.rss as rss_news
 import collectors.news.calendar as news_calendar
 import collectors.news.topics as news_topics
 
-# ── AKShare 主源 ──
-import collectors.akshare_futures as ak_futures
+# ── 主源：新浪外盘期货（COMEX 金银）──
+import collectors.futures_sina as sina_fut
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SNAPSHOT_FILE = PROJECT_ROOT / "data/current/dashboard_data.json"
@@ -53,8 +54,6 @@ LOG_DIR.mkdir(parents=True, exist_ok=True)
 #  后端频控配置
 # ══════════════════════════════════════════════════════════════
 
-# 各后端最小请求间隔（秒）
-# 超出此频率会被后端限流（HTTP 429 / 断开连接）
 BACKEND_INTERVAL = {
     "sina":          0.5,    # 新浪财经 — 几乎无限制，秒级轮询可用
     "shmet":         1.0,    # 上海金属网 — 宽松
@@ -72,20 +71,21 @@ BACKEND_INTERVAL = {
 
 # 每个采集器对应的后端（按最严格的后端标明）
 COLLECTOR_BACKEND = {
-    "akshare_futures": "sina",
-    "gold_spot":       "goldapi",
-    "yfinance_batch":  "yfinance",
-    "treasuries":      "ustreasury",
-    "fred":            "fred",
-    "cboe_vix":        "cboe",
-    "fallback":        "fred",
-    "china_futures":   "sina",
-    "news_rss":        "rss",
-    "news_calendar":   "local",
-    "news_topics":     "local",
+    "futures_sina":   "sina",
+    "spot_gold":      "goldapi",
+    "spot_daily":     "yfinance",
+    "yfinance":       "yfinance",
+    "treasury":       "ustreasury",
+    "macro_tips":     "fred",
+    "macro_nfp":      "fred",
+    "vix":            "cboe",
+    "macro_index":    "fred",
+    "futures_shfe":   "sina",
+    "news_rss":       "rss",
+    "news_calendar":  "local",
+    "news_topics":    "local",
 }
 
-# 上次调用时间记录（按后端）
 _last_call_time: dict[str, float] = defaultdict(float)
 
 
@@ -125,20 +125,35 @@ def _safe_write_snapshot(updates: dict):
 
 
 def _safe_write_history(history: list):
-    """追加写入历史 CSV"""
+    """追加/覆盖写入历史 CSV"""
     import csv
+    # 按文件分组（收集所有 mode="overwrite" 文件的行，先清空再写）
+    file_groups: dict = {}
     for h in history:
-        file_path = PROJECT_ROOT / h["file"]
-        row = h["row"]
-        grain = h.get("grain", "daily")
+        fp = str(PROJECT_ROOT / h["file"])
+        if fp not in file_groups:
+            file_groups[fp] = {"rows": [], "mode": "a"}
+        file_groups[fp]["rows"].append(h["row"])
+        if h.get("mode") == "overwrite":
+            file_groups[fp]["mode"] = "w"
+
+    for fp_str, group in file_groups.items():
+        file_path = Path(fp_str)
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        exists = file_path.exists()
+        mode = group["mode"]
+        rows = group["rows"]
+        if not rows:
+            continue
         try:
-            with open(file_path, "a", newline="", encoding="utf-8") as f:
-                writer = csv.DictWriter(f, fieldnames=list(row.keys()))
-                if not exists:
+            with open(file_path, mode, newline="", encoding="utf-8") as f:
+                writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+                if mode == "w":
                     writer.writeheader()
-                writer.writerow(row)
+                for row in rows:
+                    writer.writerow(row)
+            if mode == "w":
+                file_label = file_path.name
+                _log(f"  ✏️ {file_label}: 覆盖写入 {len(rows)} 行")
         except Exception as e:
             _log(f"  ⚠️ 历史写入失败 {file_path.name}: {e}")
 
@@ -149,13 +164,10 @@ def _run_collector(name: str, collector_func, snapshot: bool = True, history: bo
     _log(f"采集: {name}")
     t0 = time.time()
     try:
-        # 后端频控
         backend = COLLECTOR_BACKEND.get(name, "local")
         _rate_limit(backend)
 
         result = collector_func()
-
-        # 记录本次调用时间（频控用）
         _last_call_time[backend] = time.time()
 
         if result is None:
@@ -184,36 +196,40 @@ def _run_collector(name: str, collector_func, snapshot: bool = True, history: bo
 
 # ══════════════════════════════════════════════════════════════
 #  采集器定义
-#  格式: (名称, 采集函数, 写snapshot, 写history, 可跳过)
-#  后端映射见 COLLECTOR_BACKEND 字典
 # ══════════════════════════════════════════════════════════════
 
 REALTIME_COLLECTORS = [
-    # ── 主源：COMEX 金银实时（新浪外盘期货，秒级刷新，频控宽松）──
-    ("akshare_futures",     lambda: ak_futures.AKShareFuturesCollector().collect_realtime(), True, True, False),
+    # ── 主源：COMEX 金银实时（新浪外盘期货，秒级刷新）──
+    ("futures_sina",        lambda: sina_fut.AKShareFuturesCollector().collect_realtime(), True, True, False),
 
-    # ── 兜底：gold-api 现货验证（频控宽松）──
-    ("gold_spot",           lambda: gold_spot.GoldSpot().collect(), True, True, True),
+    # ── 兜底：gold-api 现货验证 ──
+    ("spot_gold",           lambda: spot_gold.GoldSpot().collect(), True, True, True),
 
-    # ── 兜底：yfinance（常被 429，跳过不影响，各指标有独立 fallback）──
-    ("yfinance_batch",      lambda: yf_batch.YFinanceBatch().collect(), True, True, True),
+    # ── 兜底：yfinance（常 429，跳过不影响）──
+    ("yfinance",            lambda: yfinance.YFinanceBatch().collect(), True, True, True),
 ]
 
 DAILY_COLLECTORS = [
-    # ── 兜底：U.S. Treasury（收益率）──
-    ("treasuries",          lambda: treas.Treasuries().collect(), True, True, True),
+    # ── 兜底：U.S. Treasury 美债收益率 ──
+    ("treasury",            lambda: treasury.Treasuries().collect(), True, True, True),
 
-    # ── 兜底：FRED（TIPS/CPI/PCE/信用利差）──
-    ("fred",                lambda: fred_collector.FredCollector().collect(), True, True, False),
+    # ── 兜底：FRED 宏观（TIPS/CPI/PCE/信用利差）──
+    ("macro_tips",          lambda: macro_tips.FredCollector().collect(), True, True, False),
 
-    # ── 兜底：CBOE VIX（日频，写 vix 键）──
-    ("cboe_vix",            lambda: cboe_vix.CboeVix().collect(), True, True, True),
+    # ── FRED 非农就业（PAYEMS）──
+    ("macro_nfp",           lambda: macro_nfp.NfpCollector().collect(), True, True, True),
 
-    # ── 兜底：FRED（SP500/DXY/原油/铜/汇率）──
-    ("fallback",            lambda: fallback.FallbackCollector().collect(), True, True, True),
+    # ── 兜底：CBOE VIX ──
+    ("vix",                 lambda: vix_collector.CboeVix().collect(), True, True, True),
 
-    # ── 国内期货：AKShare/新浪（沪金沪银独立源）──
-    ("china_futures",       lambda: china_fut.ChinaFuturesCollector().v1_collect(), True, True, False),
+    # ── 兜底：FRED 指数（SP500/DXY/原油/铜/汇率）──
+    ("macro_index",         lambda: macro_index.FallbackCollector().collect(), True, True, True),
+
+    # ── 日频：金银现货（Yahoo GLD/SLV → daily CSV）──
+    ("spot_daily",          lambda: spot_daily.SpotDailyCollector().collect(), False, False, True),
+
+    # ── 上期所沪金沪银（新浪国内期货）──
+    ("futures_shfe",        lambda: shfe_fut.ChinaFuturesCollector().v1_collect(), True, True, False),
 
     # ── 新闻管道：RSS → 日历 → 事件汇聚 ──
     ("news_rss",            lambda: rss_news.main(), True, False, True),
@@ -225,7 +241,7 @@ DAILY_COLLECTORS = [
 def run_all():
     """执行全部采集器"""
     _log("=" * 50)
-    _log("V2 全面数据采集（AKShare 主源）")
+    _log("V2 全面数据采集（兜底优先）")
     _log("=" * 50)
 
     ok = 0
@@ -253,7 +269,7 @@ def run_all():
 
 def run_realtime():
     """仅实时采集"""
-    _log("── 实时采集（主源: akshare_futures | 兜底: gold-api, yfinance）──")
+    _log("── 实时采集（futures_sina, spot_gold, yfinance）──")
     for name, fn, snap, hist, skip in REALTIME_COLLECTORS:
         _run_collector(name, fn, snap, hist, skip_on_fail=skip)
 
@@ -274,7 +290,7 @@ def run_backfill():
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="V2 统一数据采集总管 (AKShare 主源)")
+    parser = argparse.ArgumentParser(description="V2 统一数据采集总管")
     parser.add_argument("mode", nargs="?", default="all",
                         choices=["all", "realtime", "daily", "backfill"],
                         help="all=全部, realtime=仅实时, daily=仅日频, backfill=历史回填")

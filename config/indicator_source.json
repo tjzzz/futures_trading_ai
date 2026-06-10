@@ -1,307 +1,621 @@
 {
   "version": "3.0",
   "updated_at": "2026-06-08",
-
   "description": "指标定义统一注册表（V1）—— 所有模块从此处读取指标映射、数据源、存储路径和展示配置。按采集源分组：gold-api / yahoo-finance / ustreasury / fred / cboe-vix / akshare / rss",
-
   "indicators": {
     "gold": {
       "name": "黄金",
       "name_en": "Gold",
       "category": "precious_metal",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.gold_api"],
+      "collectors": [
+        "collectors.gold_api"
+      ],
       "files": {
         "snapshot_key": "gold_price",
-        "minutely": { "file": "gold_silver_minutely.csv", "field": "gold_usd" },
-        "daily": { "file": "gold_silver_daily.csv", "field": "gold_close" }
+        "daily": {
+          "file": "gold_silver_daily.csv",
+          "field": "gold_close"
+        }
       },
-      "display": { "icon": "G", "color": "#f59e0b", "group": 1, "unit": "USD/oz", "precision": 2 },
+      "display": {
+        "icon": "G",
+        "color": "#f59e0b",
+        "group": 1,
+        "unit": "USD/oz",
+        "precision": 2
+      },
       "thresholds": null
     },
     "silver": {
       "name": "白银",
       "name_en": "Silver",
       "category": "precious_metal",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.gold_api"],
+      "collectors": [
+        "collectors.gold_api"
+      ],
       "files": {
         "snapshot_key": "silver_price",
-        "minutely": { "file": "gold_silver_minutely.csv", "field": "silver_usd" },
-        "daily": { "file": "gold_silver_daily.csv", "field": "silver_close" }
+        "daily": {
+          "file": "gold_silver_daily.csv",
+          "field": "silver_close"
+        }
       },
-      "display": { "icon": "S", "color": "#14b8a6", "group": 1, "unit": "USD/oz", "precision": 2 },
+      "display": {
+        "icon": "S",
+        "color": "#14b8a6",
+        "group": 1,
+        "unit": "USD/oz",
+        "precision": 2
+      },
       "thresholds": null
     },
     "ratio": {
       "name": "金银比",
       "name_en": "Gold/Silver Ratio",
       "category": "derived",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.gold_api"],
+      "collectors": [
+        "collectors.gold_api"
+      ],
       "files": {
         "snapshot_key": "gold_silver_ratio",
-        "minutely": { "file": "gold_silver_minutely.csv", "field": "ratio" },
-        "daily": { "file": "gold_silver_daily.csv", "field": "ratio_close" }
+        "daily": {
+          "file": "gold_silver_daily.csv",
+          "field": "ratio_close"
+        }
       },
-      "display": { "icon": "R", "color": "#a855f7", "group": 2, "unit": "", "precision": 2 },
-      "thresholds": { "warning": 80, "critical": 85 }
+      "display": {
+        "icon": "R",
+        "color": "#a855f7",
+        "group": 2,
+        "unit": "",
+        "precision": 2
+      },
+      "thresholds": {
+        "warning": 80,
+        "critical": 85
+      }
     },
     "gold_futures": {
       "name": "黄金期货",
       "name_en": "Gold Futures",
       "category": "precious_metal",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": "GC=F",
-      "collectors": ["collectors.yfinance_batch"],
-      "files": { "snapshot_key": "gold_futures", "minutely": { "file": "yfinance_minutely.csv", "field": "gold_futures" } },
-      "display": { "icon": "GF", "color": "#f59e0b", "group": 1, "unit": "USD/oz", "precision": 2 },
+      "collectors": [
+        "collectors.yfinance_batch"
+      ],
+      "files": {
+        "snapshot_key": "gold_futures"
+      },
+      "display": {
+        "icon": "GF",
+        "color": "#f59e0b",
+        "group": 1,
+        "unit": "USD/oz",
+        "precision": 2
+      },
       "thresholds": null
     },
     "silver_futures": {
       "name": "白银期货",
       "name_en": "Silver Futures",
       "category": "precious_metal",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": "SI=F",
-      "collectors": ["collectors.yfinance_batch"],
-      "files": { "snapshot_key": "silver_futures", "minutely": { "file": "yfinance_minutely.csv", "field": "silver_futures" } },
-      "display": { "icon": "SF", "color": "#14b8a6", "group": 1, "unit": "USD/oz", "precision": 2 },
+      "collectors": [
+        "collectors.yfinance_batch"
+      ],
+      "files": {
+        "snapshot_key": "silver_futures"
+      },
+      "display": {
+        "icon": "SF",
+        "color": "#14b8a6",
+        "group": 1,
+        "unit": "USD/oz",
+        "precision": 2
+      },
       "thresholds": null
     },
     "oil_wti": {
       "name": "WTI原油",
       "name_en": "WTI Crude Oil",
       "category": "commodity",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": "CL=F",
-      "collectors": ["collectors.yfinance_batch"],
-      "files": { "snapshot_key": "oil_wti", "minutely": { "file": "yfinance_minutely.csv", "field": "oil_wti" } },
-      "display": { "icon": "CL", "color": "#1e293b", "group": 5, "unit": "USD/bbl", "precision": 2 },
+      "collectors": [
+        "collectors.yfinance_batch"
+      ],
+      "files": {
+        "snapshot_key": "oil_wti"
+      },
+      "display": {
+        "icon": "CL",
+        "color": "#1e293b",
+        "group": 5,
+        "unit": "USD/bbl",
+        "precision": 2
+      },
       "thresholds": null
     },
     "oil_brent": {
       "name": "布伦特原油",
       "name_en": "Brent Crude Oil",
       "category": "commodity",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": "BZ=F",
-      "collectors": ["collectors.yfinance_batch"],
-      "files": { "snapshot_key": "oil_brent", "minutely": { "file": "yfinance_minutely.csv", "field": "oil_brent" } },
-      "display": { "icon": "BR", "color": "#334155", "group": 5, "unit": "USD/bbl", "precision": 2 },
+      "collectors": [
+        "collectors.yfinance_batch"
+      ],
+      "files": {
+        "snapshot_key": "oil_brent"
+      },
+      "display": {
+        "icon": "BR",
+        "color": "#334155",
+        "group": 5,
+        "unit": "USD/bbl",
+        "precision": 2
+      },
       "thresholds": null
     },
     "copper": {
       "name": "铜期货",
       "name_en": "Copper Futures",
       "category": "commodity",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": "HG=F",
-      "collectors": ["collectors.yfinance_batch"],
-      "files": { "snapshot_key": "copper", "minutely": { "file": "yfinance_minutely.csv", "field": "copper" } },
-      "display": { "icon": "CU", "color": "#d97706", "group": 5, "unit": "USD/lb", "precision": 4 },
+      "collectors": [
+        "collectors.yfinance_batch"
+      ],
+      "files": {
+        "snapshot_key": "copper"
+      },
+      "display": {
+        "icon": "CU",
+        "color": "#d97706",
+        "group": 5,
+        "unit": "USD/lb",
+        "precision": 4
+      },
       "thresholds": null
     },
     "dxy": {
       "name": "美元指数",
       "name_en": "USD Index",
       "category": "macro",
-      "quadrant": ["green"],
+      "quadrant": [
+        "green"
+      ],
       "yahoo_symbol": "DX-Y.NYB",
-      "collectors": ["collectors.yfinance_batch"],
+      "collectors": [
+        "collectors.yfinance_batch"
+      ],
       "files": {
         "snapshot_key": "dxy",
-        "daily": { "file": "dxy.csv", "field": "value" },
-        "minutely": { "file": "yfinance_minutely.csv", "field": "dxy" }
+        "daily": {
+          "file": "dxy.csv",
+          "field": "value"
+        }
       },
-      "display": { "icon": "$", "color": "#3b82f6", "group": 3, "unit": "", "precision": 3 },
+      "display": {
+        "icon": "$",
+        "color": "#3b82f6",
+        "group": 3,
+        "unit": "",
+        "precision": 3
+      },
       "thresholds": null
     },
     "treasury_10y": {
       "name": "10Y美债收益率",
       "name_en": "US 10Y Treasury Yield",
       "category": "macro",
-      "quadrant": ["green"],
+      "quadrant": [
+        "green"
+      ],
       "yahoo_symbol": "^TNX",
-      "collectors": ["collectors.yfinance_batch", "collectors.treasuries"],
+      "collectors": [
+        "collectors.yfinance_batch",
+        "collectors.treasuries"
+      ],
       "files": {
         "snapshot_key": "treasury_10y",
-        "daily": { "file": "treasury.csv", "field": "10yr" },
-        "minutely": { "file": "yfinance_minutely.csv", "field": "us10y" }
+        "daily": {
+          "file": "treasury.csv",
+          "field": "10yr"
+        }
       },
-      "display": { "icon": "B", "color": "#ef4444", "group": 3, "unit": "%", "precision": 3 },
-      "thresholds": { "warning": 4.5, "critical": 5.0 }
+      "display": {
+        "icon": "B",
+        "color": "#ef4444",
+        "group": 3,
+        "unit": "%",
+        "precision": 3
+      },
+      "thresholds": {
+        "warning": 4.5,
+        "critical": 5.0
+      }
     },
     "treasury_2y": {
       "name": "2Y美债收益率",
       "name_en": "US 2Y Treasury Yield",
       "category": "macro",
-      "quadrant": ["blue"],
+      "quadrant": [
+        "blue"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.treasuries"],
-      "files": { "daily": { "file": "treasury.csv", "field": "2yr" } },
-      "display": { "icon": "2Y", "color": "#f97316", "group": 3, "unit": "%", "precision": 3 },
+      "collectors": [
+        "collectors.treasuries"
+      ],
+      "files": {
+        "daily": {
+          "file": "treasury.csv",
+          "field": "2yr"
+        }
+      },
+      "display": {
+        "icon": "2Y",
+        "color": "#f97316",
+        "group": 3,
+        "unit": "%",
+        "precision": 3
+      },
       "thresholds": null
     },
     "treasury_30y": {
       "name": "30Y美债收益率",
       "name_en": "US 30Y Treasury Yield",
       "category": "macro",
-      "quadrant": ["green"],
+      "quadrant": [
+        "green"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.treasuries"],
-      "files": { "daily": { "file": "treasury.csv", "field": "30yr" } },
-      "display": { "icon": "30Y", "color": "#dc2626", "group": 3, "unit": "%", "precision": 3 },
+      "collectors": [
+        "collectors.treasuries"
+      ],
+      "files": {
+        "daily": {
+          "file": "treasury.csv",
+          "field": "30yr"
+        }
+      },
+      "display": {
+        "icon": "30Y",
+        "color": "#dc2626",
+        "group": 3,
+        "unit": "%",
+        "precision": 3
+      },
       "thresholds": null
     },
     "tips_10y": {
       "name": "10Y实际利率(TIPS)",
       "name_en": "10Y TIPS Yield",
       "category": "macro",
-      "quadrant": ["blue"],
+      "quadrant": [
+        "blue"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.fred"],
-      "files": { "snapshot_key": "tips_10y", "daily": { "file": "tips.csv", "field": "value" } },
-      "display": { "icon": "TI", "color": "#6366f1", "group": 3, "unit": "%", "precision": 2 },
+      "collectors": [
+        "collectors.fred"
+      ],
+      "files": {
+        "snapshot_key": "tips_10y",
+        "daily": {
+          "file": "tips.csv",
+          "field": "value"
+        }
+      },
+      "display": {
+        "icon": "TI",
+        "color": "#6366f1",
+        "group": 3,
+        "unit": "%",
+        "precision": 2
+      },
       "thresholds": null
     },
     "vix": {
       "name": "VIX恐慌指数",
       "name_en": "CBOE Volatility Index",
       "category": "sentiment",
-      "quadrant": ["orange"],
+      "quadrant": [
+        "orange"
+      ],
       "yahoo_symbol": "^VIX",
-      "collectors": ["collectors.yfinance_batch", "collectors.cboe_vix"],
+      "collectors": [
+        "collectors.yfinance_batch",
+        "collectors.cboe_vix"
+      ],
       "files": {
         "snapshot_key": "vix",
-        "daily": { "file": "vix.csv", "field": "close" },
-        "minutely": { "file": "yfinance_minutely.csv", "field": "vix" }
+        "daily": {
+          "file": "vix.csv",
+          "field": "close"
+        }
       },
-      "display": { "icon": "V", "color": "#ef4444", "group": 4, "unit": "", "precision": 2 },
-      "thresholds": { "warning": 20, "critical": 25 }
+      "display": {
+        "icon": "V",
+        "color": "#ef4444",
+        "group": 4,
+        "unit": "",
+        "precision": 2
+      },
+      "thresholds": {
+        "warning": 20,
+        "critical": 25
+      }
     },
     "gld_holdings": {
       "name": "GLD ETF持仓",
       "name_en": "SPDR Gold Trust Holdings",
       "category": "sentiment",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": "GLD",
-      "collectors": ["collectors.yfinance_batch"],
-      "files": { "snapshot_key": "gld_holdings", "minutely": { "file": "yfinance_minutely.csv", "field": "gld_holdings" } },
-      "display": { "icon": "GLD", "color": "#f59e0b", "group": 4, "unit": "USD", "precision": 2 },
+      "collectors": [
+        "collectors.yfinance_batch"
+      ],
+      "files": {
+        "snapshot_key": "gld_holdings"
+      },
+      "display": {
+        "icon": "GLD",
+        "color": "#f59e0b",
+        "group": 4,
+        "unit": "USD",
+        "precision": 2
+      },
       "thresholds": null
     },
     "slv_holdings": {
       "name": "SLV ETF持仓",
       "name_en": "iShares Silver Trust Holdings",
       "category": "sentiment",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": "SLV",
-      "collectors": ["collectors.yfinance_batch"],
-      "files": { "snapshot_key": "slv_holdings", "minutely": { "file": "yfinance_minutely.csv", "field": "slv_holdings" } },
-      "display": { "icon": "SLV", "color": "#14b8a6", "group": 4, "unit": "USD", "precision": 2 },
+      "collectors": [
+        "collectors.yfinance_batch"
+      ],
+      "files": {
+        "snapshot_key": "slv_holdings"
+      },
+      "display": {
+        "icon": "SLV",
+        "color": "#14b8a6",
+        "group": 4,
+        "unit": "USD",
+        "precision": 2
+      },
       "thresholds": null
     },
     "fedwatch_prob": {
       "name": "FedWatch利率概率",
       "name_en": "CME FedWatch Rate Probabilities",
       "category": "derived",
-      "quadrant": ["blue"],
+      "quadrant": [
+        "blue"
+      ],
       "yahoo_symbol": "FF=F",
-      "collectors": ["collectors.yfinance_batch"],
-      "files": { "snapshot_key": "fedwatch_prob", "minutely": { "file": "yfinance_minutely.csv", "field": "fedfunds" } },
-      "display": { "icon": "FW", "color": "#8b5cf6", "group": 3, "unit": "%", "precision": 1 },
+      "collectors": [
+        "collectors.yfinance_batch"
+      ],
+      "files": {
+        "snapshot_key": "fedwatch_prob"
+      },
+      "display": {
+        "icon": "FW",
+        "color": "#8b5cf6",
+        "group": 3,
+        "unit": "%",
+        "precision": 1
+      },
       "thresholds": null
     },
     "shfe_gold": {
       "name": "沪金",
       "name_en": "SHFE Gold Futures",
       "category": "precious_metal",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.china_futures"],
+      "collectors": [
+        "collectors.china_futures"
+      ],
       "files": {
         "snapshot_key": "shfe_gold",
-        "daily": { "file": "china_futures.csv", "field": "au_close" }
+        "daily": {
+          "file": "china_futures.csv",
+          "field": "au_close"
+        }
       },
-      "display": { "icon": "AU", "color": "#f59e0b", "group": 1, "unit": "CNY/g", "precision": 2 },
+      "display": {
+        "icon": "AU",
+        "color": "#f59e0b",
+        "group": 1,
+        "unit": "CNY/g",
+        "precision": 2
+      },
       "thresholds": null
     },
     "shfe_silver": {
       "name": "沪银",
       "name_en": "SHFE Silver Futures",
       "category": "precious_metal",
-      "quadrant": ["red"],
+      "quadrant": [
+        "red"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.china_futures"],
+      "collectors": [
+        "collectors.china_futures"
+      ],
       "files": {
         "snapshot_key": "shfe_silver",
-        "daily": { "file": "china_futures.csv", "field": "ag_close" }
+        "daily": {
+          "file": "china_futures.csv",
+          "field": "ag_close"
+        }
       },
-      "display": { "icon": "AG", "color": "#14b8a6", "group": 1, "unit": "CNY/kg", "precision": 2 },
+      "display": {
+        "icon": "AG",
+        "color": "#14b8a6",
+        "group": 1,
+        "unit": "CNY/kg",
+        "precision": 2
+      },
       "thresholds": null
     },
     "cpi_yoy": {
       "name": "CPI 同比",
       "name_en": "CPI YoY",
       "category": "macro",
-      "quadrant": ["blue"],
+      "quadrant": [
+        "blue"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.fred"],
-      "files": { "snapshot_key": "cpi_yoy", "daily": { "file": "cpi.csv", "field": "value" } },
-      "display": { "icon": "CPI", "color": "#ef4444", "group": 3, "unit": "%", "precision": 2 },
+      "collectors": [
+        "collectors.fred"
+      ],
+      "files": {
+        "snapshot_key": "cpi_yoy",
+        "daily": {
+          "file": "cpi.csv",
+          "field": "value"
+        }
+      },
+      "display": {
+        "icon": "CPI",
+        "color": "#ef4444",
+        "group": 3,
+        "unit": "%",
+        "precision": 2
+      },
       "thresholds": null
     },
     "pce_core": {
       "name": "核心 PCE",
       "name_en": "Core PCE",
       "category": "macro",
-      "quadrant": ["blue"],
+      "quadrant": [
+        "blue"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.fred"],
-      "files": { "snapshot_key": "pce_core", "daily": { "file": "pce_core.csv", "field": "value" } },
-      "display": { "icon": "PCE", "color": "#dc2626", "group": 3, "unit": "%", "precision": 2 },
+      "collectors": [
+        "collectors.fred"
+      ],
+      "files": {
+        "snapshot_key": "pce_core",
+        "daily": {
+          "file": "pce_core.csv",
+          "field": "value"
+        }
+      },
+      "display": {
+        "icon": "PCE",
+        "color": "#dc2626",
+        "group": 3,
+        "unit": "%",
+        "precision": 2
+      },
       "thresholds": null
     },
     "credit_spread": {
       "name": "高收益信用利差",
       "name_en": "HY Credit Spread",
       "category": "sentiment",
-      "quadrant": ["orange"],
+      "quadrant": [
+        "orange"
+      ],
       "yahoo_symbol": null,
-      "collectors": ["collectors.fred"],
-      "files": { "snapshot_key": "credit_spread", "daily": { "file": "credit_hy.csv", "field": "value" } },
-      "display": { "icon": "CS", "color": "#dc2626", "group": 4, "unit": "%", "precision": 2 },
+      "collectors": [
+        "collectors.fred"
+      ],
+      "files": {
+        "snapshot_key": "credit_spread",
+        "daily": {
+          "file": "credit_hy.csv",
+          "field": "value"
+        }
+      },
+      "display": {
+        "icon": "CS",
+        "color": "#dc2626",
+        "group": 4,
+        "unit": "%",
+        "precision": 2
+      },
       "thresholds": null
     },
     "usdcnh": {
       "name": "USD/CNH",
       "name_en": "USD/CNH",
       "category": "macro",
-      "quadrant": ["green"],
+      "quadrant": [
+        "green"
+      ],
       "yahoo_symbol": "USDCNY=X",
-      "collectors": ["collectors.yfinance_batch"],
-      "files": { "snapshot_key": "usdcnh", "minutely": { "file": "yfinance_minutely.csv", "field": "usdcnh" } },
-      "display": { "icon": "CN", "color": "#2563eb", "group": 3, "unit": "", "precision": 4 },
+      "collectors": [
+        "collectors.yfinance_batch"
+      ],
+      "files": {
+        "snapshot_key": "usdcnh"
+      },
+      "display": {
+        "icon": "CN",
+        "color": "#2563eb",
+        "group": 3,
+        "unit": "",
+        "precision": 4
+      },
       "thresholds": null
     }
   },
-
   "collectors": {
     "collectors.gold_api": {
       "name": "金银现货采集器",
       "module": "collectors.gold_api",
       "frequency_minutes": 5,
       "data_source": "gold-api.com",
-      "indicators": ["gold", "silver", "ratio"],
+      "indicators": [
+        "gold",
+        "silver",
+        "ratio"
+      ],
       "url": "https://api.gold-api.com/price/{symbol}",
       "output": {
-        "snapshot_keys": ["gold_price", "silver_price", "gold_silver_ratio"],
-        "minutely_file": "gold_silver_minutely.csv",
-        "minutely_fields": ["gold_usd", "silver_usd", "ratio"]
+        "snapshot_keys": [
+          "gold_price",
+          "silver_price",
+          "gold_silver_ratio"
+        ]
       }
     },
     "collectors.yfinance_batch": {
@@ -309,11 +623,36 @@
       "module": "collectors.yfinance_batch",
       "frequency_minutes": 5,
       "data_source": "yahoo-finance",
-      "indicators": ["dxy", "treasury_10y", "vix", "gold_futures", "silver_futures", "oil_wti", "oil_brent", "copper", "gld_holdings", "slv_holdings", "usdcnh", "fedwatch_prob"],
+      "indicators": [
+        "dxy",
+        "treasury_10y",
+        "vix",
+        "gold_futures",
+        "silver_futures",
+        "oil_wti",
+        "oil_brent",
+        "copper",
+        "gld_holdings",
+        "slv_holdings",
+        "usdcnh",
+        "fedwatch_prob"
+      ],
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}",
       "output": {
-        "snapshot_keys": ["dxy", "treasury_10y", "vix", "gold_futures", "silver_futures", "oil_wti", "oil_brent", "copper", "gld_holdings", "slv_holdings", "usdcnh", "fedwatch_prob"],
-        "minutely_file": "yfinance_minutely.csv"
+        "snapshot_keys": [
+          "dxy",
+          "treasury_10y",
+          "vix",
+          "gold_futures",
+          "silver_futures",
+          "oil_wti",
+          "oil_brent",
+          "copper",
+          "gld_holdings",
+          "slv_holdings",
+          "usdcnh",
+          "fedwatch_prob"
+        ]
       }
     },
     "collectors.treasuries": {
@@ -321,12 +660,23 @@
       "module": "collectors.treasuries",
       "frequency_minutes": 1440,
       "data_source": "ustreasury",
-      "indicators": ["treasury_10y", "treasury_2y", "treasury_30y"],
+      "indicators": [
+        "treasury_10y",
+        "treasury_2y",
+        "treasury_30y"
+      ],
       "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all",
       "output": {
-        "snapshot_keys": ["treasury", "treasury_10y"],
+        "snapshot_keys": [
+          "treasury",
+          "treasury_10y"
+        ],
         "daily_file": "treasury.csv",
-        "daily_fields": ["10yr", "2yr", "30yr"]
+        "daily_fields": [
+          "10yr",
+          "2yr",
+          "30yr"
+        ]
       }
     },
     "collectors.fred": {
@@ -334,15 +684,37 @@
       "module": "collectors.fred",
       "frequency_minutes": 1440,
       "data_source": "fred",
-      "indicators": ["tips_10y", "cpi_yoy", "pce_core", "credit_spread"],
+      "indicators": [
+        "tips_10y",
+        "cpi_yoy",
+        "pce_core",
+        "credit_spread"
+      ],
       "url": "https://fred.stlouisfed.org/",
       "output": {
-        "snapshot_keys": ["tips_10y", "cpi_yoy", "pce_core", "credit_spread"],
+        "snapshot_keys": [
+          "tips_10y",
+          "cpi_yoy",
+          "pce_core",
+          "credit_spread"
+        ],
         "daily_files": {
-          "tips": { "file": "tips.csv", "field": "value" },
-          "cpi": { "file": "cpi.csv", "field": "value" },
-          "pce": { "file": "pce_core.csv", "field": "value" },
-          "credit_hy": { "file": "credit_hy.csv", "field": "value" }
+          "tips": {
+            "file": "tips.csv",
+            "field": "value"
+          },
+          "cpi": {
+            "file": "cpi.csv",
+            "field": "value"
+          },
+          "pce": {
+            "file": "pce_core.csv",
+            "field": "value"
+          },
+          "credit_hy": {
+            "file": "credit_hy.csv",
+            "field": "value"
+          }
         }
       }
     },
@@ -351,10 +723,14 @@
       "module": "collectors.cboe_vix",
       "frequency_minutes": 1440,
       "data_source": "cboe-vix",
-      "indicators": ["vix"],
+      "indicators": [
+        "vix"
+      ],
       "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv",
       "output": {
-        "snapshot_keys": ["vix_daily"],
+        "snapshot_keys": [
+          "vix_daily"
+        ],
         "daily_file": "vix.csv"
       }
     },
@@ -363,7 +739,12 @@
       "module": "collectors.fallback",
       "frequency_minutes": 1440,
       "data_source": "fred|exchangerate-api",
-      "indicators": ["oil_wti", "oil_brent", "copper", "usdcnh"],
+      "indicators": [
+        "oil_wti",
+        "oil_brent",
+        "copper",
+        "usdcnh"
+      ],
       "notes": "当 Yahoo Finance 限流时补缺。FRED 日频原油/月度铜，ExchangeRate-API 每日 USD/CNY"
     },
     "collectors.china_futures": {
@@ -371,7 +752,10 @@
       "module": "collectors.china_futures",
       "frequency_minutes": 1440,
       "data_source": "akshare-sina",
-      "indicators": ["shfe_gold", "shfe_silver"],
+      "indicators": [
+        "shfe_gold",
+        "shfe_silver"
+      ],
       "notes": "免费，无需 API Key，日频 OHLC + 持仓量"
     },
     "collectors.news_rss": {
@@ -386,10 +770,12 @@
         "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",
         "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000115"
       ],
-      "output": { "feed_file": "latest_feed.json", "events_file": "event_tracker.json" }
+      "output": {
+        "feed_file": "latest_feed.json",
+        "events_file": "event_tracker.json"
+      }
     }
   },
-
   "sources": [
     {
       "id": "gold-api",

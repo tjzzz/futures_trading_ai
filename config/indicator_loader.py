@@ -37,7 +37,6 @@ logger = logging.getLogger("indicator_loader")
 _SOURCE_FILE = Path(__file__).resolve().parent / "indicator_source.json"
 _DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 _DAILY_DIR = _DATA_DIR / "history" / "daily"
-_MINUTELY_DIR = _DATA_DIR / "history" / "minutely"
 
 
 class IndicatorLoader:
@@ -141,14 +140,6 @@ class IndicatorLoader:
 
     # ── 路径辅助 ──
 
-    def minutely_path(self, indicator_id: str) -> Optional[Path]:
-        """指标对应的分钟级 CSV 完整路径"""
-        f = self.get(indicator_id)
-        if not f:
-            return None
-        file = f.get("files", {}).get("minutely", {}).get("file")
-        return _MINUTELY_DIR / file if file else None
-
     def daily_path(self, indicator_id: str) -> Optional[Path]:
         """指标对应的日频 CSV 完整路径"""
         f = self.get(indicator_id)
@@ -185,7 +176,6 @@ class IndicatorLoader:
                     "unit": d.get("unit"),
                     "precision": d.get("precision"),
                 },
-                "has_minutely": "minutely" in ind.get("files", {}),
                 "has_daily": "daily" in ind.get("files", {}),
             }
         return {"indicators": out}

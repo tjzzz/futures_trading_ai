@@ -17,12 +17,12 @@ class GoldSpot(BaseCollector):
     """金银现货实时价格"""
 
     def __init__(self):
-        super().__init__("gold_spot")
+        super().__init__("spot_gold")
         self._max_retries = 3
         self._retry_delay = 2
 
     def collect(self) -> dict | None:
-        self.logger.info("=== gold_spot start ===")
+        self.logger.info(f"=== {self.name} start ===")
         errors = []
         xau_data = xag_data = None
 
@@ -73,7 +73,6 @@ class GoldSpot(BaseCollector):
         silver_usd = float(raw.get("xag", {}).get("price", 0))
         now = self._now()
         snapshot = {}
-        history_rows = []
 
         if gold_usd > 0:
             snapshot["gold_price"] = {"value": round(gold_usd, 2), "unit": "USD/oz", "updated_at": now}
@@ -82,18 +81,12 @@ class GoldSpot(BaseCollector):
         if gold_usd > 0 and silver_usd > 0:
             ratio = round(gold_usd / silver_usd, 2)
             snapshot["gold_silver_ratio"] = {"value": ratio, "updated_at": now}
-            history_rows.append({
-                "file": "data/history/minutely/gold_silver_minutely.csv",
-                "row": {"timestamp": now, "gold_usd": round(gold_usd, 2),
-                        "silver_usd": round(silver_usd, 2), "ratio": ratio},
-                "grain": "minutely",
-            })
 
         if not snapshot:
             self.logger.error("金银价格均为零或空")
             return None
 
-        return {"snapshot": snapshot, "history": history_rows}
+        return {"snapshot": snapshot}
 
 
 def main():

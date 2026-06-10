@@ -22,10 +22,8 @@ import requests
 from collectors.base import BaseCollector
 
 # ── FRED 系列 ──
-FRED_TEMPLATE = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}&cosd={start}&coed={end}"
+FRED_URL = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}&cosd={start}&coed={end}"
 
-def _fred_url(series_id: str, start: str = "2026-01-01", end: str = "2026-12-31") -> str:
-    return FRED_TEMPLATE.replace("{series_id}", series_id).replace("{start}", start).replace("{end}", end)
 FRED_SERIES = [
     ("sp500",         "SP500",        "标普500",              "daily",  "延迟1天"),
     ("dxy",           "DTWEXBGS",     "广义美元指数",          "daily",  "延迟1天"),
@@ -42,10 +40,19 @@ class FallbackCollector(BaseCollector):
     """兜底数据采集器"""
 
     def __init__(self):
-        super().__init__("fallback")
+        super().__init__("macro_index")
 
     def collect(self) -> dict | None:
-        self.logger.info(f"=== fallback start ({len(FRED_SERIES)} FRED + FX) ===")
+        self.logger.info(f"=== {self.name} start ({len(FRED_SERIES)} FRED + FX) ===")
+        # T-1 检查
+        all_fresh = all(
+            not self._needs_update(f"data/history/daily/{snap_key}.csv", max_stale_days=1)
+            for snap_key, _, _, _, _ in FRED_SERIES
+        )
+        if all_fresh:
+            self.logger.info("  macro_index: 全部系列已更新到 T-1，跳过")
+            return None
+
         snapshot = {}
         history = []
         errors = []
@@ -53,7 +60,9 @@ class FallbackCollector(BaseCollector):
         # ── FRED 系列 ──
         for snap_key, series_id, name, freq, freshness in FRED_SERIES:
             try:
-                url = _fred_url(series_id)
+                hist_file = f"data/history/daily/{snap_key}.csv"
+                url = FRED_URL.format(series_id=series_id, start="2026-01-01", end="2026-12-31")
+                self.logger.info(f"  {name}: 请求 2026 全量")
                 r = requests.get(url, timeout=15)
                 r.raise_for_status()
                 lines = r.text.strip().split("\n")
@@ -88,14 +97,12 @@ class FallbackCollector(BaseCollector):
                     "freshness": freshness,
                 }
 
-                # 日频仅写最新行（避免重复追加全量历史）
-                history.append({
-                    "file": f"data/history/daily/{snap_key}.csv",
-                    "row": latest,
-                    "grain": "daily",
-                })
+                for r in all_rows:
+                    history.append({
+                        "file": hist_file, "row": r, "grain": "daily", "mode": "overwrite",
+                    })
 
-                self.logger.info(f"  {name}: {latest['date']} = {latest['value']:.2f}")
+                self.logger.info(f"  {name}: {latest['date']} = {latest['value']:.2f} (全量 {len(all_rows)} 行)")
 
             except Exception as e:
                 errors.append(f"{name}({series_id}): {e}")
@@ -128,7 +135,7 @@ class FallbackCollector(BaseCollector):
         if errors:
             self.logger.warning(f"部分成功 — {', '.join(errors[:3])}")
 
-        self.logger.info(f"✅ fallback 完成: {len(snapshot)} 个字段")
+        self.logger.info(f"✅ {self.name} 完成: {len(snapshot)} 个字段")
         return {"snapshot": snapshot, "history": history}
 
 

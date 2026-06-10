@@ -23,7 +23,6 @@ LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4o")
 # ─── 数据路径 ──────────────────────────────────────────────
 DATA_CURRENT = DATA_DIR / "current" / "dashboard_data.json"
 DATA_HISTORY_DAILY = DATA_DIR / "history" / "daily"
-DATA_HISTORY_MINUTELY = DATA_DIR / "history" / "minutely"
 DATA_EVENTS = DATA_DIR / "events" / "latest_feed.json"
 
 # ─── 采集器配置 ────────────────────────────────────────────

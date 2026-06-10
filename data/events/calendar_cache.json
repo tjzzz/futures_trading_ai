@@ -1,5 +1,178 @@
 {
-  "date": "2026-06-08",
-  "events": [],
-  "fetched_at": "2026-06-08 16:40:58"
+  "date": "2026-06-09",
+  "date_range": "2026-06-09 ~ 2026-06-15",
+  "events": [
+    {
+      "date": "2026-06-09 01:00",
+      "event": "苹果WWDC开发者大会，升级版Siri或发布",
+      "region": "美国",
+      "importance": 4,
+      "actual": "nan",
+      "expected": "nan",
+      "previous": "nan",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "unclassified"
+      ]
+    },
+    {
+      "date": "2026-06-10 20:30",
+      "event": "5月核心CPI同比",
+      "region": "美国",
+      "importance": 3,
+      "actual": "nan",
+      "expected": "2.9",
+      "previous": "2.8",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "inflation"
+      ]
+    },
+    {
+      "date": "2026-06-10 20:30",
+      "event": "5月CPI同比",
+      "region": "美国",
+      "importance": 4,
+      "actual": "nan",
+      "expected": "4.2",
+      "previous": "3.8",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "inflation"
+      ]
+    },
+    {
+      "date": "2026-06-11 06:00",
+      "event": "甲骨文财报电话会",
+      "region": "美国",
+      "importance": 4,
+      "actual": "nan",
+      "expected": "nan",
+      "previous": "nan",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "unclassified"
+      ]
+    },
+    {
+      "date": "2026-06-11 12:02",
+      "event": "SpaceX IPO最终正式定价，股票将开始发售",
+      "region": "美国",
+      "importance": 4,
+      "actual": "nan",
+      "expected": "nan",
+      "previous": "nan",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "unclassified"
+      ]
+    },
+    {
+      "date": "2026-06-11 12:02",
+      "event": "SpaceX计划邀请1500名散户投资者参加6月11日举行的大型活动",
+      "region": "美国",
+      "importance": 3,
+      "actual": "nan",
+      "expected": "nan",
+      "previous": "nan",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "unclassified"
+      ]
+    },
+    {
+      "date": "2026-06-11 12:02",
+      "event": "世界杯开幕",
+      "region": "美国",
+      "importance": 4,
+      "actual": "nan",
+      "expected": "nan",
+      "previous": "nan",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "unclassified"
+      ]
+    },
+    {
+      "date": "2026-06-11 20:30",
+      "event": "5月PPI同比",
+      "region": "美国",
+      "importance": 3,
+      "actual": "nan",
+      "expected": "6.4",
+      "previous": "6.0",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "unclassified"
+      ]
+    },
+    {
+      "date": "2026-06-11 20:30",
+      "event": "6月6日当周首次申请失业救济人数(万人)",
+      "region": "美国",
+      "importance": 3,
+      "actual": "nan",
+      "expected": "22.0",
+      "previous": "22.5",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "safe_haven",
+        "opportunity_cost"
+      ]
+    },
+    {
+      "date": "2026-06-12 00:00",
+      "event": "SpaceX确定上市日期：6月12日",
+      "region": "美国",
+      "importance": 4,
+      "actual": "nan",
+      "expected": "nan",
+      "previous": "nan",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "unclassified"
+      ]
+    }
+  ],
+  "fetched_at": "2026-06-09 20:42:56"
 }

@@ -14,9 +14,11 @@
       return {"snapshot": {key: value_dict, ...}, "history": [{"file": ..., "row": ...}]}
 """
 
+import csv
 import logging
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from typing import List, Dict, Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 LOG_DIR = PROJECT_ROOT / "logs"
@@ -53,6 +55,34 @@ class BaseCollector:
     def __init__(self, name: str):
         self.name = name
         self.logger = setup_logger(name)
+
+    def _csv_latest_date(self, csv_rel_path: str, date_key: str = "date") -> Optional[str]:
+        """读取 CSV 最新日期，用于优化请求范围"""
+        p = PROJECT_ROOT / csv_rel_path
+        if not p.exists():
+            return None
+        try:
+            with open(p, "r", encoding="utf-8") as f:
+                rows = list(csv.DictReader(f))
+            if not rows:
+                return None
+            # CSV 按时间顺序追加，最后一行最新
+            return rows[-1].get(date_key, "").strip() or None
+        except Exception:
+            return None
+
+    def _needs_update(self, csv_rel_path: str, date_key: str = "date",
+                       max_stale_days: int = 1) -> bool:
+        """检查 CSV 是否需要更新：文件不存在，或最新日期早于 max_stale_days 天前"""
+        last = self._csv_latest_date(csv_rel_path, date_key)
+        if last is None:
+            return True
+        try:
+            last_dt = datetime.strptime(last, "%Y-%m-%d").date()
+            cutoff = datetime.now(CST).date() - timedelta(days=max_stale_days)
+            return last_dt < cutoff
+        except ValueError:
+            return True
 
     def collect(self) -> dict | None:
         """

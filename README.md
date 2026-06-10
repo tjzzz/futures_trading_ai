@@ -103,7 +103,7 @@ python tools/analyze_position.py --symbol all
 
 | 文档 | 用途 |
 |------|------|
-| `docs/1_金银价格驱动因子体系.md` | 分析框架（七因子归因模型） |
+| `Projects/交易Agent系统/1_宏观三维七因子归因框架.md` | 分析框架（七因子归因模型，位于 vault） |
 | `docs/v1-Agent分析SOP.md` | 分析标准操作流程 |
 | `docs/v1-数据中台设计.md` | 数据架构规范 |
 
@@ -146,7 +146,7 @@ futures_trading_ai/
     ├── v1-数据中台设计.md
     ├── v1-后端引擎设计.md
     ├── v1-Agent分析SOP.md
-    └── 1_金银价格驱动因子体系.md
+    └── （框架文档已迁移至 vault: Projects/交易Agent系统/1_宏观三维七因子归因框架.md）
 ```
 
 ---
@@ -155,59 +155,56 @@ futures_trading_ai/
 
 ### ✅ 已完成（V1）
 
-- V1 采集器 8 个（按数据源命名），统一 `python -m collectors.run` 运行
-- V2 AKShare 主源重构：akshare_futures（COMEX 金银实时）、akshare_global（全球指数）、akshare_bond（美债收益率）、akshare_news（金十新闻+宏观日历）
+- V1 采集器统一命名（按数据源），统一 `python -m collectors.run` 运行
 - run.py 后端感知频控（13 个后端独立 min_interval，按后端自动等待）
 - 因子对齐数据管道（7 因子 → `current_factors.json`，含三周期信号计算）
-- 统一直询 CLI `data_query.py`（snapshot/macro/factors/technical/history/events/news）
-- 宏观信号合成 `analyze_macro.py`
-- AI Agent 分析 SOP（含输出模板、数据新鲜度规则、推理标注规则、异动归因流程）
-- SOP 标准分析流程首次端到端测试通过（2026-06-08）
-- 交易档案系统（`wiki_trade/trading_archive/`）
-- 数据采集全链路跑通（15/15 采集器通过，20/25 dashboard 字段实时）
+- 统一直询 CLI `data_query.py`（snapshot/macro/factors/technical/history/events/news/realtime，含 `--refresh` 自动刷新）
+- 宏观信号合成 `analyze_macro.py`（含 NFP 预期差修正、COT 替代判断）
+- macro_memo.md 自动更新 — 分析完成后自动对比上次判断并写入记忆
+- GLD/SLV ETF、FedWatch 概率 — yfinance 采集已实现
+- COMEX 金银实时 OI — futures_sina.py 字段映射已修复
+- 白银历史数据回填 — 数据连续至最新
+- Dashboard — Flask + Jinja2 + Lightweight Charts 单页看板
+- 飞书推送 — feishu/push.py 异动预警/晨报/事件提醒已实现
+- 预判验证闭环 — tools/verify_predictions.py（745 行）
+- 交易引擎 — trading/ 全套实现（engine/strategy/risk/order/backtest）
+- news_by_factor / events_by_factor — data_query.py 命令已实现
+- 分钟级 CSV 历史 — V1 已废弃（不再使用 minutely 级落盘）
 
 ### ⏳ 待完善
 
 #### 🔴 数据源问题
 
-- [ ] 东方财富代理屏蔽 — `push2.eastmoney.com` 被系统代理（Clash X/Surge TUN模式）拦截，所有 akshare_global（DXY/SP500/VIX）和 akshare_bond（美债）请求失败。需在代理客户端将 `eastmoney.com` 加入直连/白名单
-- [ ] yfinance 429 限流 — 12-ticker 批量请求频繁触发 Yahoo 限流，仅 1-2/12 成功。DXY、SP500、VIX 数据停滞 18 天。方案：降低 yfinance 调用频率至 30s+，或减少 batch ticker 数量
-- [ ] investing.com API 变更 — `futures_foreign_hist` 已废弃，无法获取 COMEX 金银日频历史。替代方案：新浪期货日频或 FRED
+- [ ] yfinance 429 限流 — 12-ticker 批量请求频繁触发 Yahoo 限流。方案：降低调用频率至 30s+，或减少 batch ticker 数量
 - [ ] CBOE VIX SSL 偶发错误 — 日频采集偶发 SSL 连接失败，重试一般可恢复
-- [ ] 华尔街见闻频控限制 — 单日调用次数有限，`macro_info_ws()` 频繁调用可能封 IP。建议每日固定在 8:30 和 20:30 调用
+- [ ] 华尔街见闻频控限制 — 单日调用次数有限，建议每日固定在 8:30 和 20:30 调用
 
 #### 📡 数据覆盖缺口
 
-- [ ] GLD/SLV ETF、FedWatch 概率 — 依赖 yfinance，当前不可用。AKShare 是否有替代 source 待调研
-- [ ] SGE 黄金现货 — `spot_hist_sge("Au99.99")` AKShare 可用但未接入 dashboard
+- [ ] SGE 黄金现货 — `spot_hist_sge("Au99.99")` AKShare 可用但未接入 dashboard 和 factor 模型
 - [ ] COT 持仓数据 — `macro_usa_cftc_c_holding` AKShare 可用但未集成到 factor 模型
-- [ ] COMEX 金银实时 OI — akshare_futures 返回的 OI 为 0，需排查数据字段映射
 - [ ] compute_factors.py 结构性需求因子 — `structural_demand` 数据块为空，央行购金数据需手动录入或接入新闻自动归类
-- [ ] 白银历史数据不连续 — 3/27 ~ 5/18 数据缺失，需回填
-- [ ] data_query.py news 为空 — `news` 和 `news_by_factor` 返回空结果，latest_feed.json 格式可能不匹配查询解析逻辑
-- [ ] data_query.py technical spot_silver — 数据截至 5/20，不反映当前价格，需排查数据源更新
+- [ ] data_query.py news 结果为空 — latest_feed.json 格式可能与查询解析逻辑不匹配
 
 #### 🔧 工程缺失
 
 - [ ] generate_brief.py — 晨报/复盘自动生成工具尚未创建
-- [ ] 分钟级历史记录 — COMEX 实时数据（akshare_futures）未写入 minutely CSV 历史
 - [ ] monitor_state.json 采集状态监控 — run.py 当前不写入各采集器运行状态和最后成功时间
-- [ ] compute_factors.py — fedwatch_prob 字段为 null，待数据源恢复后接入
 - [ ] analyze_macro.py — 宏观信号合成脚本未实际验证输出质量
-- [ ] data_query.py news_by_factor — 查询结果为空，大概率是管道格式不匹配
+- [ ] 交易引擎 (trading/) 未与主系统集成 — 当前是独立模块，未被 collectors/tools 引用
+- [ ] 飞书推送未集成到采集/分析流程 — feishu/push.py 代码到位但未对接 run.py 或 analyze_macro.py
+- [ ] 定时晨报调度 — feishu/push.py 有 push_morning_brief() 但无定时 cron 调度
+- [ ] 统一启动入口 — server.py/start.py 已被清理，缺少新的启动脚本
 
 #### 🤖 Agent 分析闭环
 
-- [ ] macro_memo.md 自动更新 — SOP 分析完成后未写入记忆系统，需在 `step_memory` 阶段调用写入
 - [ ] decisions.md 复盘写入 — 判断错误检测后未自动记录到决策档案
 - [ ] WebSearch 信息入库 — 搜索发现的新概念/知识未沉淀到 wiki 知识库
 - [ ] 无持仓时的建议优化 — 当前持仓评估无数据时，建议应基于资金管理原则给出参考
 
-#### 🚀 第三波计划
-
-- [ ] 飞书推送 — 异动预警推送到飞书 webhook
-- [ ] Web 因子看板 — 七因子仪表盘实时展示
-- [ ] 定时晨报 — 每日开盘前自动生成并推送
+#### 🧹 代码清理
+- [ ] README 项目结构图过时 — 采集器列表(旧名)、目录与实际代码不符
+- [ ] SOP 文档被清理后 — 新框架文档（三维因子分析框架设计.md + 新闻事件模块设计.md）是否完全覆盖旧 SOP 内容需确认
 
 ---
 

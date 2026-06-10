@@ -3,30 +3,41 @@
 V3 Data Query Tool — 封装 V2 数据层供 AI Agent 调用
 
 用法:
-    python data_query.py snapshot          — 当前行情快照
-    python data_query.py macro             — 宏观数据摘要
-    python data_query.py positions         — 查询持仓 (结合 vault memory)
-    python data_query.py history <品种>     — 历史行情 (gold/silver/silver_ratio)
-    python data_query.py events            — 活跃事件
-    python data_query.py news              — 最新新闻
-    python data_query.py analysis          — 运行四象限分析
-    python data_query.py monitor           — 阈值监控状态
-    python data_query.py factors           — 全部因子数据
-    python data_query.py factors <factor>  — 单因子
-    python data_query.py technical         — 全部技术指标
-    python data_query.py technical <品种>   — 单品种技术指标 (shfe_gold/shfe_silver/spot_gold/spot_silver)
-    python data_query.py news_by_factor <factor>      — 按因子查新闻
-    python data_query.py events_by_factor <factor>    — 按因子查事件
+    python data_query.py snapshot [--refresh]   — 当前行情快照
+    python data_query.py macro [--refresh]      — 宏观数据摘要
+    python data_query.py positions              — 查询持仓 (结合 vault memory)
+    python data_query.py history <品种> [--refresh] — 历史行情 (gold/silver/silver_ratio)
+    python data_query.py events [--refresh]     — 活跃事件
+    python data_query.py news [--refresh]       — 最新新闻
+    python data_query.py analysis               — 运行四象限分析
+    python data_query.py monitor                — 阈值监控状态
+    python data_query.py factors [因子] [--refresh] — 全部/单因子数据
+    python data_query.py technical [品种]       — 全部/单品种技术指标
+    python data_query.py news_by_factor <因子>  — 按因子查新闻
+    python data_query.py events_by_factor <因子>— 按因子查事件
+    python data_query.py realtime <源>          — 实时数据直查（不落盘）
+
+    --refresh  自动刷新过期数据后再查询（运行采集器）
+
+实时数据直查 (realtime):
+    gold/silver       → gold-api.com 金银现货
+    comex             → AKShare/新浪 COMEX 金银期货
+    macro             → Yahoo Finance 宏观指标 (DXY/VIX/GLD/SLV)
+    all               → 全部实时数据源
 
 输出: JSON 格式，便于 AI 解析
 """
 
 import json
 import csv
+import subprocess
 import sys
+import time
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
 from typing import List, Dict
+
+CST = timezone(timedelta(hours=8))
 
 # ============ 路径配置 ============
 
@@ -46,6 +57,100 @@ HISTORY_FILES = {
     "silver": DATA_HISTORY / "daily" / "gold_silver_daily.csv",
     "silver_ratio": DATA_HISTORY / "daily" / "gold_silver_daily.csv",
 }
+
+# ============ 新鲜度检查 & 自动刷新 ============
+
+AUTO_REFRESH = False  # 由 --refresh 或 --stale 控制
+
+
+def _parse_args():
+    """解析命令行参数，提取 --refresh 标记和命令"""
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    flags = [a for a in sys.argv[1:] if a.startswith("--")]
+    return args, flags
+
+
+def _now_str() -> str:
+    return datetime.now(CST).strftime("%Y-%m-%d %H:%M:%S")
+
+
+def _today_str() -> str:
+    return datetime.now(CST).strftime("%Y-%m-%d")
+
+
+def _is_today(date_str: str) -> bool:
+    """判断日期字符串是否为今天"""
+    return date_str[:10] == _today_str()
+
+
+def _staleness(path: Path, max_minutes: float = 30) -> float | None:
+    """返回文件距今多少分钟，None 表示文件不存在"""
+    if not path.exists():
+        return None
+    age = time.time() - path.stat().st_mtime
+    return age / 60.0
+
+
+def _check_freshness(path: Path, label: str, max_minutes: float = 30,
+                     auto_refresh: bool = False) -> bool:
+    """检查数据文件新鲜度。返回 True = 够新，False = 过期。"""
+    age_min = _staleness(path, max_minutes)
+    if age_min is None:
+        print(json.dumps({"warn": f"{label} 文件不存在: {path}", "auto_refresh": auto_refresh}, ensure_ascii=False))
+        return _try_refresh(path, label) if auto_refresh else False
+
+    if age_min > max_minutes:
+        print(json.dumps({"warn": f"{label} 数据已过期({age_min:.0f}分钟前)", "auto_refresh": auto_refresh}, ensure_ascii=False))
+        if auto_refresh:
+            return _try_refresh(path, label)
+        return False
+    return True
+
+
+def _try_refresh(path: Path, label: str) -> bool:
+    """尝试通过运行采集器刷新数据"""
+    print(json.dumps({"info": f"正在刷新 {label}..."}, ensure_ascii=False))
+    try:
+        if "dashboard_data" in str(path) or "snapshot" in str(path):
+            # 实时采集：金银现货、宏观指标
+            print(json.dumps({"step": "实时采集 (金银、宏观指标)..."}, ensure_ascii=False))
+            r = subprocess.run(
+                [sys.executable, "-m", "collectors.run", "realtime"],
+                cwd=PROJECT_ROOT, capture_output=False, timeout=120,
+            )
+            if r.returncode != 0:
+                print(json.dumps({"warn": "实时采集部分失败，数据可能不完整"}, ensure_ascii=False))
+        if "factors" in str(path):
+            # 因子依赖实时数据 + 日频历史数据
+            print(json.dumps({"step": "实时采集 (金银、宏观指标)..."}, ensure_ascii=False))
+            subprocess.run(
+                [sys.executable, "-m", "collectors.run", "realtime"],
+                cwd=PROJECT_ROOT, capture_output=False, timeout=120,
+            )
+            print(json.dumps({"step": "日频采集 (TIPS/美债/VIX/SP500/汇率)..."}, ensure_ascii=False))
+            subprocess.run(
+                [sys.executable, "-m", "collectors.run", "daily"],
+                cwd=PROJECT_ROOT, capture_output=False, timeout=180,
+            )
+            print(json.dumps({"step": "计算七因子信号+技术指标..."}, ensure_ascii=False))
+            subprocess.run(
+                [sys.executable, "tools/compute_factors.py"],
+                cwd=PROJECT_ROOT, capture_output=False, timeout=120,
+            )
+        if "events" in str(path) or "news" in str(path) or "latest_feed" in str(path):
+            print(json.dumps({"step": "刷新新闻和事件..."}, ensure_ascii=False))
+            subprocess.run(
+                [sys.executable, "-m", "collectors.run", "realtime"],
+                cwd=PROJECT_ROOT, capture_output=False, timeout=120,
+            )
+        print(json.dumps({"info": f"{label} 刷新完成"}, ensure_ascii=False))
+        return True
+    except subprocess.TimeoutExpired:
+        print(json.dumps({"error": f"{label} 刷新超时"}, ensure_ascii=False))
+        return False
+    except Exception as e:
+        print(json.dumps({"error": f"{label} 刷新失败: {e}"}, ensure_ascii=False))
+        return False
 
 
 # ============ 读取函数 ============
@@ -401,25 +506,92 @@ def cmd_technical(symbol: str = "") -> dict:
     }
 
 
+def cmd_realtime(source: str = "all") -> dict:
+    """实时数据直查 — 不落盘，直接调用采集器"""
+    result = {}
+
+    if source in ("gold", "silver", "all"):
+        try:
+            from collectors.spot_gold import GoldSpot
+            spot = GoldSpot().collect()
+            if spot:
+                for k, v in spot.get("snapshot", {}).items():
+                    result[k] = v
+                result["_spot_gold"] = "ok"
+            else:
+                result["_spot_gold"] = "fail"
+        except Exception as e:
+            result["_spot_gold"] = f"error: {e}"
+
+    if source in ("comex", "all"):
+        try:
+            from collectors.futures_sina import AKShareFuturesCollector
+            comex = AKShareFuturesCollector().collect_realtime()
+            if comex:
+                for k, v in comex.get("snapshot", {}).items():
+                    result[k] = v
+                result["_comex"] = "ok"
+            else:
+                result["_comex"] = "fail"
+        except Exception as e:
+            result["_comex"] = f"error: {e}"
+
+    if source in ("macro", "all"):
+        try:
+            from collectors.yfinance import YFinanceBatch
+            macro = YFinanceBatch().collect()
+            if macro:
+                for k, v in macro.get("snapshot", {}).items():
+                    result[k] = v
+                result["_macro"] = "ok"
+            else:
+                result["_macro"] = "fail"
+        except Exception as e:
+            result["_macro"] = f"error: {e}"
+
+    result["_queried_at"] = _now_str()
+    result["_source"] = source
+    return result
+
+
 def main():
-    if len(sys.argv) < 2:
+    args, flags = _parse_args()
+    AUTO_REFRESH = "--refresh" in flags
+
+    if not args:
         print(__doc__)
         sys.exit(1)
 
-    command = sys.argv[1]
+    command = args[0]
+
+    # ── 新鲜度检查（部分命令支持）──
+    freshness_checks = {
+        "snapshot": (DASHBOARD_FILE, "dashboard_data"),
+        "macro": (DASHBOARD_FILE, "dashboard_data"),
+        "events": (EVENT_FILE, "events"),
+        "news": (NEWS_FILE, "news"),
+        "factors": (FACTORS_FILE, "factors"),
+        "technical": (FACTORS_FILE, "factors"),
+    }
+
+    if command in freshness_checks:
+        fpath, label = freshness_checks[command]
+        _check_freshness(fpath, label, auto_refresh=AUTO_REFRESH)
 
     handlers = {
         "snapshot": lambda: cmd_snapshot(),
         "macro": lambda: cmd_macro(),
-        "history": lambda: cmd_history(sys.argv[2]) if len(sys.argv) > 2 else {"error": "请指定品种: gold/silver/silver_ratio"},
+        "positions": lambda: {"error": "请通过 agent memory 查询持仓"},
+        "history": lambda: cmd_history(args[1]) if len(args) > 1 else {"error": "请指定品种: gold/silver/silver_ratio"},
         "events": lambda: cmd_events(),
         "news": lambda: cmd_news(),
         "monitor": lambda: cmd_monitor(),
         "analysis": lambda: cmd_analysis(),
-        "factors": lambda: cmd_factors(sys.argv[2] if len(sys.argv) > 2 else ""),
-        "technical": lambda: cmd_technical(sys.argv[2] if len(sys.argv) > 2 else ""),
-        "news_by_factor": lambda: cmd_news_by_factor(sys.argv[2]) if len(sys.argv) > 2 else {"error": "请指定因子 ID，如: safe_haven"},
-        "events_by_factor": lambda: cmd_events_by_factor(sys.argv[2]) if len(sys.argv) > 2 else {"error": "请指定因子 ID，如: positioning"},
+        "factors": lambda: cmd_factors(args[1] if len(args) > 1 else ""),
+        "technical": lambda: cmd_technical(args[1] if len(args) > 1 else ""),
+        "news_by_factor": lambda: cmd_news_by_factor(args[1]) if len(args) > 1 else {"error": "请指定因子 ID，如: safe_haven"},
+        "events_by_factor": lambda: cmd_events_by_factor(args[1]) if len(args) > 1 else {"error": "请指定因子 ID，如: positioning"},
+        "realtime": lambda: cmd_realtime(args[1] if len(args) > 1 else "all"),
     }
 
     if command not in handlers:

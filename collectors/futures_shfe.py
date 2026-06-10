@@ -6,9 +6,9 @@
 覆盖: 沪金 (AU) / 沪银 (AG) — 日频 OHLC + 持仓量 + 结算价
 
 用法:
-    python -m collectors.china_futures              # 沪金 + 沪银
-    python -m collectors.china_futures AU           # 仅沪金
-    python -m collectors.china_futures AU AG SC     # 指定品种
+    python -m collectors.futures_shfe              # 沪金 + 沪银
+    python -m collectors.futures_shfe AU           # 仅沪金
+    python -m collectors.futures_shfe AU AG SC     # 指定品种
 
 依赖: pip install akshare
 """
@@ -22,7 +22,7 @@ from pathlib import Path
 from collectors.base import BaseCollector
 from config import loader
 
-logger = logging.getLogger("china_futures")
+logger = logging.getLogger("futures_shfe")
 CST = timezone(timedelta(hours=8))
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,7 +48,7 @@ class ChinaFuturesCollector(BaseCollector):
     """国内期货主力合约采集器 (AKShare / 新浪)"""
 
     def __init__(self):
-        super().__init__("china_futures")
+        super().__init__("futures_shfe")
         self._ak = None
         try:
             import akshare as ak
@@ -193,6 +193,13 @@ class ChinaFuturesCollector(BaseCollector):
     def v1_collect(self) -> dict | None:
         """V1 采集接口（被 collectors.run.py 调用）"""
         self.logger.info(f"=== {self.name} v1 start ===")
+
+        # T-1 检查：数据已到前一日则跳过
+        hist_file = "data/history/daily/china_futures.csv"
+        if not self._needs_update(hist_file, max_stale_days=1):
+            self.logger.info("  shfe: 数据已更新到 T-1，跳过")
+            return None
+
         try:
             raw = self.fetch()
             if not raw:
@@ -206,19 +213,13 @@ class ChinaFuturesCollector(BaseCollector):
         for sk, sv in result.get("snapshot_updates", {}).items():
             snapshot[sk] = sv
 
-        # 仅写最新行（避免重复追加全量历史）
-        latest_rows = {}
-        for r in result.get("history_rows", []):
-            sym = r.get("symbol", "")
-            if sym not in latest_rows:
-                latest_rows[sym] = r
-            else:
-                if r["date"] > latest_rows[sym]["date"]:
-                    latest_rows[sym] = r
-        history = [{"file": "data/history/daily/china_futures.csv",
-                     "row": r, "grain": "daily"} for r in latest_rows.values()]
+        history_rows = result.get("history_rows", [])
+        if history_rows:
+            self.logger.info(f"  shfe: 全量 {len(history_rows)} 行，覆盖写入")
 
-        return {"snapshot": snapshot, "history": history}
+        return {"snapshot": snapshot, "history": [{
+            "file": hist_file, "row": r, "grain": "daily", "mode": "overwrite"
+        } for r in history_rows]}
 
 
 def main():

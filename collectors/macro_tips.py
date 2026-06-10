@@ -40,20 +40,35 @@ class FredCollector(BaseCollector):
     """FRED 多系列采集器"""
 
     def __init__(self):
-        super().__init__("fred")
+        super().__init__("macro_tips")
 
     def collect(self) -> dict | None:
-        self.logger.info(f"=== fred start ({len(FRED_SERIES)} series) ===")
+        self.logger.info(f"=== {self.name} start ({len(FRED_SERIES)} series) ===")
+
+        # T-1 检查：日频系列
+        daily_series = [(s_id, name, snap_key, hist_f, fields, fresh)
+                        for s_id, name, snap_key, hist_f, fields, fresh in FRED_SERIES
+                        if s_id not in MONTHLY_SERIES]
+        all_fresh = all(
+            not self._needs_update(f"data/history/daily/{hf}", max_stale_days=1)
+            for _, _, _, hf, _, _ in daily_series
+        )
+        if all_fresh and daily_series:
+            self.logger.info("  macro_tips: 全部日频系列已更新到 T-1，跳过")
+            return None
+
         snapshot = {}
         history = []
         errors = []
 
         for series_id, name, snap_key, hist_file, fields, freshness in FRED_SERIES:
             try:
+                hist_path = f"data/history/daily/{hist_file}"
                 url = FRED_URL.format(series_id=series_id, start="2026-01-01", end="2026-12-31")
+                self.logger.info(f"  {name}: 请求 2026 全量")
                 r = requests.get(url, timeout=15)
                 r.raise_for_status()
-                result = self._parse_single(series_id, name, snap_key, hist_file, fields, freshness, r.text)
+                result = self._parse_single(series_id, name, snap_key, hist_path, freshness, r.text)
                 if result:
                     s, h = result
                     snapshot.update(s)
@@ -73,11 +88,11 @@ class FredCollector(BaseCollector):
         if errors:
             self.logger.warning(f"部分成功: {len(snapshot)}/{len(FRED_SERIES)} — {', '.join(errors[:3])}")
 
-        self.logger.info(f"✅ fred 完成: {len(snapshot)} 个系列")
+        self.logger.info(f"✅ {self.name} 完成: {len(snapshot)} 个系列")
         return {"snapshot": snapshot, "history": history}
 
     def _parse_single(self, series_id: str, name: str, snap_key: str,
-                       hist_file: str, fields: list[str], freshness: str, raw: str) -> tuple | None:
+                       hist_file: str, freshness: str, raw: str) -> tuple | None:
         """解析单个 FRED 系列"""
         lines = raw.strip().split("\n")
         if len(lines) < 2:
@@ -86,7 +101,6 @@ class FredCollector(BaseCollector):
         is_monthly = series_id in MONTHLY_SERIES
 
         if is_monthly:
-            # 月度数据：取最新值（非年度化CPI直接使用）
             parts = lines[-1].split(",")
             if len(parts) < 2:
                 return None
@@ -103,13 +117,12 @@ class FredCollector(BaseCollector):
                 },
             }
             history = [{
-                "file": f"data/history/daily/{hist_file}",
+                "file": hist_file,
                 "row": {"date": date_str, "value": value},
                 "grain": "daily",
             }]
             return snapshot, history
         else:
-            # 日频数据：解析全部，取最新
             all_rows = []
             for line in lines[1:]:
                 line = line.strip()
@@ -130,6 +143,8 @@ class FredCollector(BaseCollector):
                 return None
 
             latest = all_rows[-1]
+            self.logger.info(f"  {name}: {latest['date']} = {latest['value']:.2f} (全量 {len(all_rows)} 行)")
+
             snapshot = {
                 snap_key: {
                     "value": round(latest["value"], 2),
@@ -140,10 +155,8 @@ class FredCollector(BaseCollector):
                 },
             }
             history = [{
-                "file": f"data/history/daily/{hist_file}",
-                "row": latest,
-                "grain": "daily",
-            }]
+                "file": hist_file, "row": r, "grain": "daily", "mode": "overwrite",
+            } for r in all_rows]
             return snapshot, history
 
 

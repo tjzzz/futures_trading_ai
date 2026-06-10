@@ -22,7 +22,7 @@
   主导因子 = max(strength) 的非中性因子
 
 框架文档:
-  Projects/交易Agent系统/1_金银价格驱动因子体系.md
+  Projects/交易Agent系统/1_宏观三维七因子归因框架.md
 """
 
 import argparse
@@ -592,6 +592,21 @@ def _analyze_opportunity_cost(fdata: dict) -> Tuple[str, float, str, dict]:
     elif signal == "bearish" and tips_trend == "down":
         strength = max(strength - 0.15, 0.1)
 
+    # ---- NFP 预期差修正 ----
+    nfp_surprise = data.get("nfp_surprise_pct", {})
+    nfp_signal_direction_matched = False
+    if isinstance(nfp_surprise, dict):
+        nfp_val = nfp_surprise.get("value")
+        if nfp_val is not None:
+            if nfp_val > 10:  # 超预期 > 10% → 经济过热 → 利空金银
+                strength = min(strength + 0.2, 1.0)
+                nfp_signal_direction_matched = True
+            elif nfp_val > 5:  # 超预期 > 5%
+                strength = min(strength + 0.1, 1.0)
+            elif nfp_val < -10:  # 低于预期 > 10% → 经济走弱 → 利多金银
+                strength = min(strength + 0.2, 1.0)
+                nfp_signal_direction_matched = True
+
     # ---- evidence ----
     trend_cn = {
         "down": "下行",
@@ -617,11 +632,27 @@ def _analyze_opportunity_cost(fdata: dict) -> Tuple[str, float, str, dict]:
 
     evidence = "，".join(parts)
 
+    # 添加 NFP 描述
+    if isinstance(nfp_surprise, dict):
+        nfp_val = nfp_surprise.get("value")
+        nfp_event = nfp_surprise.get("event", "")
+        if nfp_val is not None and abs(nfp_val) > 5:
+            nfp_desc = f"非农{'超预期' if nfp_val > 0 else '低于预期'}{abs(nfp_val):.1f}%"
+            if nfp_event:
+                nfp_desc += f" ({nfp_event})"
+            evidence += "，" + nfp_desc
+
     key_metrics = {
         "tips_10y": round(tips, 2),
         "tips_trend_20d": tips_trend,
         "nominal_10y": round(nominal, 2),
     }
+
+    # 添加 NFP key metrics
+    if isinstance(nfp_surprise, dict):
+        nfp_val = nfp_surprise.get("value")
+        if nfp_val is not None:
+            key_metrics["nfp_surprise_pct"] = round(nfp_val, 2)
 
     return signal, round(strength, 2), evidence, key_metrics
 

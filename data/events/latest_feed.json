@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-06-09 17:22 CST",
-  "total": 60,
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 59,
   "events": [
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves premarket: GSK, Nuvalent, J.M. Smucker, SailPoint and more",
+      "description": "These are the stocks posting the largest moves in early trading.",
+      "link": "https://www.cnbc.com/2026/06/09/stocks-making-the-biggest-moves-premarket-gsk-nuvalent-jm-smucker-sailpoint-and-more.html",
+      "pubDate": "Tue, 09 Jun 2026 12:20:40 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
     {
       "source": "cnbc_markets",
       "title": "Electric vehicle giant BYD predicts 80% of China car sales will soon be electric",
@@ -14,7 +28,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -28,7 +42,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -42,7 +56,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -56,7 +70,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -70,7 +84,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -86,7 +100,7 @@
         "opportunity_cost": 0.85,
         "safe_haven": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -100,7 +114,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -114,7 +128,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -128,7 +142,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -142,7 +156,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -156,7 +170,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -170,7 +184,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -184,7 +198,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -198,7 +212,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -212,7 +226,7 @@
       "relevance": {
         "currency": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -226,7 +240,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -240,7 +254,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -254,7 +268,7 @@
       "relevance": {
         "safe_haven": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -270,7 +284,7 @@
         "opportunity_cost": 0.6,
         "safe_haven": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -284,7 +298,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -298,7 +312,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -312,7 +326,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -326,7 +340,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -340,7 +354,7 @@
       "relevance": {
         "safe_haven": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -354,7 +368,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -368,7 +382,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -382,7 +396,7 @@
       "relevance": {
         "safe_haven": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_markets",
@@ -396,21 +410,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
-    },
-    {
-      "source": "cnbc_markets",
-      "title": "'Disrupted or dead': AI is crushing a generation of startups built before ChatGPT",
-      "description": "The AI boom that has funneled more than $250 billion into OpenAI and Anthropic has left hundreds of startups built before ChatGPT's arrival in 2022 stranded.",
-      "link": "https://www.cnbc.com/2026/06/01/ai-startup-valuations-pre-chatgpt.html",
-      "pubDate": "Wed, 03 Jun 2026 20:48:40 GMT",
-      "factors": [
-        "unclassified"
-      ],
-      "relevance": {
-        "unclassified": 0.3
-      },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -424,7 +424,7 @@
       "relevance": {
         "safe_haven": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -438,7 +438,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -452,7 +452,7 @@
       "relevance": {
         "opportunity_cost": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -466,7 +466,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -480,7 +480,7 @@
       "relevance": {
         "safe_haven": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -494,7 +494,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -510,7 +510,7 @@
         "opportunity_cost": 0.6,
         "safe_haven": 0.6
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -524,7 +524,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -538,7 +538,7 @@
       "relevance": {
         "safe_haven": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -552,7 +552,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -566,7 +566,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -580,7 +580,7 @@
       "relevance": {
         "opportunity_cost": 0.6
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -594,7 +594,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -608,7 +608,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -622,7 +622,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -636,7 +636,7 @@
       "relevance": {
         "safe_haven": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -650,7 +650,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -664,7 +664,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -678,7 +678,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -692,7 +692,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -706,7 +706,7 @@
       "relevance": {
         "safe_haven": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -720,7 +720,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -734,7 +734,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -748,7 +748,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -762,7 +762,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -776,7 +776,7 @@
       "relevance": {
         "inflation": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -790,7 +790,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -804,7 +804,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -818,7 +818,7 @@
       "relevance": {
         "unclassified": 0.3
       },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     },
     {
       "source": "cnbc_economy",
@@ -832,21 +832,7 @@
       "relevance": {
         "safe_haven": 0.6
       },
-      "fetched_at": "2026-06-09 17:22 CST"
-    },
-    {
-      "source": "marketwatch",
-      "title": "Knicks ticket prices plunge more than 50% ahead of Game 3 at MSG — but not just because Trump’s going",
-      "description": "Ticketing-industry pros say there’s a bigger driver behind some ticket prices dropping several thousand dollars.",
-      "link": "https://www.marketwatch.com/story/knicks-ticket-prices-plunge-more-than-50-ahead-of-game-3-at-msg-but-not-just-because-trumps-going-b7944acf?mod=mw_rss_topstories",
-      "pubDate": "Mon, 08 Jun 2026 22:33:00 GMT",
-      "factors": [
-        "unclassified"
-      ],
-      "relevance": {
-        "unclassified": 0.3
-      },
-      "fetched_at": "2026-06-09 17:22 CST"
+      "fetched_at": "2026-06-09 20:42 CST"
     }
   ]
 }
