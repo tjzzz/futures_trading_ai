@@ -1,99 +1,90 @@
-# v2-agent-team 架构骨架
+# v2-agent-team 架构
 
-> 状态：骨架（结构 + 要点 + 空位），待镇哥补 / 改
-> 来源：2026-07-31 详议（coach-talks/2026-07-28 §4.5 + 本日讨论）
+> 状态：Phase 1 进行中（骨架 + 宏观分析块已落地）
 > 基线：从 v1 @0ea641c 拉出 v2-agent-team 分支（v1 已封存）
+> 大原则：拆分（工程化平台 → agent 工作流模式）；单 agent + 多 skill，不引入 LangGraph
 
-## 0. TL;DR / 大原则
+## 0. 总览
 
-- **拆分**：工程化平台模式 → agent 工作流模式
-- **不重建平台**：提取 v1 最值钱的引擎，其余封存
-- **两条线分离**（对应 MOC）：个人验证线（自用）/ 产品化线（给别人）
-- 本周复盘证明真缺口是**执行装置 + 引擎**，不是网页
+两层 + 其他：
+- **skills 层**：4 大块 skill，每块 = `SKILL.md`（agent 规则）+ `scripts/`（可移植纯 Python 内核，不依赖 WorkBuddy）
+- **web 展示层**：静态 dashboard，4 tab 对应 4 个 skill 流程
+- **其他**：trading 模拟交易 / collectors 数据采集 / dashboard 生成器 / 实盘下单（自用）/ CLI 壳（给别人）
 
-## 1. 场景定位（与 TradingAgents 的差异）
+## 1. skills 层 4 大块
 
-| 维度 | TradingAgents（参考） | 本项目 |
-|:--|:--|:--|
-| agent 数量 | 多 agent（分析师/研究员/交易员/风控）辩论 | **单 agent + 多 skill**（AGENT_WORK 路由） |
-| 编排框架 | LangGraph | 不引入（线性路由，LangGraph 是过度工程） |
-| 实盘 | 只到模拟交易所 | 决策 + 条件单清单；实盘只自用 |
+| 大类 | 归并来源（原 ~/.workbuddy/skills/） | scripts/ 可移植内核 | 状态 |
+|:--|:--|:--|:--|
+| 行情概览 | trade-info-intake + trade-macro-morning-briefing | collectors 取数 → 行情快照 | ⏳ Phase 2 |
+| 机会探查 | commodity-scan + commodity-research + options-volatility + 🆕决策/条件单清单 | 条件单清单生成器 | ⏳ Phase 2 |
+| 宏观分析/归因/事件预案 | trade-analysis-sop + trade-event-insight | compute_factors + verify_predictions + query_shfe（纯Python仅标准库） | ✅ Phase 1 |
+| 复盘归因 | trade-weekly-review | verify_predictions（命中率统计） | ⏳ Phase 2 |
 
-→ 本项目是"单 agent + 多 skill 线性流程"，没有多 agent 辩论回路，**不引入 LangGraph**。给别人那面用轻量 CLI 编排即可。若未来扩展到"多 agent 辩论"再考虑。
+> 决策建议 + 条件单清单（执行装置）并入"机会探查"（机会→决策→条件单一条链）。
 
-## 2. 三层架构
+### 加载方式（自用）
+symlink：仓库 `skills/<skill>` → `~/.workbuddy/skills/<skill>`。仓库里开发，软链回家目录加载，改一处即生效。
 
-### 2.1 引擎层（portable Python，无 UI 依赖）
-> 两线共用，只写一次。
+### 内核 / agent 分界
+- **纯计算/取数**（compute_factors / verify_predictions / query_shfe / collectors）→ `scripts/` 可移植内核
+- **需 agent 判断**（决策 / 归因 / 事件解读 / 复盘）→ `SKILL.md` 规则，agent 按 SKILL.md 调 scripts/
 
-| 模块 | 来源 v1 | 作用 |
-|:--|:--|:--|
-| compute_factors（三周期七因子） | tools/compute_factors.py | 周度因子快照 |
-| verify_predictions | tools/verify_predictions.py | 预判命中率追踪 |
-| data_query | tools/data_query.py | 数据查询 |
-| collectors | collectors/ | 数据采集（akshare 国内 / fred 美债·TIPS） |
-| **条件单清单生成器** 🆕 | 待建 | 事件前生成待挂触发单 + 止损单清单（执行装置） |
-
-空位：
-- [ ] 各模块输入/输出契约
-- [ ] 数据源依赖清单（akshare 可替国内，fred 留美债/TIPS）
-- [ ] 条件单清单的输出格式（文本/JSON）
-
-### 2.2 编排层
-
-| 面 | 形态 | 状态 |
-|:--|:--|:--|
-| 自用 | WorkBuddy skill 包（trade-factor-3d / 执行装置 / verify-predictions）+ AGENT_WORK 路由 | 已在跑，零迁移 |
-| 给别人 | 轻量 CLI 编排（Python，按 AGENT_WORK 路由跑引擎模块） | 待建 |
-
-空位：
-- [ ] CLI 命令设计（子命令结构）
-- [ ] 给别人是否带 LLM 步骤（决策需 LLM，引擎不需要）——影响交付是否含模型/key
-- [ ] 配置项（品种 / 数据源 / 可选 LLM key）
-
-### 2.3 展示层（静态 dashboard）
+## 2. web 展示层
 
 - 形态：**生成式静态网页**（dashboard.html 风格），非 SaaS、无交易交互
-- tab：机会发现 / 信源 / 当前持仓 / agent 自学习进度
-- 数据源：引擎输出的 JSON/md 快照
+- 4 tab：行情 / 机会 / 宏观 / 复盘（与 skills 层一一对应）
+- 数据源：各 skill 输出的 JSON/md 快照
 - 刷新：周节奏（守护后刷新）
-- 纯展示
+- 改造：v1 `dashboard/` 是 Flask 动态 → 重写为静态生成
 
-空位：
-- [ ] 各 tab 具体字段
-- [ ] 由谁/何时生成（守护末步？）
-- [ ] 自用与给别人是否同一份
+## 3. 其他
 
-## 3. 交付物边界
+| 模块 | 说明 | 本期 |
+|:--|:--|:--|
+| `collectors/` | 数据采集层（akshare/fred/yfinance），被 skills 调用 | 保留 |
+| `trading/` | 模拟交易/回测引擎（v1 已有正收益） | 保留不动 |
+| dashboard 生成器 | 聚合各 skill 输出 → 静态 html | ⏳ Phase 3 |
+| 实盘下单 | 只自用，不进给别人交付 | 远期 |
+| `cli/` | 给别人的 CLI 壳 + requirements | ⏳ Phase 4（重议触发） |
+
+## 4. 仓库目录结构
+
+```
+futures_trading_ai/
+├── skills/                # 4 大块 skill 源码（symlink 出去自用）
+│   ├── market-overview/   # 行情概览        (SKILL.md + scripts/)
+│   ├── opportunity/       # 机会探查（含决策+条件单清单）
+│   ├── macro-analysis/    # 宏观分析/归因/事件预案  ✅ Phase1
+│   └── review/            # 复盘归因
+├── collectors/            # 数据采集层（akshare/fred）
+├── tools/                 # 现有引擎脚本，逐步迁入对应 skill 的 scripts/
+├── dashboard/             # web 展现层（Flask → 静态生成）
+├── trading/               # 模拟交易/回测引擎
+├── docs/                  # 本文档
+├── data/                  # 数据（runtime log/state 已 gitignore）
+└── cli/                   # 给别人的 CLI 壳（远期）
+```
+
+## 5. 自用 vs 给别人
 
 | 项 | 自用 | 给别人 |
 |:--|:--|:--|
-| 因子快照 | ✅ | ✅ |
-| 决策（带价位 / 止损 / 赔率） | ✅ | ✅ |
-| 待挂条件单清单 | ✅ | ✅ |
-| 实盘自动下单 | ✅（自己用） | ❌ 不交付 |
-| 静态 dashboard | ✅ | ✅（只读） |
+| 4 块 skills | symlink + WorkBuddy agent 调 | 抽 `scripts/` 内核 + CLI 壳 |
+| LLM 步骤 | agent 全程 | 仅"机会探查"决策步带 LLM，取数/计算不带 |
+| dashboard | 自用看 | 只读给 |
+| 实盘下单 | 自用 | 不交付 |
+| trading 回测 | 自用验证 | 不交付（远期） |
 
-## 4. 分阶段
+## 6. 分阶段
 
-- **Phase 1（轻）**：trade-factor-3d skill + 执行装置（条件单清单）→ 验收 = 连续 2 周有快照且影响机会分级
-- **Phase 2**：verify_predictions 进周五复盘（命中率追踪）
-- **Phase 3**：vectorbt 最小回测（落 05 目录）
-- 展示层 dashboard 随 Phase 1 产出逐步搭 tab
+- **Phase 1**（进行中）：骨架 + 宏观分析块（✅ scripts 验证可独立跑 + SKILL.md + symlink）+ 本文档重写
+- **Phase 2**：搬其余 3 块（行情概览 / 机会探查 / 复盘归因），每块 symlink + 验证
+- **Phase 3**：web 展现层（dashboard 静态生成，4 tab）
+- **Phase 4**（远期/重议触发）：给别人 CLI 壳
 
-空位：
-- [ ] Phase 1 时间盒
-- [ ] dashboard 第一个 tab 优先级
-
-## 5. 暂缓 / 重议条件
-
-- 展现层 SaaS 化（多用户 / 实时交互）：暂缓
-- 重议触发（满足任一）：① 账户连续 2 月正收益且回撤可控 ② 闭环跑满 8 周 ③ 出现第二个真实使用者且不会用 CLI
-- LangGraph：若从"单 agent"扩展到"多 agent 辩论"再引入
-
-## 6. 待镇哥拍板 / 补
-
-- [ ] 本骨架认可？
-- [ ] 给别人那面是否含 LLM 步骤（决定交付是否带模型/key）
-- [ ] dashboard tab 优先级与字段
-- [ ] Phase 1 时间盒
+## 7. 风险 / 待办
+- **symlink 是否被 WorkBuddy 跟随**：下次会话验证 agent 能否调起 macro-analysis；不支持则回退 install 脚本同步
+- **data_query.py 裁剪**（依赖 collectors 动态 import）：TODO，暂留 tools/
+- **脚本内 data 相对路径**：部分脚本用相对路径写 `data/`，需改为相对仓库根或可配置，保证从 scripts/ 跑也正确读写
+- 现有 skills 全无 scripts/，Phase 2 搬时要新增 scripts/ 并迁引擎
+- v1 dashboard Flask → 静态生成：Phase 3 重写
