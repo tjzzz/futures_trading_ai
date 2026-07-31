@@ -16,6 +16,7 @@ RSS 新闻采集器 — V1 七因子归类
 import hashlib
 import json
 import re
+import shutil
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -30,6 +31,7 @@ CST = timezone(timedelta(hours=8))
 # ── 文件路径 ──
 EVENTS_FILE = PROJECT_ROOT / "data/events/event_tracker.json"
 FEED_FILE = PROJECT_ROOT / "data/events/latest_feed.json"
+NEWS_ARCHIVE_DIR = PROJECT_ROOT / "data/events/news/"
 
 # ── RSS 源（只保留有价值的） ──
 RSS_FEEDS = {
@@ -212,7 +214,19 @@ def classify_to_factors(text: str) -> list[tuple[str, float]]:
 
 def main():
     now = datetime.now(CST)
+    today = now.strftime("%Y-%m-%d")
     logger.info("=== 新闻采集 (V1 七因子) %s ===", now.strftime("%Y-%m-%d %H:%M CST"))
+
+    # ── 检查今日是否已归档（复用缓存）──
+    archive_path = NEWS_ARCHIVE_DIR / f"{today}.json"
+    if archive_path.exists():
+        cached = json.loads(archive_path.read_text(encoding="utf-8"))
+        logger.info(f"  今日新闻已归档，复用缓存: {today} ({cached.get('total', 0)} 条)")
+        # 确保 latest_feed.json 也指向最新
+        if not FEED_FILE.exists():
+            FEED_FILE.parent.mkdir(parents=True, exist_ok=True)
+            FEED_FILE.write_text(json.dumps(cached, ensure_ascii=False, indent=2), encoding="utf-8")
+        return {"snapshot": {}, "history": []}
 
     all_items = []
     source_counts = {}
@@ -317,6 +331,15 @@ def main():
     EVENTS_FILE.parent.mkdir(parents=True, exist_ok=True)
     EVENTS_FILE.write_text(json.dumps(events_data, ensure_ascii=False, indent=2), encoding="utf-8")
     logger.info("  活跃事件: %d 条（置信度≥0.4）", len(active_events))
+
+    # ── 写入按日归档 ──
+    NEWS_ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+    archive_path.write_text(json.dumps(feed_data, ensure_ascii=False, indent=2), encoding="utf-8")
+    # 更新 latest.json
+    latest_path = NEWS_ARCHIVE_DIR / "latest.json"
+    shutil.copy2(archive_path, latest_path)
+    logger.info(f"  📦 新闻归档: {today} ({feed_data['total']} 条)")
+
     logger.info("✅ 新闻采集完成")
     return {"snapshot": {}, "history": []}
 

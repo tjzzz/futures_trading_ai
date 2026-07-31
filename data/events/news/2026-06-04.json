@@ -1,0 +1,119 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 8,
+  "events": [
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves after hours: Lululemon Athletica, ServiceTitan, Argan and more",
+      "description": "See which stocks are posting big moves after the bell.",
+      "link": "https://www.cnbc.com/2026/06/04/stocks-making-the-biggest-moves-after-hours-lulu-agx-ttan.html",
+      "pubDate": "Thu, 04 Jun 2026 22:54:31 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Ark Invest owns SpaceX in its venture ETF. It says Starlink alone supports $2 trillion value at IPO",
+      "description": "Brett Winton said SpaceX's Starlink satellite broadband network is the primary driver of ARK's valuation thesis.",
+      "link": "https://www.cnbc.com/2026/06/04/ark-invest-owns-spacex-in-its-venture-etf-it-says-starlink-alone-supports-2-trillion-value-at-ipo.html",
+      "pubDate": "Thu, 04 Jun 2026 14:18:15 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Kalshi is building a prediction markets 'Bloomberg Terminal' for high-end traders, source says",
+      "description": "The prediction market platform is developing the platform to create a singular platform for its highly engaged traders.",
+      "link": "https://www.cnbc.com/2026/06/04/kalshi-is-building-a-bloomberg-terminal-for-prediction-markets.html",
+      "pubDate": "Thu, 04 Jun 2026 12:47:27 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves premarket: Broadcom, Micron, Petco, Coinbase and more",
+      "description": "These are the stocks posting the largest moves in the premarket.",
+      "link": "https://www.cnbc.com/2026/06/04/stocks-making-the-biggest-moves-premarket-.html",
+      "pubDate": "Thu, 04 Jun 2026 16:33:01 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Home sellers pull homes off market at fastest pace since 2020",
+      "description": "CNBC's Diana Olick reports on news regarding the housing market.",
+      "link": "https://www.cnbc.com/video/2026/06/04/home-sellers-pull-homes-off-market-at-fastest-pace-since-2020.html",
+      "pubDate": "Thu, 04 Jun 2026 15:55:17 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Higher mortgage rates don't just keep buyers on the sidelines. Application denials rise too",
+      "description": "The denial rate in loan applications was 15.1% in 2024, up from 12.2% in 2021, a rise that occurred alongside surging mortgage rates, the St. Louis Fed found.",
+      "link": "https://www.cnbc.com/2026/06/04/higher-mortgage-rates-push-application-denial-rates-up.html",
+      "pubDate": "Thu, 04 Jun 2026 12:15:01 GMT",
+      "factors": [
+        "opportunity_cost"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Why institutional investors are returning to retail 'in a very big way'",
+      "description": "Investment transaction volumes reached more than $15 billion during the first quarter, an increase of 5% compared with Q1 2025, according to JLL.",
+      "link": "https://www.cnbc.com/2026/06/04/institutional-investors-retail-jll.html",
+      "pubDate": "Thu, 04 Jun 2026 13:43:59 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Sellers are pulling homes off the market at the fastest pace since 2020",
+      "description": "Frustrated sellers are pulling their homes off the market at an increasingly high pace, as demand weakens and bidding wars wane.",
+      "link": "https://www.cnbc.com/2026/06/03/sellers-delisting-homes-redfin.html",
+      "pubDate": "Thu, 04 Jun 2026 18:50:29 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}

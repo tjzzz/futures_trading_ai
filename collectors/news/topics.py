@@ -17,6 +17,7 @@
 
 import hashlib
 import json
+import shutil
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -29,6 +30,7 @@ TOPIC_FACTORY = PROJECT_ROOT / "data/events"
 EVENT_FILE = TOPIC_FACTORY / "event_tracker.json"
 FEED_FILE = TOPIC_FACTORY / "latest_feed.json"
 CALENDAR_FILE = TOPIC_FACTORY / "calendar_cache.json"
+TRACKER_ARCHIVE_DIR = TOPIC_FACTORY / "tracker/"
 
 # ── 事件关键词 → 事件类型 + 因子标签 ──
 # 用于自动创建事件
@@ -336,6 +338,24 @@ def process():
     tracker["active_events"] = events
     tracker["fetched_at"] = _now_cst()
     _save_json(EVENT_FILE, tracker)
+
+    # ── 写入按日快照归档 ──
+    today = _today_cst()
+    TRACKER_ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+    snapshot = {
+        "date": today,
+        "fetched_at": _now_cst(),
+        "total_events": len(events),
+        "active_count": len([e for e in events if e["status"] == "active"]),
+        "resolved_count": len([e for e in events if e["status"] != "active"]),
+        "events": events,
+    }
+    archive_path = TRACKER_ARCHIVE_DIR / f"{today}.json"
+    archive_path.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
+    # 更新 latest.json
+    latest_path = TRACKER_ARCHIVE_DIR / "latest.json"
+    shutil.copy2(archive_path, latest_path)
+    logger.info(f"  📦 事件跟踪归档: {today} ({len(events)} 事件)")
 
     logger.info(f"  新增事件: {new_event_count} / 匹配追加: {matched_count} / 忽略: {ignored_count}")
     logger.info(f"  活跃事件计: {len([e for e in events if e['status'] == 'active'])} / 总计: {len(events)}")

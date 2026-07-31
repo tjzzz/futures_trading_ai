@@ -7,8 +7,8 @@ V3 Data Query Tool — 封装 V2 数据层供 AI Agent 调用
     python data_query.py macro [--refresh]      — 宏观数据摘要
     python data_query.py positions              — 查询持仓 (结合 vault memory)
     python data_query.py history <品种> [--refresh] — 历史行情 (gold/silver/silver_ratio)
-    python data_query.py events [--refresh]     — 活跃事件
-    python data_query.py news [--refresh]       — 最新新闻
+    python data_query.py events [--date <日期>] — 活跃事件/历史日历
+    python data_query.py news [--date <日期>]   — 最新新闻/历史新闻
     python data_query.py analysis               — 运行四象限分析
     python data_query.py monitor                — 阈值监控状态
     python data_query.py factors [因子] [--refresh] — 全部/单因子数据
@@ -17,7 +17,8 @@ V3 Data Query Tool — 封装 V2 数据层供 AI Agent 调用
     python data_query.py events_by_factor <因子>— 按因子查事件
     python data_query.py realtime <源>          — 实时数据直查（不落盘）
 
-    --refresh  自动刷新过期数据后再查询（运行采集器）
+    --date <日期>  查询历史数据 (YYYY-MM-DD 或 "latest")，适用于 news/events
+    --refresh      自动刷新过期数据后再查询（运行采集器）
 
 实时数据直查 (realtime):
     gold/silver       → gold-api.com 金银现货
@@ -51,6 +52,10 @@ EVENT_FILE = DATA_EVENTS / "event_tracker.json"
 MONITOR_FILE = DATA_EVENTS / "monitor_state.json"
 NEWS_FILE = DATA_EVENTS / "latest_feed.json"
 FACTORS_FILE = PROJECT_ROOT / "data" / "factors" / "current_factors.json"
+
+NEWS_ARCHIVE_DIR = DATA_EVENTS / "news"
+CALENDAR_ARCHIVE_DIR = DATA_EVENTS / "calendar"
+TRACKER_ARCHIVE_DIR = DATA_EVENTS / "tracker"
 
 HISTORY_FILES = {
     "gold": DATA_HISTORY / "daily" / "gold_silver_daily.csv",
@@ -265,8 +270,22 @@ def cmd_history(symbol: str, days: int = 30):
     return {"symbol": symbol, "days": days, "data": result}
 
 
-def cmd_events():
-    """活跃事件"""
+def cmd_events(date_str: str = ""):
+    """活跃事件（默认）或按日期查询历史日历
+
+    Args:
+        date_str: ""=活跃事件, "latest"=最新日历归档, "YYYY-MM-DD"=指定日期
+    """
+    if date_str:
+        if date_str == "latest":
+            fp = CALENDAR_ARCHIVE_DIR / "latest.json"
+        else:
+            fp = CALENDAR_ARCHIVE_DIR / f"{date_str}.json"
+        if not fp.exists():
+            return {"error": f"日历未找到: {date_str}", "path": str(fp)}
+        return read_json(fp)
+
+    # 默认：活跃事件（现有行为）
     data = read_json(EVENT_FILE)
     dashboard = read_json(DASHBOARD_FILE)
 
@@ -277,8 +296,25 @@ def cmd_events():
     return events
 
 
-def cmd_news(limit: int = 10):
-    """最新新闻"""
+def cmd_news(limit: int = 10, date_str: str = ""):
+    """最新新闻（默认）或按日期查询历史新闻
+
+    Args:
+        limit: 返回条数上限
+        date_str: ""=最新, "latest"=最新归档, "YYYY-MM-DD"=指定日期
+    """
+    if date_str:
+        if date_str == "latest":
+            fp = NEWS_ARCHIVE_DIR / "latest.json"
+        else:
+            fp = NEWS_ARCHIVE_DIR / f"{date_str}.json"
+        if not fp.exists():
+            return {"error": f"新闻未找到: {date_str}", "path": str(fp)}
+        data = read_json(fp)
+        items = data.get("events", [])
+        return {"date": date_str, "total": len(items), "news": items[:limit]}
+
+    # 默认：最新新闻
     data = read_json(NEWS_FILE)
     if "error" in data:
         return data
@@ -564,6 +600,17 @@ def main():
 
     command = args[0]
 
+    # 提取 --date 参数（支持 --date=YYYY-MM-DD 或 --date YYYY-MM-DD）
+    date_str = ""
+    raw = sys.argv[1:]
+    for i, token in enumerate(raw):
+        if token == "--date" and i + 1 < len(raw):
+            date_str = raw[i + 1]
+            break
+        if token.startswith("--date="):
+            date_str = token.split("=", 1)[1]
+            break
+
     # ── 新鲜度检查（部分命令支持）──
     freshness_checks = {
         "snapshot": (DASHBOARD_FILE, "dashboard_data"),
@@ -583,8 +630,8 @@ def main():
         "macro": lambda: cmd_macro(),
         "positions": lambda: {"error": "请通过 agent memory 查询持仓"},
         "history": lambda: cmd_history(args[1]) if len(args) > 1 else {"error": "请指定品种: gold/silver/silver_ratio"},
-        "events": lambda: cmd_events(),
-        "news": lambda: cmd_news(),
+        "events": lambda: cmd_events(date_str),
+        "news": lambda: cmd_news(date_str=date_str),
         "monitor": lambda: cmd_monitor(),
         "analysis": lambda: cmd_analysis(),
         "factors": lambda: cmd_factors(args[1] if len(args) > 1 else ""),

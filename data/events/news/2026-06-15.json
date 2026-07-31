@@ -1,0 +1,426 @@
+{
+  "fetched_at": "2026-06-15 09:47 CST",
+  "total": 30,
+  "events": [
+    {
+      "source": "cnbc_world",
+      "title": "U.S. and Iran agree on peace deal to end the war, Trump and Pakistan say",
+      "description": "The deal follows weeks of mixed messaging from both Washington and Tehran on the trajectory of the conflict.",
+      "link": "https://www.cnbc.com/2026/06/14/us-iran-war-peace-deal.html",
+      "pubDate": "Sun, 14 Jun 2026 23:23:42 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "World leaders welcome U.S.-Iran deal as Europe signals sanctions relief, urges Hormuz reopening",
+      "description": "The agreement came after more than three months of stop-start negotiations and bouts of fighting since late February, roiling global energy and commodities markets.",
+      "link": "https://www.cnbc.com/2026/06/15/europe-japan-countries-welcome-us-iran-deal-strait-of-hormuz-reopening.html",
+      "pubDate": "Mon, 15 Jun 2026 01:36:48 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Markets cheer U.S.-Iran agreement, but some investors caution deal is yet to be signed",
+      "description": "Asian stocks rallied Monday while oil prices tumbled after the U.S. and Iran agreed to a peace deal aimed at ending nearly four months of conflict.",
+      "link": "https://www.cnbc.com/2026/06/15/us-iran-deal-stocks-bonds-gold-oil.html",
+      "pubDate": "Mon, 15 Jun 2026 01:21:22 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "U.S. stock futures jump on Iran deal to end the war; Japan's Nikkei surges 5%: Live updates",
+      "description": "The three major indexes are coming off a winning week.",
+      "link": "https://www.cnbc.com/2026/06/14/stock-market-today-live-updates.html",
+      "pubDate": "Mon, 15 Jun 2026 01:45:09 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "CNBC Daily Open: For real this time? U.S., Iran peace deal at hand",
+      "description": "The proposed deal will see the Strait of Hormuz opened, and the U.S. naval blockade lifted, in effect ending the conflict.",
+      "link": "https://www.cnbc.com/2026/06/15/cnbc-daily-open-for-real-this-time-us-iran-peace-deal-at-hand.html",
+      "pubDate": "Mon, 15 Jun 2026 01:05:40 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "This Chinese consumer stock could double if its global industrial pivot succeeds, JPMorgan says ",
+      "description": "A Chinese home appliance company has the chance to become a global player, JPMorgan analysts said in a report that gave several stocks an overweight rating.",
+      "link": "https://www.cnbc.com/2026/06/14/chinese-consumer-stock-could-double-if-industrial-pivot-works-jpmorgan-says.html",
+      "pubDate": "Sun, 14 Jun 2026 12:35:26 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "UK forces board sanctioned Russian shadow fleet oil tanker",
+      "description": "The U.K.'s Ministry of Defence says the SMYRTOS was in the English Channel and will be held off the south coast during investigations.",
+      "link": "https://www.cnbc.com/2026/06/14/uk-forces-board-sanctioned-russian-shadow-fleet-oil-tanker.html",
+      "pubDate": "Sun, 14 Jun 2026 09:32:40 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "SpaceX IPO sticks the landing. Here's what investors are saying about its epic first trading day",
+      "description": "Despite a large retail allocation and huge volume, volatility was moderate",
+      "link": "https://www.cnbc.com/2026/06/13/spacex-ipo-sticks-the-landing-heres-what-investors-are-saying-about-its-epic-first-trading-day.html",
+      "pubDate": "Sat, 13 Jun 2026 13:37:31 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "SpaceX IPO takeaways: SPCX closes at $161, jumping 19% after record debut",
+      "description": "SpaceX rallied in its first day as a public company. CNBC provided updates throughout the day.",
+      "link": "https://www.cnbc.com/2026/06/12/spacex-ipo-spcx-live-updates.html",
+      "pubDate": "Fri, 12 Jun 2026 23:06:36 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "This wealth advisor stock should benefit as clients get rich from SpaceX IPO, says Baird",
+      "description": "San Francisco-based wealth advisor Andersen Group is a less-than-obvious beneficiary of the SpaceX IPO, according to Baird.",
+      "link": "https://www.cnbc.com/2026/06/13/this-wealth-advisor-stock-should-benefit-as-clients-get-rich-from-spacex-ipo-says-baird.html",
+      "pubDate": "Sat, 13 Jun 2026 13:41:58 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Why Nokia is betting on AI-powered networks",
+      "description": "Nokia helped define the mobile era. Now it's trying to shape what comes next. As artificial intelligence transforms how networks are built and managed, the Finnish telecom giant is betting on AI-driven infrastructure, 6G and a more software-centric future.",
+      "link": "https://www.cnbc.com/video/2026/06/12/why-nokia-is-betting-on-ai-powered-networks.html",
+      "pubDate": "Fri, 12 Jun 2026 08:21:27 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "One quality will be most in-demand from job-seekers in the AI era, Animoca co-founder Siu says",
+      "description": "Yat Siu, the co-founder of Animoca Brands, says AI is going to change what skills are most valuable in the workforce.",
+      "link": "https://www.cnbc.com/2026/06/14/ceo-of-.html",
+      "pubDate": "Sun, 14 Jun 2026 14:03:30 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Why U.S. AI giants like Anthropic, OpenAI are launching major expansions in London",
+      "description": "The U.K. capital has become a key growth target for many of the world's most talked about AI companies.",
+      "link": "https://www.cnbc.com/2026/06/11/anthropic-openai-london-expansions-big-tech.html",
+      "pubDate": "Thu, 11 Jun 2026 11:22:23 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Goldman says stocks like Nvidia have more room to run",
+      "description": "Analysts at Goldman Sachs named several stocks that have defensive attributes that they say also offer plenty of upside.",
+      "link": "https://www.cnbc.com/2026/06/13/stocks-with-upside-include-nvidia-goldman-says.html",
+      "pubDate": "Sat, 13 Jun 2026 13:43:54 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "He left Goldman Sachs after 26 years with no job lined up. Now he runs one of America’s oldest banks",
+      "description": "After 26 years at Goldman Sachs, Robin Vince walked away without another job lined up. In this episode of \"Executive Decisions,\" the BNY CEO reflects on why he stepped off a successful career path, what he learned during the global financial crisis and how that pause ultimately led him to one of America’s oldest banks.",
+      "link": "https://www.cnbc.com/video/2026/06/09/bny-chairman-and-ceo-robin-vince-executive-decisions-with-steve-sedgwick.html",
+      "pubDate": "Tue, 09 Jun 2026 04:00:01 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Trump celebrates turning 80 with a UFC cage-fighting event while big issues loom over his presidency",
+      "description": "The president has sought to tie Sunday's event to larger, months-long celebrations of the 250th anniversary of the signing of the Declaration of Independence.",
+      "link": "https://www.cnbc.com/2026/06/14/trump-turns-80-with-a-ufc-event-while-big-issues-loom-over-presidency.html",
+      "pubDate": "Sun, 14 Jun 2026 21:21:00 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "UAE denies 'false' reports of fund transfer to Iran",
+      "description": "The statement follows a Reuters report that the UAE has agreed to unlock billions of dollars of frozen funds for Iran.",
+      "link": "https://www.cnbc.com/2026/06/13/uae-denies-false-reports-of-fund-transfer-to-iran.html",
+      "pubDate": "Sat, 13 Jun 2026 09:30:18 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Swiss reject plan to cap its population at 10 million, avoiding EU clash and cheering business",
+      "description": "The referendum had put businesses on edge due to concerns it could lead to the end of free movement of labor between Switzerland and the EU.",
+      "link": "https://www.cnbc.com/2026/06/14/swiss-voters-set-to-reject-population-cap-in-referendum.html",
+      "pubDate": "Sun, 14 Jun 2026 16:41:07 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Putin, Zelenskyy speak with Trump by phone as drone strikes kill 2 in Russia and UK detains tanker",
+      "description": "The leaders also discussed Iran, with Trump saying a U.S. agreement with Tehran was close.",
+      "link": "https://www.cnbc.com/2026/06/14/putin-zelenskyy-talk-with-trump-by-phone-drones-kill-2-in-russia.html",
+      "pubDate": "Sun, 14 Jun 2026 19:52:24 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Elon Musk drifted from Larry Page over a decade ago, but their companies are closer than ever",
+      "description": "SpaceX and Google have a long and complicated relationship, but they were both celebrating this week after Elon Musk's company held its blockbuster IPO.",
+      "link": "https://www.cnbc.com/2026/06/14/elon-musk-drifted-from-larry-page-but-spacex-google-closer-than-ever.html",
+      "pubDate": "Sun, 14 Jun 2026 11:30:01 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "From 10% chance of success to $2 trillion market cap: SpaceX's historic IPO",
+      "description": "After its Nasdaq debut on Friday, SpaceX was the sixth most-valuable U.S. company, despite being a fraction the size by revenue of tech's megacaps.",
+      "link": "https://www.cnbc.com/2026/06/13/from-10percent-chance-of-success-to-2-trillion-spacexs-historic-ipo.html",
+      "pubDate": "Sat, 13 Jun 2026 15:50:43 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "U.S.-Iran peace deal could be finalized 'in the next 24 hours,' Pakistan's PM says",
+      "description": "A senior Trump administration official had said earlier that deal to end the Iran war could be signed soon.",
+      "link": "https://www.cnbc.com/2026/06/12/iran-deal-trump-pakistan-sharif.html",
+      "pubDate": "Sat, 13 Jun 2026 14:13:52 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Switzerland is voting on whether to cap its population at 10 million. Here's what to know",
+      "description": "Switzerland votes on a population cap that could tighten immigration and put its EU free-movement agreement under pressure.",
+      "link": "https://www.cnbc.com/2026/06/13/switzerland-population-cap-referendum-immigration.html",
+      "pubDate": "Sat, 13 Jun 2026 10:51:08 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Beijing says it's 'strongly dissatisfied' with Pentagon move against top Chinese tech firms",
+      "description": "The Pentagon added a slew of Chinese tech firms, including Alibaba, Baidu and BYD, to a list of entities it believes have aided China's military.",
+      "link": "https://www.cnbc.com/2026/06/13/china-dissatisfied-with-us-move-against-chinese-tech-firms.html",
+      "pubDate": "Sat, 13 Jun 2026 11:31:17 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "32-year-old quit teaching and built a fidget-toy business with her dad. It brought in $428,000 last year",
+      "description": "Charlie Moreton and Victoria Baumann are the father-daughter duo behind Victoria Essie Studio, which has seen viral success selling 3D-printed fidget toys.",
+      "link": "https://www.cnbc.com/2026/06/14/32-year-old-quit-teaching-built-fidget-toy-business-with-her-dad-that-brought-in-428k.html",
+      "pubDate": "Sun, 14 Jun 2026 14:00:01 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "SpaceX market cap tops $2 trillion after shares of Elon Musk's rocket company gain 19% on debut",
+      "description": "SpaceX shares soared on Friday as trading commenced on the Nasdaq.",
+      "link": "https://www.cnbc.com/2026/06/12/spacex-stock-jumps-2-trillion.html",
+      "pubDate": "Sun, 14 Jun 2026 21:32:00 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "U.S. opens its home World Cup with a dynamic 4-1 victory over Paraguay, sparked by Balogun's 2 goals",
+      "description": "Balogun scored twice in the Americans' three-goal barrage before halftime in a dynamic 4-1 victory over Paraguay.",
+      "link": "https://www.cnbc.com/2026/06/13/us-wins-4-1-victory-over-paraguay-in-world-cup-opener.html",
+      "pubDate": "Sat, 13 Jun 2026 11:23:08 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Trump says U.S. military strike killed leader of Venezuela's Tren de Aragua gang",
+      "description": "Trump on Friday said U.S. forces carried out a ⁠strike that killed Hector Rusthenford Guerrero Flores, the leader of Venezuelan ​gang Tren de Aragua.",
+      "link": "https://www.cnbc.com/2026/06/13/trump-venezuela-tren-de-aragua.html",
+      "pubDate": "Sat, 13 Jun 2026 16:31:13 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Former Tesla board member says SpaceX needs to achieve 2 of its 3 moonshots to keep its valuation ",
+      "description": "SpaceX has achieved its goal of becoming the largest IPO on record.",
+      "link": "https://www.cnbc.com/2026/06/12/spacex-moonshots-valuation-westly-tesla.html",
+      "pubDate": "Sat, 13 Jun 2026 07:22:10 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    },
+    {
+      "source": "cnbc_world",
+      "title": "Elon Musk becomes world's first trillionaire as SpaceX begins trading on the Nasdaq",
+      "description": "Elon Musk's stake in SpaceX is worth more than $766 billion. Combined with his Tesla holdings, Musk's net worth as of Friday is roughly $1.05 trillion.",
+      "link": "https://www.cnbc.com/2026/06/12/elon-musk-trillionaire-spacex.html",
+      "pubDate": "Fri, 12 Jun 2026 20:42:19 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-15 09:47 CST"
+    }
+  ]
+}

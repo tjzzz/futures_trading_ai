@@ -1,0 +1,49 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 3,
+  "events": [
+    {
+      "source": "cnbc_economy",
+      "title": "We are seeing a 'K-shaped economy' in housing, says Zelman’s Alan Ratner",
+      "description": "Alan Ratner, managing director at Zelman, joins ‘Squawk on the Street’ to discuss the impact of higher mortgage rates on homebuilders, whether housing is also seeing a 'K-shaped economy,' and more.",
+      "link": "https://www.cnbc.com/video/2026/05/27/we-are-seeing-a-k-shaped-economy-in-housing-says-zelmanas-alan-ratner.html",
+      "pubDate": "Wed, 27 May 2026 15:03:29 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "42% of homeowners say insurance costs have gone up 'a lot,' survey finds. Here's why",
+      "description": "Inflation, climate change and other factors have combined to push up premiums for homeowners insurance — with broad implications for consumers and the economy. ",
+      "link": "https://www.cnbc.com/2026/05/27/homeowners-insurance-premiums.html",
+      "pubDate": "Wed, 27 May 2026 12:15:01 GMT",
+      "factors": [
+        "inflation"
+      ],
+      "relevance": {
+        "inflation": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Mortgage refinance demand drops 18% as rates hit highest level since August",
+      "description": "Mortgage rates rose to the highest level in nine months, hitting refinance demand hardest. Homebuyers also pulled back but were still more active than last year.",
+      "link": "https://www.cnbc.com/2026/05/27/mortgage-refinance-demand-drops.html",
+      "pubDate": "Wed, 27 May 2026 11:23:39 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}

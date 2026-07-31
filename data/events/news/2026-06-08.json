@@ -1,0 +1,77 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 5,
+  "events": [
+    {
+      "source": "cnbc_markets",
+      "title": "This startup wants to reduce payment friction on prediction markets",
+      "description": "EDGE Markets is announcing two new products to solve payment issues in prediction markets, the company shared exclusively with CNBC.",
+      "link": "https://www.cnbc.com/2026/06/08/this-startup-wants-to-reduce-payment-friction-on-prediction-markets.html",
+      "pubDate": "Mon, 08 Jun 2026 12:31:46 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves premarket: Nvidia, Marvell, Flex and more",
+      "description": "These are the stocks posting the largest moves in early trading.",
+      "link": "https://www.cnbc.com/2026/06/08/stocks-making-the-biggest-moves-premarket-nvidia-marvell-flex-and-more.html",
+      "pubDate": "Mon, 08 Jun 2026 12:00:05 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Hong Kong's IPO boom is developing a performance problem",
+      "description": "As Hong Kong vies with Wall Street to be the top IPO market, a growing number of pre-debut runups turn sour after their listing.",
+      "link": "https://www.cnbc.com/2026/06/08/hong-kongs-ipo-boom-is-developing-a-performance-problem.html",
+      "pubDate": "Mon, 08 Jun 2026 00:44:55 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Bitcoin is cratering, but a new Wall Street crypto hype is on the rise",
+      "description": "As bitcoin dropped to its lowest price since 2024, investors flock to a new type of crypto investment linked to the hyperliquid platforms, HYPE ETFs.",
+      "link": "https://www.cnbc.com/2026/06/06/bitcoin-price-crash-crypto-hype-hyperliquid-etfs.html",
+      "pubDate": "Mon, 08 Jun 2026 15:11:48 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "China's property sector hasn't hit bottom, but the slump is slowing: Strategist",
+      "description": "Peter Churchouse, Managing Director at Portwood Capital, says China’s property downturn may be stabilizing as policy support slows the pace of price declines. However, he warns the market has likely not yet bottomed, and long-term structural pressures such as weaker demographics, slower urbanization",
+      "link": "https://www.cnbc.com/video/2026/06/08/china-property-slump-slowing-structural-downturn-remains-strategist.html",
+      "pubDate": "Mon, 08 Jun 2026 05:48:19 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-12",
+  "total": 1,
+  "events": [
+    {
+      "date": "2026-06-12 00:00",
+      "event": "SpaceX确定上市日期：6月12日",
+      "region": "美国",
+      "importance": 4,
+      "actual": "nan",
+      "expected": "nan",
+      "previous": "nan",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "unclassified"
+      ]
+    }
+  ],
+  "archived_at": "migration"
+}

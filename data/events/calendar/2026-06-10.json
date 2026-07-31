@@ -1,0 +1,41 @@
+{
+  "date": "2026-06-10",
+  "total": 2,
+  "events": [
+    {
+      "date": "2026-06-10 20:30",
+      "event": "5月核心CPI同比",
+      "region": "美国",
+      "importance": 3,
+      "actual": "nan",
+      "expected": "2.9",
+      "previous": "2.8",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "inflation"
+      ]
+    },
+    {
+      "date": "2026-06-10 20:30",
+      "event": "5月CPI同比",
+      "region": "美国",
+      "importance": 4,
+      "actual": "nan",
+      "expected": "4.2",
+      "previous": "3.8",
+      "surprise": {
+        "direction": "unknown",
+        "pct_diff": null,
+        "impact": "中性"
+      },
+      "factor_tags": [
+        "inflation"
+      ]
+    }
+  ],
+  "archived_at": "migration"
+}

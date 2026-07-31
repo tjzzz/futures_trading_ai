@@ -1,0 +1,239 @@
+{
+  "date": "2026-06-09",
+  "fetched_at": "2026-06-09 20:42:56",
+  "total_events": 6,
+  "active_count": 6,
+  "resolved_count": 0,
+  "events": [
+    {
+      "title": "Hot jobs report puts Fed cuts further out of reach as Chair Warsh faces policy tests",
+      "summary": "Another big jobs report in May has swept aside the possibility of interest rate cuts anytime soon.",
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/06/05/hot-jobs-report-puts-fed-cuts-further-out-of-reach-as-chair-warsh-faces-policy-tests.html",
+      "pubDate": "Fri, 05 Jun 2026 19:09:09 GMT",
+      "factor_tags": [
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.85,
+        "safe_haven": 0.3
+      },
+      "impact": null,
+      "expiry": null,
+      "event_id": "evt_4c90eb0c",
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "headline": "Hot jobs report puts Fed cuts further out of reach as Chair Warsh faces policy tests",
+          "detail": "Another big jobs report in May has swept aside the possibility of interest rate cuts anytime soon.",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Goldman Sachs cuts Hong Kong stocks in favor of mainland China AI hardware plays",
+          "detail": "The investment bank on Wednesday cut its rating on H shares to market-weight from overweight, while staying overweight mainland China's A shares.",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Fed Chair Warsh makes first hires at central bank, including 'Project 2025' author",
+          "detail": "The new Fed chair has made his first hires. One wrote the Fed chapter in the conservative policy blueprint \"Project 2025.\"",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "China's property sector hasn't hit bottom, but the slump is slowing: Strategist",
+          "detail": "Peter Churchouse, Managing Director at Portwood Capital, says China’s property downturn may be stabilizing as policy support slows the pace of price declines. However, he warns the market has likely n",
+          "source": "cnbc_economy",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Sen. Lisa Blunt Rochester: We have a housing crisis in this country",
+          "detail": "Sen. Lisa Blunt Rochester (D-Del.) joins 'Squawk Box' to discuss her thoughts on Fed Chair Kevin Warsh, addressing the U.S. housing crisis, President Trump's decision to name Bill Pulte as acting DNI,",
+          "source": "cnbc_economy",
+          "impact": null
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "title": "Fed Chair Warsh makes first hires at central bank, including 'Project 2025' author",
+      "summary": "The new Fed chair has made his first hires. One wrote the Fed chapter in the conservative policy blueprint \"Project 2025.\"",
+      "source": "cnbc_markets",
+      "link": "https://www.cnbc.com/2026/06/02/fed-chair-warsh-makes-first-hires-at-central-bank-including-project-2025-author.html",
+      "pubDate": "Wed, 03 Jun 2026 14:38:04 GMT",
+      "factor_tags": [
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.6,
+        "safe_haven": 0.3
+      },
+      "impact": null,
+      "expiry": null,
+      "event_id": "evt_eff4d351",
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "headline": "Greg Abel just made his first big deal as Berkshire CEO. Why Warren Buffett is happy",
+          "detail": "Berkshire's purchase of homebuilder Taylor Morrison gives the conglomerate a larger foothold in housing and appears to have been struck at a bargain valuation.",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
+          "detail": "The acquisition marks one of the first major strategic deals under Warren Buffett's successor Greg Abel, who took over as CEO in the beginning of 2026.",
+          "source": "cnbc_economy",
+          "impact": null
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "title": "Sen. Lisa Blunt Rochester: We have a housing crisis in this country",
+      "summary": "Sen. Lisa Blunt Rochester (D-Del.) joins 'Squawk Box' to discuss her thoughts on Fed Chair Kevin Warsh, addressing the U.S. housing crisis, President Trump's decision to name Bill Pulte as acting DNI,",
+      "source": "cnbc_economy",
+      "link": "https://www.cnbc.com/video/2026/06/03/sen-lisa-blunt-rochester-we-have-a-housing-crisis-in-this-country.html",
+      "pubDate": "Wed, 03 Jun 2026 11:27:56 GMT",
+      "factor_tags": [
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.6,
+        "safe_haven": 0.6
+      },
+      "impact": null,
+      "expiry": null,
+      "event_id": "evt_3e59da28",
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "headline": "Rubio odds for GOP 2028 nominee close to overtaking Vance on Kalshi",
+          "detail": "Vice President Vance has seen his odds slip since the start of the year, as the secretary of State's chances have been buoyed by international conflicts.",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Cassidy: Pulte not 'competent' for intelligence director role",
+          "detail": "Intelligence community veterans have warned that Pulte is ill-prepared for the job and could target Trump's foes in the role.",
+          "source": "cnbc_economy",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Trump names housing chief Bill Pulte acting intelligence director, replacing Tulsi Gabbard",
+          "detail": "Pulte has alleged wrongdoing related to mortgages against Trump's foes, Federal Reserve Governor Lisa Cook and New York Attorney General Letitia James.",
+          "source": "cnbc_economy",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "42% of homeowners say insurance costs have gone up 'a lot,' survey finds. Here's why",
+          "detail": "Inflation, climate change and other factors have combined to push up premiums for homeowners insurance — with broad implications for consumers and the economy. ",
+          "source": "cnbc_economy",
+          "impact": null
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "event_id": "fed_policy_path",
+      "title": "Fed 政策路径跟踪",
+      "type": "permanent",
+      "status": "active",
+      "severity": "medium",
+      "factor_tags": [
+        "opportunity_cost",
+        "currency"
+      ],
+      "started_at": "2026-06-09",
+      "expected_expiry": null,
+      "sources": [
+        "system"
+      ],
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "headline": "Bitcoin set to slump to new lows for 2026 after recent sell-off, traders forecast",
+          "detail": "The cryptocurrency is likely to break below its lows hit in early February, traders on prediction market Kalshi believe.",
+          "source": "cnbc_markets",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Higher mortgage rates don't just keep buyers on the sidelines. Application denials rise too",
+          "detail": "The denial rate in loan applications was 15.1% in 2024, up from 12.2% in 2021, a rise that occurred alongside surging mortgage rates, the St. Louis Fed found.",
+          "source": "cnbc_economy",
+          "impact": null
+        }
+      ],
+      "key_levels": {},
+      "next_focus": null,
+      "narrative_change": null
+    },
+    {
+      "event_id": "economic_calendar",
+      "title": "经济数据日历",
+      "type": "permanent",
+      "status": "active",
+      "severity": "medium",
+      "factor_tags": [
+        "inflation",
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "started_at": "2026-06-09",
+      "expected_expiry": null,
+      "sources": [
+        "system"
+      ],
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "headline": "Sellers are pulling homes off the market at the fastest pace since 2020",
+          "detail": "Frustrated sellers are pulling their homes off the market at an increasingly high pace, as demand weakens and bidding wars wane.",
+          "source": "cnbc_economy",
+          "impact": null
+        },
+        {
+          "date": "2026-06-09",
+          "headline": "Dubai's premium real estate segments are recovering despite Iran uncertainty: DAMAC Group",
+          "detail": "Ali Sajwani, Managing Director of Dubai real estate developer DAMAC Group, says there's been a pick-up in sales in the UAE real estate market despite the ongoing Middle East war. He attributes Dubai's",
+          "source": "cnbc_economy",
+          "impact": null
+        }
+      ],
+      "key_levels": {},
+      "next_focus": null,
+      "narrative_change": null
+    },
+    {
+      "event_id": "iran_middle_east",
+      "title": "中东/伊朗局势",
+      "type": "geo_political",
+      "status": "active",
+      "severity": "high",
+      "factor_tags": [
+        "safe_haven"
+      ],
+      "started_at": "2026-06-01",
+      "expected_expiry": null,
+      "sources": [
+        "manual"
+      ],
+      "timeline": [],
+      "key_levels": {},
+      "next_focus": null,
+      "narrative_change": null
+    }
+  ]
+}

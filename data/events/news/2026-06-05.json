@@ -1,0 +1,65 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 4,
+  "events": [
+    {
+      "source": "cnbc_markets",
+      "title": "Hot jobs report puts Fed cuts further out of reach as Chair Warsh faces policy tests",
+      "description": "Another big jobs report in May has swept aside the possibility of interest rate cuts anytime soon.",
+      "link": "https://www.cnbc.com/2026/06/05/hot-jobs-report-puts-fed-cuts-further-out-of-reach-as-chair-warsh-faces-policy-tests.html",
+      "pubDate": "Fri, 05 Jun 2026 19:09:09 GMT",
+      "factors": [
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.85,
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Where investors may find the next 'big wave' for AI trade ",
+      "description": "Tim Urbanowicz, chief investment strategist at Innovator from Goldman Sachs Asset Management, tackles the AI boom.",
+      "link": "https://www.cnbc.com/2026/06/05/where-investors-may-find-the-next-big-wave-for-ai-trade.html",
+      "pubDate": "Fri, 05 Jun 2026 12:17:43 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves premarket: Lululemon, Micron, ServiceTitan, Strategy & more",
+      "description": "These are the stocks posting the largest moves premarket.",
+      "link": "https://www.cnbc.com/2026/06/05/stocks-making-the-biggest-moves-premarket-lulu-mu-ttan.html",
+      "pubDate": "Fri, 05 Jun 2026 11:25:10 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "China poaches more AI talent from the U.S. as it eyes the next 'super-app'",
+      "description": "Tencent Chief AI Scientist Yao Shunyu, who joined the company from OpenAI, said Friday he aims to pursue artificial general intelligence.",
+      "link": "https://www.cnbc.com/2026/06/05/china-may-move-toward-us-path-on-ai-as-firms-poach-employees.html",
+      "pubDate": "Fri, 05 Jun 2026 07:50:47 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}

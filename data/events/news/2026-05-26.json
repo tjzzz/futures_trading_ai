@@ -1,0 +1,35 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 2,
+  "events": [
+    {
+      "source": "cnbc_economy",
+      "title": "Wells Fargo to offer mortgage incentives on 3D printed homes with Icon",
+      "description": "CNBC's Diana Olick joins 'Squawk Box' with the latest edition of CNBC's Property Play.",
+      "link": "https://www.cnbc.com/video/2026/05/26/wells-fargo-to-offer-mortgage-incentives-on-3d-printed-homes-with-icon.html",
+      "pubDate": "Tue, 26 May 2026 12:13:02 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Wells Fargo to offer mortgage incentives on 3D printed homes with Icon",
+      "description": "Wells Fargo will provide a 50 basis point lender credit to buyers of Icon homes using its mortgages.",
+      "link": "https://www.cnbc.com/2026/05/26/wells-fargo-mortgage-incentives-3d-printed-homes-icon.html",
+      "pubDate": "Tue, 26 May 2026 12:16:21 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}

@@ -42,7 +42,9 @@ logs/
 
 # Data files (keep structure, ignore large files)
 
-
+# Runtime logs & state (don't commit)
+data/diagnostic_log.csv
+data/trading_state.json
 # Database (optional - remove if you want to track small DB files)
 # data/*.db
 

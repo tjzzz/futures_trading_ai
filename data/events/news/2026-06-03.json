@@ -1,0 +1,165 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 11,
+  "events": [
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves after hours: Broadcom, CrowdStrike, PVH & more",
+      "description": "See which stocks are posting big moves after the bell.",
+      "link": "https://www.cnbc.com/2026/06/03/stocks-making-the-biggest-moves-after-hours-avgo-crwd-pvh.html",
+      "pubDate": "Wed, 03 Jun 2026 22:51:53 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Bitcoin set to slump to new lows for 2026 after recent sell-off, traders forecast",
+      "description": "The cryptocurrency is likely to break below its lows hit in early February, traders on prediction market Kalshi believe.",
+      "link": "https://www.cnbc.com/2026/06/03/bitcoin-to-slump-to-new-lows-after-recent-sell-off-traders-predict.html",
+      "pubDate": "Wed, 03 Jun 2026 20:06:54 GMT",
+      "factors": [
+        "currency"
+      ],
+      "relevance": {
+        "currency": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Morgan Stanley will soon open its trillion-dollar wealth management funnel to AI agents",
+      "description": "Morgan Stanley's move is one of the earliest instances of a major Wall Street bank opening its platforms to external AI tools.",
+      "link": "https://www.cnbc.com/2026/06/03/ai-agents-morgan-stanley-wealth-management-funnel.html",
+      "pubDate": "Wed, 03 Jun 2026 15:32:54 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves premarket: Blackstone, Marvell Technology, Palo Alto Networks & more",
+      "description": "These are the stocks posting the largest moves premarket.",
+      "link": "https://www.cnbc.com/2026/06/03/stocks-making-the-biggest-moves-premarket-bx-mrvl-panw.html",
+      "pubDate": "Wed, 03 Jun 2026 11:36:50 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Goldman Sachs cuts Hong Kong stocks in favor of mainland China AI hardware plays",
+      "description": "The investment bank on Wednesday cut its rating on H shares to market-weight from overweight, while staying overweight mainland China's A shares.",
+      "link": "https://www.cnbc.com/2026/06/03/goldman-sachs-cuts-hong-kong-stocks-to-ne.html",
+      "pubDate": "Wed, 03 Jun 2026 01:49:10 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Fed Chair Warsh makes first hires at central bank, including 'Project 2025' author",
+      "description": "The new Fed chair has made his first hires. One wrote the Fed chapter in the conservative policy blueprint \"Project 2025.\"",
+      "link": "https://www.cnbc.com/2026/06/02/fed-chair-warsh-makes-first-hires-at-central-bank-including-project-2025-author.html",
+      "pubDate": "Wed, 03 Jun 2026 14:38:04 GMT",
+      "factors": [
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.6,
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "GOP Sen. Tillis slams Trump intelligence pick Pulte: 'Don't think he has a prayer'",
+      "description": "Pulte is widely viewed as a Trump loyalist who has targeted the president's political foes during his tenure leading the housing regulatory agency.",
+      "link": "https://www.cnbc.com/2026/06/03/tillis-trump-pulte-intelligence-dni-senate.html",
+      "pubDate": "Wed, 03 Jun 2026 18:25:37 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Sen. Lisa Blunt Rochester: We have a housing crisis in this country",
+      "description": "Sen. Lisa Blunt Rochester (D-Del.) joins 'Squawk Box' to discuss her thoughts on Fed Chair Kevin Warsh, addressing the U.S. housing crisis, President Trump's decision to name Bill Pulte as acting DNI, and more.",
+      "link": "https://www.cnbc.com/video/2026/06/03/sen-lisa-blunt-rochester-we-have-a-housing-crisis-in-this-country.html",
+      "pubDate": "Wed, 03 Jun 2026 11:27:56 GMT",
+      "factors": [
+        "opportunity_cost",
+        "safe_haven"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.6,
+        "safe_haven": 0.6
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Mortgage rates are easing slightly, but homebuyers are retreating",
+      "description": "Mortgage rates fell slightly last week, but neither current homeowners nor potential homebuyers were inspired. Demand for mortgages fell overall.",
+      "link": "https://www.cnbc.com/2026/06/03/mortgage-rates-are-easing-slightly-but-homebuyers-are-retreating.html",
+      "pubDate": "Wed, 03 Jun 2026 12:29:58 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Pulte appointment as spy chief would give a Trump attack dog access to a trove of intelligence",
+      "description": "In his role atop the housing finance agency, Bill Pulte has used his access to mortgage records to refer some top Trump opponents for prosecution.",
+      "link": "https://www.cnbc.com/2026/06/02/bill-pulte-dni-tulsi-gabbard.html",
+      "pubDate": "Wed, 03 Jun 2026 10:57:06 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Trump names housing chief Bill Pulte acting intelligence director, replacing Tulsi Gabbard",
+      "description": "Pulte has alleged wrongdoing related to mortgages against Trump's foes, Federal Reserve Governor Lisa Cook and New York Attorney General Letitia James.",
+      "link": "https://www.cnbc.com/2026/06/02/intelligence-trump-bill-pulte-tulsi-gabbard.html",
+      "pubDate": "Wed, 03 Jun 2026 14:57:55 GMT",
+      "factors": [
+        "opportunity_cost"
+      ],
+      "relevance": {
+        "opportunity_cost": 0.6
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}

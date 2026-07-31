@@ -1,0 +1,35 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 2,
+  "events": [
+    {
+      "source": "cnbc_economy",
+      "title": "Perot Group chairman: We’re building 1-million-square-foot facilities to keep up with demand",
+      "description": "Ross Perot Jr., Hillwood and The Perot Group chairman, joins 'The Exchange' to discuss the real estate market, keeping up with demand and much more.",
+      "link": "https://www.cnbc.com/video/2026/05/29/perot-group-chairman-weare-building-1-million-square-foot-facilities-to-keep-up-with-demand.html",
+      "pubDate": "Fri, 29 May 2026 17:41:54 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "NYC approves pied-à-terre tax: The Corcoran Group’s Noble Black on the impact on wealthy homeowners",
+      "description": "Noble Black, The Corcoran Group real estate broker, joins 'Squawk Box' to discuss New York City's pied-à-terre tax, impact on the real estate market, and more.",
+      "link": "https://www.cnbc.com/video/2026/05/29/nyc-approves-pied-a-terre-tax-the-corcoran-groupas-noble-black-on-the-impact-on-wealthy-homeowners.html",
+      "pubDate": "Fri, 29 May 2026 12:29:28 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}

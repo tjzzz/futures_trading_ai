@@ -125,9 +125,14 @@ def _safe_write_snapshot(updates: dict):
 
 
 def _safe_write_history(history: list):
-    """追加/覆盖写入历史 CSV"""
+    """追加/覆盖写入历史 CSV — 带合并去重
+
+    无论 mode="w" 还是 mode="a"，都采用"读旧+合新+去重+全量写回"策略。
+    按 (date, symbol) 对旧+新行去重，新行覆盖旧行。
+    """
     import csv
-    # 按文件分组（收集所有 mode="overwrite" 文件的行，先清空再写）
+    from collections import OrderedDict
+
     file_groups: dict = {}
     for h in history:
         fp = str(PROJECT_ROOT / h["file"])
@@ -140,20 +145,57 @@ def _safe_write_history(history: list):
     for fp_str, group in file_groups.items():
         file_path = Path(fp_str)
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        mode = group["mode"]
-        rows = group["rows"]
-        if not rows:
+        new_rows = group["rows"]
+        if not new_rows:
             continue
+
         try:
-            with open(file_path, mode, newline="", encoding="utf-8") as f:
-                writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
-                if mode == "w":
-                    writer.writeheader()
-                for row in rows:
-                    writer.writerow(row)
-            if mode == "w":
-                file_label = file_path.name
-                _log(f"  ✏️ {file_label}: 覆盖写入 {len(rows)} 行")
+            # ── Step 1: 读取现有数据 ──
+            existing = []
+            fieldnames = list(new_rows[0].keys())
+            if file_path.exists():
+                with open(file_path, "r", newline="", encoding="utf-8") as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        existing.append(row)
+
+            # ── Step 2: 合并去重 ──
+            # 以 (date, symbol) 作为去重键（字段缺失时用 date 单键）
+            dedup = OrderedDict()
+            # 现有行先进去
+            for row in existing:
+                key = (row.get("date", ""), row.get("symbol", ""))
+                dedup[key] = row
+            # 新行覆盖旧行
+            for row in new_rows:
+                key = (row.get("date", ""), row.get("symbol", ""))
+                dedup[key] = row
+
+            merged = list(dedup.values())
+            if not merged:
+                continue
+
+            # 按日期排序
+            try:
+                merged.sort(key=lambda r: r.get("date", ""))
+            except Exception:
+                pass
+
+            # ── Step 3: 全量写入 ──
+            with open(file_path, "w", newline="", encoding="utf-8") as f:
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(merged)
+
+            file_label = file_path.name
+            old_count = len(existing)
+            new_count = len(merged)
+            deduped = old_count + len(new_rows) - new_count
+            if deduped > 0:
+                _log(f"  ✏️ {file_label}: {old_count}→{new_count} 行 (去重 {deduped} 条)")
+            else:
+                _log(f"  ✏️ {file_label}: 追加 {len(new_rows)} 行 → {new_count} 总行")
+
         except Exception as e:
             _log(f"  ⚠️ 历史写入失败 {file_path.name}: {e}")
 

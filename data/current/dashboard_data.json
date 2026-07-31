@@ -1,17 +1,17 @@
 {
   "gold_price": {
-    "value": 4340.9,
+    "value": 4348.9,
     "unit": "USD/oz",
-    "updated_at": "2026-06-09 19:24:05"
+    "updated_at": "2026-06-16 18:48:09"
   },
   "silver_price": {
-    "value": 68.71,
+    "value": 70.59,
     "unit": "USD/oz",
-    "updated_at": "2026-06-09 19:24:05"
+    "updated_at": "2026-06-16 18:48:09"
   },
   "gold_silver_ratio": {
-    "value": 63.18,
-    "updated_at": "2026-06-09 19:24:05"
+    "value": 61.61,
+    "updated_at": "2026-06-16 18:48:09"
   },
   "treasury_10y": {
     "value": 4.56,
@@ -56,7 +56,7 @@
     "updated_at": "2026-06-09 20:42:38",
     "freshness": "延迟1天"
   },
-  "global_updated_at": "2026-06-10 18:04:48",
+  "global_updated_at": "2026-06-16 18:48:09",
   "global_freshness": "尚未采集",
   "treasury": {
     "10yr": 4.56,
@@ -108,33 +108,33 @@
     "updated_at": "2026-05-19 22:30 CST"
   },
   "gold_futures": {
-    "value": 4363.51,
-    "change_pct": 0.0,
-    "open": 4354.7,
-    "high": 4375.7,
-    "low": 4336.0,
-    "prev_close": 4363.4,
+    "value": 4368.2,
+    "change_pct": 0.38,
+    "open": 4331.3,
+    "high": 4369.8,
+    "low": 4326.7,
+    "prev_close": 4351.6,
     "open_interest": 0,
-    "bid": 4362.1,
-    "ask": 4362.4,
+    "bid": 4367.8,
+    "ask": 4368.1,
     "source": "akshare_sina_foreign",
-    "quote_time": "19:23:48",
-    "updated_at": "2026-06-09 19:23:57",
+    "quote_time": "18:48:06",
+    "updated_at": "2026-06-16 18:48:07",
     "freshness": "实时"
   },
   "silver_futures": {
-    "value": 68.71,
-    "change_pct": 0.19,
-    "open": 68.32,
-    "high": 68.98,
-    "low": 67.53,
-    "prev_close": 68.58,
+    "value": 70.56,
+    "change_pct": 0.55,
+    "open": 69.95,
+    "high": 70.75,
+    "low": 69.1,
+    "prev_close": 70.18,
     "open_interest": 0,
-    "bid": 68.67,
-    "ask": 68.69,
+    "bid": 70.55,
+    "ask": 70.56,
     "source": "akshare_sina_foreign",
-    "quote_time": "19:23:27",
-    "updated_at": "2026-06-09 19:23:57",
+    "quote_time": "18:48:05",
+    "updated_at": "2026-06-16 18:48:07",
     "freshness": "实时"
   },
   "shfe_gold": {

@@ -1,0 +1,119 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 8,
+  "events": [
+    {
+      "source": "cnbc_markets",
+      "title": "Goldman Sachs CEO David Solomon says markets are in 'greed' mode as AI companies seek billions",
+      "description": "Goldman Sachs CEO David Solomon's comments come as investors prepare for what will be one of the busiest periods for equity issuance in years.",
+      "link": "https://www.cnbc.com/2026/06/02/goldman-ceo-david-solomon-greed-mode-ai-firms-ipos.html",
+      "pubDate": "Tue, 02 Jun 2026 19:06:48 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Greg Abel channels Buffett's deal-making style in nearly $17 billion spree, expanding into tech",
+      "description": "The back-to-back deals offer one of the clearest signals yet that Abel is prepared to put Berkshire's enormous balance sheet to work.",
+      "link": "https://www.cnbc.com/2026/06/02/greg-abel-channels-buffetts-dealmaking-style-in-17-billion-deal-spree.html",
+      "pubDate": "Tue, 02 Jun 2026 17:57:40 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Polymarket closes its first block trade as prediction markets push for Wall Street adoption",
+      "description": "Prediction market platforms have increasingly looked to institutional traders, not individual ones, as the next venue for growth.",
+      "link": "https://www.cnbc.com/2026/06/02/polymarket-closes-first-block-trade-in-push-for-institutional-adoption.html",
+      "pubDate": "Tue, 02 Jun 2026 12:25:12 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves premarket: Marvell Technology, Hewlett Packard Enterprise, Victoria's Secret & more",
+      "description": "These are the stocks posting the largest moves in early trading.",
+      "link": "https://www.cnbc.com/2026/06/02/stocks-making-the-biggest-moves-premarket-mrvl-hpe-vsxy.html",
+      "pubDate": "Tue, 02 Jun 2026 12:16:23 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Cassidy: Pulte not 'competent' for intelligence director role",
+      "description": "Intelligence community veterans have warned that Pulte is ill-prepared for the job and could target Trump's foes in the role.",
+      "link": "https://www.cnbc.com/2026/06/02/cassidy-pulte-intelligence-trump.html",
+      "pubDate": "Tue, 02 Jun 2026 22:03:00 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Vision Capital CEO says AI is creating investing opportunities in commercial REITs",
+      "description": "Jeff Olin, Vision Capital CEO and president, joins 'Fast Money' to talk investing opportunities in the real estate space.",
+      "link": "https://www.cnbc.com/video/2026/06/02/vision-capital-ceo-says-ai-is-creating-investing-opportunities-in-commercial-reits.html",
+      "pubDate": "Tue, 02 Jun 2026 21:59:13 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Homeowners insurance premiums have soared in recent years. How to reduce your costs",
+      "description": "Insurance premiums have soared for many homeowners in recent years, but there are steps policyholders can take to reduce them, experts said.",
+      "link": "https://www.cnbc.com/2026/06/02/homeowners-insurance-premiums-costs-how-to-reduce.html",
+      "pubDate": "Tue, 02 Jun 2026 17:18:07 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Property Play: Sonny Kalsi on AI, apartments and the data center debate",
+      "description": "Diana Olick sits down with a global real estate investment heavyweight, Sonny Kalsi, CEO of SLC Management.",
+      "link": "https://www.cnbc.com/video/2026/06/02/property-play-sonny-kalsi-on-ai-apartments-and-the-data-center-debate.html",
+      "pubDate": "Tue, 02 Jun 2026 11:58:01 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}

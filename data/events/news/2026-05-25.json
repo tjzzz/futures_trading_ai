@@ -1,0 +1,21 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 1,
+  "events": [
+    {
+      "source": "cnbc_economy",
+      "title": "Dubai's premium real estate segments are recovering despite Iran uncertainty: DAMAC Group",
+      "description": "Ali Sajwani, Managing Director of Dubai real estate developer DAMAC Group, says there's been a pick-up in sales in the UAE real estate market despite the ongoing Middle East war. He attributes Dubai's strength to the government's incentives and fee breaks for the hospitality industry which amount to",
+      "link": "https://www.cnbc.com/video/2026/05/25/dubais-premium-real-estate-segments-recovering-despite-the-war-damac.html",
+      "pubDate": "Mon, 25 May 2026 07:16:29 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.6
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}

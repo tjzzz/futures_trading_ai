@@ -1,5 +1,22 @@
 {
-  "predictions": [],
+  "predictions": [
+    {
+      "created_at": "2026-06-11 07:26:03",
+      "direction": "bearish",
+      "confidence": 0.7,
+      "dominant_factor": "opportunity_cost",
+      "dominant_cycle": "event_driven",
+      "gold_price_at_analysis": 4062.76,
+      "gold_range_low": 3950,
+      "gold_range_high": 4150,
+      "silver_price_at_analysis": 62.3,
+      "silver_range_low": 58,
+      "silver_range_high": 66,
+      "id": 1,
+      "verified": false,
+      "verification": null
+    }
+  ],
   "factor_weights": {
     "opportunity_cost": 1.0,
     "currency": 0.6,
@@ -21,5 +38,5 @@
     "range_accuracy": null,
     "by_factor": {}
   },
-  "last_updated": "2026-06-09 19:16:18"
+  "last_updated": "2026-06-11 07:26:03"
 }

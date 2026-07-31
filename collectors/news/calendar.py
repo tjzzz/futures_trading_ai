@@ -15,6 +15,7 @@
 """
 
 import json
+import shutil
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -25,6 +26,7 @@ CST = timezone(timedelta(hours=8))
 
 EVENTS_FILE = PROJECT_ROOT / "data/events/event_tracker.json"
 CALENDAR_CACHE = PROJECT_ROOT / "data/events/calendar_cache.json"
+CALENDAR_ARCHIVE_DIR = PROJECT_ROOT / "data/events/calendar/"
 
 
 def _now_cst() -> str:
@@ -142,6 +144,20 @@ def collect(days_ahead: int = 7) -> dict | None:
     """
     logger.info("=== calendar start ===")
     tracker = _load_tracker()
+    today = datetime.now(CST)
+    today_str = today.strftime("%Y-%m-%d")
+
+    # ── 检查今日日历是否已归档（复用缓存）──
+    archive_path = CALENDAR_ARCHIVE_DIR / f"{today_str}.json"
+    if archive_path.exists():
+        cached = json.loads(archive_path.read_text(encoding="utf-8"))
+        logger.info(f"  今日日历已归档，复用缓存: {today_str} ({cached.get('total', 0)} 条)")
+        # 恢复 tracker 中的 calendar 字段
+        if not tracker.get("calendar"):
+            tracker["calendar"] = cached.get("events", [])
+            tracker["fetched_at"] = cached.get("fetched_at", "")
+            _save_tracker(tracker)
+        return {"snapshot": {}, "history": []}
 
     try:
         import akshare as ak
@@ -225,15 +241,58 @@ def collect(days_ahead: int = 7) -> dict | None:
         tracker["fetched_at"] = _now_cst()
         _save_tracker(tracker)
 
-        # 更新 cache
+        # ── 按日归档：将已过去的事件归档到各自日期的文件 ──
+        CALENDAR_ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+        today_dt = datetime.now(CST)
+        passed_events = [e for e in all_calendar if e["date"][:10] < today_str]
+        upcoming_events = [e for e in all_calendar if e["date"][:10] >= today_str]
+
+        # 按日期分组归档
+        from collections import defaultdict
+        by_date = defaultdict(list)
+        for e in passed_events:
+            date_key = e["date"][:10]
+            by_date[date_key].append(e)
+
+        for date_key, items in by_date.items():
+            archive_fp = CALENDAR_ARCHIVE_DIR / f"{date_key}.json"
+            existing = []
+            if archive_fp.exists():
+                existing = json.loads(archive_fp.read_text(encoding="utf-8")).get("events", [])
+            merged = { (e["date"], e["event"]): e for e in existing }
+            for e in items:
+                merged[(e["date"], e["event"])] = e
+            archive_data = {
+                "date": date_key,
+                "total": len(merged),
+                "events": list(merged.values()),
+                "archived_at": _now_cst(),
+            }
+            archive_fp.write_text(json.dumps(archive_data, ensure_ascii=False, indent=2), encoding="utf-8")
+            logger.info(f"  📦 日历归档: {date_key} ({len(items)} 条)")
+
+        # 更新 cache — 只保留今日及未来事件
         cal_cache = {
-            "date": today.strftime("%Y-%m-%d"),
+            "date": today_str,
             "date_range": tracker["calendar_date_range"],
-            "events": all_calendar,
+            "total": len(upcoming_events),
+            "events": upcoming_events,
             "fetched_at": _now_cst(),
         }
         CALENDAR_CACHE.parent.mkdir(parents=True, exist_ok=True)
         CALENDAR_CACHE.write_text(json.dumps(cal_cache, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        # 更新 latest.json
+        today_archive = CALENDAR_ARCHIVE_DIR / f"{today_str}.json"
+        today_archive_data = {
+            "date": today_str,
+            "total": len(passed_events) + len(upcoming_events),
+            "events": all_calendar,
+            "fetched_at": _now_cst(),
+        }
+        today_archive.write_text(json.dumps(today_archive_data, ensure_ascii=False, indent=2), encoding="utf-8")
+        latest_path = CALENDAR_ARCHIVE_DIR / "latest.json"
+        shutil.copy2(today_archive, latest_path)
 
         logger.info(f"✅ calendar 完成: {len(all_calendar)} 条 (范围: {tracker['calendar_date_range']})")
         return {"snapshot": {}, "history": []}

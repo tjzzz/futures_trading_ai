@@ -1,0 +1,175 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 12,
+  "events": [
+    {
+      "source": "cnbc_markets",
+      "title": "Greg Abel just made his first big deal as Berkshire CEO. Why Warren Buffett is happy",
+      "description": "Berkshire's purchase of homebuilder Taylor Morrison gives the conglomerate a larger foothold in housing and appears to have been struck at a bargain valuation.",
+      "link": "https://www.cnbc.com/2026/06/01/greg-abel-just-made-his-first-big-deal-as-berkshire-ceo-why-warren-buffett-is-happy.html",
+      "pubDate": "Mon, 01 Jun 2026 17:46:28 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves midday: MGM Resorts, Zoom Communications, Nvidia, Viasat, IBM & more",
+      "description": "These are the stocks posting the largest moves midday.",
+      "link": "https://www.cnbc.com/2026/06/01/stocks-making-the-biggest-moves-midday-mgm-zm-nvda-vsat-ibm.html",
+      "pubDate": "Mon, 01 Jun 2026 18:31:42 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Individual traders drove Kalshi’s rise. Now, it’s going for Wall Street",
+      "description": "In a series of moves in 2026, the prediction market platform in the U.S. is working to make its event contracts more attractive to institutional trading.",
+      "link": "https://www.cnbc.com/2026/06/01/individual-traders-drove-kalshis-rise-now-its-going-for-wall-street.html",
+      "pubDate": "Mon, 01 Jun 2026 15:22:09 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Rubio odds for GOP 2028 nominee close to overtaking Vance on Kalshi",
+      "description": "Vice President Vance has seen his odds slip since the start of the year, as the secretary of State's chances have been buoyed by international conflicts.",
+      "link": "https://www.cnbc.com/2026/06/01/rubio-odds-for-gop-2028-nominee-close-to-overtaking-vance-on-kalshi.html",
+      "pubDate": "Mon, 01 Jun 2026 15:03:17 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves premarket: Nvidia, Arm, Taylor Morrison, Qualcomm & more",
+      "description": "These are the stocks posting the largest moves premarket.",
+      "link": "https://www.cnbc.com/2026/06/01/stocks-making-the-biggest-moves-premarket-nnvda-arm-qcom.html",
+      "pubDate": "Mon, 01 Jun 2026 11:36:04 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Housing Wire's Mohtashami on the state of the real estate sector",
+      "description": "Logan Mohtashami, Housing Wire lead analyst, joins 'Closing Bell Overtime' to talk the state of the housing sector.",
+      "link": "https://www.cnbc.com/video/2026/06/01/housing-wires-mohtashami-on-the-state-of-the-real-estate-sector.html",
+      "pubDate": "Mon, 01 Jun 2026 21:48:11 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Greg Abel just made his first big deal as Berkshire CEO. Why Warren Buffett is happy",
+      "description": "Berkshire's purchase of homebuilder Taylor Morrison gives the conglomerate a larger foothold in housing and appears to have been struck at a bargain valuation.",
+      "link": "https://www.cnbc.com/2026/06/01/greg-abel-just-made-his-first-big-deal-as-berkshire-ceo-why-warren-buffett-is-happy.html",
+      "pubDate": "Mon, 01 Jun 2026 17:46:28 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Berkshire's bet on Taylor Morrison suggests the housing market may have bottomed",
+      "description": "Analysts say the deal between Berkshire Hathaway and Taylor Morrison signals that the housing market may have bottomed.",
+      "link": "https://www.cnbc.com/2026/06/01/berkshire-taylor-morrison-bet-housing-market-bottom.html",
+      "pubDate": "Mon, 01 Jun 2026 17:08:20 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Watch CNBC's full interview with The Perot Group's Ross Perot Jr.",
+      "description": "Ross Perot Jr., Hillwood and The Perot Group chairman, joins ‘The Exchange’ to discuss the real estate market, keeping up with demand and much more.",
+      "link": "https://www.cnbc.com/video/2026/06/01/watch-cnbcs-full-interview-with-the-perot-groups-ross-perot-jr.html",
+      "pubDate": "Mon, 01 Jun 2026 15:17:25 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Taylor Morrison CEO says Berkshire Hathaway deal marks ‘a very exciting time’ for the company",
+      "description": "Taylor Morrison CEO Sheryl Palmer joins CNBC's 'Squawk on the Street' to discuss Taylor Morrison's agreement to be acquired by Berkshire Hathaway in a $6.8 billion deal.",
+      "link": "https://www.cnbc.com/video/2026/06/01/taylor-morrison-ceo-says-berkshire-hathaway-deal-marks-aa-very-exciting-timea-for-the-company.html",
+      "pubDate": "Mon, 01 Jun 2026 14:33:46 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion",
+      "description": "CNBC's Becky Quick reports on the latest news.",
+      "link": "https://www.cnbc.com/video/2026/06/01/berkshire-hathaway-buys-taylor-morrison-for-6-point-8-billion.html",
+      "pubDate": "Mon, 01 Jun 2026 13:46:31 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_economy",
+      "title": "Berkshire Hathaway buys Taylor Morrison for $6.8 billion. Buffett touts Abel’s deal-making",
+      "description": "The acquisition marks one of the first major strategic deals under Warren Buffett's successor Greg Abel, who took over as CEO in the beginning of 2026.",
+      "link": "https://www.cnbc.com/2026/06/01/berkshire-hathaway-taylor-morrison-home-acquisition-housing-market.html",
+      "pubDate": "Mon, 01 Jun 2026 20:18:46 GMT",
+      "factors": [
+        "safe_haven"
+      ],
+      "relevance": {
+        "safe_haven": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}

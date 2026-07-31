@@ -1,0 +1,35 @@
+{
+  "fetched_at": "2026-06-09 20:42 CST",
+  "total": 2,
+  "events": [
+    {
+      "source": "cnbc_markets",
+      "title": "Stocks making the biggest moves premarket: GSK, Nuvalent, J.M. Smucker, SailPoint and more",
+      "description": "These are the stocks posting the largest moves in early trading.",
+      "link": "https://www.cnbc.com/2026/06/09/stocks-making-the-biggest-moves-premarket-gsk-nuvalent-jm-smucker-sailpoint-and-more.html",
+      "pubDate": "Tue, 09 Jun 2026 12:20:40 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    },
+    {
+      "source": "cnbc_markets",
+      "title": "Electric vehicle giant BYD predicts 80% of China car sales will soon be electric",
+      "description": "BYD expects China's competitive electric vehicle market to continue growing, even as manufacturers and analysts anticipate domestic demand to taper further.",
+      "link": "https://www.cnbc.com/2026/06/09/electric-vehicle-giant-byd-predicts-80percent-of-china-car-sales-will-soon-be-electric.html",
+      "pubDate": "Tue, 09 Jun 2026 06:52:53 GMT",
+      "factors": [
+        "unclassified"
+      ],
+      "relevance": {
+        "unclassified": 0.3
+      },
+      "fetched_at": "2026-06-09 20:42 CST"
+    }
+  ],
+  "archived_from": "migration"
+}
