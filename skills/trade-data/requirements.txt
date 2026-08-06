@@ -1,0 +1,17 @@
+# trade-data 数据中台依赖（M2 · 2026-08-06 固化）
+# 4 业务块共用取数层；非标准库，运行前 pip install -r requirements.txt
+
+akshare>=1.14        # 期货/贵金属行情、宏观数据（主力：futures_main_sina / futures_zh_spot / option_vol_shfe）
+fredapi>=0.5.1       # 美联储 FRED 宏观序列（TIPS 实际利率、美债、SP500 等）
+yfinance>=0.2        # COMEX / 外盘兜底（GLD/SLV/DXY/VIX）
+requests>=2.31       # gold-api.com 现货金银直查、CNBC RSS
+pandas>=2.0          # 数据帧处理
+beautifulsoup4>=4.12 # 网页解析（news/calendar 类源）
+lxml>=5.0            # RSS 解析加速
+
+# 备注：
+# - 运行入口：python skills/trade-data/scripts/data_query.py <子命令>
+#   realtime（直连，主路径）✅ 已实测；macro/technical 依赖 v1 落盘数据（data/current|factors），
+#   v2 下由各业务 skill 内核直连生成，不再依赖 v1 落盘。
+# - collectors/ 为 v1 搬迁归档（路径已改造 parents[4]）；futures_shfe 等部分采集器与最新 akshare
+#   接口兼容性未逐一验证，实际取数以 market_snapshot.py / compute_factors.py 直连写法为准。
