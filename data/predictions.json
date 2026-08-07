@@ -1,0 +1,43 @@
+{
+  "hypotheses": [
+    {
+      "id": "H1地缘缓和-1",
+      "created_at": "2026-08-07",
+      "label": "H1地缘缓和",
+      "direction": "bearish",
+      "target_symbol": "silver",
+      "price_at_analysis": 62.51,
+      "range_low": 58.0,
+      "range_high": 62.5,
+      "verify_by": "2026-08-08",
+      "verified": false,
+      "result": null
+    },
+    {
+      "id": "H2定价重心切就业-2",
+      "created_at": "2026-08-07",
+      "label": "H2定价重心切就业",
+      "direction": "bullish",
+      "target_symbol": "silver",
+      "price_at_analysis": 62.51,
+      "range_low": 60.0,
+      "range_high": 65.0,
+      "verify_by": "2026-08-08",
+      "verified": false,
+      "result": null
+    },
+    {
+      "id": "H3现货银62突破-3",
+      "created_at": "2026-08-07",
+      "label": "H3现货银62突破",
+      "direction": "bullish",
+      "target_symbol": "silver",
+      "price_at_analysis": 62.51,
+      "range_low": 62.0,
+      "range_high": 65.5,
+      "verify_by": "2026-08-09",
+      "verified": false,
+      "result": null
+    }
+  ]
+}

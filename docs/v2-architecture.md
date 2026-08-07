@@ -11,14 +11,14 @@
 | 行情概览 | market_snapshot.py（akshare 直连 → 一屏快照） | ✅ 2026-08-05 M3 内核+SKILL.md |
 | 机会探查 | 条件单清单生成器（+ 决策/归因 agent 规则） | ✅ 2026-08-07 M4 建（order_list_gen.py + SKILL.md，非农 B 预案首个用例） |
 | 宏观分析/归因/事件预案 | compute_factors + verify_predictions + query_shfe（纯Python仅标准库） | ✅ Phase1 |
-| 复盘归因 | verify_predictions 命中率统计 | ⏳ |
+| 复盘归因 | 假设命中率统计（prediction_stats.py） | ✅ 2026-08-07 M5 建（H1-H3 已记录） |
 
 - 每 skill = `SKILL.md`（agent 规则）+ `scripts/`（可移植内核，不依赖 WorkBuddy）
 - **trade-data 是底层公共取数层**，其余 4 块业务 skill 调它
 - 决策 + 条件单清单（执行装置）并入"机会探查"
 - 自用加载：`skills/<skill>` symlink → `~/.workbuddy/skills/<skill>`
 
-## web 展示层（「初步版本」= 下周目标）
+## web 展示层（「初步版本」= 8/9 目标 · 8/7 初版已建）
 
 4 tab（从各 skill 输出快照生成，周节奏刷新）：
 
@@ -29,9 +29,10 @@
 | 当前持仓 & 复盘管理 | 持仓 + 复盘摘要；**用户可自行输入持仓、设置止盈止损** | 可输入 |
 | 交易模拟 | 占位页（后面继续做） | 只读 |
 
+- ✅ M6 初版：`web/index.html`（单文件 14.6KB，深色主题，4 tab + localStorage 持仓增删改 + 导出/导入 JSON + Elder2% 风险校验）
 - 持仓输入：**localStorage + 导出 JSON**（纯静态，简单优先；换设备靠导出兜底）
 - 止盈止损：**只展示，不联动经纬**（经纬无法接入实盘，数据联动无意义——镇哥 7/31 定）
-- v1 `dashboard/`（Flask）→ 重写为静态生成
+- v1 `dashboard/`（Flask）→ 已重写为静态（web/index.html）
 
 ## 自用 vs 给别人
 | 项 | 自用 | 给别人 |
@@ -51,7 +52,8 @@
 - github 仓库改名后更新本地 remote URL
 - M2 ✅（2026-08-06）：collectors/data_query 迁入 `skills/trade-data/scripts/` + 相对路径改造 + requirements + SKILL.md；realtime 直连实测通；snapshot/macro/technical 仍依赖 v1 落盘数据（v2 由各业务 skill 直连替代）
 - M4 ✅（2026-08-07）：机会探查 skill（`skills/opportunity/`）= SKILL.md（候选 S/A/B/C 分级 + 决策规则）+ scripts/order_list_gen.py（条件单清单生成器：触发单/止损单/目标单 + Elder 2% 校验 + 赔率三档 + 失效条件）；非农 B 预案为首个用例（examples/）
-- M5 复盘归因 SKILL.md + verify_predictions 命中率统计封装
-- M6 静态 4tab dashboard（持仓 tab 可输入 localStorage）
+- M5 ✅（2026-08-07）：复盘归因 skill（`skills/review/`）= SKILL.md + scripts/prediction_stats.py（假设 add/verify/stats 三模式，akshare 可选）；H1-H3 已记录 data/predictions.json
+- M6 ✅（2026-08-07）：web/index.html 静态 4tab dashboard（行情/机会/持仓复盘/交易模拟，localStorage 持仓 + 导出 JSON）
+- **8/9 初版验收状态：M1-M6 全 ✅**（剩余：M7 联调 + symlink + github remote 更新）
 - 各 collector 与最新 akshare 接口适配（用到再改，随业务 skill 走）
 - 止盈止损只展示不联动（经纬无实盘接入，联动无意义）

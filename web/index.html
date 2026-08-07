@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FuturesTradingAI · 交易系统看板</title>
+<style>
+  :root {
+    --bg: #0f1420; --panel: #161d2e; --panel2: #1c2438; --border: #26304a;
+    --text: #e6eaf2; --dim: #8b94ad; --gold: #f0c674; --silver: #c8d0e0;
+    --red: #e06c75; --green: #98c379; --yellow: #e5c07b; --blue: #61afef;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding-bottom: 40px; }
+  header { padding: 20px 24px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  header h1 { font-size: 20px; font-weight: 700; color: var(--gold); letter-spacing: 1px; }
+  header .sub { color: var(--dim); font-size: 12px; }
+  nav { display: flex; gap: 4px; padding: 12px 24px 0; flex-wrap: wrap; }
+  nav button { background: transparent; border: 1px solid var(--border); color: var(--dim); padding: 8px 18px; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 14px; }
+  nav button.active { background: var(--panel); color: var(--text); border-color: var(--panel2); border-bottom-color: var(--panel); }
+  main { padding: 20px 24px; }
+  .tab { display: none; }
+  .tab.active { display: block; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .card h2 { font-size: 15px; margin-bottom: 12px; color: var(--gold); display: flex; align-items: center; gap: 8px; }
+  .card h2 .badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--panel2); color: var(--dim); font-weight: 400; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: var(--dim); font-weight: 500; padding: 8px 10px; border-bottom: 1px solid var(--border); font-size: 12px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #1f2940; }
+  tr:last-child td { border-bottom: none; }
+  .up { color: var(--red); } .down { color: var(--green); }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 8px; font-size: 11px; font-weight: 600; }
+  .tag-s { background: #5c3a3a; color: var(--red); } .tag-a { background: #5c4a2e; color: var(--yellow); }
+  .tag-b { background: #2e4a3a; color: var(--green); } .tag-c { background: #333a4a; color: var(--dim); }
+  .tag-red { background: #5c2e33; color: var(--red); } .tag-yellow { background: #5c4a2e; color: var(--yellow); }
+  .tag-green { background: #2e4a3a; color: var(--green); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .kpi { background: var(--panel2); border-radius: 10px; padding: 14px 16px; }
+  .kpi .label { color: var(--dim); font-size: 12px; margin-bottom: 6px; }
+  .kpi .value { font-size: 22px; font-weight: 700; }
+  .kpi .delta { font-size: 12px; margin-top: 4px; }
+  .quote { font-size: 13px; color: var(--dim); border-left: 3px solid var(--blue); padding-left: 12px; margin: 8px 0; line-height: 1.7; }
+  .note { font-size: 12px; color: var(--dim); line-height: 1.8; }
+  .pos-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 12px; }
+  .pos-form input, .pos-form select { background: var(--panel2); border: 1px solid var(--border); color: var(--text); padding: 9px 10px; border-radius: 8px; font-size: 13px; }
+  .btn { background: var(--gold); color: #1a1a1a; border: none; padding: 9px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 13px; }
+  .btn.ghost { background: var(--panel2); color: var(--text); border: 1px solid var(--border); }
+  .btn-row { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+  .redline { border-left: 4px solid var(--red); padding: 10px 14px; background: #2a1f26; border-radius: 8px; margin: 8px 0; font-size: 13px; }
+  .yellowline { border-left: 4px solid var(--yellow); padding: 10px 14px; background: #2a261e; border-radius: 8px; margin: 8px 0; font-size: 13px; }
+  .greenline { border-left: 4px solid var(--green); padding: 10px 14px; background: #1e2a22; border-radius: 8px; margin: 8px 0; font-size: 13px; }
+  .ph { border: 2px dashed var(--border); border-radius: 12px; padding: 60px 20px; text-align: center; color: var(--dim); }
+  .ph h3 { color: var(--dim); margin-bottom: 8px; }
+  @media (max-width: 900px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>⚡ FuturesTradingAI</h1>
+  <span class="sub">交易系统看板 · 数据快照 2026-08-07 09:58 · 本地静态版</span>
+</header>
+<nav>
+  <button class="active" data-tab="market">行情资讯</button>
+  <button data-tab="opportunity">机会探查</button>
+  <button data-tab="position">持仓 & 复盘</button>
+  <button data-tab="simulation">交易模拟</button>
+</nav>
+
+<main>
+  <!-- ══════════ TAB 1 行情资讯 ══════════ -->
+  <section class="tab active" id="tab-market">
+    <div class="grid3">
+      <div class="kpi"><div class="label">现货黄金 (USD/oz)</div><div class="value up">4,258.0</div><div class="delta up">COMEX 4,316.3 (+0.39%)</div></div>
+      <div class="kpi"><div class="label">现货白银 (USD/oz)</div><div class="value up">62.15-62.38</div><div class="delta up">金银比 69.2</div></div>
+      <div class="kpi"><div class="label">美元指数 DXY</div><div class="value">99.95</div><div class="delta">—</div></div>
+    </div>
+    <div class="card">
+      <h2>沪金 / 沪银 / 沪锌 实时 <span class="badge">SHFE 09:58</span></h2>
+      <table>
+        <thead><tr><th>合约</th><th>最新价</th><th>日高</th><th>日低</th><th>持仓量</th><th>备注</th></tr></thead>
+        <tbody>
+          <tr><td>沪银 白银连续</td><td class="up">15,198</td><td>15,198</td><td>14,942</td><td>318,277</td><td>夜盘低点已探 B 预案触发区上沿</td></tr>
+          <tr><td>沪金 黄金连续</td><td class="up">927.6</td><td>930.98</td><td>920.48</td><td>205,427</td><td>高位震荡</td></tr>
+          <tr><td>沪锌 沪锌连续</td><td class="up">25,995</td><td>26,010</td><td>25,765</td><td>131,263</td><td>创 60 日新高，追高违背 R1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h2>本周事件窗口 W32 <span class="badge">8/3-8/9</span></h2>
+      <div class="redline"><b>🔴 今晚 20:30 7 月非农（T-0 决定性）</b>：预期 8.3 万 / 失业率 4.2%；前置信号分裂（初请 19.9 万强 vs ADP +4.4 万弱）</div>
+      <div class="yellowline"><b>⚠️ 美伊反转（8/6-8/7）</b>：伊朗格什姆岛打击 + 拟禁美以船只法案 + 油价一夜反弹（WTI 78.23 / Brent 83.58）→ H1 地缘缓和判断下修</div>
+      <div class="greenline"><b>✅ 8/5 ADP +4.4 万（miss）</b> → 弱非农信号；<b>✅ 8/6 初请 19.9 万（强韧）</b> → 冷热分化</div>
+    </div>
+    <div class="card">
+      <h2>可验证假设 <span class="badge">W32</span></h2>
+      <table>
+        <thead><tr><th>假设</th><th>方向</th><th>验证窗口</th><th>状态</th><th>证伪条件</th></tr></thead>
+        <tbody>
+          <tr><td>H1 地缘缓和真伪</td><td>偏空银</td><td>8/3-8/8</td><td><span class="tag tag-yellow">验证中·偏负面</span></td><td>伊朗军事动作升级/谈判破裂</td></tr>
+          <tr><td>H2 定价重心切就业</td><td>偏多银</td><td>8/7 非农</td><td><span class="tag tag-red">T-0 裁决</span></td><td>非农弱但金银不涨</td></tr>
+          <tr><td>H3 现货银 62 突破</td><td>偏多银</td><td>8/5-8/9</td><td><span class="tag tag-green">验证中·站稳 62</span></td><td>回落跌破 60</td></tr>
+        </tbody>
+      </table>
+      <p class="note">命中率闭环已接入 M5 复盘归因（data/predictions.json），周六自动结算。</p>
+    </div>
+  </section>
+
+  <!-- ══════════ TAB 2 机会探查 ══════════ -->
+  <section class="tab" id="tab-opportunity">
+    <div class="card">
+      <h2>非农三档预案（持仓应对版） <span class="badge">8/7 10:25 更新</span></h2>
+      <table>
+        <thead><tr><th>情景</th><th>概率</th><th>触发</th><th>应对（持仓多 1 手 @15,079）</th></tr></thead>
+        <tbody>
+          <tr><td>A 就业转弱（利多）</td><td>~40%</td><td>&lt;8 万</td><td>顺势持有，止损上移 15,100；15,630/15,925 分批止盈</td></tr>
+          <tr><td><b>B 符合预期（首选）</b></td><td>~40%</td><td>8-12 万</td><td>持仓可拿；回踩 15,140-15,265 止跌可加 1 手（总 2 手风险 7,620 元）</td></tr>
+          <tr><td>C 就业强劲（利空）</td><td>~20%</td><td>&gt;15 万</td><td><b>破 14,825 无条件离场</b>（R4 硬止损）</td></tr>
+        </tbody>
+      </table>
+      <div class="greenline"><b>✅ 建议动作</b>：20:30 前挂持仓止损 14,825（风险 3,810 元 &lt;1w），保护单非新仓。</div>
+    </div>
+    <div class="card">
+      <h2>候选清单 <span class="badge">8/6 扫描</span></h2>
+      <table>
+        <thead><tr><th>品种</th><th>方向</th><th>等级</th><th>三板斧</th><th>核心驱动</th><th>核心风险</th></tr></thead>
+        <tbody>
+          <tr><td>沪银</td><td class="up">偏多</td><td><span class="tag tag-a">A</span></td><td>2/3</td><td>非农弱→降息预期 / 央行购金底</td><td>初请强韧对冲 ADP miss；追高成本</td></tr>
+          <tr><td>沪锌</td><td class="up">偏多</td><td><span class="tag tag-b">B</span></td><td>2/3</td><td>矿紧+冶炼减产托底</td><td>已创 60 日新高，追高违背 R1；建议撤单等回踩 25,000-25,200</td></tr>
+          <tr><td>沪金</td><td>中性</td><td><span class="tag tag-b">B</span></td><td>2/3</td><td>央行购金 / 避险</td><td>弹性小于白银，MA60 压制</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h2>条件单清单（执行装置） <span class="badge">M4 首个用例</span></h2>
+      <table>
+        <thead><tr><th>#</th><th>单类型</th><th>合约</th><th>方向</th><th>触发/价格</th><th>手数</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>触发单</td><td>ag2612</td><td>多</td><td>15,140-15,265</td><td>1</td></tr>
+          <tr><td>2</td><td>止损单</td><td>ag2612</td><td>反方向</td><td>14,825</td><td>1</td></tr>
+          <tr><td>3</td><td>第一目标</td><td>ag2612</td><td>反方向</td><td>15,925</td><td>1</td></tr>
+        </tbody>
+      </table>
+      <p class="note">单手风险 5,696 元 ✅（Elder 2%）；赔率 下沿 2.49 / 中值 1.97 / 上沿 1.50。经纬只提供建议，实盘执行由镇哥自行决定。</p>
+    </div>
+  </section>
+
+  <!-- ══════════ TAB 3 持仓 & 复盘 ══════════ -->
+  <section class="tab" id="tab-position">
+    <div class="card">
+      <h2>当前持仓 <span class="badge">localStorage 本地保存</span></h2>
+      <div class="pos-form">
+        <input id="p_contract" placeholder="合约，如 ag2612" value="ag2612">
+        <select id="p_dir"><option value="多">多</option><option value="空">空</option></select>
+        <input id="p_lots" type="number" placeholder="手数" value="1">
+        <input id="p_price" type="number" placeholder="入场均价" value="15079">
+        <input id="p_stop" type="number" placeholder="止损价" value="14825">
+        <input id="p_target" type="number" placeholder="目标价" value="15925">
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="addPos()">➕ 添加 / 更新持仓</button>
+        <button class="btn ghost" onclick="exportPos()">📤 导出 JSON</button>
+        <button class="btn ghost" onclick="importPos()">📥 导入 JSON</button>
+        <button class="btn ghost" onclick="clearPos()">🗑 清空</button>
+      </div>
+      <div id="pos_table_wrap" style="margin-top:14px"></div>
+    </div>
+    <div class="card">
+      <h2>持仓风控摘要 <span class="badge">只展示，不联动实盘</span></h2>
+      <div id="risk_summary" class="note"></div>
+    </div>
+    <div class="card">
+      <h2>本周复盘要点 <span class="badge">W32</span></h2>
+      <div class="redline"><b>R4 纪律</b>：8/4 沪银首仓预埋止损完整闭环（正面案例）；本周新仓 8/5 追高（R1 反思）→ 止损 14,825 建议挂上</div>
+      <div class="yellowline"><b>待裁决</b>：沪锌 24,500 挂单建议撤（现价 25,995 偏离 1,495 点 + 60 日新高）</div>
+      <div class="greenline"><b>两次踏空教训已沉淀</b>：7/24 全平（纪律错）、7/30 无预埋（时机错）→ 已建执行装置（M4 条件单清单）</div>
+    </div>
+  </section>
+
+  <!-- ══════════ TAB 4 交易模拟 ══════════ -->
+  <section class="tab" id="tab-simulation">
+    <div class="ph">
+      <h3>📈 交易模拟（占位页）</h3>
+      <p>后续接入：akshare 数据 + 三周期信号回测 + 模拟盘验证（08/09 初版未含，Phase 3 规划）</p>
+      <p style="margin-top:8px;font-size:12px">关联：05_交易系统与模拟盘 / option-event-scan 沪金回测（NFP 前买 Call 胜率 94.2%）</p>
+    </div>
+  </section>
+</main>
+
+<script>
+// ══════════ TAB 切换 ══════════
+document.querySelectorAll("nav button").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+  };
+});
+
+// ══════════ 持仓管理（localStorage）══════════
+const POS_KEY = "ftai_positions_v1";
+let positions = [];
+try { positions = JSON.parse(localStorage.getItem(POS_KEY)) || []; } catch(e) { positions = []; }
+
+function renderPos() {
+  const wrap = document.getElementById("pos_table_wrap");
+  if (!positions.length) {
+    wrap.innerHTML = '<p class="note">暂无持仓。默认演示：沪银 2612 多 1 手 @15,079（8/5 晚买入）。</p>';
+    document.getElementById("risk_summary").innerHTML = "无持仓 → 无风险敞口。";
+    return;
+  }
+  const rows = positions.map((p, i) => {
+    const risk = Math.abs(p.price - p.stop) * 15 * p.lots;
+    return `<tr>
+      <td>${p.contract}</td><td>${p.dir}</td><td>${p.lots}</td>
+      <td>${p.price}</td><td>${p.stop}</td><td>${p.target}</td>
+      <td>≈ ${risk.toLocaleString()} 元</td>
+      <td><button class="btn ghost" onclick="delPos(${i})" style="padding:3px 10px;font-size:12px">删</button></td>
+    </tr>`;
+  }).join("");
+  wrap.innerHTML = `<table><thead><tr><th>合约</th><th>方向</th><th>手数</th><th>均价</th><th>止损</th><th>目标</th><th>单笔风险(Elder2%)</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+  const totalRisk = positions.reduce((s, p) => s + Math.abs(p.price - p.stop) * 15 * p.lots, 0);
+  document.getElementById("risk_summary").innerHTML =
+    `总单笔风险 ≈ <b>${totalRisk.toLocaleString()} 元</b>（预算 10,000 元 → ${totalRisk <= 10000 ? '<span style="color:var(--green)">✅ 合规</span>' : '<span style="color:var(--red)">❌ 超预算</span>'}）<br>` +
+    `止损保护：持仓必须挂硬止损（R4），不挂 = 裸奔。`;
+}
+function addPos() {
+  const p = {
+    contract: document.getElementById("p_contract").value.trim() || "ag2612",
+    dir: document.getElementById("p_dir").value,
+    lots: +document.getElementById("p_lots").value || 1,
+    price: +document.getElementById("p_price").value || 0,
+    stop: +document.getElementById("p_stop").value || 0,
+    target: +document.getElementById("p_target").value || 0,
+  };
+  if (!p.price || !p.stop) { alert("均价与止损必填"); return; }
+  const idx = positions.findIndex(x => x.contract === p.contract && x.dir === p.dir);
+  if (idx >= 0) positions[idx] = p; else positions.push(p);
+  localStorage.setItem(POS_KEY, JSON.stringify(positions));
+  renderPos();
+}
+function delPos(i) { positions.splice(i, 1); localStorage.setItem(POS_KEY, JSON.stringify(positions)); renderPos(); }
+function clearPos() { if (confirm("清空全部持仓？")) { positions = []; localStorage.removeItem(POS_KEY); renderPos(); } }
+function exportPos() {
+  const blob = new Blob([JSON.stringify(positions, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "ftai_positions.json";
+  a.click();
+}
+function importPos() {
+  const input = document.createElement("input");
+  input.type = "file"; input.accept = ".json";
+  input.onchange = async () => {
+    try {
+      const data = JSON.parse(await input.files[0].text());
+      if (!Array.isArray(data)) throw 0;
+      positions = data;
+      localStorage.setItem(POS_KEY, JSON.stringify(positions));
+      renderPos();
+    } catch(e) { alert("JSON 格式不正确"); }
+  };
+  input.click();
+}
+renderPos();
+</script>
+</body>
+</html>
