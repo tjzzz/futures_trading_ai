@@ -9,7 +9,7 @@
 |:--|:--|:--|
 | trade-data 数据中台 | collectors + data_query（akshare/fred，需装依赖） | ✅ 2026-08-06 M2 迁入+realtime 实测 |
 | 行情概览 | market_snapshot.py（akshare 直连 → 一屏快照） | ✅ 2026-08-05 M3 内核+SKILL.md |
-| 机会探查 | 条件单清单生成器（+ 决策/归因 agent 规则） | ⏳ |
+| 机会探查 | 条件单清单生成器（+ 决策/归因 agent 规则） | ✅ 2026-08-07 M4 建（order_list_gen.py + SKILL.md，非农 B 预案首个用例） |
 | 宏观分析/归因/事件预案 | compute_factors + verify_predictions + query_shfe（纯Python仅标准库） | ✅ Phase1 |
 | 复盘归因 | verify_predictions 命中率统计 | ⏳ |
 
@@ -50,7 +50,7 @@
 ## 待办
 - github 仓库改名后更新本地 remote URL
 - M2 ✅（2026-08-06）：collectors/data_query 迁入 `skills/trade-data/scripts/` + 相对路径改造 + requirements + SKILL.md；realtime 直连实测通；snapshot/macro/technical 仍依赖 v1 落盘数据（v2 由各业务 skill 直连替代）
-- M4 机会探查 SKILL.md + 条件单清单生成器
+- M4 ✅（2026-08-07）：机会探查 skill（`skills/opportunity/`）= SKILL.md（候选 S/A/B/C 分级 + 决策规则）+ scripts/order_list_gen.py（条件单清单生成器：触发单/止损单/目标单 + Elder 2% 校验 + 赔率三档 + 失效条件）；非农 B 预案为首个用例（examples/）
 - M5 复盘归因 SKILL.md + verify_predictions 命中率统计封装
 - M6 静态 4tab dashboard（持仓 tab 可输入 localStorage）
 - 各 collector 与最新 akshare 接口适配（用到再改，随业务 skill 走）
