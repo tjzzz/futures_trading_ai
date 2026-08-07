@@ -1,0 +1,16 @@
+{
+  "plan_name": "非农 B 预案（8/7 20:30）",
+  "symbol": "沪银连续",
+  "contract": "ag2612",
+  "direction": "多",
+  "hands": 1,
+  "trigger_low": 15140,
+  "trigger_high": 15265,
+  "stop": 14825,
+  "target": 15925,
+  "risk_per_hand": 5696,
+  "risk_budget": 10000,
+  "valid_until": "2026-08-07 20:30 前",
+  "trigger_rule": "新增 8-12 万、失业率持平 → 回踩止跌确认（4h 收阳/不创新低）",
+  "invalidate": "非农强劲（>15 万）→ 转 C 预案不接飞刀；或金银回落破 59（14,580）→ 趋势转弱重新评估"
+}
